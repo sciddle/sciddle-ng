@@ -11,13 +11,13 @@ pipeline {
         buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
     }
     parameters {
-        string(name: 'BASE_REF', defaultValue: 'https://amphibian.intero.berlin', description: 'URL the app shall be accessible from')
-        string(name: 'WEB_ROOT', defaultValue: '/var/www/amphibian', description: 'Web root directory for this app')
+        string(name: 'BASE_REF', defaultValue: 'https://sciddle.intero.berlin', description: 'URL the app shall be accessible from')
+        string(name: 'WEB_ROOT', defaultValue: '/var/www/sciddle', description: 'Web root directory for this app')
     }
     stages {
         stage('Checkout') {
             steps {
-                git url: 'git@github.com:florianschwanz/amphibian7.git', branch: 'master'
+                git url: 'git@github.com:florianschwanz/sciddle-ng.git', branch: 'master'
             }
         }
         stage('Init submodules') {

@@ -12,7 +12,7 @@ import {NotificationService} from '../../../../core/notification/services/notifi
 export class NotificationComponent implements OnInit {
 
   /** App title */
-  title = 'amphibian7';
+  title = 'sciddle';
 
   /**
    * Constructor
@@ -46,6 +46,6 @@ export class NotificationComponent implements OnInit {
    * Handles click on show-notification button
    */
   showNotificationButtonClicked() {
-    this.notificationService.displayNotification('Hello Amphibian', 'This is a notification', 'icon-96x96.png');
+    this.notificationService.displayNotification('Hello Sciddle', 'This is a notification', 'icon-96x96.png');
   }
 }
