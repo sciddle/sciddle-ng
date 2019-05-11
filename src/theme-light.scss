@@ -1,6 +1,40 @@
 @import '~@angular/material/theming';
 
-$light-primary: mat-palette($mat-blue, 700, 800, 900);
+$color-sciddle : #049af8;
+$mat-sciddle: (
+  50: $color-sciddle,
+  100: $color-sciddle,
+  200: $color-sciddle,
+  300: $color-sciddle,
+  400: $color-sciddle,
+  500: $color-sciddle,
+  600: $color-sciddle,
+  700: $color-sciddle,
+  800: $color-sciddle,
+  900: $color-sciddle,
+  A100: $color-sciddle,
+  A200: $color-sciddle,
+  A400: $color-sciddle,
+  A700: $color-sciddle,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $dark-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $light-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text,
+  )
+);
+
+$light-primary: mat-palette($mat-sciddle, 700, 800, 900);
 $light-accent: mat-palette($mat-red, 500, 600, 700);
 $light-warn: mat-palette($mat-red);
 
