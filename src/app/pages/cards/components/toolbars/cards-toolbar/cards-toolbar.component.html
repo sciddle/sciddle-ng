@@ -1,0 +1,29 @@
+<mat-toolbar class="toolbar flexcontainer">
+  <div *ngIf="media > mediaType.MEDIUM" class="toolbar-block start">
+    <span *ngIf="media != mediaType.SMALL" class="toolbar-title" [style.color]="titleColor">{{ title }}</span>
+  </div>
+  <div *ngIf="media < mediaType.LARGE" class="toolbar-block start">
+    <button mat-button class="toolbar-menu-item" (click)="onMenuItemClicked('menu')">
+      <mat-icon svgIcon="menu"></mat-icon>
+    </button>
+    <span *ngIf="media != mediaType.SMALL" class="toolbar-title" [style.color]="titleColor">{{ title }}</span>
+  </div>
+  <div class="flexbox"></div>
+  <div class="toolbar-block end">
+    <button mat-button class="toolbar-menu-item right" [matMenuTriggerFor]="menu">
+      <mat-icon svgIcon="more_vert"></mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <!-- <mat-divider></mat-divider> -->
+      <button mat-menu-item (click)="onMenuItemClicked('settings')">
+        <mat-icon svgIcon="settings"></mat-icon>
+        <span>Settings</span>
+      </button>
+      <mat-divider></mat-divider>
+      <button mat-menu-item (click)="onMenuItemClicked('about')">
+        <mat-icon svgIcon="blank"></mat-icon>
+        <span>About</span>
+      </button>
+    </mat-menu>
+  </div>
+</mat-toolbar>
