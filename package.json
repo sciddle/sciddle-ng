@@ -1,6 +1,9 @@
 {
   "name": "sciddle",
   "version": "0.0.0",
+  "license": "",
+  "homepage": "https://github.com/florianschwanz/sciddle-ng",
+  "angular-cli": {},
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
