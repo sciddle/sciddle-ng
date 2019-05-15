@@ -12,14 +12,12 @@ import {Hue} from '../model/hue.model';
 })
 export class MaterialColorService {
 
-  /** Dark primary text color */
-  static DARK_PRIMARY_TEXT = 'rgba(black, 0.87)';
   /** Primary palette */
-  static PRIMARY_PALETTE = PaletteType.LIME;
+  static PRIMARY_PALETTE = PaletteType.LIGHT_BLUE;
   /** Primary hue */
   static PRIMARY_HUE = HueType._600;
   /** Accent palette */
-  static ACCENT_PALETTE = PaletteType.AMBER;
+  static ACCENT_PALETTE = PaletteType.RED;
   /** Accent hue */
   static ACCENT_HUE = HueType._600;
 

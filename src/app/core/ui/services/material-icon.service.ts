@@ -59,7 +59,10 @@ export class MaterialIconService {
   private VARIANT = 'production';
   /** List of icons */
   private icons: Icon[] = [
-    {topic: IconTopic.ACTION, name: 'add', file: 'ic_add_24px.svg'}
+    {topic: IconTopic.ACTION, name: 'add', file: 'ic_add_24px.svg'},
+    {topic: IconTopic.ACTION, name: 'settings', file: 'ic_settings_24px.svg'},
+    {topic: IconTopic.NAVIGATION, name: 'arrow_back', file: 'ic_arrow_back_24px.svg'},
+    {topic: IconTopic.NAVIGATION, name: 'more_vert', file: 'ic_more_vert_24px.svg'},
   ];
 
   /**
@@ -69,9 +72,12 @@ export class MaterialIconService {
    * @param sanitizer sanitizer
    */
   public initializeIcons(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
+
     this.icons.forEach(icon => {
       iconRegistry.addSvgIcon(icon.name,
         sanitizer.bypassSecurityTrustResourceUrl(this.ICON_ROOT_DIR + '/' + icon.topic + '/svg/' + this.VARIANT + '/' + icon.file));
     });
+
+    iconRegistry.addSvgIcon('blank', sanitizer.bypassSecurityTrustResourceUrl('assets/icons/ic_blank_24px.svg'));
   }
 }
