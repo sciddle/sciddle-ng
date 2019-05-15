@@ -18,12 +18,12 @@ export class Card extends Entity {
   /**
    * Constructor
    */
-  constructor() {
+  constructor(word: string, taboos: string[], difficulty: number) {
     super();
     this.entityType = EntityType.CARD;
-    this.word = '';
-    this.taboos = [];
-    this.difficulty = 0;
+    this.word = word;
+    this.taboos = taboos;
+    this.difficulty = difficulty;
 
     this.index = 0;
   }
