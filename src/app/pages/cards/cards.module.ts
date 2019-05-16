@@ -5,6 +5,8 @@ import {MaterialModule} from '../../ui/material/material.module';
 import {CardsRoutingModule} from './cards-routing.module';
 import {CardsComponent} from './pages/cards/cards.component';
 import {CardsToolbarComponent} from './components/toolbars/cards-toolbar/cards-toolbar.component';
+import {SwingModule} from 'angular2-swing';
+import {CardFragmentComponent} from './components/fragments/card-fragment/card-fragment.component';
 
 @NgModule({
   imports: [
@@ -13,13 +15,17 @@ import {CardsToolbarComponent} from './components/toolbars/cards-toolbar/cards-t
     ReactiveFormsModule,
     MaterialModule,
 
+    SwingModule,
+
     CardsRoutingModule,
   ],
   declarations: [
     // Pages
     CardsComponent,
     // Toolbars
-    CardsToolbarComponent
+    CardsToolbarComponent,
+    // Fragments
+    CardFragmentComponent,
   ], entryComponents: [
     // Pages
     CardsComponent,

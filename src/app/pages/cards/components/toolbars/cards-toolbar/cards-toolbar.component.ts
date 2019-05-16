@@ -1,7 +1,5 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
 import {Media} from '../../../../../core/ui/model/media.enum';
-import {Subject} from 'rxjs';
-import {debounceTime} from 'rxjs/operators';
 
 /**
  * Displays cards toolbar
