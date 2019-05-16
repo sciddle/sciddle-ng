@@ -7,9 +7,9 @@
   (menuItemEventEmitter)="onMenuItemClicked($event)"></app-cards-toolbar>
 
 <div class="card-main-content">
-  <div swing-stack #myswing1 [stackConfig]="stackConfig">
-    <div swing-card #mycards1 *ngFor="let card of cards">
-      <app-card-fragment [card]="card" [media]="media">
+  <div swing-stack #swingStack [stackConfig]="stackConfig">
+    <div swing-card #swingCards>
+      <app-card-fragment *ngIf="cards[0] != null" [card]="cards[0]" [media]="media">
       </app-card-fragment>
     </div>
   </div>
