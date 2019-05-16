@@ -157,21 +157,15 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
   onMenuItemClicked(menuItem: string) {
   }
 
+  /**
+   * Handles moving item
+   * @param element element
+   * @param x x value
+   * @param y y value
+   * @param r degrees
+   */
   onItemMove(element, x, y, r) {
-    let color = '';
-    const abs = Math.abs(x);
-
-    const min = Math.trunc(Math.min(16 * 16 - abs, 16 * 16));
-    const hexCode = this.decimalToHex(min, 2);
-
-    if (x < 0) {
-      color = '#FF' + hexCode + hexCode;
-    } else {
-      color = '#' + hexCode + 'FF' + hexCode;
-    }
-
-    element.style.background = color;
-    element.style['transform'] = `translate3d(0, 0, 0) translate(${x}px, ${y}px) rotate(${r}deg)`;
+    element.style.transform = `translate3d(0, 0, 0) translate(${x}px, ${y}px) rotate(${r}deg)`;
   }
 
   //
