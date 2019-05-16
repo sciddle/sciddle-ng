@@ -35,11 +35,16 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
   /** Helper subject used to finish other subscriptions */
   private unsubscribeSubject = new Subject();
 
-  @ViewChild('myswing1') swingStack: SwingStackComponent;
-  @ViewChildren('mycards1') swingCards: QueryList<SwingCardComponent>;
+  /** Swing stack control */
+  @ViewChild('swingStack') swingStack: SwingStackComponent;
+  /** Swing cards control */
+  @ViewChildren('swingCards') swingCards: QueryList<SwingCardComponent>;
 
+  /** Stack configuration */
   stackConfig: StackConfig;
-  recentCard = '';
+
+  /** Number of pixels the card needs to be moved before it counts as swiped */
+  private throwOutDistance = 800;
 
   /**
    * Constructor
@@ -73,18 +78,17 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.initializeMediaSubscription();
 
     this.initializeStackConfig();
-
-    this.initializeMockCards();
   }
 
   /**
    * Handles after-view-init lifecycle phase
    */
   ngAfterViewInit() {
-    // Either subscribe in controller or set in HTML
     this.swingStack.throwin.subscribe((event: DragEvent) => {
       // event.target.style.background = '#ffffff';
     });
+
+    this.initializeMockCards();
   }
 
   /**
@@ -127,9 +131,12 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
+  /**
+   * Initializes stack config
+   */
   private initializeStackConfig() {
     this.stackConfig = {
-      allowedDirections: [Direction.UP, Direction.DOWN, Direction.LEFT, Direction.RIGHT],
+      allowedDirections: [Direction.LEFT, Direction.RIGHT],
       throwOutConfidence: (offsetX, offsetY, element) => {
         return Math.min(Math.abs(offsetX) / (element.offsetWidth / 2), 1);
       },
@@ -137,11 +144,14 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
         this.onItemMove(element, x, y, r);
       },
       throwOutDistance: (d) => {
-        return 800;
+        return this.throwOutDistance;
       }
     };
   }
 
+  /**
+   * Initializes mock cards
+   */
   private initializeMockCards() {
     this.cards = this.cardsMockService.CARDS;
   }
@@ -166,6 +176,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    */
   onItemMove(element, x, y, r) {
     element.style.transform = `translate3d(0, 0, 0) translate(${x}px, ${y}px) rotate(${r}deg)`;
+    element.style.opacity = 1 - (1.2 * (Math.abs(x) / this.throwOutDistance));
   }
 
   //
