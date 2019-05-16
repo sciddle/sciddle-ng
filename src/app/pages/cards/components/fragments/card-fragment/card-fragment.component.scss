@@ -1,0 +1,90 @@
+@import '../../../../../../flex';
+@import '../../../../../../sizes';
+@import '../../../../../../theme';
+
+//
+// Custom
+//
+
+.container {
+  min-height: 110px;
+}
+
+.card-header-content {
+  padding: 5px;
+  width: 100%;
+}
+
+.card-main-content {
+  min-height: 70px;
+}
+
+.word {
+  font-family: 'Roboto Slab', serif;
+  font-size: 2.0em;
+  font-weight: 800;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+.taboo {
+  font-family: 'Roboto Slab', serif;
+  font-size: 1.4em;
+  font-weight: 600;
+  margin-top: 15px;
+  text-align: center;
+}
+
+.difficulty {
+  font-family: 'Roboto Slab', serif;
+  font-size: 1.2em;
+  font-weight: 600;
+  margin: 20px;
+}
+
+//
+// Material
+//
+
+mat-card {
+  margin: 15px auto;
+
+  @media #{$breakpoint-small} {
+    width: 100%;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box; /* Firefox, other Gecko */
+    box-sizing: border-box; /* Opera/IE 8+ */
+  }
+  @media #{$breakpoint-medium} {
+    width: 300px;
+  }
+  @media #{$breakpoint-large} {
+    width: 300px;
+  }
+
+  &:hover .hidden {
+    display: inline-block;
+  }
+}
+
+mat-card-header {
+  margin-left: 0;
+  cursor: pointer;
+}
+
+mat-card-content {
+  margin-bottom: 0;
+}
+
+mat-card-actions {
+  padding: 0;
+  margin: 0;
+}
+
+.mat-card-actions .mat-button:first-child, .mat-card-actions .mat-raised-button:first-child {
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 15px;
+  padding-right: 15px;
+}

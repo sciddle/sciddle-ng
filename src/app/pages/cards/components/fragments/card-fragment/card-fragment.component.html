@@ -1,0 +1,17 @@
+<div [class]="themeClass">
+  <mat-card class="container">
+    <div *ngIf="devMode" class="debug">id {{ card.id.slice(0, 19)  }}...</div>
+    <div *ngIf="devMode" class="debug">index {{ card.index }}</div>
+
+    <mat-card-title class="word">
+      {{ card.word }}
+    </mat-card-title>
+    <div *ngFor="let taboo of card.taboos" class="taboo">
+      {{ taboo }}
+    </div>
+    <mat-card-footer class="flexcontainer">
+      <div class="flexbox"></div>
+      <button mat-mini-fab class="difficulty" [style.background]="difficultyColor">{{ card.difficulty }}</button>
+    </mat-card-footer>
+  </mat-card>
+</div>
