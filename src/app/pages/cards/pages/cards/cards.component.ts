@@ -188,6 +188,5 @@ export class CardsComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       this.swingStack.stack.getCard(event.target).throwIn(0, 0);
     }, 100);
-
   }
 }
