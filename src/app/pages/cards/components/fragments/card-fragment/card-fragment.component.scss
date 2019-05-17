@@ -8,6 +8,9 @@
 
 .container {
   min-height: 110px;
+
+  background-image: url(../../../../../../assets/images/front.png);
+  background-size: 100% 100%;
 }
 
 .card-header-content {
@@ -23,8 +26,8 @@
   font-family: 'Roboto Slab', serif;
   font-size: 2.0em;
   font-weight: 800;
-  margin-top: 15px;
-  margin-bottom: 5px;
+  margin-top: 20px !important;
+  margin-bottom: 40px !important;
   text-align: center;
 }
 
@@ -40,7 +43,7 @@
   font-family: 'Roboto Slab', serif;
   font-size: 1.2em;
   font-weight: 600;
-  margin: 20px;
+  margin: 40px;
 }
 
 //
