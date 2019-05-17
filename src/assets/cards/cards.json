@@ -1,0 +1,34 @@
+[
+  {
+    "entityType": 0,
+    "id": "1",
+    "creationDate": null,
+    "modificationDate": null,
+    "word": "Vegan",
+    "taboos": [
+      "Essen",
+      "Ernährung",
+      "Fleisch",
+      "Vegetarisch",
+      "Milch"
+    ],
+    "index": 1,
+    "difficulty": 1
+  },
+  {
+    "entityType": 0,
+    "id": "2",
+    "creationDate": null,
+    "modificationDate": null,
+    "word": "Vegetarisch",
+    "taboos": [
+      "Fleisch",
+      "Essen",
+      "Vegan",
+      "Ernährung",
+      "Tiere"
+    ],
+    "index": 2,
+    "difficulty": 1
+  }
+]

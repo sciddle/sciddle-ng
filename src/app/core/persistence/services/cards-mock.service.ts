@@ -1,4 +1,6 @@
 import {Injectable} from '@angular/core';
+import {Http} from '@angular/http';
+import mockCards from '../../../../assets/cards/cards.json';
 import {Card} from '../../entity/model/card/card.model';
 
 @Injectable({
@@ -6,11 +8,10 @@ import {Card} from '../../entity/model/card/card.model';
 })
 export class CardsMockService {
 
-  public CARDS: Card[] = [
-    new Card('Vegan', ['Essen', 'Ernährung', 'Fleisch', 'Vegetarisch', 'Milch'], 1),
-    new Card('Vegetarisch', ['Fleisch', 'Essen', 'Vegan', 'Ernährung', 'Tiere'], 1)
-  ];
-
-  constructor() {
+  /**
+   * Returns mock cards
+   */
+  getMockCards(): Card[] {
+    return mockCards;
   }
 }
