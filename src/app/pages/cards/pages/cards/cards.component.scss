@@ -21,3 +21,10 @@
     margin-right: 40px;
   }
 }
+
+.animate-translation-100 {
+  -webkit-transition: .100s ease-out;
+  -moz-transition: .100s ease-out;
+  -o-transition: .100s ease-out;
+  transition: .100s ease-out;
+}

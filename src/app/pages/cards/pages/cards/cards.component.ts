@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
+import {Component, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {Media} from '../../../../core/ui/model/media.enum';
 import {environment} from '../../../../../environments/environment';
 import {MatDialog, MatIconRegistry} from '@angular/material';
@@ -8,16 +8,17 @@ import {takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 import {MaterialIconService} from '../../../../core/ui/services/material-icon.service';
 import {DomSanitizer} from '@angular/platform-browser';
-import {Direction, StackConfig, SwingCardComponent, SwingStackComponent} from 'angular2-swing';
+import {Direction, StackConfig, SwingCardComponent, SwingStackComponent, ThrowEvent} from 'angular2-swing';
 import {Card} from '../../../../core/entity/model/card/card.model';
 import {CardsMockService} from '../../../../core/persistence/services/cards-mock.service';
+import {SnackbarService} from '../../../../core/ui/services/snackbar.service';
 
 @Component({
   selector: 'app-cards',
   templateUrl: './cards.component.html',
   styleUrls: ['./cards.component.scss']
 })
-export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
+export class CardsComponent implements OnInit, OnDestroy {
 
   /** App title */
   public title = environment.APP_NAME;
@@ -55,6 +56,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    * @param materialColorService material color service
    * @param materialIconService material icon service
    * @param sanitizer sanitizer
+   * @param snackbarService snackbar service
    */
   constructor(private cardsMockService: CardsMockService,
               public dialog: MatDialog,
@@ -62,7 +64,8 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
               private mediaService: MediaService,
               private materialColorService: MaterialColorService,
               private materialIconService: MaterialIconService,
-              private sanitizer: DomSanitizer) {
+              private sanitizer: DomSanitizer,
+              private snackbarService: SnackbarService) {
   }
 
   //
@@ -76,19 +79,8 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.initializeColors();
     this.initializeMaterial();
     this.initializeMediaSubscription();
-
-    this.initializeStackConfig();
-  }
-
-  /**
-   * Handles after-view-init lifecycle phase
-   */
-  ngAfterViewInit() {
-    this.swingStack.throwin.subscribe((event: DragEvent) => {
-      // event.target.style.background = '#ffffff';
-    });
-
     this.initializeMockCards();
+    this.initializeStackConfig();
   }
 
   /**
@@ -143,7 +135,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
       transform: (element, x, y, r) => {
         this.onItemMove(element, x, y, r);
       },
-      throwOutDistance: (d) => {
+      throwOutDistance: () => {
         return this.throwOutDistance;
       }
     };
@@ -153,7 +145,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    * Initializes mock cards
    */
   private initializeMockCards() {
-    this.cards = this.cardsMockService.CARDS;
+    this.cards = this.cardsMockService.getMockCards();
   }
 
   //
@@ -179,18 +171,23 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
     element.style.opacity = 1 - (1.2 * (Math.abs(x) / this.throwOutDistance));
   }
 
-  //
-  // Helpers
-  //
+  /**
+   * Handles throw out of a card
+   * @param event throw event
+   */
+  onCardThrownOut(event: ThrowEvent) {
+    // Put first card to end
+    this.cards.push(this.cards.shift());
+  }
 
-  private decimalToHex(d, padding) {
-    let hex = Number(d).toString(16);
-    padding = typeof (padding) === 'undefined' || padding === null ? padding = 2 : padding;
+  /**
+   * Handles end of throw out card
+   * @param event throw event
+   */
+  onCardThrownOutEnd(event: ThrowEvent) {
+    setTimeout(() => {
+      this.swingStack.stack.getCard(event.target).throwIn(0, 0);
+    }, 100);
 
-    while (hex.length < padding) {
-      hex = '0' + hex;
-    }
-
-    return hex;
   }
 }
