@@ -7,9 +7,12 @@
   (menuItemEventEmitter)="onMenuItemClicked($event)"></app-cards-toolbar>
 
 <div class="card-main-content">
-  <div swing-stack #swingStack [stackConfig]="stackConfig">
-    <div swing-card #swingCards>
-      <app-card-fragment *ngIf="cards[0] != null" [card]="cards[0]" [media]="media">
+  <div swing-stack #swingStack
+       [stackConfig]="stackConfig"
+        (throwout)="onCardThrownOut($event)"
+        (throwoutend)="onCardThrownOutEnd($event)">
+    <div swing-card class="animate-translation-100" [ngClass]="{'animate-translation-100': cards[0].animateBack}">
+      <app-card-fragment [card]="cards[0]" [media]="media">
       </app-card-fragment>
     </div>
   </div>

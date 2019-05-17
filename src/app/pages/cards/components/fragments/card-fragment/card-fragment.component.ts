@@ -1,6 +1,7 @@
 import {ChangeDetectionStrategy, Component, Input, isDevMode, OnInit} from '@angular/core';
 import {Stack} from '../../../../../core/entity/model/stack/stack.model';
 import {Media} from '../../../../../core/ui/model/media.enum';
+import {Card} from '../../../../../core/entity/model/card/card.model';
 
 /**
  * Displays a card
@@ -16,7 +17,7 @@ export class CardFragmentComponent implements OnInit {
   /** Stack the card is contained in */
   @Input() stack = new Stack();
   /** Card to be displayed */
-  @Input() card;
+  @Input() card = new Card();
   /** Current media */
   @Input() media: Media;
   /** Default theme to be used */
@@ -60,18 +61,20 @@ export class CardFragmentComponent implements OnInit {
    * Initializes colors
    */
   private initializeColors() {
-    switch (this.card.difficulty) {
-      case 1: {
-        this.difficultyColor = '#4caf50';
-        break;
-      }
-      case 2: {
-        this.difficultyColor = '#ffca28';
-        break;
-      }
-      case 3: {
-        this.difficultyColor = '#f44336';
-        break;
+    if (this.card != null) {
+      switch (this.card.difficulty) {
+        case 1: {
+          this.difficultyColor = '#4caf50';
+          break;
+        }
+        case 2: {
+          this.difficultyColor = '#ffca28';
+          break;
+        }
+        case 3: {
+          this.difficultyColor = '#f44336';
+          break;
+        }
       }
     }
   }
