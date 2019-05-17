@@ -1,34 +1,6 @@
 [
-  {
-    "entityType": 0,
-    "id": "1",
-    "creationDate": null,
-    "modificationDate": null,
-    "word": "Vegan",
-    "taboos": [
-      "Essen",
-      "Ernährung",
-      "Fleisch",
-      "Vegetarisch",
-      "Milch"
-    ],
-    "index": 1,
-    "difficulty": 1
-  },
-  {
-    "entityType": 0,
-    "id": "2",
-    "creationDate": null,
-    "modificationDate": null,
-    "word": "Vegetarisch",
-    "taboos": [
-      "Fleisch",
-      "Essen",
-      "Vegan",
-      "Ernährung",
-      "Tiere"
-    ],
-    "index": 2,
-    "difficulty": 1
-  }
+  { "entityType": 0, "id": "1", "word": "Vegan", "taboos": ["Essen", "Ernährung", "Fleisch", "Vegetarisch", "Milch" ], "index": 1, "difficulty": 1 },
+  { "entityType": 0, "id": "2", "word": "Vegetarisch", "taboos": ["Fleisch", "Essen", "Vegan", "Ernährung", "Tiere"], "index": 2, "difficulty": 1 },
+  { "entityType": 0, "id": "3", "word": "Albedo", "taboos": ["Eis", "Reflexion", "Strahlung", "Energie", "Wolken"], "index": 3, "difficulty": 3 },
+  { "entityType": 0, "id": "4", "word": "Temperatur", "taboos": ["Wärme", "Kälte", "Thermometer", "Energie", "Grad"], "index": 4, "difficulty": 1 }
 ]
