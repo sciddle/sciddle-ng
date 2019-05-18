@@ -14,6 +14,7 @@ import {CardsMockService} from '../../../../core/persistence/services/cards-mock
 import {SnackbarService} from '../../../../core/ui/services/snackbar.service';
 import {CardsService} from '../../../../core/entity/services/card/cards.service';
 import {Stack} from '../../../../core/entity/model/stack/stack.model';
+import {AboutDialogComponent} from '../../../../ui/about-dialog/about-dialog/about-dialog.component';
 
 @Component({
   selector: 'app-cards',
@@ -169,6 +170,22 @@ export class CardsComponent implements OnInit, OnDestroy {
     switch (menuItem) {
       case 'shuffle-cards': {
         this.shuffleCards().then(() => {
+        });
+        break;
+      }
+      case 'about': {
+        this.dialog.open(AboutDialogComponent, {
+          disableClose: false,
+          data: {
+            title: 'Über die App',
+            name: environment.NAME,
+            version: environment.VERSION,
+            authorCode: environment.AUTHOR_CODE,
+            authorContent: environment.AUTHOR_CONTENT,
+            licenseCode: environment.LICENSE_CODE,
+            licenseContent: environment.LICENSE_CONTENT,
+            homepage: environment.HOMEPAGE,
+          }
         });
         break;
       }
