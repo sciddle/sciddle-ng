@@ -7,6 +7,7 @@ import {CardsComponent} from './pages/cards/cards.component';
 import {CardsToolbarComponent} from './components/toolbars/cards-toolbar/cards-toolbar.component';
 import {SwingModule} from 'angular2-swing';
 import {CardFragmentComponent} from './components/fragments/card-fragment/card-fragment.component';
+import {AboutDialogModule} from '../../ui/about-dialog/about-dialog.module';
 
 @NgModule({
   imports: [
@@ -18,6 +19,8 @@ import {CardFragmentComponent} from './components/fragments/card-fragment/card-f
     SwingModule,
 
     CardsRoutingModule,
+
+    AboutDialogModule,
   ],
   declarations: [
     // Pages
