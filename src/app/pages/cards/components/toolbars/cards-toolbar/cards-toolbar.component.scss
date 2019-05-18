@@ -15,7 +15,7 @@
   vertical-align: top;
 
   @media #{$breakpoint-small} {
-    padding: 0;
+    padding: 0 10px;
   }
   @media #{$breakpoint-medium} {
     padding: 0 10px;
@@ -38,7 +38,7 @@
   padding-right: 10px;
 
   @media #{$breakpoint-small} {
-    width: 10%;
+    width: 100px;
   }
   @media #{$breakpoint-medium} {
     width: 100px;
