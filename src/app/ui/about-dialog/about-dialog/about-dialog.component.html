@@ -1,0 +1,13 @@
+<h2 mat-dialog-title>{{ dialogTitle }}</h2>
+<mat-dialog-content>
+  <p>{{ name }} (Version {{ version }})</p>
+  <p>Idee, Texte und Grafiken von {{ authorContent }}, lizenziert unter {{ licenseContent }}.</p>
+  <p>Implementierung durch {{ authorCode }}, lizenziert unter {{ licenseCode }}.</p>
+  <p>Mehr Informationen unter <a href="{{ homepage }}" target="_blank">{{ homepage }}</a>.</p>
+</mat-dialog-content>
+<mat-dialog-actions class="flexcontainer">
+  <div class="flexbox"></div>
+  <button mat-button [mat-dialog-close]=null>
+    Schließen
+  </button>
+</mat-dialog-actions>
