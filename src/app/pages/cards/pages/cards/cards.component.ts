@@ -12,6 +12,8 @@ import {Direction, StackConfig, SwingCardComponent, SwingStackComponent, ThrowEv
 import {Card} from '../../../../core/entity/model/card/card.model';
 import {CardsMockService} from '../../../../core/persistence/services/cards-mock.service';
 import {SnackbarService} from '../../../../core/ui/services/snackbar.service';
+import {CardsService} from '../../../../core/entity/services/card/cards.service';
+import {Stack} from '../../../../core/entity/model/stack/stack.model';
 
 @Component({
   selector: 'app-cards',
@@ -23,6 +25,8 @@ export class CardsComponent implements OnInit, OnDestroy {
   /** App title */
   public title = environment.APP_NAME;
 
+  /** Stack */
+  public stack: Stack;
   /** Array of cards */
   public cards: Card[] = [];
 
@@ -49,6 +53,7 @@ export class CardsComponent implements OnInit, OnDestroy {
 
   /**
    * Constructor
+   * @param cardsService cards service
    * @param cardsMockService cards mock service
    * @param dialog dialog
    * @param iconRegistry iconRegistry
@@ -58,7 +63,8 @@ export class CardsComponent implements OnInit, OnDestroy {
    * @param sanitizer sanitizer
    * @param snackbarService snackbar service
    */
-  constructor(private cardsMockService: CardsMockService,
+  constructor(private cardsService: CardsService,
+              private cardsMockService: CardsMockService,
               public dialog: MatDialog,
               private iconRegistry: MatIconRegistry,
               private mediaService: MediaService,
@@ -146,6 +152,9 @@ export class CardsComponent implements OnInit, OnDestroy {
    */
   private initializeMockCards() {
     this.cards = this.cardsMockService.getMockCards();
+
+    this.stack = new Stack();
+    this.stack.cards = this.cards;
   }
 
   //
@@ -157,6 +166,13 @@ export class CardsComponent implements OnInit, OnDestroy {
    * @param menuItem menu item that has been clicked
    */
   onMenuItemClicked(menuItem: string) {
+    switch (menuItem) {
+      case 'shuffle-cards': {
+        this.shuffleCards().then(() => {
+        });
+        break;
+      }
+    }
   }
 
   /**
@@ -188,5 +204,27 @@ export class CardsComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       this.swingStack.stack.getCard(event.target).throwIn(0, 0);
     }, 100);
+  }
+
+  //
+  // Helpers
+  //
+
+  /**
+   * Shuffles cards
+   */
+  private shuffleCards(): Promise<any> {
+    return new Promise(() => {
+      this.cardsService.shuffleStack(this.stack).then((() => {
+        this.snackbarService.showSnackbar('Shuffled cards');
+        /*
+        this.stacksPersistenceService.updateStack(this.stack).then(() => {
+          this.snackbarService.showSnackbar('Shuffled cards');
+        }).catch(err => {
+          this.snackbarService.showSnackbar('Failed to shuffle cards');
+        });
+        */
+      }));
+    });
   }
 }
