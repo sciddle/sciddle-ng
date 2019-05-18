@@ -1,0 +1,40 @@
+pipeline {
+    agent {
+        node {
+            label 'master'
+        }
+    }
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
+    }
+    stages {
+        stage('Checkout') {
+            steps {
+                git url: 'git@github.com:florianschwanz/sciddle-ng.git', branch: 'master'
+            }
+        }
+        stage('Init submodules') {
+            steps {
+                sh "git submodule init"
+                sh "git submodule update"
+            }
+        }
+        stage('Build GitHub Pages') {
+            steps {
+                script {
+                    try {
+                        sh  '''
+                            npm install
+                            npm run gh-pages
+                            git add docs
+                            git commit -m "Generated GitHub pages"
+                            git push -u origin master
+                        '''
+                    } catch (err)  {
+                        currentBuild.result = 'UNSTABLE'
+                    }
+                }
+            }
+        }
+    }
+}
