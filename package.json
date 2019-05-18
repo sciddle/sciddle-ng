@@ -1,7 +1,10 @@
 {
   "name": "sciddle",
   "version": "0.0.0",
-  "license": "",
+  "authorCode": "Florian Schwanz",
+  "authorContent": "Dennis Rätzel",
+  "licenseCode": "AGPLv3",
+  "licenseContent": "CC BY 4.0",
   "homepage": "https://github.com/florianschwanz/sciddle-ng",
   "angular-cli": {},
   "scripts": {

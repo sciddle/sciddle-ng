@@ -9,7 +9,10 @@ export const environment = {
 
   NAME: require('../../package.json').name,
   VERSION: require('../../package.json').version,
-  LICENSE: require('../../package.json').license,
+  AUTHOR_CODE: require('../../package.json').authorCode,
+  AUTHOR_CONTENT: require('../../package.json').authorContent,
+  LICENSE_CODE: require('../../package.json').licenseCode,
+  LICENSE_CONTENT: require('../../package.json').licenseContent,
   HOMEPAGE: require('../../package.json').homepage,
   TAGS: require('../../tags.json').tags,
 };
