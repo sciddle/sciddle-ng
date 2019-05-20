@@ -19,6 +19,9 @@ import {STACK_PERSISTENCE_POUCHDB} from '../../../../core/entity/entity.module';
 import {ActivatedRoute} from '@angular/router';
 import {CardsAssetsService} from '../../../../core/entity/services/card/cards-assets.service';
 
+/**
+ * Displays card component
+ */
 @Component({
   selector: 'app-cards',
   templateUrl: './cards.component.html',
