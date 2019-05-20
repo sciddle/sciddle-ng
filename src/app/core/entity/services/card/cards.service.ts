@@ -99,7 +99,7 @@ export class CardsService {
       const cardsAfter = CloneService.cloneCards(Array.from(this.cards.values()));
 
       // Check if cards have been changed
-      if (JSON.stringify(cardsAfter.toString()) != JSON.stringify(cardsBefore.toString())) {
+      if (JSON.stringify(cardsAfter.toString()) !== JSON.stringify(cardsBefore.toString())) {
         resolve(Array.from(this.cards.values()));
       } else {
         this.notify();
