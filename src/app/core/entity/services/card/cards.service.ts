@@ -53,6 +53,24 @@ export class CardsService {
   }
 
   //
+  // Lookup
+  //
+
+  /**
+   * Get minimum index of a given list of cards
+   * @param cards cards
+   */
+  static getMinIndex(cards: Card[]): number {
+    const min = Math.min(...cards.map(card => {
+      return card.index;
+    }).filter(index => {
+      return !isNaN(index);
+    }));
+
+    return !isNaN(min) ? min : 0;
+  }
+
+  //
   // Initialization
   //
 
@@ -138,6 +156,51 @@ export class CardsService {
 
       resolve();
     });
+  }
+
+  /**
+   * Puts card a the end of a stack
+   * @param stack stack
+   * @param card card
+   */
+  public putCardToEnd(stack: Stack, card: Card): Promise<any> {
+    return new Promise((resolve) => {
+      card.index = CardsService.getMinIndex(Array.from(this.cards.values())) - 1;
+      this.updateCard(stack, card).then(() => {
+        resolve();
+      });
+    });
+  }
+
+  /**
+   * Updates an existing card
+   * @param stack stack
+   * @param card card to be updated
+   */
+  public updateCard(stack: Stack, card: Card): Promise<any> {
+    return new Promise((resolve, reject) => {
+      if (card == null) {
+        reject();
+      }
+
+      this.updateCardOfStack(stack, card);
+      resolve();
+    });
+  }
+
+  /**
+   * Updates card of stack
+   * @param stack stack
+   * @param card card
+   */
+  private updateCardOfStack(stack: Stack, card: Card) {
+    // Get index of the card to be updated
+    const index = stack.cards.findIndex(c => {
+      return c.id === card.id;
+    });
+
+    // Update the card
+    stack.cards[index] = card;
   }
 
   //
