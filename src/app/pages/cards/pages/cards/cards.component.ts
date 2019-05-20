@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
+import {Component, Inject, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {Media} from '../../../../core/ui/model/media.enum';
 import {environment} from '../../../../../environments/environment';
 import {MatDialog, MatIconRegistry} from '@angular/material';
@@ -10,11 +10,14 @@ import {MaterialIconService} from '../../../../core/ui/services/material-icon.se
 import {DomSanitizer} from '@angular/platform-browser';
 import {Direction, StackConfig, SwingCardComponent, SwingStackComponent, ThrowEvent} from 'angular2-swing';
 import {Card} from '../../../../core/entity/model/card/card.model';
-import {CardsMockService} from '../../../../core/persistence/services/cards-mock.service';
 import {SnackbarService} from '../../../../core/ui/services/snackbar.service';
 import {CardsService} from '../../../../core/entity/services/card/cards.service';
 import {Stack} from '../../../../core/entity/model/stack/stack.model';
 import {AboutDialogComponent} from '../../../../ui/about-dialog/about-dialog/about-dialog.component';
+import {StacksPersistenceService} from '../../../../core/entity/services/stack/persistence/stacks-persistence.interface';
+import {STACK_PERSISTENCE_POUCHDB} from '../../../../core/entity/entity.module';
+import {ActivatedRoute} from '@angular/router';
+import {CardsAssetsService} from '../../../../core/entity/services/card/cards-assets.service';
 
 @Component({
   selector: 'app-cards',
@@ -26,6 +29,8 @@ export class CardsComponent implements OnInit, OnDestroy {
   /** App title */
   public title = environment.APP_NAME;
 
+  /** ID passed as an argument */
+  public id: string;
   /** Stack */
   public stack: Stack;
   /** Array of cards */
@@ -55,24 +60,26 @@ export class CardsComponent implements OnInit, OnDestroy {
   /**
    * Constructor
    * @param cardsService cards service
-   * @param cardsMockService cards mock service
    * @param dialog dialog
    * @param iconRegistry iconRegistry
    * @param mediaService media service
    * @param materialColorService material color service
    * @param materialIconService material icon service
+   * @param route route
    * @param sanitizer sanitizer
    * @param snackbarService snackbar service
+   * @param stacksPersistenceService stacks persistence service
    */
   constructor(private cardsService: CardsService,
-              private cardsMockService: CardsMockService,
               public dialog: MatDialog,
               private iconRegistry: MatIconRegistry,
               private mediaService: MediaService,
               private materialColorService: MaterialColorService,
               private materialIconService: MaterialIconService,
+              private route: ActivatedRoute,
               private sanitizer: DomSanitizer,
-              private snackbarService: SnackbarService) {
+              private snackbarService: SnackbarService,
+              @Inject(STACK_PERSISTENCE_POUCHDB) private stacksPersistenceService: StacksPersistenceService) {
   }
 
   //
@@ -83,11 +90,23 @@ export class CardsComponent implements OnInit, OnDestroy {
    * Handles on-init lifecycle phase
    */
   ngOnInit() {
+    this.initializeStackSubscription();
+    this.initializeCardSubscription();
+
     this.initializeColors();
     this.initializeMaterial();
     this.initializeMediaSubscription();
-    this.initializeMockCards();
+
     this.initializeStackConfig();
+
+    this.route.params.subscribe(() => {
+      this.id = this.route.snapshot.paramMap.get('id');
+
+      // Try to load existing stack
+      if (this.id != null) {
+        this.findEntities(this.id);
+      }
+    });
   }
 
   /**
@@ -102,7 +121,89 @@ export class CardsComponent implements OnInit, OnDestroy {
   // Initialization
   //
 
+  /**
+   * Initializes stack subscription
+   */
+  private initializeStackSubscription() {
+    this.stacksPersistenceService.stackSubject.pipe(
+      takeUntil(this.unsubscribeSubject)
+    ).subscribe((value) => {
+      if (value != null) {
+        const stack = value as Stack;
+        this.initializeStack(stack);
+      } else {
+        this.initializeEmptyStack();
+      }
+    });
+  }
+
+  /**
+   * Initializes card subscription
+   */
+  private initializeCardSubscription() {
+    this.cardsService.cardsSubject.pipe(
+      takeUntil(this.unsubscribeSubject)
+    ).subscribe((value) => {
+      if (value != null) {
+        this.initializeCards(value as Card[]);
+      }
+    });
+  }
+
+  // Stack
+
+  /**
+   * Initializes stack
+   * @param stack stack
+   */
+  private initializeStack(stack: Stack) {
+    console.log(`initializeStack cards ${stack.cards.length}`);
+
+    this.stack = stack;
+
+    this.initializeTitle(stack);
+    this.cardsService.initializeCards(stack.cards);
+    this.cardsService.mergeCardsFromAssets(CardsAssetsService.getAssetsCards()).then(resolve => {
+      console.log(`FOO ${JSON.stringify(resolve)}`);
+      this.stack.cards = resolve;
+      this.stacksPersistenceService.updateStack(this.stack);
+    }, dismiss => {
+      console.log(`BAR`);
+    });
+  }
+
+  /**
+   * Initializes empty stack
+   */
+  private initializeEmptyStack() {
+    const stack = new Stack();
+    stack.id = '0';
+    this.stacksPersistenceService.createStack(stack);
+  }
+
+  // Cards
+
+  /**
+   * Initializes cards by filtering them
+   * @param cards cards
+   */
+  private initializeCards(cards: Card[]) {
+
+    // Filter and sort cards
+    this.cards = cards.sort(CardsService.sortCards);
+  }
+
   // Others
+
+  /**
+   * Finds entities by a given ID
+   * @param id ID
+   */
+  private findEntities(id: string) {
+    if (id != null) {
+      this.stacksPersistenceService.findStackByID(this.id);
+    }
+  }
 
   /**
    * Initializes colors
@@ -131,6 +232,14 @@ export class CardsComponent implements OnInit, OnDestroy {
   }
 
   /**
+   * Initializes title
+   * @param stack stack
+   */
+  private initializeTitle(stack: Stack) {
+    this.title = stack != null && stack.title != null ? stack.title : this.title;
+  }
+
+  /**
    * Initializes stack config
    */
   private initializeStackConfig() {
@@ -146,16 +255,6 @@ export class CardsComponent implements OnInit, OnDestroy {
         return this.throwOutDistance;
       }
     };
-  }
-
-  /**
-   * Initializes mock cards
-   */
-  private initializeMockCards() {
-    this.cards = this.cardsMockService.getMockCards();
-
-    this.stack = new Stack();
-    this.stack.cards = this.cards;
   }
 
   //
