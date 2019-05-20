@@ -1,4 +1,4 @@
-import { EntityModule } from './entity.module';
+import {EntityModule} from './entity.module';
 
 describe('EntityModule', () => {
   let entityModule: EntityModule;
