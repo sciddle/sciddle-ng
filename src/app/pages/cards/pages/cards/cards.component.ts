@@ -160,18 +160,14 @@ export class CardsComponent implements OnInit, OnDestroy {
    * @param stack stack
    */
   private initializeStack(stack: Stack) {
-    console.log(`initializeStack cards ${stack.cards.length}`);
-
     this.stack = stack;
 
     this.initializeTitle(stack);
     this.cardsService.initializeCards(stack.cards);
     this.cardsService.mergeCardsFromAssets(CardsAssetsService.getAssetsCards()).then(resolve => {
-      console.log(`FOO ${JSON.stringify(resolve)}`);
       this.stack.cards = resolve;
-      this.stacksPersistenceService.updateStack(this.stack);
-    }, dismiss => {
-      console.log(`BAR`);
+      this.stacksPersistenceService.updateStack(this.stack).then(() => {});
+      this.snackbarService.showSnackbar('Neue Karten geladen');
     });
   }
 
@@ -181,7 +177,7 @@ export class CardsComponent implements OnInit, OnDestroy {
   private initializeEmptyStack() {
     const stack = new Stack();
     stack.id = '0';
-    this.stacksPersistenceService.createStack(stack);
+    this.stacksPersistenceService.createStack(stack).then(() => {});
   }
 
   // Cards
@@ -311,8 +307,11 @@ export class CardsComponent implements OnInit, OnDestroy {
    * @param event throw event
    */
   onCardThrownOut(event: ThrowEvent) {
-    // Put first card to end
-    this.cards.push(this.cards.shift());
+    this.cardsService.putCardToEnd(this.stack, this.cards[0]).then(() => {
+      this.updateCard(this.stack, this.cards[0]).then(() => {
+        this.snackbarService.showSnackbar('Karte ans Ende gelegt');
+      });
+    });
   }
 
   /**
@@ -329,20 +328,38 @@ export class CardsComponent implements OnInit, OnDestroy {
   // Helpers
   //
 
+
+  /**
+   * Updates a card
+   * @param stack stack
+   * @param card card
+   */
+  private updateCard(stack: Stack, card: Card): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.cardsService.updateCard(stack, card).then(() => {
+        this.stacksPersistenceService.clearStacks();
+        this.stacksPersistenceService.updateStack(stack).then(() => {
+          resolve();
+        }).catch(err => {
+          console.error(err);
+          reject();
+        });
+      }).catch(err => {
+        console.error(err);
+        reject();
+      });
+    });
+  }
+
   /**
    * Shuffles cards
    */
   private shuffleCards(): Promise<any> {
     return new Promise(() => {
       this.cardsService.shuffleStack(this.stack).then((() => {
-        this.snackbarService.showSnackbar('Shuffled cards');
-        /*
         this.stacksPersistenceService.updateStack(this.stack).then(() => {
-          this.snackbarService.showSnackbar('Shuffled cards');
-        }).catch(err => {
-          this.snackbarService.showSnackbar('Failed to shuffle cards');
+          this.snackbarService.showSnackbar('Karten gemischt');
         });
-        */
       }));
     });
   }
