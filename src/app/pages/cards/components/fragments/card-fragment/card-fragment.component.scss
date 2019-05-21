@@ -18,10 +18,6 @@
   width: 100%;
 }
 
-.card-main-content {
-  min-height: 70px;
-}
-
 .word {
   font-family: 'Roboto Slab', serif;
   font-size: 2.0em;
@@ -55,15 +51,16 @@ mat-card {
 
   @media #{$breakpoint-small} {
     width: 100%;
+    max-width: 400px;
     -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
     -moz-box-sizing: border-box; /* Firefox, other Gecko */
     box-sizing: border-box; /* Opera/IE 8+ */
   }
   @media #{$breakpoint-medium} {
-    width: 300px;
+    width: 400px;
   }
   @media #{$breakpoint-large} {
-    width: 300px;
+    width: 400px;
   }
 
   &:hover .hidden {
