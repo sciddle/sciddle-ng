@@ -2,7 +2,8 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
 const routes: Routes = [
-  {path: '', redirectTo: 'cards/0', pathMatch: 'full'},
+  {path: '', redirectTo: 'welcome', pathMatch: 'full'},
+  {path: 'welcome', loadChildren: './pages/welcome/welcome.module#WelcomeModule'},
   {path: 'cards', loadChildren: './pages/cards/cards.module#CardsModule'},
   {path: 'cards/:id', loadChildren: './pages/cards/cards.module#CardsModule'},
 ];
