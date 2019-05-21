@@ -1,4 +1,13 @@
-import {ChangeDetectionStrategy, Component, Input, isDevMode, OnInit} from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  isDevMode,
+  OnChanges,
+  OnInit,
+  SimpleChanges
+} from '@angular/core';
 import {Stack} from '../../../../../core/entity/model/stack/stack.model';
 import {Media} from '../../../../../core/ui/model/media.enum';
 import {Card} from '../../../../../core/entity/model/card/card.model';
@@ -12,7 +21,7 @@ import {Card} from '../../../../../core/entity/model/card/card.model';
   styleUrls: ['./card-fragment.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CardFragmentComponent implements OnInit {
+export class CardFragmentComponent implements OnChanges {
 
   /** Stack the card is contained in */
   @Input() stack = new Stack();
@@ -45,9 +54,9 @@ export class CardFragmentComponent implements OnInit {
   //
 
   /**
-   * Handles on-init lifecycle phase
+   * Handles on-changes lifecycle phase
    */
-  ngOnInit() {
+  ngOnChanges(changes: SimpleChanges): void {
     this.initializeColors();
   }
 
