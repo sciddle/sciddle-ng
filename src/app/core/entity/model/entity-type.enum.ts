@@ -4,5 +4,8 @@
 export enum EntityType {
 
   STACK,
-  CARD
+  CARD,
+
+  GAME,
+  TEAM,
 }
