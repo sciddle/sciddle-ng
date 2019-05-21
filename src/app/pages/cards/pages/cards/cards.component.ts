@@ -165,9 +165,11 @@ export class CardsComponent implements OnInit, OnDestroy {
     this.initializeTitle(stack);
     this.cardsService.initializeCards(stack.cards);
     this.cardsService.mergeCardsFromAssets(CardsAssetsService.getAssetsCards()).then(resolve => {
-      this.stack.cards = resolve;
+      this.stack.cards = resolve as Card[];
       this.stacksPersistenceService.updateStack(this.stack).then(() => {});
       this.snackbarService.showSnackbar('Neue Karten geladen');
+    }, () => {
+      // Do nothing
     });
   }
 

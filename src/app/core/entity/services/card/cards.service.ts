@@ -79,11 +79,13 @@ export class CardsService {
    * @param cards cards
    */
   public initializeCards(cards: Card[]) {
-    this.clearCards();
-    cards.forEach(card => {
-      this.cards.set(card.id, card);
-    });
-    this.notify();
+    if (cards != null) {
+      this.clearCards();
+      cards.forEach(card => {
+        this.cards.set(card.id, card);
+      });
+      this.notify();
+    }
   }
 
   /**
@@ -120,7 +122,6 @@ export class CardsService {
       if (JSON.stringify(cardsAfter.toString()) !== JSON.stringify(cardsBefore.toString())) {
         resolve(Array.from(this.cards.values()));
       } else {
-        this.notify();
         dismiss();
       }
     });
@@ -145,7 +146,8 @@ export class CardsService {
    * Shuffles cards of a given stack
    * @param stack stack
    */
-  public shuffleStack(stack: Stack): Promise<any> {
+  public shuffleStack(stack: Stack):
+    Promise<any> {
     return new Promise((resolve) => {
       let index = 0;
 
@@ -177,7 +179,8 @@ export class CardsService {
    * @param stack stack
    * @param card card to be updated
    */
-  public updateCard(stack: Stack, card: Card): Promise<any> {
+  public updateCard(stack: Stack, card: Card):
+    Promise<any> {
     return new Promise((resolve, reject) => {
       if (card == null) {
         reject();
