@@ -1,6 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {SnackbarService} from './core/ui/services/snackbar.service';
-import {MatSnackBar, MatSnackBarConfig} from '@angular/material';
+import {MatSnackBar} from '@angular/material';
+import {PouchDBService} from './core/persistence/services/pouchdb.service';
+import {environment} from '../environments/environment';
 
 /**
  * Displays application
@@ -10,17 +12,19 @@ import {MatSnackBar, MatSnackBarConfig} from '@angular/material';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
 
   /** Default app theme */
   themeClass = 'light-theme';
 
   /**
    * Constructor
+   * @param pouchDBService pouchDB service
    * @param snackbarService snackbar service
    * @param snackBar snack bar
    */
-  constructor(private snackbarService: SnackbarService,
+  constructor(private pouchDBService: PouchDBService,
+              private snackbarService: SnackbarService,
               public snackBar: MatSnackBar) {
   }
 
@@ -35,6 +39,13 @@ export class AppComponent implements OnInit {
     this.initializeSnackbar();
   }
 
+  /**
+   * Handles after-view-init lifecycle phase
+   */
+  ngAfterViewInit() {
+    this.initializeDatabaseSync();
+  }
+
   //
   // Initialization
   //
@@ -47,6 +58,13 @@ export class AppComponent implements OnInit {
         this.openSnackBar(snack[0], snack[1], snack[2]);
       }
     );
+  }
+
+  /**
+   * Initializes database sync
+   */
+  private initializeDatabaseSync() {
+    this.pouchDBService.sync(`http://localhost:5984/${environment.DATABASE_ENTITIES}`);
   }
 
   //
