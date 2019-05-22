@@ -65,7 +65,7 @@
   { "entityType": 0, "id": "64", "word": "Planetare Grenzen", "taboos": ["Ökosystem", "Belastung", "Ressourcen", "Stabilität", "Nachhaltigkeit"], "index": 64, "difficulty": 3 },
   { "entityType": 0, "id": "65", "word": "Wolken", "taboos": ["Wasserdampf", "Verdunstung", "Regen", "Reflexion", "Kreislauf"], "index": 65, "difficulty": 1 },
   { "entityType": 0, "id": "66", "word": "Eisbohrkern", "taboos": ["Proxydaten", "Klima", "Vergangenheit", "Gas", "Zeitreihe"], "index": 66, "difficulty": 2 },
-  { "entityType": 0, "id": "67", "word": "Wasserfampf", "taboos": ["Wolken", "Verdunstung", "Meer", "Kochen", "Atmosphäre"], "index": 67, "difficulty": 1 },
+  { "entityType": 0, "id": "67", "word": "Wasserdampf", "taboos": ["Wolken", "Verdunstung", "Meer", "Kochen", "Atmosphäre"], "index": 67, "difficulty": 1 },
   { "entityType": 0, "id": "68", "word": "Svante Arrhenius", "taboos": ["Treibhauseffekt", "Wissenschaftler", "Schweden", "Forschung", "Nobelpreis"], "index": 68, "difficulty": 3 },
   { "entityType": 0, "id": "69", "word": "Wärme", "taboos": ["Temperatur", "Infrarot-Strahlung", "Kälte", "Energie", "Transport"], "index": 69, "difficulty": 1 },
   { "entityType": 0, "id": "70", "word": "Klimageschichte", "taboos": ["Paläoklimatologie", "Eisbohrkern", "Zeitreihe", "Vergangenheit", "Sediment"], "index": 70, "difficulty": 3 },
@@ -118,7 +118,7 @@
   { "entityType": 0, "id": "117", "word": "Eisendüngung", "taboos": ["Geo-Engineering", "Algen", "Ozean", "Kohlendioxid (CO2)", "Speicher"], "index": 117, "difficulty": 3 },
   { "entityType": 0, "id": "118", "word": "Energiewende", "taboos": ["Kraftwerk", "Wirtschaft", "Veränderung", "Strom", "Kohlendioxid (CO2)"], "index": 118, "difficulty": 2 },
   { "entityType": 0, "id": "119", "word": "Gegenstrahlung", "taboos": ["Reflexion", "Wärmestrahlung", "Atmosphäre", "Energiebilanz", "Wolken"], "index": 119, "difficulty": 3 },
-  { "entityType": 0, "id": "120", "word": "Fluorkohlenwasserstoffe", "taboos": ["Kühlschrank", "Kältemittel", "Klimaanlage", "Treibhausgas", "Klimawirksamkeit"], "index": 120, "difficulty": 3 },
+  { "entityType": 0, "id": "120", "word": "Fluorkohlen-wasserstoffe", "taboos": ["Kühlschrank", "Kältemittel", "Klimaanlage", "Treibhausgas", "Klimawirksamkeit"], "index": 120, "difficulty": 3 },
   { "entityType": 0, "id": "121", "word": "Geo-Engineering", "taboos": ["Technologie", "Veränderung", "Steuerung", "Eisendüngung", "Atmosphäre"], "index": 121, "difficulty": 3 },
   { "entityType": 0, "id": "122", "word": "Massentierhaltung", "taboos": ["Landwirtschaft", "Ernährung", "Fleisch", "Milchprodukte", "Futtermittel"], "index": 122, "difficulty": 1 },
   { "entityType": 0, "id": "123", "word": "Eneuerbare-Energien-Gesetz", "taboos": ["Ausbau", "Umlage", "Strom", "Einspeisung", "Geld"], "index": 123, "difficulty": 3 },
@@ -136,7 +136,7 @@
   { "entityType": 0, "id": "135", "word": "Emissionshandel", "taboos": ["Kohlendioxid (CO2)", "Treibhausgas", "Wirtschaft", "Einsparung", "Klimapolitik"], "index": 135, "difficulty": 3 },
   { "entityType": 0, "id": "136", "word": "Klimasensitivität", "taboos": ["Konzentration", "Kohlendioxid (CO2)", "Temperatur", "Erwärmung", "Treibhausgas"], "index": 136, "difficulty": 3 },
   { "entityType": 0, "id": "137", "word": "Clausius-Clapyron Gleichung", "taboos": ["Druck", "Formel", "Temperatur", "Wasserdampf", "Sättigung"], "index": 137, "difficulty": 3 },
-  { "entityType": 0, "id": "138", "word": "Forderungen-katalog", "taboos": ["Lösungsvorschläge", "Bedingungen", "Wünsche", "Handlungen", "Anweisunge"], "index": 138, "difficulty": 3 },
+  { "entityType": 0, "id": "138", "word": "Forderungenkatalog", "taboos": ["Lösungsvorschläge", "Bedingungen", "Wünsche", "Handlungen", "Anweisungen"], "index": 138, "difficulty": 3 },
   { "entityType": 0, "id": "139", "word": "Übereinkommen von Paris", "taboos": ["Frankreich", "Vereibarung", "Kyoto-Protokoll", "Klimaziele", "Vertrag"], "index": 139, "difficulty": 2 },
   { "entityType": 0, "id": "140", "word": "1,5-Grad-Ziel", "taboos": ["Paris", "IPCC", "Begrenzung", "Temperatur", "Globale Erwärmung"], "index": 140, "difficulty": 2 }
 ]
