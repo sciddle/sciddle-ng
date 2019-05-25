@@ -1,0 +1,25 @@
+<app-games-toolbar
+  class="fixed"
+  [title]="title"
+  [titleColor]="titleColor"
+  [media]="media"
+  (menuItemEventEmitter)="onMenuItemClicked($event)"></app-games-toolbar>
+
+<div class="main-content">
+  <div class="buttons vertical-center">
+    <div>
+      <button mat-flat-button color="primary" class="button"
+              [disabled]="stack == null"
+              (click)="onSinglePlayerClicked()">
+        ALLEIN SPIELEN
+      </button>
+    </div>
+    <div>
+      <button mat-flat-button color="primary" class="button"
+              disabled=true
+              (click)="onMultiPlayerClicked()">
+        GEGEN ANDERE SPIELEN
+      </button>
+    </div>
+  </div>
+</div>

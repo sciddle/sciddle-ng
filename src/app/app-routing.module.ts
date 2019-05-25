@@ -2,8 +2,9 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
 const routes: Routes = [
-  {path: '', redirectTo: 'welcome', pathMatch: 'full'},
-  {path: 'welcome', loadChildren: './pages/welcome/welcome.module#WelcomeModule'},
+  {path: '', redirectTo: 'games/0', pathMatch: 'full'},
+  {path: 'games', loadChildren: './pages/games/games.module#GamesModule'},
+  {path: 'games/:id', loadChildren: './pages/games/games.module#GamesModule'},
   {path: 'cards', loadChildren: './pages/cards/cards.module#CardsModule'},
   {path: 'cards/:id', loadChildren: './pages/cards/cards.module#CardsModule'},
 ];
