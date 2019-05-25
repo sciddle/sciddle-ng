@@ -7,8 +7,6 @@ import {EntityType} from '../entity-type.enum';
  */
 export class Game extends Entity {
 
-  /** ID of the stack to play with */
-  stackID: number;
   /** Teams that play the game */
   teams: Team[];
 
@@ -18,7 +16,6 @@ export class Game extends Entity {
   constructor() {
     super();
     this.entityType = EntityType.GAME;
-    this.stackID = -1;
     this.teams = [];
   }
 }
