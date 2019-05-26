@@ -173,7 +173,8 @@ export class CardsComponent implements OnInit, OnDestroy {
   private initializeEmptyStack() {
     const stack = new Stack();
     stack.id = '0';
-    this.stacksPersistenceService.createStack(stack).then(() => {});
+    this.stacksPersistenceService.createStack(stack).then(() => {
+    });
   }
 
   // Cards
@@ -263,7 +264,15 @@ export class CardsComponent implements OnInit, OnDestroy {
   onMenuItemClicked(menuItem: string) {
     switch (menuItem) {
       case 'back': {
-        this.router.navigate([`/games/${this.stack.id}`]).then();
+        // Remove existing game
+        this.stack.game = null;
+
+        // Save stack
+        this.stacksPersistenceService.updateStack(this.stack).then(() => {
+          // Navigate to game page
+          this.router.navigate([`/games/${this.stack.id}`]).then();
+        });
+
         break;
       }
       case 'shuffle-cards': {

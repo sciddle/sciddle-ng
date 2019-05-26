@@ -27,7 +27,7 @@ export class GamesService {
    * Initializes a single-player game
    * @param stack to initialize game for
    */
-  initSinglePlayerGame(stack: Stack): Promise<any> {
+  initializeSinglePlayerGame(stack: Stack): Promise<any> {
     return new Promise((resolve) => {
       this.cardsService.shuffleStack(stack);
       stack.game = new Game();
@@ -41,7 +41,7 @@ export class GamesService {
    * @param stack to initialize game for
    * @param teamCount number of teams
    */
-  initMultiPlayerGame(stack: Stack, teamCount: number): Promise<any> {
+  initializeMultiPlayerGame(stack: Stack, teamCount: number): Promise<any> {
     return new Promise((resolve) => {
       this.cardsService.shuffleStack(stack);
       stack.game = new Game();
@@ -55,6 +55,18 @@ export class GamesService {
 
       resolve();
     });
+  }
+
+  //
+  // Helpers
+  //
+
+  /**
+   * Determines if an active game exists
+   * @param stack stack
+   */
+  existsGame(stack: Stack) {
+    return stack != null && stack.game != null;
   }
 
   /**
