@@ -256,7 +256,7 @@ export class GamesComponent implements OnInit, OnDestroy {
    * Handles click on single-user button
    */
   onSinglePlayerClicked() {
-    this.gameService.initSinglePlayerGame(this.stack).then(() => {
+    this.gameService.initializeSinglePlayerGame(this.stack).then(() => {
       this.initializeCards(this.stack).then(() => {
         this.router.navigate([`/cards/${this.stack.id}`]).then(() => {
         });
@@ -280,7 +280,7 @@ export class GamesComponent implements OnInit, OnDestroy {
    * @param teamCount number of teams
    */
   onTeamsSelected(teamCount: number) {
-    this.gameService.initMultiPlayerGame(this.stack, teamCount).then(() => {
+    this.gameService.initializeMultiPlayerGame(this.stack, teamCount).then(() => {
       this.initializeCards(this.stack).then(() => {
         this.router.navigate([`/cards/${this.stack.id}`]).then(() => {
         });
