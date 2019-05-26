@@ -258,7 +258,10 @@ export class GamesComponent implements OnInit, OnDestroy {
   onSinglePlayerClicked() {
     this.gameService.initializeSinglePlayerGame(this.stack).then(() => {
       this.initializeCards(this.stack).then(() => {
-        this.router.navigate([`/cards/${this.stack.id}`]).then(() => {
+        this.cardsService.shuffleStack(this.stack);
+        this.stacksPersistenceService.updateStack(this.stack).then(() => {
+          this.router.navigate([`/cards/${this.stack.id}`]).then(() => {
+          });
         });
       });
     });
@@ -282,7 +285,10 @@ export class GamesComponent implements OnInit, OnDestroy {
   onTeamsSelected(teamCount: number) {
     this.gameService.initializeMultiPlayerGame(this.stack, teamCount).then(() => {
       this.initializeCards(this.stack).then(() => {
-        this.router.navigate([`/cards/${this.stack.id}`]).then(() => {
+        this.cardsService.shuffleStack(this.stack);
+        this.stacksPersistenceService.updateStack(this.stack).then(() => {
+          this.router.navigate([`/cards/${this.stack.id}`]).then(() => {
+          });
         });
       });
     });
