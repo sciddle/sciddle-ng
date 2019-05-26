@@ -16,8 +16,7 @@ import {Stack} from '../../../../core/entity/model/stack/stack.model';
 import {AboutDialogComponent} from '../../../../ui/about-dialog/about-dialog/about-dialog.component';
 import {StacksPersistenceService} from '../../../../core/entity/services/stack/persistence/stacks-persistence.interface';
 import {STACK_PERSISTENCE_POUCHDB} from '../../../../core/entity/entity.module';
-import {ActivatedRoute} from '@angular/router';
-import {CardsAssetsService} from '../../../../core/entity/services/card/cards-assets.service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 /**
  * Displays card component
@@ -69,6 +68,7 @@ export class CardsComponent implements OnInit, OnDestroy {
    * @param materialColorService material color service
    * @param materialIconService material icon service
    * @param route route
+   * @param router router
    * @param sanitizer sanitizer
    * @param snackbarService snackbar service
    * @param stacksPersistenceService stacks persistence service
@@ -80,6 +80,7 @@ export class CardsComponent implements OnInit, OnDestroy {
               private materialColorService: MaterialColorService,
               private materialIconService: MaterialIconService,
               private route: ActivatedRoute,
+              private router: Router,
               private sanitizer: DomSanitizer,
               private snackbarService: SnackbarService,
               @Inject(STACK_PERSISTENCE_POUCHDB) private stacksPersistenceService: StacksPersistenceService) {
@@ -230,7 +231,7 @@ export class CardsComponent implements OnInit, OnDestroy {
    * @param stack stack
    */
   private initializeTitle(stack: Stack) {
-    this.title = stack != null && stack.title != null ? stack.title : this.title;
+    // this.title = stack != null && stack.title != null ? stack.title : this.title;
   }
 
   /**
@@ -261,6 +262,10 @@ export class CardsComponent implements OnInit, OnDestroy {
    */
   onMenuItemClicked(menuItem: string) {
     switch (menuItem) {
+      case 'back': {
+        this.router.navigate([`/games/${this.stack.id}`]).then();
+        break;
+      }
       case 'shuffle-cards': {
         this.shuffleCards().then(() => {
         });

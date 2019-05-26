@@ -213,7 +213,7 @@ export class GamesComponent implements OnInit, OnDestroy {
    * @param stack stack
    */
   private initializeTitle(stack: Stack) {
-    this.title = stack != null && stack.title != null ? stack.title : this.title;
+    // this.title = stack != null && stack.title != null ? stack.title : this.title;
   }
 
   //
