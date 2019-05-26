@@ -8,17 +8,23 @@
 <div class="main-content">
   <div class="buttons vertical-center">
     <div>
-      <button mat-flat-button color="primary" class="button"
+      <button mat-flat-button color="primary" class="mode-button"
               [disabled]="stack == null"
               (click)="onSinglePlayerClicked()">
         ALLEIN SPIELEN
       </button>
     </div>
     <div>
-      <button mat-flat-button color="primary" class="button"
-              disabled=true
+      <button mat-flat-button color="primary" class="mode-button"
+              [disabled]="stack == null"
               (click)="onMultiPlayerClicked()">
         GEGEN ANDERE SPIELEN
+      </button>
+    </div>
+    <div [@teamCountSelectionAnimation]="teamCountSelectionState">
+      <button *ngFor="let item of arrayOne(5); let i = index;" mat-flat-button color="primary" class="team-button"
+              (click)="onTeamsSelected(i+1)">
+        {{ i + 1 }}
       </button>
     </div>
   </div>

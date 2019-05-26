@@ -18,6 +18,7 @@ import {MediaService} from '../../../../core/ui/services/media.service';
 import {MaterialIconService} from '../../../../core/ui/services/material-icon.service';
 import {DomSanitizer} from '@angular/platform-browser';
 import {AboutDialogComponent} from '../../../../ui/about-dialog/about-dialog/about-dialog.component';
+import {Animations, TeamCountSelectionState} from './games.animation';
 
 /**
  * Displays games page
@@ -25,7 +26,10 @@ import {AboutDialogComponent} from '../../../../ui/about-dialog/about-dialog/abo
 @Component({
   selector: 'app-welcome',
   templateUrl: './games.component.html',
-  styleUrls: ['./games.component.scss']
+  styleUrls: ['./games.component.scss'],
+  animations: [
+    Animations.teamCountSelectionAnimation,
+  ]
 })
 export class GamesComponent implements OnInit, OnDestroy {
 
@@ -46,6 +50,9 @@ export class GamesComponent implements OnInit, OnDestroy {
 
   /** Helper subject used to finish other subscriptions */
   private unsubscribeSubject = new Subject();
+
+  /** Scroll state */
+  public teamCountSelectionState: TeamCountSelectionState = TeamCountSelectionState.DEACTIVATED;
 
   /**
    * Constructor
@@ -261,11 +268,35 @@ export class GamesComponent implements OnInit, OnDestroy {
    * Handles click on multi-user button
    */
   onMultiPlayerClicked() {
-    this.gameService.initMultiPlayerGame(this.stack).then(() => {
+    if (this.teamCountSelectionState === TeamCountSelectionState.DEACTIVATED) {
+      this.teamCountSelectionState = TeamCountSelectionState.ACTIVATED;
+    } else {
+      this.teamCountSelectionState = TeamCountSelectionState.DEACTIVATED;
+    }
+  }
+
+  /**
+   * Handles selection of team count
+   * @param teamCount number of teams
+   */
+  onTeamsSelected(teamCount: number) {
+    this.gameService.initMultiPlayerGame(this.stack, teamCount).then(() => {
       this.initializeCards(this.stack).then(() => {
         this.router.navigate([`/cards/${this.stack.id}`]).then(() => {
         });
       });
     });
+  }
+
+  //
+  // Helpers
+  //
+
+  /**
+   * Generates an array of a given number of elements
+   * @param n number of elements
+   */
+  arrayOne(n: number): any[] {
+    return Array(n);
   }
 }
