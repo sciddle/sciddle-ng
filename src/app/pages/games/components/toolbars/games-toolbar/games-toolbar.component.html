@@ -1,8 +1,5 @@
 <mat-toolbar class="toolbar flexcontainer">
-  <div *ngIf="media > mediaType.MEDIUM" class="toolbar-block start">
-    <span *ngIf="media != mediaType.SMALL" class="toolbar-title" [style.color]="titleColor">{{ title }}</span>
-  </div>
-  <div *ngIf="media < mediaType.LARGE" class="toolbar-block start">
+  <div class="toolbar-block start">
     <button mat-button class="toolbar-menu-item" (click)="onMenuItemClicked('menu')">
       <mat-icon svgIcon="menu"></mat-icon>
     </button>
