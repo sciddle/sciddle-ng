@@ -146,8 +146,7 @@ export class CardsService {
    * Shuffles cards of a given stack
    * @param stack stack
    */
-  public shuffleStack(stack: Stack):
-    Promise<any> {
+  public shuffleStack(stack: Stack): Promise<any> {
     return new Promise((resolve) => {
       let index = 0;
 
