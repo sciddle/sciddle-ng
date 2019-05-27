@@ -19,6 +19,7 @@ import {STACK_PERSISTENCE_POUCHDB} from '../../../../core/entity/entity.module';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ConfirmationDialogComponent} from '../../../../ui/confirmation-dialog/confirmation-dialog/confirmation-dialog.component';
 import {GamesService} from '../../../../core/entity/services/game/games.service';
+import {GameMode} from '../../../../core/entity/model/game-mode.enum';
 
 /**
  * Displays card component
@@ -268,12 +269,16 @@ export class CardsComponent implements OnInit, OnDestroy {
   onMenuItemClicked(menuItem: string) {
     switch (menuItem) {
       case 'back': {
-        if (this.gamesService.isSinglePlayerGame(this.stack)) {
-          this.handleBackAction();
-        } else {
-          this.handleBackActionWithConfirmation();
+        switch (this.gamesService.getGameMode(this.stack)) {
+          case GameMode.MULTI_PLAYER: {
+            this.handleBackAction();
+            break;
+          }
+          case GameMode.SINGLE_PLAYER: {
+            this.handleBackActionWithConfirmation();
+            break;
+          }
         }
-
         break;
       }
       case 'shuffle-cards': {
