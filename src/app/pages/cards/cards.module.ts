@@ -8,6 +8,7 @@ import {CardsToolbarComponent} from './components/toolbars/cards-toolbar/cards-t
 import {SwingModule} from 'angular2-swing';
 import {CardFragmentComponent} from './components/fragments/card-fragment/card-fragment.component';
 import {AboutDialogModule} from '../../ui/about-dialog/about-dialog.module';
+import {ConfirmationDialogModule} from '../../ui/confirmation-dialog/confirmation-dialog.module';
 
 @NgModule({
   imports: [
@@ -21,6 +22,7 @@ import {AboutDialogModule} from '../../ui/about-dialog/about-dialog.module';
     CardsRoutingModule,
 
     AboutDialogModule,
+    ConfirmationDialogModule
   ],
   declarations: [
     // Pages

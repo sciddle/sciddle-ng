@@ -17,6 +17,8 @@ import {AboutDialogComponent} from '../../../../ui/about-dialog/about-dialog/abo
 import {StacksPersistenceService} from '../../../../core/entity/services/stack/persistence/stacks-persistence.interface';
 import {STACK_PERSISTENCE_POUCHDB} from '../../../../core/entity/entity.module';
 import {ActivatedRoute, Router} from '@angular/router';
+import {ConfirmationDialogComponent} from '../../../../ui/confirmation-dialog/confirmation-dialog/confirmation-dialog.component';
+import {GamesService} from '../../../../core/entity/services/game/games.service';
 
 /**
  * Displays card component
@@ -63,6 +65,7 @@ export class CardsComponent implements OnInit, OnDestroy {
    * Constructor
    * @param cardsService cards service
    * @param dialog dialog
+   * @param gamesService games service
    * @param iconRegistry iconRegistry
    * @param mediaService media service
    * @param materialColorService material color service
@@ -75,6 +78,7 @@ export class CardsComponent implements OnInit, OnDestroy {
    */
   constructor(private cardsService: CardsService,
               public dialog: MatDialog,
+              private gamesService: GamesService,
               private iconRegistry: MatIconRegistry,
               private mediaService: MediaService,
               private materialColorService: MaterialColorService,
@@ -264,14 +268,11 @@ export class CardsComponent implements OnInit, OnDestroy {
   onMenuItemClicked(menuItem: string) {
     switch (menuItem) {
       case 'back': {
-        // Remove existing game
-        this.stack.game = null;
-
-        // Save stack
-        this.stacksPersistenceService.updateStack(this.stack).then(() => {
-          // Navigate to game page
-          this.router.navigate([`/games/${this.stack.id}`]).then();
-        });
+        if (this.gamesService.isSinglePlayerGame(this.stack)) {
+          this.handleBackAction();
+        } else {
+          this.handleBackActionWithConfirmation();
+        }
 
         break;
       }
@@ -337,6 +338,40 @@ export class CardsComponent implements OnInit, OnDestroy {
   // Helpers
   //
 
+  /**
+   * Handles back action
+   */
+  private handleBackActionWithConfirmation() {
+    const confirmationDialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      disableClose: false,
+      data: {
+        title: 'Spiel beenden',
+        text: 'Willst du das Spiel beenden?',
+        action: 'Ja, beenden',
+        negativeAction: 'Nein, weiterspielen',
+        value: {}
+      }
+    });
+    confirmationDialogRef.afterClosed().subscribe(confirmationResult => {
+      if (confirmationResult != null) {
+        this.handleBackAction();
+      }
+    });
+  }
+
+  /**
+   * Handles back action
+   */
+  private handleBackAction() {
+    // Remove existing game
+    this.stack.game = null;
+
+    // Save stack
+    this.stacksPersistenceService.updateStack(this.stack).then(() => {
+      // Navigate to game page
+      this.router.navigate([`/games/${this.stack.id}`]).then();
+    });
+  }
 
   /**
    * Updates a card
