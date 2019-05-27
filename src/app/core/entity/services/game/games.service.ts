@@ -6,11 +6,38 @@ import {Team} from '../../model/game/team.model';
 import {ColorService} from '../../../ui/services/color.service';
 import {STACK_PERSISTENCE_POUCHDB} from '../../entity.module';
 import {StacksPersistenceService} from '../stack/persistence/stacks-persistence.interface';
+import {GameMode} from '../../model/game-mode.enum';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GamesService {
+
+  //
+  // Static methods
+  //
+
+  /**
+   * Determines if an active game exists
+   * @param stack stack
+   */
+  static existsGame(stack: Stack) {
+    return stack != null && stack.game != null;
+  }
+
+  /**
+   * Returns current game mode
+   * @param stack stack
+   */
+  static getGameMode(stack: Stack): GameMode {
+    if (stack.game == null
+      || stack.game.teams == null
+      || stack.game.teams.length < 2) {
+      return GameMode.SINGLE_PLAYER;
+    } else {
+      return GameMode.MULTI_PLAYER;
+    }
+  }
 
   /**
    * Constructor
@@ -57,27 +84,5 @@ export class GamesService {
 
       resolve();
     });
-  }
-
-  //
-  // Helpers
-  //
-
-  /**
-   * Determines if an active game exists
-   * @param stack stack
-   */
-  existsGame(stack: Stack) {
-    return stack != null && stack.game != null;
-  }
-
-  /**
-   * Determine whether a given stack is currently played in single player mode
-   * @param stack stack
-   */
-  isSinglePlayerGame(stack: Stack): boolean {
-    return stack.game == null
-      || stack.game.teams == null
-      || stack.game.teams.length < 2;
   }
 }
