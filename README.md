@@ -2,6 +2,10 @@
 
 [![Sciddle logo](https://github.com/sciddle/sciddle-ng/blob/master/src/assets/logos/logo-144x144.png)](https://github.com/sciddle/sciddle-ng/blob/master/src/assets/logos/logo-144x144.png)
 
+## Demo
+
+A demo of this app can be found on [https://sciddle.intero.berlin](https://sciddle.intero.berlin)
+
 ## Purpose
 
 Sciddle is a **sci**ence ri**ddle** game that lets you learn science terms in a fun way.
