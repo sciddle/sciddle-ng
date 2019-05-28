@@ -40,6 +40,8 @@ export class CardsComponent implements OnInit, OnDestroy {
   public stack: Stack;
   /** Array of cards */
   public cards: Card[] = [];
+  /** Game mode */
+  public gameMode: GameMode;
 
   /** Title color */
   public titleColor = 'black';
@@ -140,6 +142,7 @@ export class CardsComponent implements OnInit, OnDestroy {
       if (value != null) {
         const stack = value as Stack;
         this.initializeStack(stack);
+        this.initializeGameMode(stack);
       } else {
         this.initializeEmptyStack();
       }
@@ -192,6 +195,16 @@ export class CardsComponent implements OnInit, OnDestroy {
 
     // Filter and sort cards
     this.cards = cards.filter(CardsService.isCardPartOfStack).sort(CardsService.sortCards);
+  }
+
+  // Game
+
+  /**
+   * Initializes game mode
+   * @param stack stack
+   */
+  private initializeGameMode(stack: Stack) {
+    this.gameMode = GamesService.getGameMode(stack);
   }
 
   // Others

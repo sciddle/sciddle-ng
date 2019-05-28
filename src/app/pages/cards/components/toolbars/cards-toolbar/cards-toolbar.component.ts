@@ -1,5 +1,6 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
 import {Media} from '../../../../../core/ui/model/media.enum';
+import {GameMode} from '../../../../../core/entity/model/game-mode.enum';
 
 /**
  * Displays cards toolbar
@@ -18,11 +19,17 @@ export class CardsToolbarComponent {
   @Input() titleColor = 'black';
   /** Current media */
   @Input() media: Media;
+  /** Game mode */
+  @Input() gameMode: GameMode;
+  /** Card count */
+  @Input() cardCount: number;
   /** Event emitter indicating menu items being clicked */
   @Output() menuItemEventEmitter = new EventEmitter<string>();
 
   /** Enum for media types */
   mediaType = Media;
+  /** Enum of game mode types */
+  gameModeType = GameMode;
 
   //
   // Actions
