@@ -53,6 +53,18 @@ export class CardsService {
   }
 
   //
+  // Filter
+  //
+
+  /**
+   * Determines whether a card is part of the current stack
+   * @param card card
+   */
+  static isCardPartOfStack(card: Card): boolean {
+    return card.index >= 0;
+  }
+
+  //
   // Lookup
   //
 
@@ -151,9 +163,11 @@ export class CardsService {
       let index = 0;
 
       // Assign new indices to shuffled cards
-      CardsService.shuffleCards(stack.cards).forEach(card => {
-        card.index = index++;
-      });
+      CardsService
+        .shuffleCards(stack.cards.filter(CardsService.isCardPartOfStack))
+        .forEach(card => {
+          card.index = index++;
+        });
 
       resolve();
     });
@@ -167,6 +181,20 @@ export class CardsService {
   public putCardToEnd(stack: Stack, card: Card): Promise<any> {
     return new Promise((resolve) => {
       card.index = CardsService.getMinIndex(Array.from(this.cards.values())) - 1;
+      this.updateCard(stack, card).then(() => {
+        resolve();
+      });
+    });
+  }
+
+  /**
+   * Puts card away by giving it the index -1
+   * @param stack stack
+   * @param card card
+   */
+  public putCardAway(stack: Stack, card: Card): Promise<any> {
+    return new Promise((resolve) => {
+      card.index = -1;
       this.updateCard(stack, card).then(() => {
         resolve();
       });
