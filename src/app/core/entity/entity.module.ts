@@ -1,10 +1,11 @@
-import {InjectionToken, NgModule} from '@angular/core';
+import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {EntityProviders} from './entity.providers';
-import {StacksPersistenceService} from './services/stack/persistence/stacks-persistence.interface';
+import {_STACK_PERSISTENCE_POUCHDB} from './entity.tokens';
+
 
 /** Injection token for stack persistence PouchDB */
-export let STACK_PERSISTENCE_POUCHDB = new InjectionToken<StacksPersistenceService>('app.stack-persistence-pouchdb');
+export let STACK_PERSISTENCE_POUCHDB = _STACK_PERSISTENCE_POUCHDB;
 
 @NgModule({
   imports: [
