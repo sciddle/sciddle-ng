@@ -191,7 +191,7 @@ export class CardsComponent implements OnInit, OnDestroy {
   private initializeCards(cards: Card[]) {
 
     // Filter and sort cards
-    this.cards = cards.sort(CardsService.sortCards);
+    this.cards = cards.filter(CardsService.isCardPartOfStack).sort(CardsService.sortCards);
   }
 
   // Others
@@ -322,11 +322,24 @@ export class CardsComponent implements OnInit, OnDestroy {
    * @param event throw event
    */
   onCardThrownOut(event: ThrowEvent) {
-    this.cardsService.putCardToEnd(this.stack, this.cards[0]).then(() => {
-      this.updateCard(this.stack, this.cards[0]).then(() => {
-        this.snackbarService.showSnackbar('Karte ans Ende gelegt');
-      });
-    });
+    switch (GamesService.getGameMode(this.stack)) {
+      case GameMode.SINGLE_PLAYER: {
+        this.cardsService.putCardToEnd(this.stack, this.cards[0]).then(() => {
+          this.updateCard(this.stack, this.cards[0]).then(() => {
+            this.snackbarService.showSnackbar('Karte ans Ende gelegt');
+          });
+        });
+        break;
+      }
+      case GameMode.MULTI_PLAYER: {
+        this.cardsService.putCardAway(this.stack, this.cards[0]).then(() => {
+          this.updateCard(this.stack, this.cards[0]).then(() => {
+            this.snackbarService.showSnackbar('Karte weggelegt');
+          });
+        });
+        break;
+      }
+    }
   }
 
   /**
