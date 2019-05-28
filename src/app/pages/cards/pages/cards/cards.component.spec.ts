@@ -1,6 +1,11 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-
 import {CardsComponent} from './cards.component';
+import {STACK_PERSISTENCE_POUCHDB} from '../../../../core/entity/entity.module';
+import {CardsDeclarations} from '../../cards.declarations';
+import {CardsImports} from '../../cards.imports';
+import {ActivatedRoute, Router} from '@angular/router';
+import {StacksPouchdbService} from '../../../../core/entity/services/stack/persistence/stacks-pouchdb.service';
+import {BehaviorSubject, Observable} from 'rxjs';
 
 describe('CardsComponent', () => {
   let component: CardsComponent;
@@ -8,9 +13,20 @@ describe('CardsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [CardsComponent]
-    })
-      .compileComponents();
+      imports: [CardsImports],
+      declarations: [CardsDeclarations],
+      providers: [
+        {
+          provide: ActivatedRoute, useValue: {
+            params: Observable.create(),
+            snapshot: {}
+          }
+        },
+        {provide: Router},
+        {provide: StacksPouchdbService},
+        {provide: STACK_PERSISTENCE_POUCHDB, useClass: StacksPouchdbService},
+      ]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +35,7 @@ describe('CardsComponent', () => {
     fixture.detectChanges();
   });
 
-  xit('should create', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });

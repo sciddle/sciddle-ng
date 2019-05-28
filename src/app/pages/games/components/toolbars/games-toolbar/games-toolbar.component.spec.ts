@@ -1,6 +1,8 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {GamesToolbarComponent} from './games-toolbar.component';
+import {GamesDeclarations} from '../../../games.declarations';
+import {GamesImports} from '../../../games.imports';
 
 describe('GamesToolbarComponent', () => {
   let component: GamesToolbarComponent;
@@ -8,7 +10,8 @@ describe('GamesToolbarComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [GamesToolbarComponent]
+      imports: [GamesImports],
+      declarations: [GamesDeclarations]
     })
       .compileComponents();
   }));
