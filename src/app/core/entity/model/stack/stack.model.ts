@@ -12,7 +12,7 @@ export class Stack extends Entity {
   title: string;
   /** Cards */
   cards: Card[];
-  /* Game the stack is used for */
+  /** Game the stack is used for */
   game: Game;
 
   /**
