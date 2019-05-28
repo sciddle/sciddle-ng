@@ -6,24 +6,13 @@ import {AboutDialogModule} from '../../ui/about-dialog/about-dialog.module';
 import {GamesRoutingModule} from './games-routing.module';
 import {GamesComponent} from './pages/games/games.component';
 import {GamesToolbarComponent} from './components/toolbars/games-toolbar/games-toolbar.component';
+import {GamesDeclarations} from './games.declarations';
+import {GamesImports} from './games.imports';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MaterialModule,
-
-    GamesRoutingModule,
-
-    AboutDialogModule,
-  ],
-  declarations: [
-    // Pages
-    GamesComponent,
-    // Toolbars
-    GamesToolbarComponent,
-  ], entryComponents: [
+  imports: [GamesImports],
+  declarations: [GamesDeclarations],
+  entryComponents: [
     // Pages
     GamesComponent,
   ], providers: [], exports: [

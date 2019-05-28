@@ -15,12 +15,10 @@ export class GameGuard implements CanActivate {
 
   /**
    * Constructor
-   * @param gamesService games service
    * @param stacksPersistenceService stacks persistence service
    * @param router router
    */
-  constructor(private gamesService: GamesService,
-              @Inject(STACK_PERSISTENCE_POUCHDB) private stacksPersistenceService: StacksPersistenceService,
+  constructor(@Inject(STACK_PERSISTENCE_POUCHDB) private stacksPersistenceService: StacksPersistenceService,
               private router: Router) {
   }
 
@@ -36,7 +34,7 @@ export class GameGuard implements CanActivate {
         if (value != null) {
           const stack = value as Stack;
 
-          if (this.gamesService.existsGame(stack)) {
+          if (GamesService.existsGame(stack)) {
             this.router.navigate([`/cards/${stack.id}`]).then(() => {
             });
             resolve(false);

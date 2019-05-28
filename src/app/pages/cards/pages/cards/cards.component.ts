@@ -269,7 +269,7 @@ export class CardsComponent implements OnInit, OnDestroy {
   onMenuItemClicked(menuItem: string) {
     switch (menuItem) {
       case 'back': {
-        switch (this.gamesService.getGameMode(this.stack)) {
+        switch (GamesService.getGameMode(this.stack)) {
           case GameMode.MULTI_PLAYER: {
             this.handleBackAction();
             break;
