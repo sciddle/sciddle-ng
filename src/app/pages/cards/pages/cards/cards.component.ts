@@ -22,6 +22,12 @@ import {GamesService} from '../../../../core/entity/services/game/games.service'
 import {GameMode} from '../../../../core/entity/model/game-mode.enum';
 import {Game} from '../../../../core/entity/model/game/game.model';
 import {GameState} from '../../../../core/entity/model/game-state.enum';
+import {TurnState} from '../../../../core/entity/model/turn-state.enum';
+
+export enum DisplayAspect {
+  DISPLAY_CARDS,
+  DISPLAY_TEAM
+}
 
 /**
  * Displays card component
@@ -47,6 +53,11 @@ export class CardsComponent implements OnInit, OnDestroy {
   public game: Game;
   /** Game mode */
   public gameMode: GameMode;
+
+  /** Current display aspect */
+  public displayAspect: DisplayAspect;
+  /** Enum of display aspect types */
+  public displayAspectType = DisplayAspect;
 
   /** Title color */
   public titleColor = 'black';
@@ -227,24 +238,55 @@ export class CardsComponent implements OnInit, OnDestroy {
   private initializeGame(game: Game) {
     this.game = game;
 
-    if (GamesService.getGameMode(game) === GameMode.MULTI_PLAYER) {
-      switch (game.state) {
-        case GameState.UNINIZIALIZED:
-          // Start game
-          this.gamesService.startGame(this.game).then(() => {
-            this.stacksPersistenceService.updateStack(this.stack).then(() => {
-              this.snackbarService.showSnackbar('Spiel gestarted');
+    switch (GamesService.getGameMode(game)) {
+      case GameMode.SINGLE_PLAYER: {
+        // If playing alone only display cards
+        this.displayAspect = DisplayAspect.DISPLAY_CARDS;
+        break;
+      }
+      case GameMode.MULTI_PLAYER: {
+        switch (game.state) {
+          case GameState.UNINIZIALIZED:
+            // Start game
+            this.gamesService.startGame(this.game).then(() => {
+              this.stacksPersistenceService.updateStack(this.stack).then(() => {
+                this.snackbarService.showSnackbar('Spiel gestarted');
+              });
             });
-          });
-          break;
-        case GameState.ONGOING: {
-          // Conduct turn
-          break;
+            break;
+          case GameState.ONGOING: {
+            // Conduct turn
+            switch (game.turn.state) {
+              case TurnState.UNINIZIALIZED: {
+                this.gamesService.startTurn(this.game).then(() => {
+                  this.stacksPersistenceService.updateStack(this.stack).then(() => {
+                    this.snackbarService.showSnackbar('Runde gestarted');
+                  });
+                });
+                break;
+              }
+              case TurnState.DISPLAY_TEAM_TAKING_TURN: {
+                break;
+              }
+              case TurnState.SELECT_DIFFICULTY: {
+                break;
+              }
+              case TurnState.DISPLAY_CARD: {
+                break;
+              }
+              case TurnState.DISPLAY_OUTCOMES: {
+                break;
+              }
+            }
+
+            break;
+          }
+          case GameState.FINISHED: {
+            // Finish game
+            break;
+          }
         }
-        case GameState.FINISHED: {
-          // Finish game
-          break;
-        }
+        break;
       }
     }
   }

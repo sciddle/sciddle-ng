@@ -23,7 +23,7 @@ export class Game extends Entity {
     super();
     this.entityType = EntityType.GAME;
     this.state = GameState.UNINIZIALIZED;
-    this.turn = null;
+    this.turn = new Turn();
     this.teams = [];
   }
 }

@@ -9,6 +9,7 @@ import {StacksPersistenceService} from '../stack/persistence/stacks-persistence.
 import {GameMode} from '../../model/game-mode.enum';
 import {Subject} from 'rxjs';
 import {GameState} from '../../model/game-state.enum';
+import {Turn} from '../../model/game/turn.model';
 
 @Injectable({
   providedIn: 'root'
@@ -123,6 +124,21 @@ export class GamesService {
     return new Promise(resolve => {
       this.game = game;
       this.game.state = GameState.ONGOING;
+      this.notify();
+
+      resolve();
+    });
+  }
+
+  /**
+   * Starts turn
+   * @param game game
+   */
+  public startTurn(game: Game): Promise<any> {
+    return new Promise(resolve => {
+      this.game = game;
+      this.game.turn = new Turn();
+      this.game
       this.notify();
 
       resolve();

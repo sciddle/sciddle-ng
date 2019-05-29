@@ -8,13 +8,21 @@
   (menuItemEventEmitter)="onMenuItemClicked($event)"></app-cards-toolbar>
 
 <div class="main-content">
-  <div swing-stack #swingStack
-       [stackConfig]="stackConfig"
-        (throwout)="onCardThrownOut($event)"
-        (throwoutend)="onCardThrownOutEnd($event)">
-    <div swing-card class="animate-translation-100">
-      <app-card-fragment [card]="cards[0]" [media]="media">
-      </app-card-fragment>
+  <!-- Cards -->
+  <div *ngIf="displayAspect === displayAspectType.DISPLAY_CARDS">
+    <div swing-stack #swingStack
+         [stackConfig]="stackConfig"
+         (throwout)="onCardThrownOut($event)"
+         (throwoutend)="onCardThrownOutEnd($event)">
+      <div swing-card class="animate-translation-100">
+        <app-card-fragment [card]="cards[0]" [media]="media">
+        </app-card-fragment>
+      </div>
     </div>
+  </div>
+
+  <!-- Else -->
+  <div *ngIf="displayAspect == null">
+    Nothing to see here
   </div>
 </div>
