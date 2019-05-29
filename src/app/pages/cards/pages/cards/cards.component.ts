@@ -20,6 +20,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ConfirmationDialogComponent} from '../../../../ui/confirmation-dialog/confirmation-dialog/confirmation-dialog.component';
 import {GamesService} from '../../../../core/entity/services/game/games.service';
 import {GameMode} from '../../../../core/entity/model/game-mode.enum';
+import {Game} from '../../../../core/entity/model/game/game.model';
+import {GameState} from '../../../../core/entity/model/game-state.enum';
 
 /**
  * Displays card component
@@ -40,6 +42,9 @@ export class CardsComponent implements OnInit, OnDestroy {
   public stack: Stack;
   /** Array of cards */
   public cards: Card[] = [];
+
+  /** Game */
+  public game: Game;
   /** Game mode */
   public gameMode: GameMode;
 
@@ -104,6 +109,8 @@ export class CardsComponent implements OnInit, OnDestroy {
     this.initializeStackSubscription();
     this.initializeCardSubscription();
 
+    this.initializeGameSubscription();
+
     this.initializeColors();
     this.initializeMaterial();
     this.initializeMediaSubscription();
@@ -162,6 +169,19 @@ export class CardsComponent implements OnInit, OnDestroy {
     });
   }
 
+  /**
+   * Initializes turn subscription
+   */
+  private initializeGameSubscription() {
+    this.gamesService.gameSubject.pipe(
+      takeUntil(this.unsubscribeSubject)
+    ).subscribe((value) => {
+      if (value != null) {
+        this.initializeGame(value as Game);
+      }
+    });
+  }
+
   // Stack
 
   /**
@@ -173,6 +193,7 @@ export class CardsComponent implements OnInit, OnDestroy {
 
     this.initializeTitle(stack);
     this.cardsService.initializeCards(stack.cards);
+    this.gamesService.initializeGame(stack.game);
   }
 
   /**
@@ -200,11 +221,40 @@ export class CardsComponent implements OnInit, OnDestroy {
   // Game
 
   /**
+   * Initializes game
+   * @param game game
+   */
+  private initializeGame(game: Game) {
+    this.game = game;
+
+    if (GamesService.getGameMode(game) === GameMode.MULTI_PLAYER) {
+      switch (game.state) {
+        case GameState.UNINIZIALIZED:
+          // Start game
+          this.gamesService.startGame(this.game).then(() => {
+            this.stacksPersistenceService.updateStack(this.stack).then(() => {
+              this.snackbarService.showSnackbar('Spiel gestarted');
+            });
+          });
+          break;
+        case GameState.ONGOING: {
+          // Conduct turn
+          break;
+        }
+        case GameState.FINISHED: {
+          // Finish game
+          break;
+        }
+      }
+    }
+  }
+
+  /**
    * Initializes game mode
    * @param stack stack
    */
   private initializeGameMode(stack: Stack) {
-    this.gameMode = GamesService.getGameMode(stack);
+    this.gameMode = GamesService.getGameModeByStack(stack);
   }
 
   // Others
@@ -282,7 +332,7 @@ export class CardsComponent implements OnInit, OnDestroy {
   onMenuItemClicked(menuItem: string) {
     switch (menuItem) {
       case 'back': {
-        switch (GamesService.getGameMode(this.stack)) {
+        switch (GamesService.getGameModeByStack(this.stack)) {
           case GameMode.SINGLE_PLAYER: {
             this.handleBackAction();
             break;
@@ -335,7 +385,7 @@ export class CardsComponent implements OnInit, OnDestroy {
    * @param event throw event
    */
   onCardThrownOut(event: ThrowEvent) {
-    switch (GamesService.getGameMode(this.stack)) {
+    switch (GamesService.getGameModeByStack(this.stack)) {
       case GameMode.SINGLE_PLAYER: {
         this.cardsService.putCardToEnd(this.stack, this.cards[0]).then(() => {
           this.updateCard(this.stack, this.cards[0]).then(() => {
