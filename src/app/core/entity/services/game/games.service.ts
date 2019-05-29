@@ -7,11 +7,18 @@ import {ColorService} from '../../../ui/services/color.service';
 import {STACK_PERSISTENCE_POUCHDB} from '../../entity.module';
 import {StacksPersistenceService} from '../stack/persistence/stacks-persistence.interface';
 import {GameMode} from '../../model/game-mode.enum';
+import {Subject} from 'rxjs';
+import {GameState} from '../../model/game-state.enum';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GamesService {
+
+  /** Game currently played */
+  game: Game;
+  /** Subject that publishes game */
+  gameSubject = new Subject<Game>();
 
   //
   // Static methods
@@ -29,10 +36,16 @@ export class GamesService {
    * Returns current game mode
    * @param stack stack
    */
-  static getGameMode(stack: Stack): GameMode {
-    if (stack.game == null
-      || stack.game.teams == null
-      || stack.game.teams.length < 2) {
+  static getGameModeByStack(stack: Stack): GameMode {
+    if (stack != null && stack.game != null) {
+      return GamesService.getGameMode(stack.game);
+    }
+
+    return GameMode.SINGLE_PLAYER;
+  }
+
+  static getGameMode(game: Game): GameMode {
+    if (game.teams == null || game.teams.length < 2) {
       return GameMode.SINGLE_PLAYER;
     } else {
       return GameMode.MULTI_PLAYER;
@@ -84,5 +97,46 @@ export class GamesService {
 
       resolve();
     });
+  }
+
+  /**
+   * Initializes a game
+   * @param game game
+   */
+  initializeGame(game: Game) {
+    if (game != null) {
+      this.game = game;
+      this.notify();
+    }
+  }
+
+  //
+  // Game state machine
+  // In this section all steps of a game are handled
+  //
+
+  /**
+   * Starts game
+   * @param game game to be started
+   */
+  public startGame(game: Game): Promise<any> {
+    return new Promise(resolve => {
+      this.game = game;
+      this.game.state = GameState.ONGOING;
+      this.notify();
+
+      resolve();
+    });
+  }
+
+  //
+  // Notification
+  //
+
+  /**
+   * Informs subscribers that something has changed
+   */
+  private notify() {
+    this.gameSubject.next(this.game);
   }
 }
