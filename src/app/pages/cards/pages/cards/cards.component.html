@@ -9,9 +9,43 @@
 
 <div class="main-content">
   <!-- Team -->
-  <div *ngIf="displayAspect === displayAspectType.DISPLAY_TEAM">
-    <div class="display-team">
-      <span>Team {{ stack.game.turn.teamID }} ist am Zug</span>
+  <div *ngIf="displayAspect === displayAspectType.DISPLAY_TEAM" (click)="onDisplayTeamClicked()">
+    <div class="display-team-container">
+      <span class="current-team-text">Team {{ stack.game.turn.teamID }} ist am Zug</span>
+      <div class="continue-text">
+        Tippe auf den Bildschirm um weiterzumachen
+      </div>
+    </div>
+  </div>
+  <!-- Difficulty -->
+  <div *ngIf="displayAspect === displayAspectType.DISPLAY_DIFFICULTY_SELECTION">
+    <div class="display-team-container">
+      <div class="continue-text">
+        Wähle einen Schwierigkeitsgrad aus
+        <div class="buttons vertical-center">
+          <div>
+            <button mat-flat-button color="primary" class="difficulty-button"
+                    [disabled]="cardsEasy.length < 1"
+                    (click)="onDifficultySelected(1)">
+              EINFACH ({{ cardsEasy.length }})
+            </button>
+          </div>
+          <div>
+            <button mat-flat-button color="primary" class="difficulty-button"
+                    [disabled]="cardsMedium.length < 1"
+                    (click)="onDifficultySelected(2)">
+              MITTEL ({{ cardsMedium.length }})
+            </button>
+          </div>
+          <div>
+            <button mat-flat-button color="primary" class="difficulty-button"
+                    [disabled]="cardsHard.length < 1"
+                    (click)="onDifficultySelected(3)">
+              SCHWER ({{ cardsHard.length }})
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <!-- Cards -->

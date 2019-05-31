@@ -64,6 +64,30 @@ export class CardsService {
     return card.index >= 0;
   }
 
+  /**
+   * Determines whether a card's difficulty is easy
+   * @param card card
+   */
+  static isEasy(card: Card): boolean {
+    return card.difficulty === 1;
+  }
+
+  /**
+   * Determines whether a card's difficulty is medium
+   * @param card card
+   */
+  static isMedium(card: Card): boolean {
+    return card.difficulty === 2;
+  }
+
+  /**
+   * Determines whether a card's difficulty is hard
+   * @param card card
+   */
+  static isHard(card: Card): boolean {
+    return card.difficulty === 3;
+  }
+
   //
   // Lookup
   //
