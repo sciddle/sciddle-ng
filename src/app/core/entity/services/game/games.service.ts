@@ -10,6 +10,7 @@ import {GameMode} from '../../model/game-mode.enum';
 import {Subject} from 'rxjs';
 import {GameState} from '../../model/game-state.enum';
 import {Turn} from '../../model/game/turn.model';
+import {TurnState} from '../../model/turn-state.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -135,10 +136,12 @@ export class GamesService {
    * @param game game
    */
   public startTurn(game: Game): Promise<any> {
+    console.log(`startTurn`);
     return new Promise(resolve => {
       this.game = game;
       this.game.turn = new Turn();
-      this.game
+      this.game.turn.state = TurnState.DISPLAY_TEAM_TAKING_TURN;
+      this.game.turn.teamID = 0;
       this.notify();
 
       resolve();
