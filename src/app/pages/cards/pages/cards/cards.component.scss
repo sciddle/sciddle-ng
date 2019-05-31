@@ -24,9 +24,45 @@
 
 // Team
 
-.display-team {
+.display-team-container {
   text-align: center;
-  font-size: 5em;
+}
+
+.current-team-text {
+  font-size: 4em;
+}
+
+.continue-text {
+  font-size: 2em;
+}
+
+.buttons {
+  margin: 15px auto;
+  text-align: center;
+
+  width: 100%;
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box; /* Firefox, other Gecko */
+  box-sizing: border-box; /* Opera/IE 8+ */
+
+  &:hover .hidden {
+    display: inline-block;
+  }
+}
+
+.vertical-center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.difficulty-button {
+  font-size: 2em;
+  padding: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .animate-translation-100 {

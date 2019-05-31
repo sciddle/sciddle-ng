@@ -148,6 +148,20 @@ export class GamesService {
     });
   }
 
+  /**
+   * Displays difficulty selection screen
+   * @param game game
+   */
+  public showDifficultySelection(game: Game): Promise<any> {
+    return new Promise(resolve => {
+      this.game = game;
+      this.game.turn.state = TurnState.SELECT_DIFFICULTY;
+      this.notify();
+
+      resolve();
+    });
+  }
+
   //
   // Notification
   //

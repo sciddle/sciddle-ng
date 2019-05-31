@@ -26,7 +26,8 @@ import {TurnState} from '../../../../core/entity/model/turn-state.enum';
 
 export enum DisplayAspect {
   DISPLAY_CARDS,
-  DISPLAY_TEAM
+  DISPLAY_TEAM,
+  DISPLAY_DIFFICULTY_SELECTION,
 }
 
 /**
@@ -48,6 +49,13 @@ export class CardsComponent implements OnInit, OnDestroy {
   public stack: Stack;
   /** Array of cards */
   public cards: Card[] = [];
+
+  /** Array of easy cards */
+  public cardsEasy: Card[] = [];
+  /** Array of medium cards */
+  public cardsMedium: Card[] = [];
+  /** Array of hard cards */
+  public cardsHard: Card[] = [];
 
   /** Game */
   public game: Game;
@@ -227,6 +235,10 @@ export class CardsComponent implements OnInit, OnDestroy {
 
     // Filter and sort cards
     this.cards = cards.filter(CardsService.isCardPartOfStack).sort(CardsService.sortCards);
+
+    this.cardsEasy = this.cards.filter(CardsService.isEasy);
+    this.cardsMedium = this.cards.filter(CardsService.isMedium);
+    this.cardsHard = this.cards.filter(CardsService.isHard);
   }
 
   // Game
@@ -273,6 +285,8 @@ export class CardsComponent implements OnInit, OnDestroy {
                 break;
               }
               case TurnState.SELECT_DIFFICULTY: {
+                console.log(`TurnState.DISPLAY_DIFFICULTY_SELECTION`);
+                this.displayAspect = DisplayAspect.DISPLAY_DIFFICULTY_SELECTION;
                 break;
               }
               case TurnState.DISPLAY_CARD: {
@@ -412,6 +426,22 @@ export class CardsComponent implements OnInit, OnDestroy {
         break;
       }
     }
+  }
+
+  //
+
+  /**
+   * Handles click on display team
+   */
+  onDisplayTeamClicked() {
+    this.gamesService.showDifficultySelection(this.game);
+  }
+
+  /**
+   * Handles difficulty selection
+   * @param difficulty difficulty
+   */
+  onDifficultySelected(difficulty: number) {
   }
 
   /**
