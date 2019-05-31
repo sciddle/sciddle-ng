@@ -237,6 +237,7 @@ export class CardsComponent implements OnInit, OnDestroy {
    */
   private initializeGame(game: Game) {
     this.game = game;
+    console.log(`game ${JSON.stringify(game)}`);
 
     switch (GamesService.getGameMode(game)) {
       case GameMode.SINGLE_PLAYER: {
@@ -258,6 +259,7 @@ export class CardsComponent implements OnInit, OnDestroy {
             // Conduct turn
             switch (game.turn.state) {
               case TurnState.UNINIZIALIZED: {
+                console.log(`TurnState.UNINIZIALIZED`);
                 this.gamesService.startTurn(this.game).then(() => {
                   this.stacksPersistenceService.updateStack(this.stack).then(() => {
                     this.snackbarService.showSnackbar('Runde gestarted');
@@ -266,6 +268,8 @@ export class CardsComponent implements OnInit, OnDestroy {
                 break;
               }
               case TurnState.DISPLAY_TEAM_TAKING_TURN: {
+                console.log(`TurnState.DISPLAY_TEAM_TAKING_TURN`);
+                this.displayAspect = DisplayAspect.DISPLAY_TEAM;
                 break;
               }
               case TurnState.SELECT_DIFFICULTY: {

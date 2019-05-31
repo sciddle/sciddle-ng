@@ -8,6 +8,12 @@
   (menuItemEventEmitter)="onMenuItemClicked($event)"></app-cards-toolbar>
 
 <div class="main-content">
+  <!-- Team -->
+  <div *ngIf="displayAspect === displayAspectType.DISPLAY_TEAM">
+    <div class="display-team">
+      <span>Team {{ stack.game.turn.teamID }} ist am Zug</span>
+    </div>
+  </div>
   <!-- Cards -->
   <div *ngIf="displayAspect === displayAspectType.DISPLAY_CARDS">
     <div swing-stack #swingStack
