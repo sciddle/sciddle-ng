@@ -171,9 +171,6 @@ export class CardsService {
     this.notify();
   }
 
-  constructor() {
-  }
-
   //
   // State
   //
@@ -194,6 +191,47 @@ export class CardsService {
         });
 
       resolve();
+    });
+  }
+
+  /**
+   * Moves a card with a given difficulty to top of the stack
+   * @param stack stack
+   * @param difficulty difficulty
+   */
+  moveCardWithSpecificDifficultyToTop(stack: Stack, difficulty: number): Promise<Stack> {
+    console.log(`moveCardWithSpecificDifficultyToTop ${difficulty}`);
+
+    stack.cards = stack.cards.sort(CardsService.sortCards);
+
+    let i = stack.cards.length;
+
+    return new Promise((resolve, reject) => {
+      console.log(`difficulty ${stack.cards[0].difficulty}`);
+      console.log(`stack ${JSON.stringify(stack.cards.map(c => {
+        return `${c.word.slice(0, 5)} / ${c.index}`;
+      }))}`);
+      // console.log(`firstCard ${JSON.stringify(stack.cards[0])}`);
+      // console.log(`match ${stack.cards[0].difficulty == difficulty}`);
+      if (stack.cards[0].difficulty === difficulty) {
+        resolve(stack);
+      } else {
+        // Move cards from to to end until the top card has the desired difficulty
+        while (stack.cards[0].difficulty !== difficulty && i >= 0) {
+          console.log(`put first card to end`);
+          this.putCardToEnd(stack, stack.cards[0]);
+          stack.cards = stack.cards.sort(CardsService.sortCards);
+          i--;
+          resolve(stack);
+
+          console.log(`stack ${JSON.stringify(stack.cards.map(c => {
+            return `${c.word.slice(0, 5)} / ${c.index}`;
+          }))}`);
+        }
+      }
+
+      // Iterated over all cards but non matched
+      resolve(stack);
     });
   }
 
