@@ -162,6 +162,21 @@ export class GamesService {
     });
   }
 
+  /**
+   * Displays a card of a given difficulty
+   * @param game game
+   * @param difficulty difficulty
+   */
+  public showCard(game: Game, difficulty: number): Promise<any> {
+    return new Promise(resolve => {
+      this.game = game;
+      this.game.turn.state = TurnState.DISPLAY_CARD;
+      this.notify();
+
+      resolve();
+    });
+  }
+
   //
   // Notification
   //

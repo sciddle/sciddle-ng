@@ -290,6 +290,8 @@ export class CardsComponent implements OnInit, OnDestroy {
                 break;
               }
               case TurnState.DISPLAY_CARD: {
+                console.log(`TurnState.DISPLAY_CARDS`);
+                this.displayAspect = DisplayAspect.DISPLAY_CARDS;
                 break;
               }
               case TurnState.DISPLAY_OUTCOMES: {
@@ -442,6 +444,23 @@ export class CardsComponent implements OnInit, OnDestroy {
    * @param difficulty difficulty
    */
   onDifficultySelected(difficulty: number) {
+    this.cardsService.moveCardWithSpecificDifficultyToTop(this.stack, difficulty).then((resolve) => {
+      if (resolve != null) {
+        const stack = resolve as Stack;
+
+        console.log(`resolve ${JSON.stringify(stack.cards.map(c => {
+          return `${c.word.slice(0, 5)} / ${c.index}`;
+        }))}`);
+
+        this.stack = stack;
+        this.cards = stack.cards;
+        this.gamesService.showCard(this.game, difficulty);
+
+        console.log(`cards ${JSON.stringify(this.cards.map(c => {
+          return `${c.word.slice(0, 5)} / ${c.index}`;
+        }))}`);
+      }
+    });
   }
 
   /**
