@@ -4,7 +4,13 @@
 
 //
 
+.debug {
+  color: mat-color($mat-grey, 400);
+}
+
 .main-content {
+  width: 100%;
+
   @media #{$breakpoint-small} {
     // padding-top: 88px;
     margin-left: 10px;
@@ -22,17 +28,17 @@
   }
 }
 
-// Team
+//
 
-.display-team-container {
+.center {
   text-align: center;
 }
 
-.current-team-text {
+.main-text {
   font-size: 4em;
 }
 
-.continue-text {
+.explanation-text {
   font-size: 2em;
 }
 
@@ -50,19 +56,19 @@
   }
 }
 
+.button {
+  font-size: 2em;
+  padding: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
 .vertical-center {
   margin: 0;
   position: absolute;
   top: 50%;
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
-}
-
-.difficulty-button {
-  font-size: 2em;
-  padding: 20px;
-  margin-top: 20px;
-  margin-bottom: 20px;
 }
 
 .animate-translation-100 {

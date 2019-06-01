@@ -1,9 +1,11 @@
 import {TurnState} from '../turn-state.enum';
+import {Entity} from '../entity.model';
+import {EntityType} from '../entity-type.enum';
 
 /**
  * Represents a turn
  */
-export class Turn {
+export class Turn extends Entity {
 
   /** State of the turn */
   state: TurnState;
@@ -14,7 +16,9 @@ export class Turn {
    * Constructor
    */
   public constructor() {
-    this.state = TurnState.UNINIZIALIZED;
+    super();
+    this.entityType = EntityType.TURN;
+    this.state = TurnState.NEW;
     this.teamID = -1;
   }
 }

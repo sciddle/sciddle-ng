@@ -4,47 +4,59 @@
   [titleColor]="titleColor"
   [media]="media"
   [gameMode]="gameMode"
-  [cardCount]="cards.length"
+  [cardCount]="cardsInStack"
   (menuItemEventEmitter)="onMenuItemClicked($event)"></app-cards-toolbar>
 
-<div class="main-content">
+<!-- Debugging -->
+<div *ngIf="devMode" class="debug main-content">
+  <div *ngIf="game != null">
+    <div *ngIf="game.turn != null">
+      <div>game turn state {{ json.stringify(game.turn.state) }}</div>
+      <div>game turn team {{ json.stringify(game.turn.teamID) }}</div>
+      <div *ngFor="let t of game.teams">team {{ t.index }} > {{ t.score }}</div>
+    </div>
+  </div>
+  <br/>
+  <div *ngFor="let c of cards">
+    {{ c.word }} (index {{ c.index }}) difficulty {{ c.difficulty }}
+  </div>
+</div>
+
+<div class="main-content vertical-center center">
   <!-- Team -->
-  <div *ngIf="displayAspect === displayAspectType.DISPLAY_TEAM" (click)="onDisplayTeamClicked()">
-    <div class="display-team-container">
-      <span class="current-team-text">Team {{ stack.game.turn.teamID }} ist am Zug</span>
-      <div class="continue-text">
-        Tippe auf den Bildschirm um weiterzumachen
-      </div>
+  <div *ngIf="displayAspect === displayAspectType.DISPLAY_TEAM"
+       (click)="onDisplayTeamClicked()">
+    <span class="main-text">Team {{ stack.game.turn.teamID + 1 }} ist am Zug</span>
+    <div class="explanation-text">
+      Tippe auf den Bildschirm um weiterzumachen
     </div>
   </div>
   <!-- Difficulty -->
   <div *ngIf="displayAspect === displayAspectType.DISPLAY_DIFFICULTY_SELECTION">
-    <div class="display-team-container">
-      <div class="continue-text">
-        Wähle einen Schwierigkeitsgrad aus
-        <div class="buttons vertical-center">
-          <div>
-            <button mat-flat-button color="primary" class="difficulty-button"
-                    [disabled]="cardsEasy.length < 1"
-                    (click)="onDifficultySelected(1)">
-              EINFACH ({{ cardsEasy.length }})
-            </button>
-          </div>
-          <div>
-            <button mat-flat-button color="primary" class="difficulty-button"
-                    [disabled]="cardsMedium.length < 1"
-                    (click)="onDifficultySelected(2)">
-              MITTEL ({{ cardsMedium.length }})
-            </button>
-          </div>
-          <div>
-            <button mat-flat-button color="primary" class="difficulty-button"
-                    [disabled]="cardsHard.length < 1"
-                    (click)="onDifficultySelected(3)">
-              SCHWER ({{ cardsHard.length }})
-            </button>
-          </div>
-        </div>
+    <div class="explanation-text">
+      Wähle einen Schwierigkeitsgrad aus
+    </div>
+    <div class="buttons">
+      <div>
+        <button mat-flat-button color="primary" class="button"
+                [disabled]="cardsEasy.length < 1"
+                (click)="onDifficultySelected(1)">
+          EINFACH ({{ cardsEasy.length }})
+        </button>
+      </div>
+      <div>
+        <button mat-flat-button color="primary" class="button"
+                [disabled]="cardsMedium.length < 1"
+                (click)="onDifficultySelected(2)">
+          MITTEL ({{ cardsMedium.length }})
+        </button>
+      </div>
+      <div>
+        <button mat-flat-button color="primary" class="button"
+                [disabled]="cardsHard.length < 1"
+                (click)="onDifficultySelected(3)">
+          SCHWER ({{ cardsHard.length }})
+        </button>
       </div>
     </div>
   </div>
@@ -59,10 +71,29 @@
         </app-card-fragment>
       </div>
     </div>
+    <div *ngIf="gameMode === gameModeType.MULTI_PLAYER" class="explanation-text">
+      Wisch die Karte zur Seite sobald jemand den Begriff errät
+    </div>
   </div>
-
-  <!-- Else -->
-  <div *ngIf="displayAspect == null">
-    Nothing to see here
+  <!-- Turn evaluation -->
+  <div *ngIf="displayAspect === displayAspectType.DISPLAY_TURN_EVALUATION">
+    <div class="explanation-text">
+      Welches Team hat richtig geantwortet?
+    </div>
+    <div class="buttons">
+      <div *ngFor="let team of stack.game.teams">
+        <button mat-flat-button color="primary" class="button"
+                (click)="onSuccessfulTeamSelected(team.index)">
+          TEAM {{ team.index + 1}}
+        </button>
+      </div>
+      <div>
+        <button mat-flat-button color="primary" class="button"
+                (click)="onSuccessfulTeamSelected(null)">
+          NIEMAND
+        </button>
+      </div>
+    </div>
   </div>
 </div>
+

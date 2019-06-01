@@ -1,4 +1,4 @@
-import {Component, Inject, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
+import {Component, Inject, isDevMode, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {Media} from '../../../../core/ui/model/media.enum';
 import {environment} from '../../../../../environments/environment';
 import {MatDialog, MatIconRegistry} from '@angular/material';
@@ -28,6 +28,7 @@ export enum DisplayAspect {
   DISPLAY_CARDS,
   DISPLAY_TEAM,
   DISPLAY_DIFFICULTY_SELECTION,
+  DISPLAY_TURN_EVALUATION
 }
 
 /**
@@ -56,11 +57,15 @@ export class CardsComponent implements OnInit, OnDestroy {
   public cardsMedium: Card[] = [];
   /** Array of hard cards */
   public cardsHard: Card[] = [];
+  /** Number of cards in the stack */
+  public cardsInStack = 0;
 
   /** Game */
   public game: Game;
   /** Game mode */
   public gameMode: GameMode;
+  /** Enum of game modes */
+  public gameModeType = GameMode;
 
   /** Current display aspect */
   public displayAspect: DisplayAspect;
@@ -77,6 +82,9 @@ export class CardsComponent implements OnInit, OnDestroy {
   /** Helper subject used to finish other subscriptions */
   private unsubscribeSubject = new Subject();
 
+  /** JSON class for debugging */
+  public json = JSON;
+
   /** Swing stack control */
   @ViewChild('swingStack') swingStack: SwingStackComponent;
   /** Swing cards control */
@@ -87,6 +95,9 @@ export class CardsComponent implements OnInit, OnDestroy {
 
   /** Number of pixels the card needs to be moved before it counts as swiped */
   private throwOutDistance = 800;
+
+  /** Dev mode */
+  devMode = false;
 
   /**
    * Constructor
@@ -115,6 +126,7 @@ export class CardsComponent implements OnInit, OnDestroy {
               private sanitizer: DomSanitizer,
               private snackbarService: SnackbarService,
               @Inject(STACK_PERSISTENCE_POUCHDB) private stacksPersistenceService: StacksPersistenceService) {
+    this.devMode = isDevMode();
   }
 
   //
@@ -239,6 +251,8 @@ export class CardsComponent implements OnInit, OnDestroy {
     this.cardsEasy = this.cards.filter(CardsService.isEasy);
     this.cardsMedium = this.cards.filter(CardsService.isMedium);
     this.cardsHard = this.cards.filter(CardsService.isHard);
+
+    this.cardsInStack = this.cards.filter(CardsService.isCardPartOfStack).length;
   }
 
   // Game
@@ -249,7 +263,6 @@ export class CardsComponent implements OnInit, OnDestroy {
    */
   private initializeGame(game: Game) {
     this.game = game;
-    console.log(`game ${JSON.stringify(game)}`);
 
     switch (GamesService.getGameMode(game)) {
       case GameMode.SINGLE_PLAYER: {
@@ -262,43 +275,43 @@ export class CardsComponent implements OnInit, OnDestroy {
           case GameState.UNINIZIALIZED:
             // Start game
             this.gamesService.startGame(this.game).then(() => {
-              this.stacksPersistenceService.updateStack(this.stack).then(() => {
-                this.snackbarService.showSnackbar('Spiel gestarted');
-              });
+              this.snackbarService.showSnackbar('Spiel gestarted');
             });
             break;
           case GameState.ONGOING: {
             // Conduct turn
             switch (game.turn.state) {
-              case TurnState.UNINIZIALIZED: {
-                console.log(`TurnState.UNINIZIALIZED`);
-                this.gamesService.startTurn(this.game).then(() => {
-                  this.stacksPersistenceService.updateStack(this.stack).then(() => {
-                    this.snackbarService.showSnackbar('Runde gestarted');
-                  });
+              case TurnState.NEW: {
+                this.gamesService.startTurn(this.game).then((resolve) => {
+
+                  // Persist data once per turn
+                  if (resolve != null) {
+                    this.game = resolve as Game;
+                    this.stack.game = resolve as Game;
+                    this.stacksPersistenceService.updateStack(this.stack).then(() => {
+                      this.snackbarService.showSnackbar('Runde gestarted');
+                    });
+                  }
                 });
                 break;
               }
               case TurnState.DISPLAY_TEAM_TAKING_TURN: {
-                console.log(`TurnState.DISPLAY_TEAM_TAKING_TURN`);
                 this.displayAspect = DisplayAspect.DISPLAY_TEAM;
                 break;
               }
               case TurnState.SELECT_DIFFICULTY: {
-                console.log(`TurnState.DISPLAY_DIFFICULTY_SELECTION`);
                 this.displayAspect = DisplayAspect.DISPLAY_DIFFICULTY_SELECTION;
                 break;
               }
               case TurnState.DISPLAY_CARD: {
-                console.log(`TurnState.DISPLAY_CARDS`);
                 this.displayAspect = DisplayAspect.DISPLAY_CARDS;
                 break;
               }
               case TurnState.DISPLAY_OUTCOMES: {
+                this.displayAspect = DisplayAspect.DISPLAY_TURN_EVALUATION;
                 break;
               }
             }
-
             break;
           }
           case GameState.FINISHED: {
@@ -436,7 +449,8 @@ export class CardsComponent implements OnInit, OnDestroy {
    * Handles click on display team
    */
   onDisplayTeamClicked() {
-    this.gamesService.showDifficultySelection(this.game);
+    this.gamesService.showDifficultySelection(this.game).then(() => {
+    });
   }
 
   /**
@@ -448,17 +462,10 @@ export class CardsComponent implements OnInit, OnDestroy {
       if (resolve != null) {
         const stack = resolve as Stack;
 
-        console.log(`resolve ${JSON.stringify(stack.cards.map(c => {
-          return `${c.word.slice(0, 5)} / ${c.index}`;
-        }))}`);
-
         this.stack = stack;
         this.cards = stack.cards;
-        this.gamesService.showCard(this.game, difficulty);
-
-        console.log(`cards ${JSON.stringify(this.cards.map(c => {
-          return `${c.word.slice(0, 5)} / ${c.index}`;
-        }))}`);
+        this.gamesService.showCard(this.game, difficulty).then(() => {
+        });
       }
     });
   }
@@ -490,10 +497,7 @@ export class CardsComponent implements OnInit, OnDestroy {
         break;
       }
       case GameMode.MULTI_PLAYER: {
-        this.cardsService.putCardAway(this.stack, this.cards[0]).then(() => {
-          this.updateCard(this.stack, this.cards[0]).then(() => {
-            this.snackbarService.showSnackbar('Karte weggelegt');
-          });
+        this.gamesService.showTurnEvaluation(this.game).then(() => {
         });
         break;
       }
@@ -506,8 +510,22 @@ export class CardsComponent implements OnInit, OnDestroy {
    */
   onCardThrownOutEnd(event: ThrowEvent) {
     setTimeout(() => {
-      this.swingStack.stack.getCard(event.target).throwIn(0, 0);
+      if (this.gameMode === GameMode.SINGLE_PLAYER) {
+        this.swingStack.stack.getCard(event.target).throwIn(0, 0);
+      }
     }, 100);
+  }
+
+  /**
+   * Handles selection of successful team
+   * @param teamID team ID
+   */
+  onSuccessfulTeamSelected(teamID: number) {
+    this.gamesService.closeTurn(this.game, teamID, this.cards[0].difficulty).then(() => {
+      this.cardsService.putCardAway(this.stack, this.stack.cards[0]).then();
+      this.stacksPersistenceService.updateStack(this.stack).then(() => {
+      });
+    });
   }
 
   //

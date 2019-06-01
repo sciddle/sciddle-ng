@@ -6,6 +6,8 @@ import {EntityType} from '../entity-type.enum';
  */
 export class Team extends Entity {
 
+  /** Index */
+  index: number;
   /** Score of the team */
   score: number;
   /** Team icon */
@@ -19,6 +21,7 @@ export class Team extends Entity {
   constructor() {
     super();
     this.entityType = EntityType.TEAM;
+    this.index = -1;
     this.score = 0;
     this.icon = '';
     this.color = '';

@@ -23,5 +23,6 @@ export class Stack extends Entity {
     this.entityType = EntityType.STACK;
     this.title = '';
     this.cards = [];
+    this.game = null;
   }
 }
