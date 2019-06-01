@@ -28,7 +28,8 @@ export enum DisplayAspect {
   DISPLAY_CARDS,
   DISPLAY_TEAM,
   DISPLAY_DIFFICULTY_SELECTION,
-  DISPLAY_TURN_EVALUATION
+  DISPLAY_TURN_EVALUATION,
+  DISPLAY_SCORE_OVERVIEW
 }
 
 /**
@@ -299,7 +300,7 @@ export class CardsComponent implements OnInit, OnDestroy {
                 this.displayAspect = DisplayAspect.DISPLAY_TEAM;
                 break;
               }
-              case TurnState.SELECT_DIFFICULTY: {
+              case TurnState.DISPLAY_DIFFICULTY_SELECTION: {
                 this.displayAspect = DisplayAspect.DISPLAY_DIFFICULTY_SELECTION;
                 break;
               }
@@ -307,8 +308,12 @@ export class CardsComponent implements OnInit, OnDestroy {
                 this.displayAspect = DisplayAspect.DISPLAY_CARDS;
                 break;
               }
-              case TurnState.DISPLAY_OUTCOMES: {
+              case TurnState.DISPLAY_EVALUATION: {
                 this.displayAspect = DisplayAspect.DISPLAY_TURN_EVALUATION;
+                break;
+              }
+              case TurnState.DISPLAY_SCORE: {
+                this.displayAspect = DisplayAspect.DISPLAY_SCORE_OVERVIEW;
                 break;
               }
             }
@@ -521,11 +526,18 @@ export class CardsComponent implements OnInit, OnDestroy {
    * @param teamID team ID
    */
   onSuccessfulTeamSelected(teamID: number) {
-    this.gamesService.closeTurn(this.game, teamID, this.cards[0].difficulty).then(() => {
+    this.gamesService.evaluateTurn(this.game, teamID, this.cards[0].difficulty).then(() => {
       this.cardsService.putCardAway(this.stack, this.stack.cards[0]).then();
       this.stacksPersistenceService.updateStack(this.stack).then(() => {
       });
     });
+  }
+
+  /**
+   * Handles click on score overview
+   */
+  onDisplayScoreOverviewClicked() {
+    this.gamesService.closeTurn(this.game);
   }
 
   //

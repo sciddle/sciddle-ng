@@ -73,7 +73,7 @@
     </div>
     <div *ngIf="gameMode === gameModeType.MULTI_PLAYER && stack.game != null"
          class="explanation-text">
-      Wisch die Karte zur Seite sobald jemand den Begriff errät
+      Wisch die Karte zur Seite sobald jemand den Begriff erraten hat
     </div>
   </div>
   <!-- Turn evaluation -->
@@ -94,6 +94,18 @@
           NIEMAND
         </button>
       </div>
+    </div>
+  </div>
+  <!-- Score -->
+  <div *ngIf="displayAspect === displayAspectType.DISPLAY_SCORE_OVERVIEW && stack.game != null"
+       (click)="onDisplayScoreOverviewClicked()">
+    <div *ngFor="let team of stack.game.teams" class="main-text">
+      TEAM {{ team.index + 1}} - {{ team.score }}
+      <span *ngIf="team.score !== 1">Punkte</span>
+      <span *ngIf="team.score === 1">Punkt</span>
+    </div>
+    <div class="explanation-text">
+      Tippe auf den Bildschirm um weiterzumachen
     </div>
   </div>
 </div>
