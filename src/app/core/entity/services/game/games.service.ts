@@ -219,7 +219,7 @@ export class GamesService {
    * Evaluates turn by
    * <li>awarding points to a team
    * @param game game
-   * @param teamID team ID
+   * @param teamID team ID of team which guessed correctly
    * @param difficulty difficulty
    */
   public evaluateTurn(game: Game, teamID: number, difficulty: number): Promise<any> {
@@ -228,6 +228,11 @@ export class GamesService {
       this.game.turn.state = TurnState.DISPLAY_SCORE;
 
       if (teamID != null) {
+        // Give points to team taking turn
+        GamesService.awardPoints(game.teams.filter(team => {
+          return team.index === game.turn.teamID;
+        })[0], difficulty);
+        // Give points to team that guessed correctly
         GamesService.awardPoints(game.teams.filter(team => {
           return team.index === teamID;
         })[0], difficulty);
