@@ -179,7 +179,7 @@ export class GamesService {
   public showDifficultySelection(game: Game): Promise<any> {
     return new Promise(resolve => {
       this.game = game;
-      this.game.turn.state = TurnState.SELECT_DIFFICULTY;
+      this.game.turn.state = TurnState.DISPLAY_DIFFICULTY_SELECTION;
       this.notify();
 
       resolve();
@@ -208,7 +208,7 @@ export class GamesService {
   public showTurnEvaluation(game: Game): Promise<any> {
     return new Promise(resolve => {
       this.game = game;
-      this.game.turn.state = TurnState.DISPLAY_OUTCOMES;
+      this.game.turn.state = TurnState.DISPLAY_EVALUATION;
       this.notify();
 
       resolve();
@@ -216,21 +216,37 @@ export class GamesService {
   }
 
   /**
-   * Awards points to a team
+   * Evaluates turn by
+   * <li>awarding points to a team
    * @param game game
    * @param teamID team ID
    * @param difficulty difficulty
    */
-  public closeTurn(game: Game, teamID: number, difficulty: number): Promise<any> {
+  public evaluateTurn(game: Game, teamID: number, difficulty: number): Promise<any> {
     return new Promise(resolve => {
       this.game = game;
-      this.game.turn.state = TurnState.NEW;
+      this.game.turn.state = TurnState.DISPLAY_SCORE;
 
       if (teamID != null) {
         GamesService.awardPoints(game.teams.filter(team => {
           return team.index === teamID;
         })[0], difficulty);
       }
+
+      this.notify();
+
+      resolve();
+    });
+  }
+
+  /**
+   * Closes turn
+   * @param game game
+   */
+  public closeTurn(game: Game) {
+    return new Promise(resolve => {
+      this.game = game;
+      this.game.turn.state = TurnState.NEW;
 
       this.notify();
 
