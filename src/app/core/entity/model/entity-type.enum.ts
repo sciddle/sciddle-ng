@@ -8,4 +8,5 @@ export enum EntityType {
 
   GAME,
   TEAM,
+  TURN,
 }

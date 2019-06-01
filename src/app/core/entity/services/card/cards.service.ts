@@ -9,17 +9,21 @@ import {CloneService} from '../clone.service';
 })
 export class CardsService {
 
+  /** Index of cards being put away */
+  static CARD_INDEX_OUT_OF_STACK = null;
+
   /** Map of all cards */
   cards = new Map<string, Card>();
   /** Subject that publishes cards */
   cardsSubject = new Subject<Card[]>();
+
 
   //
   // Sort
   //
 
   /**
-   * Sorts cards based on their modification date
+   * Sorts cards based on their index (highest index first)
    * @param cardA first card
    * @param cardB seconds card
    */
@@ -61,7 +65,7 @@ export class CardsService {
    * @param card card
    */
   static isCardPartOfStack(card: Card): boolean {
-    return card.index >= 0;
+    return card.index !== CardsService.CARD_INDEX_OUT_OF_STACK;
   }
 
   /**
@@ -104,6 +108,20 @@ export class CardsService {
     }));
 
     return !isNaN(min) ? min : 0;
+  }
+
+  /**
+   * Get maximum index of a given list of cards
+   * @param cards cards
+   */
+  static getMaxIndex(cards: Card[]): number {
+    const max = Math.max(...cards.map(card => {
+      return card.index;
+    }).filter(index => {
+      return !isNaN(index);
+    }));
+
+    return !isNaN(max) ? max : 0;
   }
 
   //
@@ -200,38 +218,34 @@ export class CardsService {
    * @param difficulty difficulty
    */
   moveCardWithSpecificDifficultyToTop(stack: Stack, difficulty: number): Promise<Stack> {
-    console.log(`moveCardWithSpecificDifficultyToTop ${difficulty}`);
 
-    stack.cards = stack.cards.sort(CardsService.sortCards);
+    return new Promise((resolve) => {
+      // Find card in stack with desired difficulty
+      const card = stack.cards
+        .filter(CardsService.isCardPartOfStack)
+        .filter(c => {
+          return c.difficulty === difficulty;
+        })[0];
 
-    let i = stack.cards.length;
+      if (card != null) {
+        const maxIndex = CardsService
+          .getMaxIndex(Array.from(this.cards.values()).filter(CardsService.isCardPartOfStack));
 
-    return new Promise((resolve, reject) => {
-      console.log(`difficulty ${stack.cards[0].difficulty}`);
-      console.log(`stack ${JSON.stringify(stack.cards.map(c => {
-        return `${c.word.slice(0, 5)} / ${c.index}`;
-      }))}`);
-      // console.log(`firstCard ${JSON.stringify(stack.cards[0])}`);
-      // console.log(`match ${stack.cards[0].difficulty == difficulty}`);
-      if (stack.cards[0].difficulty === difficulty) {
-        resolve(stack);
-      } else {
-        // Move cards from to to end until the top card has the desired difficulty
-        while (stack.cards[0].difficulty !== difficulty && i >= 0) {
-          console.log(`put first card to end`);
-          this.putCardToEnd(stack, stack.cards[0]);
-          stack.cards = stack.cards.sort(CardsService.sortCards);
-          i--;
+        card.index = maxIndex + 1;
+
+        this.updateCard(stack, card).then(() => {
+          stack.cards = stack.cards
+            .filter(CardsService.isCardPartOfStack)
+            .sort(CardsService.sortCards);
           resolve(stack);
+        });
 
-          console.log(`stack ${JSON.stringify(stack.cards.map(c => {
-            return `${c.word.slice(0, 5)} / ${c.index}`;
-          }))}`);
-        }
+      } else {
+        stack.cards = stack.cards
+          .filter(CardsService.isCardPartOfStack)
+          .sort(CardsService.sortCards);
+        resolve(stack);
       }
-
-      // Iterated over all cards but non matched
-      resolve(stack);
     });
   }
 
@@ -242,7 +256,18 @@ export class CardsService {
    */
   public putCardToEnd(stack: Stack, card: Card): Promise<any> {
     return new Promise((resolve) => {
-      card.index = CardsService.getMinIndex(Array.from(this.cards.values())) - 1;
+
+      const maxIndex = CardsService.getMaxIndex(Array.from(this.cards.values()));
+      const minIndex = CardsService.getMinIndex(Array.from(this.cards.values()));
+
+      // Move card to last position
+      card.index = minIndex - 1;
+
+      // Normalize indices
+      // stack.cards.filter(CardsService.isCardPartOfStack).map(c => {
+      //   c.index = c.index - minIndex;
+      // });
+
       this.updateCard(stack, card).then(() => {
         resolve();
       });
@@ -250,13 +275,13 @@ export class CardsService {
   }
 
   /**
-   * Puts card away by giving it the index -1
+   * Puts card away by giving it the index CARD_INDEX_OUT_OF_STACK
    * @param stack stack
    * @param card card
    */
   public putCardAway(stack: Stack, card: Card): Promise<any> {
     return new Promise((resolve) => {
-      card.index = -1;
+      card.index = CardsService.CARD_INDEX_OUT_OF_STACK;
       this.updateCard(stack, card).then(() => {
         resolve();
       });
