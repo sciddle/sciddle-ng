@@ -41,6 +41,11 @@ export class GameGuard implements CanActivate {
           } else {
             resolve(true);
           }
+        } else {
+          const stack = new Stack();
+          stack.id = '0';
+          this.stacksPersistenceService.createStack(stack).then(() => {
+          });
         }
       });
 
