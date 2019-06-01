@@ -17,7 +17,6 @@ export class CardsService {
   /** Subject that publishes cards */
   cardsSubject = new Subject<Card[]>();
 
-
   //
   // Sort
   //

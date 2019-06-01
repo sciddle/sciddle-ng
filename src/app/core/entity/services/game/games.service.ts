@@ -9,9 +9,7 @@ import {StacksPersistenceService} from '../stack/persistence/stacks-persistence.
 import {GameMode} from '../../model/game-mode.enum';
 import {Subject} from 'rxjs';
 import {GameState} from '../../model/game-state.enum';
-import {Turn} from '../../model/game/turn.model';
 import {TurnState} from '../../model/turn-state.enum';
-import {Card} from '../../model/card/card.model';
 
 @Injectable({
   providedIn: 'root'
@@ -36,7 +34,7 @@ export class GamesService {
   }
 
   /**
-   * Returns current game mode
+   * Determines game mode
    * @param stack stack
    */
   static getGameModeByStack(stack: Stack): GameMode {
@@ -47,6 +45,10 @@ export class GamesService {
     return GameMode.SINGLE_PLAYER;
   }
 
+  /**
+   * Returns game mode
+   * @param game game
+   */
   static getGameMode(game: Game): GameMode {
     if (game.teams == null || game.teams.length < 2) {
       return GameMode.SINGLE_PLAYER;
@@ -199,6 +201,10 @@ export class GamesService {
     });
   }
 
+  /**
+   * Shows turn evaluation
+   * @param game game
+   */
   public showTurnEvaluation(game: Game): Promise<any> {
     return new Promise(resolve => {
       this.game = game;
