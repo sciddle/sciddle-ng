@@ -24,7 +24,7 @@
 
 <div class="main-content vertical-center center">
   <!-- Team -->
-  <div *ngIf="displayAspect === displayAspectType.DISPLAY_TEAM"
+  <div *ngIf="displayAspect === displayAspectType.DISPLAY_TEAM && stack.game != null"
        (click)="onDisplayTeamClicked()">
     <span class="main-text">Team {{ stack.game.turn.teamID + 1 }} ist am Zug</span>
     <div class="explanation-text">
@@ -32,7 +32,7 @@
     </div>
   </div>
   <!-- Difficulty -->
-  <div *ngIf="displayAspect === displayAspectType.DISPLAY_DIFFICULTY_SELECTION">
+  <div *ngIf="displayAspect === displayAspectType.DISPLAY_DIFFICULTY_SELECTION && stack.game != null">
     <div class="explanation-text">
       Wähle einen Schwierigkeitsgrad aus
     </div>
@@ -61,7 +61,7 @@
     </div>
   </div>
   <!-- Cards -->
-  <div *ngIf="displayAspect === displayAspectType.DISPLAY_CARDS">
+  <div *ngIf="displayAspect === displayAspectType.DISPLAY_CARDS && stack.game != null">
     <div swing-stack #swingStack
          [stackConfig]="stackConfig"
          (throwout)="onCardThrownOut($event)"
@@ -71,12 +71,13 @@
         </app-card-fragment>
       </div>
     </div>
-    <div *ngIf="gameMode === gameModeType.MULTI_PLAYER" class="explanation-text">
+    <div *ngIf="gameMode === gameModeType.MULTI_PLAYER && stack.game != null"
+         class="explanation-text">
       Wisch die Karte zur Seite sobald jemand den Begriff errät
     </div>
   </div>
   <!-- Turn evaluation -->
-  <div *ngIf="displayAspect === displayAspectType.DISPLAY_TURN_EVALUATION">
+  <div *ngIf="displayAspect === displayAspectType.DISPLAY_TURN_EVALUATION && stack.game != null">
     <div class="explanation-text">
       Welches Team hat richtig geantwortet?
     </div>
@@ -96,4 +97,3 @@
     </div>
   </div>
 </div>
-
