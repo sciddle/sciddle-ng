@@ -1,17 +1,19 @@
 @import '~@angular/material/theming';
 
 $color-sciddle : #049af8;
+$color-sciddle : hsl(203, 97, 49);
+
 $mat-sciddle: (
-  50: $color-sciddle,
-  100: $color-sciddle,
-  200: $color-sciddle,
-  300: $color-sciddle,
-  400: $color-sciddle,
-  500: $color-sciddle,
-  600: $color-sciddle,
-  700: $color-sciddle,
-  800: $color-sciddle,
-  900: $color-sciddle,
+  50: hsl(203, 97, 99),
+  100: hsl(203, 97, 89),
+  200: hsl(203, 97, 79),
+  300: hsl(203, 97, 69),
+  400: hsl(203, 97, 59),
+  500: hsl(203, 97, 49),
+  600: hsl(203, 97, 39),
+  700: hsl(203, 97, 29),
+  800: hsl(203, 97, 19),
+  900: hsl(203, 97, 9),
   A100: $color-sciddle,
   A200: $color-sciddle,
   A400: $color-sciddle,
@@ -24,9 +26,9 @@ $mat-sciddle: (
     400: $dark-primary-text,
     500: $light-primary-text,
     600: $light-primary-text,
-    700: $light-primary-text,
-    800: $light-primary-text,
-    900: $light-primary-text,
+    700: white,
+    800: white,
+    900: white,
     A100: $dark-primary-text,
     A200: $light-primary-text,
     A400: $light-primary-text,
