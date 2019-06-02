@@ -26,10 +26,11 @@ import {TurnState} from '../../../../core/entity/model/turn-state.enum';
 
 export enum DisplayAspect {
   DISPLAY_CARDS,
-  DISPLAY_TEAM,
+  DISPLAY_TEAM_TAKING_TURN,
   DISPLAY_DIFFICULTY_SELECTION,
   DISPLAY_TURN_EVALUATION,
-  DISPLAY_SCORE_OVERVIEW
+  DISPLAY_SCORE_OVERVIEW,
+  DISPLAY_GAME_EVALUATION
 }
 
 /**
@@ -67,6 +68,8 @@ export class CardsComponent implements OnInit, OnDestroy {
   public gameMode: GameMode;
   /** Enum of game modes */
   public gameModeType = GameMode;
+  /** Array of winning teams */
+  public winningTeams = [];
 
   /** Current display aspect */
   public displayAspect: DisplayAspect;
@@ -297,22 +300,22 @@ export class CardsComponent implements OnInit, OnDestroy {
                 break;
               }
               case TurnState.DISPLAY_TEAM_TAKING_TURN: {
-                this.displayAspect = DisplayAspect.DISPLAY_TEAM;
+                this.displayAspect = DisplayAspect.DISPLAY_TEAM_TAKING_TURN;
                 break;
               }
               case TurnState.DISPLAY_DIFFICULTY_SELECTION: {
                 this.displayAspect = DisplayAspect.DISPLAY_DIFFICULTY_SELECTION;
                 break;
               }
-              case TurnState.DISPLAY_CARD: {
+              case TurnState.DISPLAY_CARDS: {
                 this.displayAspect = DisplayAspect.DISPLAY_CARDS;
                 break;
               }
-              case TurnState.DISPLAY_EVALUATION: {
+              case TurnState.DISPLAY_TURN_EVALUATION: {
                 this.displayAspect = DisplayAspect.DISPLAY_TURN_EVALUATION;
                 break;
               }
-              case TurnState.DISPLAY_SCORE: {
+              case TurnState.DISPLAY_SCORE_OVERVIEW: {
                 this.displayAspect = DisplayAspect.DISPLAY_SCORE_OVERVIEW;
                 break;
               }
@@ -320,7 +323,7 @@ export class CardsComponent implements OnInit, OnDestroy {
             break;
           }
           case GameState.FINISHED: {
-            // Finish game
+            this.displayAspect = DisplayAspect.DISPLAY_GAME_EVALUATION;
             break;
           }
         }
@@ -537,7 +540,8 @@ export class CardsComponent implements OnInit, OnDestroy {
    * Handles click on score overview
    */
   onDisplayScoreOverviewClicked() {
-    this.gamesService.closeTurn(this.game);
+    this.winningTeams = GamesService.determineWinningTeams(this.game);
+    this.gamesService.closeTurn(this.stack.cards.filter(CardsService.isCardPartOfStack), this.game);
   }
 
   //

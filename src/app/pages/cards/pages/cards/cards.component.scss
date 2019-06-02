@@ -35,11 +35,15 @@
 }
 
 .main-text {
+  display: block;
   font-size: 4em;
+  margin-top: 25px;
 }
 
 .explanation-text {
+  display: block;
   font-size: 2em;
+  margin-top: 25px;
 }
 
 .buttons {
@@ -69,6 +73,29 @@
   top: 50%;
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
+}
+
+.full-height {
+  position: relative;
+  margin: 0 auto;
+  min-height: 100%;
+}
+
+.full-width-button {
+  padding: 25px;
+  width: 100%;
+}
+
+.difficulty-easy {
+  background-color: mat-color($mat-green, 500);
+}
+
+.difficulty-medium {
+  background-color: mat-color($mat-amber, 400);
+}
+
+.difficulty-hard {
+  background-color: mat-color($mat-red, 500);
 }
 
 .animate-translation-100 {
