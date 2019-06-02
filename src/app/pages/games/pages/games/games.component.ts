@@ -41,8 +41,10 @@ export class GamesComponent implements OnInit, OnDestroy {
   /** Stack */
   public stack: Stack;
 
-  /** Use time limit */
+  /** Selected time limit mode */
   public useTimeLimit = false;
+  /** Selected team count */
+  public teamCount = -1;
 
   /** Title color */
   public titleColor = 'black';
@@ -256,7 +258,7 @@ export class GamesComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Handles click on single-user button
+   * Handles click on single-player button
    */
   onSinglePlayerClicked() {
     this.gameService.initializeSinglePlayerGame(this.stack).then(() => {
@@ -271,7 +273,7 @@ export class GamesComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Handles click on multi-user button
+   * Handles click on multi-player button
    */
   onMultiPlayerClicked() {
     if (this.teamCountSelectionState === TeamCountSelectionState.DEACTIVATED) {
@@ -292,8 +294,15 @@ export class GamesComponent implements OnInit, OnDestroy {
    * Handles selection of team count
    * @param teamCount number of teams
    */
-  onTeamsSelected(teamCount: number) {
-    this.gameService.initializeMultiPlayerGame(this.stack, teamCount, this.useTimeLimit).then(() => {
+  onTeamCountSelected(teamCount: number) {
+    this.teamCount = teamCount;
+  }
+
+  /**
+   * Starts a multi-player game
+   */
+  onStartMultiPlayerGameClicked() {
+    this.gameService.initializeMultiPlayerGame(this.stack, this.teamCount, this.useTimeLimit).then(() => {
       this.initializeCards(this.stack).then(() => {
         this.cardsService.shuffleStack(this.stack);
         this.stacksPersistenceService.updateStack(this.stack).then(() => {

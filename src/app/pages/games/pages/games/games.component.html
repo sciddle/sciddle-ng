@@ -23,18 +23,27 @@
     </div>
     <div [@teamCountSelectionAnimation]="teamCountSelectionState">
       <div (click)="onTimeLimitToggled()" class="time-limit-button">
-        <button mat-button *ngIf="!useTimeLimit" color="primary">
+        <button *ngIf="!useTimeLimit" mat-button color="primary">
           <mat-icon svgIcon="alarm_off"></mat-icon>
           ohne Zeitlimit
         </button>
-        <button mat-flat-button *ngIf="useTimeLimit" color="primary">
+        <button *ngIf="useTimeLimit" mat-flat-button color="primary">
           <mat-icon svgIcon="alarm_on"></mat-icon>
           mit Zeitlimit
         </button>
       </div>
-      <button *ngFor="let item of arrayOne(4); let i = index;" mat-flat-button color="primary" class="team-button"
-              (click)="onTeamsSelected(i+2)">
-        {{ i + 2 }}
+      <span *ngFor="let item of arrayOne(4); let i = index;">
+        <button *ngIf="teamCount !== i + 2" mat-button color="primary" class="team-button"
+                (click)="onTeamCountSelected(i+2)">
+          {{ i + 2 }}
+        </button>
+        <button *ngIf="teamCount === i + 2" mat-flat-button color="primary" class="team-button"
+                (click)="onTeamCountSelected(i+2)">
+          {{ i + 2 }}
+        </button>
+      </span>
+      <button mat-flat-button color="primary" [disabled]="teamCount === -1" (click)="onStartMultiPlayerGameClicked()">
+        STARTEN
       </button>
     </div>
   </div>
