@@ -87,15 +87,18 @@
 }
 
 .difficulty-easy {
-  background-color: mat-color($mat-green, 500);
+  color: mat-contrast($light-primary, 400);
+  background-color: mat-color($light-primary, 400);
 }
 
 .difficulty-medium {
-  background-color: mat-color($mat-amber, 400);
+  color: mat-contrast($light-primary, 500);
+  background-color: mat-color($light-primary, 500);
 }
 
 .difficulty-hard {
-  background-color: mat-color($mat-red, 500);
+  color: mat-contrast($light-primary, 600);
+  background-color: mat-color($light-primary, 600);
 }
 
 .animate-translation-100 {
