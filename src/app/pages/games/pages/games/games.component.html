@@ -22,6 +22,16 @@
       </button>
     </div>
     <div [@teamCountSelectionAnimation]="teamCountSelectionState">
+      <div (click)="onTimeLimitToggled()" class="time-limit-button">
+        <button mat-button *ngIf="!useTimeLimit" color="primary">
+          <mat-icon svgIcon="alarm_off"></mat-icon>
+          ohne Zeitlimit
+        </button>
+        <button mat-flat-button *ngIf="useTimeLimit" color="primary">
+          <mat-icon svgIcon="alarm_on"></mat-icon>
+          mit Zeitlimit
+        </button>
+      </div>
       <button *ngFor="let item of arrayOne(4); let i = index;" mat-flat-button color="primary" class="team-button"
               (click)="onTeamsSelected(i+2)">
         {{ i + 2 }}

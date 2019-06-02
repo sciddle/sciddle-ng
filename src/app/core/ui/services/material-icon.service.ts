@@ -60,6 +60,8 @@ export class MaterialIconService {
   /** List of icons */
   private icons: Icon[] = [
     {topic: IconTopic.ACTION, name: 'add', file: 'ic_add_24px.svg'},
+    {topic: IconTopic.ACTION, name: 'alarm_off', file: 'ic_alarm_off_24px.svg'},
+    {topic: IconTopic.ACTION, name: 'alarm_on', file: 'ic_alarm_on_24px.svg'},
     {topic: IconTopic.ACTION, name: 'settings', file: 'ic_settings_24px.svg'},
     {topic: IconTopic.AV, name: 'shuffle', file: 'ic_shuffle_24px.svg'},
     {topic: IconTopic.NAVIGATION, name: 'arrow_back', file: 'ic_arrow_back_24px.svg'},
