@@ -1,16 +1,10 @@
-import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  isDevMode,
-  OnChanges,
-  OnInit,
-  SimpleChanges
-} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, isDevMode, OnChanges, SimpleChanges} from '@angular/core';
 import {Stack} from '../../../../../core/entity/model/stack/stack.model';
 import {Media} from '../../../../../core/ui/model/media.enum';
 import {Card} from '../../../../../core/entity/model/card/card.model';
+import {MaterialColorService} from '../../../../../core/ui/services/material-color.service';
+import {PaletteType} from '../../../../../core/ui/model/palette-type.enum';
+import {HueType} from '../../../../../core/ui/model/hue-type.enum';
 
 /**
  * Displays a card
@@ -44,8 +38,9 @@ export class CardFragmentComponent implements OnChanges {
 
   /**
    * Constructor
+   * @param materialColorService material color service
    */
-  constructor() {
+  constructor(private materialColorService: MaterialColorService) {
     this.devMode = isDevMode();
   }
 
@@ -73,15 +68,15 @@ export class CardFragmentComponent implements OnChanges {
     if (this.card != null) {
       switch (this.card.difficulty) {
         case 1: {
-          this.difficultyColor = '#4caf50';
+          this.difficultyColor = this.materialColorService.color(PaletteType.GREEN, HueType._500);
           break;
         }
         case 2: {
-          this.difficultyColor = '#ffca28';
+          this.difficultyColor = this.materialColorService.color(PaletteType.AMBER, HueType._400);
           break;
         }
         case 3: {
-          this.difficultyColor = '#f44336';
+          this.difficultyColor = this.materialColorService.color(PaletteType.RED, HueType._500);
           break;
         }
       }

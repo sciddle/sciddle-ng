@@ -10,6 +10,7 @@ import {GameMode} from '../../model/game-mode.enum';
 import {Subject} from 'rxjs';
 import {GameState} from '../../model/game-state.enum';
 import {TurnState} from '../../model/turn-state.enum';
+import {Card} from '../../model/card/card.model';
 
 @Injectable({
   providedIn: 'root'
@@ -77,6 +78,41 @@ export class GamesService {
     }
 
     return game.turn.teamID;
+  }
+
+  /**
+   * Determines whether a game is over
+   * @param cards cards
+   */
+  static isGameOver(cards: Card[]): boolean {
+    return cards.length === 0;
+  }
+
+  /**
+   * Determines teams with the highest score
+   * @param game game
+   */
+  static determineWinningTeams(game: Game): Team[] {
+
+    const maxScore = GamesService.getMaxScore(game.teams);
+
+    return game.teams.filter(team => {
+      return team.score === maxScore;
+    });
+  }
+
+  /**
+   * Get maximum score of a given list of teams
+   * @param teams teams
+   */
+  static getMaxScore(teams: Team[]): number {
+    const max = Math.max(...teams.map(team => {
+      return team.score;
+    }).filter(index => {
+      return !isNaN(index);
+    }));
+
+    return !isNaN(max) ? max : 0;
   }
 
   /**
@@ -194,7 +230,7 @@ export class GamesService {
   public showCard(game: Game, difficulty: number): Promise<any> {
     return new Promise(resolve => {
       this.game = game;
-      this.game.turn.state = TurnState.DISPLAY_CARD;
+      this.game.turn.state = TurnState.DISPLAY_CARDS;
       this.notify();
 
       resolve();
@@ -208,7 +244,7 @@ export class GamesService {
   public showTurnEvaluation(game: Game): Promise<any> {
     return new Promise(resolve => {
       this.game = game;
-      this.game.turn.state = TurnState.DISPLAY_EVALUATION;
+      this.game.turn.state = TurnState.DISPLAY_TURN_EVALUATION;
       this.notify();
 
       resolve();
@@ -225,7 +261,7 @@ export class GamesService {
   public evaluateTurn(game: Game, teamID: number, difficulty: number): Promise<any> {
     return new Promise(resolve => {
       this.game = game;
-      this.game.turn.state = TurnState.DISPLAY_SCORE;
+      this.game.turn.state = TurnState.DISPLAY_SCORE_OVERVIEW;
 
       if (teamID != null) {
         // Give points to team taking turn
@@ -246,12 +282,20 @@ export class GamesService {
 
   /**
    * Closes turn
+   * @param cards cards
    * @param game game
    */
-  public closeTurn(game: Game) {
+  public closeTurn(cards: Card[], game: Game) {
     return new Promise(resolve => {
-      this.game = game;
-      this.game.turn.state = TurnState.NEW;
+
+      if (GamesService.isGameOver(cards)) {
+        console.log(`game is over`);
+        this.game.state = GameState.FINISHED;
+      } else {
+        console.log(`game goes on`);
+        this.game = game;
+        this.game.turn.state = TurnState.NEW;
+      }
 
       this.notify();
 
