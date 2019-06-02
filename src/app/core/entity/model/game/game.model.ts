@@ -15,6 +15,8 @@ export class Game extends Entity {
   turn: Turn;
   /** Teams that play the game */
   teams: Team[];
+  /** User time limit */
+  useTimeLimit: boolean;
 
   /**
    * Constructor
@@ -25,5 +27,6 @@ export class Game extends Entity {
     this.state = GameState.UNINIZIALIZED;
     this.turn = new Turn();
     this.teams = [];
+    this.useTimeLimit = false;
   }
 }

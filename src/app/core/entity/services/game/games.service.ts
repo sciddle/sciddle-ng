@@ -146,11 +146,13 @@ export class GamesService {
    *
    * @param stack to initialize game for
    * @param teamCount number of teams
+   * @param useTimeLimit usage of time limit
    */
-  initializeMultiPlayerGame(stack: Stack, teamCount: number): Promise<any> {
+  initializeMultiPlayerGame(stack: Stack, teamCount: number, useTimeLimit: boolean): Promise<any> {
     return new Promise((resolve) => {
       stack.game = new Game();
       stack.game.teams = [];
+      stack.game.useTimeLimit = useTimeLimit;
 
       for (let i = 0; i < teamCount; i++) {
         const team = new Team();

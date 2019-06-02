@@ -41,6 +41,9 @@ export class GamesComponent implements OnInit, OnDestroy {
   /** Stack */
   public stack: Stack;
 
+  /** Use time limit */
+  public useTimeLimit = false;
+
   /** Title color */
   public titleColor = 'black';
   /** Enum of media types */
@@ -279,11 +282,18 @@ export class GamesComponent implements OnInit, OnDestroy {
   }
 
   /**
+   * Toggles usage of time limit
+   */
+  onTimeLimitToggled() {
+    this.useTimeLimit = !this.useTimeLimit;
+  }
+
+  /**
    * Handles selection of team count
    * @param teamCount number of teams
    */
   onTeamsSelected(teamCount: number) {
-    this.gameService.initializeMultiPlayerGame(this.stack, teamCount).then(() => {
+    this.gameService.initializeMultiPlayerGame(this.stack, teamCount, this.useTimeLimit).then(() => {
       this.initializeCards(this.stack).then(() => {
         this.cardsService.shuffleStack(this.stack);
         this.stacksPersistenceService.updateStack(this.stack).then(() => {
