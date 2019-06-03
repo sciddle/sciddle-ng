@@ -1,6 +1,6 @@
 <h2 mat-dialog-title>{{ dialogTitle }}</h2>
 <mat-dialog-content>
-  {{ text }}
+  <app-markdown-preview [markdownText]="text"></app-markdown-preview>
 </mat-dialog-content>
 <mat-dialog-actions class="flexcontainer">
   <div class="flexbox"></div>
