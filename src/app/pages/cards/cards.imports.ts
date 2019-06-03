@@ -7,6 +7,7 @@ import {CardsRoutingModule} from './cards-routing.module';
 import {ConfirmationDialogModule} from '../../ui/confirmation-dialog/confirmation-dialog.module';
 import {HttpClientModule} from '@angular/common/http';
 import {StopWatchModule} from '../../ui/stop-watch/stop-watch.module';
+import {InformationDialogModule} from '../../ui/information-dialog/information-dialog.module';
 
 /**
  * Imports of cards module
@@ -24,5 +25,6 @@ export const CardsImports = [
 
   AboutDialogModule,
   ConfirmationDialogModule,
+  InformationDialogModule,
   StopWatchModule
 ];

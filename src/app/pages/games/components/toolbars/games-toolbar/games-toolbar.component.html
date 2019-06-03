@@ -11,6 +11,11 @@
       <mat-icon svgIcon="more_vert"></mat-icon>
     </button>
     <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="onMenuItemClicked('manual')">
+        <mat-icon svgIcon="format_align_left"></mat-icon>
+        <span>Anleitung</span>
+      </button>
+      <mat-divider></mat-divider>
       <button mat-menu-item (click)="onMenuItemClicked('about')">
         <mat-icon svgIcon="blank"></mat-icon>
         <span>Über die App</span>
