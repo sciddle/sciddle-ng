@@ -420,9 +420,6 @@ export class CardsComponent implements OnInit, OnDestroy {
    * @param menuItem menu item that has been clicked
    */
   onMenuItemClicked(menuItem: string) {
-    console.log(`HUHU`);
-    console.log(`menuItem ${menuItem}`);
-
     switch (menuItem) {
       case 'back': {
         switch (GamesService.getGameModeByStack(this.stack)) {
@@ -459,6 +456,22 @@ export class CardsComponent implements OnInit, OnDestroy {
               }
             });
           });
+        break;
+      }
+      case 'open-source': {
+        this.dialog.open(InformationDialogComponent, {
+          disableClose: false,
+          data: {
+            title: 'Open Source Komponenten',
+            text: Object.keys(environment.DEPENDENCIES).map(key => {
+              return `${key} ${environment.DEPENDENCIES[key]}`;
+            }).concat('---').concat(Object.keys(environment.DEV_DEPENDENCIES).map(key => {
+              return `${key} ${environment.DEV_DEPENDENCIES[key]}`;
+            })).join('<br/>'),
+            action: 'Alles klar',
+            value: null
+          }
+        });
         break;
       }
       case 'about': {
