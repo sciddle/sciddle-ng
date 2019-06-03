@@ -71,6 +71,9 @@ export class CardsComponent implements OnInit, OnDestroy {
   /** Array of winning teams */
   public winningTeams = [];
 
+  /** Timer start time */
+  public startTime;
+
   /** Current display aspect */
   public displayAspect: DisplayAspect;
   /** Enum of display aspect types */
@@ -451,6 +454,19 @@ export class CardsComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * Handles timer running out
+   */
+  onTimerOver() {
+    // Check if timer is over during cards state
+    if (this.game.turn.state === TurnState.DISPLAY_CARDS) {
+      this.snackbarService.showSnackbar('Zeit ist abgelaufen');
+      this.gamesService.showTurnEvaluation(this.game).then();
+    } else {
+      this.startTime = null;
+    }
+  }
+
   //
 
   /**
@@ -473,6 +489,9 @@ export class CardsComponent implements OnInit, OnDestroy {
         this.stack = stack;
         this.cards = stack.cards;
         this.gamesService.showCard(this.game, difficulty).then(() => {
+          // Set timer
+          this.startTime = new Date();
+          console.log(`startTime ${JSON.stringify(this.startTime)}`);
         });
       }
     });
@@ -541,7 +560,7 @@ export class CardsComponent implements OnInit, OnDestroy {
    */
   onDisplayScoreOverviewClicked() {
     this.winningTeams = GamesService.determineWinningTeams(this.game);
-    this.gamesService.closeTurn(this.stack.cards.filter(CardsService.isCardPartOfStack), this.game);
+    this.gamesService.closeTurn(this.stack.cards.filter(CardsService.isCardPartOfStack), this.game).then();
   }
 
   //

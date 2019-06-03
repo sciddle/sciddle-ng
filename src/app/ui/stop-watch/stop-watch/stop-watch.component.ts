@@ -11,7 +11,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 export class StopWatchComponent implements OnInit {
 
   /** Duration in minutes */
-  @Input() duration: number;
+  @Input() duration = 0;
   /** Start time */
   @Input() startTime: Date;
   /** Event emitter indicating time left in seconds */
@@ -85,12 +85,12 @@ export class StopWatchComponent implements OnInit {
       const refreshIntervalID = setInterval(() => {
         if (this.isTimerActive()) {
           this.calculateTimeLeft();
+          this.timeLeftEmitter.emit(this.secondsLeft);
         } else {
           // Stop timer if time is over
           clearInterval(refreshIntervalID);
           this.invalidateTimer();
           this.timeLeftEmitter.emit(this.secondsLeft);
-
         }
       }, 1000);
     } else {
