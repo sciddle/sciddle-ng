@@ -45,6 +45,7 @@ export class GameGuard implements CanActivate {
           const stack = new Stack();
           stack.id = '0';
           this.stacksPersistenceService.createStack(stack).then(() => {
+            this.router.navigate([`/`]).then();
           });
         }
       });
