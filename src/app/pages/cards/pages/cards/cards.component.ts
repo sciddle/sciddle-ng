@@ -23,6 +23,8 @@ import {GameMode} from '../../../../core/entity/model/game-mode.enum';
 import {Game} from '../../../../core/entity/model/game/game.model';
 import {GameState} from '../../../../core/entity/model/game-state.enum';
 import {TurnState} from '../../../../core/entity/model/turn-state.enum';
+import {InformationDialogComponent} from '../../../../ui/information-dialog/information-dialog/information-dialog.component';
+import {HttpClient} from '@angular/common/http';
 
 export enum DisplayAspect {
   DISPLAY_CARDS,
@@ -111,6 +113,7 @@ export class CardsComponent implements OnInit, OnDestroy {
    * @param cardsService cards service
    * @param dialog dialog
    * @param gamesService games service
+   * @param http http client
    * @param iconRegistry iconRegistry
    * @param mediaService media service
    * @param materialColorService material color service
@@ -124,6 +127,7 @@ export class CardsComponent implements OnInit, OnDestroy {
   constructor(private cardsService: CardsService,
               public dialog: MatDialog,
               private gamesService: GamesService,
+              private http: HttpClient,
               private iconRegistry: MatIconRegistry,
               private mediaService: MediaService,
               private materialColorService: MaterialColorService,
@@ -416,6 +420,9 @@ export class CardsComponent implements OnInit, OnDestroy {
    * @param menuItem menu item that has been clicked
    */
   onMenuItemClicked(menuItem: string) {
+    console.log(`HUHU`);
+    console.log(`menuItem ${menuItem}`);
+
     switch (menuItem) {
       case 'back': {
         switch (GamesService.getGameModeByStack(this.stack)) {
@@ -433,6 +440,25 @@ export class CardsComponent implements OnInit, OnDestroy {
       case 'shuffle-cards': {
         this.shuffleCards().then(() => {
         });
+        break;
+      }
+      case 'manual': {
+        this.http.get('assets/manual/manual.md').subscribe(
+          () => {
+          }, err => {
+            this.dialog.open(InformationDialogComponent, {
+              disableClose: false,
+              data: {
+                title: 'Anleitung',
+                text: JSON.stringify(err.error.text)
+                  .replace(/"/g, '')
+                  .replace(/\\n/g, '\n')
+                  .replace(/\\r/g, '\r'),
+                action: 'Alles klar',
+                value: null
+              }
+            });
+          });
         break;
       }
       case 'about': {
@@ -491,7 +517,6 @@ export class CardsComponent implements OnInit, OnDestroy {
         this.gamesService.showCard(this.game, difficulty).then(() => {
           // Set timer
           this.startTime = new Date();
-          console.log(`startTime ${JSON.stringify(this.startTime)}`);
         });
       }
     });

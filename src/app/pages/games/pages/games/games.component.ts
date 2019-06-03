@@ -19,6 +19,8 @@ import {MaterialIconService} from '../../../../core/ui/services/material-icon.se
 import {DomSanitizer} from '@angular/platform-browser';
 import {AboutDialogComponent} from '../../../../ui/about-dialog/about-dialog/about-dialog.component';
 import {Animations, TeamCountSelectionState} from './games.animation';
+import {HttpClient} from '@angular/common/http';
+import {InformationDialogComponent} from '../../../../ui/information-dialog/information-dialog/information-dialog.component';
 
 /**
  * Displays games page
@@ -64,6 +66,7 @@ export class GamesComponent implements OnInit, OnDestroy {
    * @param cardsService cards service
    * @param dialog dialog
    * @param gameService games service
+   * @param http http client
    * @param iconRegistry iconRegistry
    * @param mediaService media service
    * @param materialColorService material color service
@@ -77,6 +80,7 @@ export class GamesComponent implements OnInit, OnDestroy {
   constructor(private cardsService: CardsService,
               public dialog: MatDialog,
               private gameService: GamesService,
+              private http: HttpClient,
               private iconRegistry: MatIconRegistry,
               private mediaService: MediaService,
               private materialColorService: MaterialColorService,
@@ -237,7 +241,28 @@ export class GamesComponent implements OnInit, OnDestroy {
    * @param menuItem menu item that has been clicked
    */
   onMenuItemClicked(menuItem: string) {
+    console.log(`menuItem ${menuItem}`);
+
     switch (menuItem) {
+      case 'manual': {
+        this.http.get('assets/manual/manual.md').subscribe(
+          () => {
+          }, err => {
+            this.dialog.open(InformationDialogComponent, {
+              disableClose: false,
+              data: {
+                title: 'Anleitung',
+                text: JSON.stringify(err.error.text)
+                  .replace(/"/g, '')
+                  .replace(/\\n/g, '\n')
+                  .replace(/\\r/g, '\r'),
+                action: 'Alles klar',
+                value: null
+              }
+            });
+          });
+        break;
+      }
       case 'about': {
         this.dialog.open(AboutDialogComponent, {
           disableClose: false,
@@ -263,7 +288,7 @@ export class GamesComponent implements OnInit, OnDestroy {
   onSinglePlayerClicked() {
     this.gameService.initializeSinglePlayerGame(this.stack).then(() => {
       this.initializeCards(this.stack).then(() => {
-        this.cardsService.shuffleStack(this.stack);
+        this.cardsService.shuffleStack(this.stack).then();
         this.stacksPersistenceService.updateStack(this.stack).then(() => {
           this.router.navigate([`/cards/${this.stack.id}`]).then(() => {
           });
@@ -304,7 +329,7 @@ export class GamesComponent implements OnInit, OnDestroy {
   onStartMultiPlayerGameClicked() {
     this.gameService.initializeMultiPlayerGame(this.stack, this.teamCount, this.useTimeLimit).then(() => {
       this.initializeCards(this.stack).then(() => {
-        this.cardsService.shuffleStack(this.stack);
+        this.cardsService.shuffleStack(this.stack).then();
         this.stacksPersistenceService.updateStack(this.stack).then(() => {
           this.router.navigate([`/cards/${this.stack.id}`]).then(() => {
           });
