@@ -28,9 +28,9 @@
 <div class="main-content vertical-center center">
   <!-- Team -->
   <div *ngIf="displayAspect === displayAspectType.DISPLAY_TEAM_TAKING_TURN && stack.game != null">
-    <button mat-button class="full-width-button" (click)="onDisplayTeamClicked()">
-      <span class="main-text">Team {{ stack.game.turn.teamID + 1 }} ist am Zug</span>
-      <span class="explanation-text">
+    <button mat-button class="button full-width-button" (click)="onDisplayTeamClicked()">
+      <span class="block main-text">Team {{ stack.game.turn.teamID + 1 }} ist am Zug</span>
+      <span class="block explanation-text">
           Tippe auf den Bildschirm um weiterzumachen
         </span>
     </button>
@@ -45,21 +45,27 @@
         <button mat-flat-button class="button difficulty-easy"
                 [disabled]="cardsEasy.length < 1"
                 (click)="onDifficultySelected(1)">
-          EINFACH ({{ cardsEasy.length }})
+          <div class="explanation-text">
+            EINFACH ({{ cardsEasy.length }})
+          </div>
         </button>
       </div>
       <div>
         <button mat-flat-button class="button difficulty-medium"
                 [disabled]="cardsMedium.length < 1"
                 (click)="onDifficultySelected(2)">
-          MITTEL ({{ cardsMedium.length }})
+          <div class="explanation-text">
+            MITTEL ({{ cardsMedium.length }})
+          </div>
         </button>
       </div>
       <div>
         <button mat-flat-button class="button difficulty-hard"
                 [disabled]="cardsHard.length < 1"
                 (click)="onDifficultySelected(3)">
-          SCHWER ({{ cardsHard.length }})
+          <div class="explanation-text">
+            SCHWER ({{ cardsHard.length }})
+          </div>
         </button>
       </div>
     </div>
@@ -89,13 +95,17 @@
       <div *ngFor="let team of stack.game.teams">
         <button mat-flat-button color="primary" class="button"
                 (click)="onSuccessfulTeamSelected(team.index)">
-          TEAM {{ team.index + 1}}
+          <div class="explanation-text">
+            TEAM {{ team.index + 1}}
+          </div>
         </button>
       </div>
       <div>
         <button mat-flat-button color="primary" class="button"
                 (click)="onSuccessfulTeamSelected(null)">
-          NIEMAND
+          <div class="explanation-text">
+            NIEMAND
+          </div>
         </button>
       </div>
     </div>
@@ -103,14 +113,14 @@
   <!-- Score overview -->
   <div *ngIf="displayAspect === displayAspectType.DISPLAY_SCORE_OVERVIEW && stack.game != null">
     <button mat-button class="full-width-button" (click)="onDisplayScoreOverviewClicked()">
-      <span *ngFor="let team of stack.game.teams" class="main-text">
-        TEAM {{ team.index + 1}} - {{ team.score }}
+      <div *ngFor="let team of stack.game.teams" class="explanation-text">
+        <span> TEAM {{ team.index + 1}} - {{ team.score }}</span>
         <span *ngIf="team.score !== 1">Punkte</span>
         <span *ngIf="team.score === 1">Punkt</span>
-      </span>
-      <span class="explanation-text">
+      </div>
+      <div class="explanation-text">
         Tippe auf den Bildschirm um weiterzumachen
-      </span>
+      </div>
     </button>
   </div>
   <!-- Game evaluation -->
@@ -129,5 +139,10 @@
       <span *ngIf="team.score !== 1">Punkte</span>
       <span *ngIf="team.score === 1">Punkt</span>
     </div>
+    <button mat-flat-button color="primary" class="button" (click)="onMenuItemClicked('back')">
+      <div class="explanation-text">
+        ZURÜCK
+      </div>
+    </button>
   </div>
 </div>

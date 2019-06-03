@@ -13,8 +13,8 @@
 
   @media #{$breakpoint-small} {
     // padding-top: 88px;
-    margin-left: 10px;
-    margin-right: 10px;
+    // margin-left: 10px;
+    // margin-right: 10px;
   }
   @media #{$breakpoint-medium} {
     // padding-top: 88px;
@@ -34,16 +34,21 @@
   text-align: center;
 }
 
-.main-text {
+.block {
   display: block;
+}
+
+.main-text {
   font-size: 4em;
   margin-top: 25px;
+  line-height: 100%;
+  white-space: pre-wrap !important;
 }
 
 .explanation-text {
-  display: block;
   font-size: 2em;
-  margin-top: 25px;
+  margin-top: 10px;
+  white-space: pre-wrap !important;
 }
 
 .buttons {
@@ -61,10 +66,10 @@
 }
 
 .button {
-  font-size: 2em;
   padding: 20px;
   margin-top: 20px;
   margin-bottom: 20px;
+  white-space: pre-wrap !important;
 }
 
 .vertical-center {
