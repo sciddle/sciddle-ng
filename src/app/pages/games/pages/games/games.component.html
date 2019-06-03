@@ -24,11 +24,11 @@
     <div [@teamCountSelectionAnimation]="teamCountSelectionState">
       <div (click)="onTimeLimitToggled()" class="time-limit-button">
         <button *ngIf="!useTimeLimit" mat-button color="primary">
-          <mat-icon svgIcon="alarm_off"></mat-icon>
+          <mat-icon svgIcon="alarm_off" class="button-icon"></mat-icon>
           ohne Zeitlimit
         </button>
         <button *ngIf="useTimeLimit" mat-flat-button color="primary">
-          <mat-icon svgIcon="alarm_on"></mat-icon>
+          <mat-icon svgIcon="alarm_on" class="button-icon"></mat-icon>
           mit Zeitlimit
         </button>
       </div>

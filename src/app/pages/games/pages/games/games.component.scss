@@ -7,8 +7,8 @@
 .main-content {
   @media #{$breakpoint-small} {
     // padding-top: 88px;
-    margin-left: 10px;
-    margin-right: 10px;
+    // margin-left: 10px;
+    // margin-right: 10px;
   }
   @media #{$breakpoint-medium} {
     // padding-top: 88px;
@@ -47,6 +47,10 @@
   margin: 0 auto 15px;
   text-align: left;
   width: 150px;
+}
+
+.button-icon {
+  margin-right: 10px;
 }
 
 .team-button {

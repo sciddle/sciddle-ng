@@ -291,10 +291,8 @@ export class GamesService {
     return new Promise(resolve => {
 
       if (GamesService.isGameOver(cards)) {
-        console.log(`game is over`);
         this.game.state = GameState.FINISHED;
       } else {
-        console.log(`game goes on`);
         this.game = game;
         this.game.turn.state = TurnState.NEW;
       }

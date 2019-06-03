@@ -36,8 +36,8 @@ $mat-sciddle: (
   )
 );
 
-$light-primary: mat-palette($mat-sciddle, 700, 800, 900);
-$light-accent: mat-palette($mat-red, 500, 600, 700);
+$light-primary: mat-palette($mat-sciddle, 500, 400, 600);
+$light-accent: mat-palette($mat-sciddle, 700, 600, 800);
 $light-warn: mat-palette($mat-red);
 
 $light-theme: mat-light-theme($light-primary, $light-accent, $light-warn);
