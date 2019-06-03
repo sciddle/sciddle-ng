@@ -4,8 +4,11 @@
   [titleColor]="titleColor"
   [media]="media"
   [gameMode]="gameMode"
+  [useTimeLimit]="(game != null) ? game.useTimeLimit : false"
+  [startTime]="startTime"
   [cardCount]="cardsInStack"
-  (menuItemEventEmitter)="onMenuItemClicked($event)"></app-cards-toolbar>
+  (menuItemEventEmitter)="onMenuItemClicked($event)"
+  (timerOverEmitter)="onTimerOver()"></app-cards-toolbar>
 
 <!-- Debugging -->
 <div *ngIf="devMode" class="debug main-content">
