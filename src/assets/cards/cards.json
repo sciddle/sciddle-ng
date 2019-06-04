@@ -1,3 +1,4 @@
+/* tslint:disable */
 [
   { "entityType": 0, "id": "1", "word": "Vegan", "taboos": ["Essen", "Ernährung", "Fleisch", "Vegetarisch", "Milch" ], "index": 1, "difficulty": 1 },
   { "entityType": 0, "id": "2", "word": "Vegetarisch", "taboos": ["Fleisch", "Essen", "Vegan", "Ernährung", "Tiere"], "index": 2, "difficulty": 1 },
@@ -5,7 +6,7 @@
   { "entityType": 0, "id": "4", "word": "Temperatur", "taboos": ["Wärme", "Kälte", "Thermometer", "Energie", "Grad"], "index": 4, "difficulty": 1 },
   { "entityType": 0, "id": "5", "word": "Photosynthese", "taboos": ["Pflanzen", "Sonne", "Energie", "Grün", "Blatt"], "index": 5, "difficulty": 2 },
   { "entityType": 0, "id": "6", "word": "Biosphäre", "taboos": ["Leben", "Erdoberfläche", "Wald", "Pflanzen", "Tiere"], "index": 6, "difficulty": 2 },
-  { "entityType": 0, "id": "7", "word": "Stalagmit", "taboos": ["Stein", "Wasser", "Zeit", "Information", "Proxydaten"], "index": 7, "difficulty": 2 },
+  { "entityType": 0, "id": "m7", "word": "Stalagmit", "taboos": ["Stein", "Wasser", "Zeit", "Information", "Proxydaten"], "index": 7, "difficulty": 2 },
   { "entityType": 0, "id": "8", "word": "Rodung", "taboos": ["Entwaldung", "Holz", "Forst", "Lebensraum", "Zerstörung"], "index": 8, "difficulty": 2 },
   { "entityType": 0, "id": "9", "word": "Mobilität", "taboos": ["Transport", "Bewegung", "Verkehr", "Reisen", "Auto"], "index": 9, "difficulty": 2 },
   { "entityType": 0, "id": "10", "word": "Energie", "taboos": ["Sonne", "Strom", "Verbrauch", "Nachhaltigkeit", "Verlust"], "index": 10, "difficulty": 1 },

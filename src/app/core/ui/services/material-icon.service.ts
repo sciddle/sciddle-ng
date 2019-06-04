@@ -84,6 +84,7 @@ export class MaterialIconService {
     });
 
     iconRegistry.addSvgIcon('blank', sanitizer.bypassSecurityTrustResourceUrl('./assets/icons/ic_blank_24px.svg'));
-    iconRegistry.addSvgIcon('open_source_initiative', sanitizer.bypassSecurityTrustResourceUrl('./assets/icons/ic_open_source_initiative_24px.svg'));
+    iconRegistry.addSvgIcon('open_source_initiative',
+      sanitizer.bypassSecurityTrustResourceUrl('./assets/icons/ic_open_source_initiative_24px.svg'));
   }
 }
