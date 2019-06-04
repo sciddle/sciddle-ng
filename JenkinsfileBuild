@@ -34,12 +34,6 @@ pipeline {
                 junit allowEmptyResults: true, testResults: 'reports/**/test-results.xml'
             }
         }
-        stage('Lint') {
-            steps {
-                sh "npm run lint-junit"
-                junit allowEmptyResults: true, testResults: 'reports/**/lint-results.xml'
-            }
-        }
         stage('Compodoc') {
             steps {
                 sh "npm run compodoc"
