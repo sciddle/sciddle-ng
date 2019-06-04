@@ -1,3 +1,4 @@
+/* tslint:disable */
 import {ChangeDetectionStrategy, Component, Input, OnChanges, SimpleChanges} from '@angular/core';
 import hljs from 'highlight.js';
 
