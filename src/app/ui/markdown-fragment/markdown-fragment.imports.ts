@@ -6,7 +6,6 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 /** Imports for markdown fragment module */
 export const MarkdownFragmentImports = [
   CommonModule,
-  BrowserAnimationsModule,
   FormsModule,
   MaterialModule,
 ];
