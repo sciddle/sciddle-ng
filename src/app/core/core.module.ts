@@ -4,6 +4,8 @@ import {EntityModule} from './entity/entity.module';
 import {UiModule} from './ui/ui.module';
 import {NotificationModule} from './notification/notification.module';
 import {PersistenceModule} from './persistence/persistence.module';
+import {UtilModule} from './util/util.module';
+import {WikipediaModule} from './wikipedia/wikipedia.module';
 
 @NgModule({
   imports: [
@@ -12,7 +14,9 @@ import {PersistenceModule} from './persistence/persistence.module';
     EntityModule,
     NotificationModule,
     PersistenceModule,
-    UiModule
+    UiModule,
+    UtilModule,
+    WikipediaModule
   ],
   declarations: []
 })
