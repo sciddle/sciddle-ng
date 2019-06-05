@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Injectable, isDevMode} from '@angular/core';
 import {Stack} from '../../model/stack/stack.model';
 import {Card} from '../../model/card/card.model';
 import {Subject} from 'rxjs';
@@ -16,6 +16,9 @@ export class CardsService {
   cards = new Map<string, Card>();
   /** Subject that publishes cards */
   cardsSubject = new Subject<Card[]>();
+
+  /** Dev mode */
+  devMode = false;
 
   //
   // Sort
@@ -123,6 +126,13 @@ export class CardsService {
     return !isNaN(max) ? max : 0;
   }
 
+  /**
+   * Constructor
+   */
+  constructor() {
+    this.devMode = isDevMode();
+  }
+
   //
   // Initialization
   //
@@ -150,7 +160,7 @@ export class CardsService {
     const cardsBefore = CloneService.cloneCards(Array.from(this.cards.values()));
 
     return new Promise((resolve, dismiss) => {
-      cardsFromAssets.forEach(card => {
+      cardsFromAssets.slice(0, this.devMode ? 10 : cardsFromAssets.length).forEach(card => {
         // Get existing card
         const existingCard = this.cards.get(card.id);
 
