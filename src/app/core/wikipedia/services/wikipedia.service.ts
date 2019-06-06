@@ -15,14 +15,14 @@ export class WikipediaService {
   }
 
   /**
-   * Retrieves wikipedia abstract of a given word
+   * Retrieves wikipedia extract of a given word
    * @param word word
+   * @param language language
    * @param abstractEmitter abstract emitter
    */
-  getAbstract(word: string, abstractEmitter: EventEmitter<string>) {
+  getExtract(word: string, language: string, abstractEmitter: EventEmitter<{pageURL: string, extract: string}>) {
 
     if (ConnectionService.isOnline()) {
-
       if (word != null && abstractEmitter != null) {
         const options = {
           method: 'POST',
@@ -30,13 +30,22 @@ export class WikipediaService {
           json: true,
         };
 
-        const ob =
-          this.http.post(`https://de.wikipedia.org/w/api.php` +
-            `?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&origin=*` +
-            `&titles=${word.replace('', '%20')}`, [], options);
-        ob.subscribe(value => {
-          console.log(JSON.stringify(value));
-          // abstractEmitter.emit(value[0]['translations'][0]['text']);
+        const title = word.trim().replace(' ', '%20');
+        const pageURL = `https://` + language + `.wikipedia.org/wiki/` + title;
+        const queryURL = `https://` + language + `.wikipedia.org/w/api.php` +
+          `?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&origin=*` +
+          `&titles=` + title;
+        const observable =
+          this.http.post(queryURL, [], options);
+        observable.subscribe(value => {
+          const query = value['query'];
+          const pages = query != null ? query['pages'] : null;
+          const pageKeys = pages != null ? Object.keys(pages) : pages;
+          const firstPageKey = pageKeys != null ? pageKeys[0] : null;
+          const firstPage = firstPageKey != null ? pages[firstPageKey] : null;
+          const extract = firstPage != null ? firstPage['extract'] : null;
+
+          abstractEmitter.emit({pageURL, extract});
         });
       }
     } else {
