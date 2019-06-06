@@ -62,6 +62,7 @@ export class MaterialIconService {
     {topic: IconTopic.ACTION, name: 'add', file: 'ic_add_24px.svg'},
     {topic: IconTopic.ACTION, name: 'alarm_off', file: 'ic_alarm_off_24px.svg'},
     {topic: IconTopic.ACTION, name: 'alarm_on', file: 'ic_alarm_on_24px.svg'},
+    {topic: IconTopic.ACTION, name: 'help_outline', file: 'ic_help_outline_24px.svg'},
     {topic: IconTopic.ACTION, name: 'settings', file: 'ic_settings_24px.svg'},
     {topic: IconTopic.AV, name: 'shuffle', file: 'ic_shuffle_24px.svg'},
     {topic: IconTopic.EDITOR, name: 'format_align_left', file: 'ic_format_align_left_24px.svg'},

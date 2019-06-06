@@ -6,6 +6,7 @@
 
     <mat-card-title class="word">
       {{ card.word }}
+      <mat-icon svgIcon="help_outline" (click)="onHelpClicked()"></mat-icon>
     </mat-card-title>
     <div *ngFor="let taboo of card.taboos" class="taboo">
       {{ taboo }}
