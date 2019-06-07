@@ -206,7 +206,7 @@ export class StacksPouchdbService implements StacksPersistenceService {
   }
 
   /**
-   * Clears cards
+   * Clears stacks
    */
   public clearStacks() {
     this.stacks.clear();
@@ -233,7 +233,7 @@ export class StacksPouchdbService implements StacksPersistenceService {
   //
 
   /**
-   * Index cards and queries them afterwards
+   * Index stacks and queries them afterwards
    * @param index index to be used
    * @param options query options
    */

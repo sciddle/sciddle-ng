@@ -7,8 +7,6 @@ import {STACK_PERSISTENCE_POUCHDB} from '../../../../core/entity/entity.module';
 import {StacksPersistenceService} from '../../../../core/entity/services/stack/persistence/stacks-persistence.interface';
 import {takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
-import {CardsAssetsService} from '../../../../core/entity/services/card/cards-assets.service';
-import {Card} from '../../../../core/entity/model/card/card.model';
 import {environment} from '../../../../../environments/environment';
 import {CardsService} from '../../../../core/entity/services/card/cards.service';
 import {Media} from '../../../../core/ui/model/media.enum';
@@ -112,6 +110,8 @@ export class GamesComponent implements OnInit, OnDestroy {
       // Try to load existing stack
       if (this.id != null) {
         this.findEntities(this.id);
+      } else {
+        this.navigateBack();
       }
     });
   }
@@ -139,7 +139,7 @@ export class GamesComponent implements OnInit, OnDestroy {
         const stack = value as Stack;
         this.initializeStack(stack);
       } else {
-        this.initializeEmptyStack();
+        this.navigateBack();
       }
     });
   }
@@ -154,36 +154,6 @@ export class GamesComponent implements OnInit, OnDestroy {
     this.stack = stack;
 
     this.initializeTitle(stack);
-  }
-
-  /**
-   * Initializes cards
-   * @param stack stack
-   */
-  private initializeCards(stack: Stack): Promise<any> {
-    return new Promise((resolve) => {
-      this.cardsService.clearCards();
-      this.cardsService.mergeCardsFromAssets(CardsAssetsService.getAssetsCards()).then(resolvedCards => {
-        this.stack.cards = resolvedCards as Card[];
-        this.stacksPersistenceService.updateStack(this.stack).then(() => {
-        });
-        this.snackbarService.showSnackbar('Neue Karten geladen');
-        resolve();
-      }, () => {
-        // Do nothing
-        resolve();
-      });
-    });
-  }
-
-  /**
-   * Initializes empty stack
-   */
-  private initializeEmptyStack() {
-    const stack = new Stack();
-    stack.id = '0';
-    this.stacksPersistenceService.createStack(stack).then(() => {
-    });
   }
 
   // Others
@@ -242,6 +212,11 @@ export class GamesComponent implements OnInit, OnDestroy {
    */
   onMenuItemClicked(menuItem: string) {
     switch (menuItem) {
+      case 'back': {
+        this.router.navigate(['/stacks']).then(() => {
+        });
+        break;
+      }
       case 'manual': {
         this.http.get('assets/manual/manual.md').subscribe(
           () => {
@@ -320,11 +295,9 @@ export class GamesComponent implements OnInit, OnDestroy {
    */
   onSinglePlayerClicked() {
     this.gameService.initializeSinglePlayerGame(this.stack).then(() => {
-      this.initializeCards(this.stack).then(() => {
-        this.cardsService.shuffleStack(this.stack).then();
-        this.stacksPersistenceService.updateStack(this.stack).then(() => {
-          this.router.navigate([`/cards/${this.stack.id}`]).then();
-        });
+      this.cardsService.shuffleStack(this.stack).then();
+      this.stacksPersistenceService.updateStack(this.stack).then(() => {
+        this.router.navigate([`/cards/${this.stack.id}`]).then();
       });
     });
   }
@@ -360,11 +333,9 @@ export class GamesComponent implements OnInit, OnDestroy {
    */
   onStartMultiPlayerGameClicked() {
     this.gameService.initializeMultiPlayerGame(this.stack, this.teamCount, this.useTimeLimit).then(() => {
-      this.initializeCards(this.stack).then(() => {
-        this.cardsService.shuffleStack(this.stack).then();
-        this.stacksPersistenceService.updateStack(this.stack).then(() => {
-          this.router.navigate([`/cards/${this.stack.id}`]).then();
-        });
+      this.cardsService.shuffleStack(this.stack).then();
+      this.stacksPersistenceService.updateStack(this.stack).then(() => {
+        this.router.navigate([`/cards/${this.stack.id}`]).then();
       });
     });
   }
@@ -379,5 +350,13 @@ export class GamesComponent implements OnInit, OnDestroy {
    */
   arrayOne(n: number): any[] {
     return Array(n);
+  }
+
+  /**
+   * Navigates back to parent view
+   */
+  private navigateBack() {
+    console.log(`navigateBack`);
+    this.router.navigate(['/stack']).then();
   }
 }

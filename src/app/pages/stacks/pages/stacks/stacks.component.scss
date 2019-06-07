@@ -1,0 +1,23 @@
+@import '../../../../../styles';
+@import '../../../../../flex';
+@import '../../../../../sizes';
+
+//
+
+.main-content {
+  @media #{$breakpoint-small} {
+    // padding-top: 88px;
+    // margin-left: 10px;
+    // margin-right: 10px;
+  }
+  @media #{$breakpoint-medium} {
+    // padding-top: 88px;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  @media #{$breakpoint-large} {
+    // padding-top: 88px;
+    margin-left: 40px;
+    margin-right: 40px;
+  }
+}
