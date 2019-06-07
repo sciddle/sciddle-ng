@@ -165,6 +165,8 @@ export class CardsComponent implements OnInit, OnDestroy {
       // Try to load existing stack
       if (this.id != null) {
         this.findEntities(this.id);
+      } else {
+        this.navigateBack();
       }
     });
   }
@@ -193,7 +195,7 @@ export class CardsComponent implements OnInit, OnDestroy {
         this.initializeStack(stack);
         this.initializeGameMode(stack);
       } else {
-        this.initializeEmptyStack();
+        this.navigateBack();
       }
     });
   }
@@ -233,9 +235,11 @@ export class CardsComponent implements OnInit, OnDestroy {
   private initializeStack(stack: Stack) {
     this.stack = stack;
 
-    this.initializeTitle(stack);
-    this.cardsService.initializeCards(stack.cards);
-    this.gamesService.initializeGame(stack.game);
+    if (stack != null) {
+      this.initializeTitle(stack);
+      this.cardsService.initializeCards(stack.cards);
+      this.gamesService.initializeGame(stack.game);
+    }
   }
 
   /**
@@ -354,9 +358,7 @@ export class CardsComponent implements OnInit, OnDestroy {
    * @param id ID
    */
   private findEntities(id: string) {
-    if (id != null) {
-      this.stacksPersistenceService.findStackByID(this.id);
-    }
+    this.stacksPersistenceService.findStackByID(this.id);
   }
 
   /**
@@ -673,5 +675,12 @@ export class CardsComponent implements OnInit, OnDestroy {
         });
       }));
     });
+  }
+
+  /**
+   * Navigates back to parent view
+   */
+  private navigateBack() {
+    this.router.navigate(['/games']).then();
   }
 }

@@ -4,6 +4,8 @@ import {GamesService} from '../core/entity/services/game/games.service';
 import {STACK_PERSISTENCE_POUCHDB} from '../core/entity/entity.module';
 import {StacksPersistenceService} from '../core/entity/services/stack/persistence/stacks-persistence.interface';
 import {Stack} from '../core/entity/model/stack/stack.model';
+import {AppRoutingModule} from '../app-routing.module';
+import {environment} from '../../environments/environment';
 
 /**
  * Checks if it is necessary to show game page
@@ -35,15 +37,14 @@ export class GameGuard implements CanActivate {
           const stack = value as Stack;
 
           if (GamesService.existsGame(stack)) {
-            this.router.navigate([`/cards/${stack.id}`]).then(() => {
-            });
+            this.router.navigate([`/cards/${stack.id}`]).then();
             resolve(false);
           } else {
             resolve(true);
           }
         } else {
           const stack = new Stack();
-          stack.id = '0';
+          stack.id = environment.DEFAULT_STACK.toString();
           this.stacksPersistenceService.createStack(stack).then(() => {
             this.router.navigate([`/`]).then();
           });
