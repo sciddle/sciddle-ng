@@ -323,8 +323,7 @@ export class GamesComponent implements OnInit, OnDestroy {
       this.initializeCards(this.stack).then(() => {
         this.cardsService.shuffleStack(this.stack).then();
         this.stacksPersistenceService.updateStack(this.stack).then(() => {
-          this.router.navigate([`/cards/${this.stack.id}`]).then(() => {
-          });
+          this.router.navigate([`/cards/${this.stack.id}`]).then();
         });
       });
     });
@@ -364,8 +363,7 @@ export class GamesComponent implements OnInit, OnDestroy {
       this.initializeCards(this.stack).then(() => {
         this.cardsService.shuffleStack(this.stack).then();
         this.stacksPersistenceService.updateStack(this.stack).then(() => {
-          this.router.navigate([`/cards/${this.stack.id}`]).then(() => {
-          });
+          this.router.navigate([`/cards/${this.stack.id}`]).then();
         });
       });
     });

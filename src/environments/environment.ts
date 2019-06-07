@@ -13,6 +13,7 @@ export const environment = {
   DATABASE_SETTINGS: 'sciddle_settings-dev',
 
   TIMER: 10,
+  DEFAULT_STACK: 0,
 
   NAME: require('../../package.json').name,
   VERSION: require('../../package.json').version,
