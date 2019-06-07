@@ -242,16 +242,6 @@ export class CardsComponent implements OnInit, OnDestroy {
     }
   }
 
-  /**
-   * Initializes empty stack
-   */
-  private initializeEmptyStack() {
-    const stack = new Stack();
-    stack.id = '0';
-    this.stacksPersistenceService.createStack(stack).then(() => {
-    });
-  }
-
   // Cards
 
   /**

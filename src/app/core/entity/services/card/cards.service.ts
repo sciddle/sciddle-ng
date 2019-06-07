@@ -2,7 +2,6 @@ import {Injectable, isDevMode} from '@angular/core';
 import {Stack} from '../../model/stack/stack.model';
 import {Card} from '../../model/card/card.model';
 import {Subject} from 'rxjs';
-import {CloneService} from '../clone.service';
 
 @Injectable({
   providedIn: 'root'
@@ -151,44 +150,7 @@ export class CardsService {
     }
   }
 
-  /**
-   * Takes cards from assets and merges them into existing stack
-   * @param cardsFromAssets cards loaded from assets
-   */
-  public mergeCardsFromAssets(cardsFromAssets: Card[]): Promise<Card[]> {
-    // Save cards before merge
-    const cardsBefore = CloneService.cloneCards(Array.from(this.cards.values()));
 
-    return new Promise((resolve, dismiss) => {
-      cardsFromAssets.slice(0, this.devMode ? 10 : cardsFromAssets.length).forEach(card => {
-        // Get existing card
-        const existingCard = this.cards.get(card.id);
-
-        if (existingCard != null) {
-          // Update existing card
-          existingCard.word = card.word;
-          existingCard.taboos = card.taboos;
-          existingCard.difficulty = card.difficulty;
-
-          // Add updated card to map
-          this.cards.set(existingCard.id, existingCard);
-        } else {
-          // Simply add new card to map
-          this.cards.set(card.id, card);
-        }
-      });
-
-      // Save cards after merge
-      const cardsAfter = CloneService.cloneCards(Array.from(this.cards.values()));
-
-      // Check if cards have been changed
-      if (JSON.stringify(cardsAfter.toString()) !== JSON.stringify(cardsBefore.toString())) {
-        resolve(Array.from(this.cards.values()));
-      } else {
-        dismiss();
-      }
-    });
-  }
 
   /**
    * Clears cards

@@ -4,7 +4,7 @@ import {GameMode} from '../../../../../core/entity/model/game-mode.enum';
 import {environment} from '../../../../../../environments/environment';
 
 /**
- * Displays cards toolbar
+ * Displays stacks toolbar
  */
 @Component({
   selector: 'app-cards-toolbar',

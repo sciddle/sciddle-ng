@@ -4,7 +4,7 @@ import {StacksDeclarations} from './stacks.declarations';
 import {StacksComponent} from './pages/stacks/stacks.component';
 
 @NgModule({
-  declarations: [StacksDeclarations, StacksComponent],
+  declarations: [StacksDeclarations],
   imports: [StacksImports],
   entryComponents: [
     // Pages

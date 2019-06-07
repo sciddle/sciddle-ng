@@ -1,0 +1,17 @@
+<div [class]="themeClass">
+  <mat-card>
+    <div *ngIf="devMode" class="debug">id {{ stack.id.slice(0, 19) }}...</div>
+
+    <div class="flexcontainer">
+      <mat-card-header (click)="onStackClicked()">
+        <mat-card-title class="stack-title" [style.color]="titleColor">{{ stack.title }}</mat-card-title>
+        <mat-card-subtitle>{{ stack.cards.length }} Karten</mat-card-subtitle>
+      </mat-card-header>
+      <div class="flexbox"></div>
+    </div>
+
+    <mat-card-content class="card-main-content">
+    </mat-card-content>
+  </mat-card>
+</div>
+

@@ -8,6 +8,7 @@ export const environment = {
   DATABASE_SETTINGS: 'sciddle_settings',
 
   TIMER: 30,
+  DEFAULT_STACK: 0,
 
   NAME: require('../../package.json').name,
   VERSION: require('../../package.json').version,
