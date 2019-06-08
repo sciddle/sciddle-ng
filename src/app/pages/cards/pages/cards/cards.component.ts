@@ -1,4 +1,14 @@
-import {Component, Inject, isDevMode, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  Inject,
+  isDevMode,
+  OnDestroy,
+  OnInit,
+  QueryList,
+  ViewChild,
+  ViewChildren
+} from '@angular/core';
 import {Media} from '../../../../core/ui/model/media.enum';
 import {environment} from '../../../../../environments/environment';
 import {MatDialog, MatIconRegistry} from '@angular/material';
@@ -25,7 +35,6 @@ import {GameState} from '../../../../core/entity/model/game-state.enum';
 import {TurnState} from '../../../../core/entity/model/turn-state.enum';
 import {InformationDialogComponent} from '../../../../ui/information-dialog/information-dialog/information-dialog.component';
 import {HttpClient} from '@angular/common/http';
-import {StacksService} from '../../../../core/entity/services/stack/stacks.service';
 
 export enum DisplayAspect {
   DISPLAY_CARDS,
@@ -44,7 +53,7 @@ export enum DisplayAspect {
   templateUrl: './cards.component.html',
   styleUrls: ['./cards.component.scss']
 })
-export class CardsComponent implements OnInit, OnDestroy {
+export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   /** App title */
   public title = environment.APP_NAME;
@@ -159,7 +168,12 @@ export class CardsComponent implements OnInit, OnDestroy {
     this.initializeMediaSubscription();
 
     this.initializeStackConfig();
+  }
 
+  /**
+   * Handles after-view-init lifecycle phase
+   */
+  ngAfterViewInit() {
     this.route.params.subscribe(() => {
       this.id = this.route.snapshot.paramMap.get('id');
 

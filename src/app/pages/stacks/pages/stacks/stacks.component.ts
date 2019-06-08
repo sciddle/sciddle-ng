@@ -1,4 +1,4 @@
-import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
+import {AfterViewInit, Component, Inject, isDevMode, OnChanges, OnDestroy, OnInit} from '@angular/core';
 import {MatDialog, MatIconRegistry} from '@angular/material';
 import {InformationDialogComponent} from '../../../../ui/information-dialog/information-dialog/information-dialog.component';
 import {HttpClient} from '@angular/common/http';
@@ -28,7 +28,7 @@ import {StacksService} from '../../../../core/entity/services/stack/stacks.servi
   templateUrl: './stacks.component.html',
   styleUrls: ['./stacks.component.scss']
 })
-export class StacksComponent implements OnInit, OnDestroy {
+export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
 
   /** App title */
   public title = environment.APP_NAME;
@@ -45,6 +45,11 @@ export class StacksComponent implements OnInit, OnDestroy {
 
   /** Helper subject used to finish other subscriptions */
   private unsubscribeSubject = new Subject();
+
+  /** JSON class for debugging */
+  public json = JSON;
+  /** Dev mode */
+  devMode = false;
 
   /**
    * Constructor
@@ -71,6 +76,8 @@ export class StacksComponent implements OnInit, OnDestroy {
               private snackbarService: SnackbarService,
               private stacksService: StacksService,
               @Inject(STACK_PERSISTENCE_POUCHDB) private stacksPersistenceService: StacksPersistenceService) {
+    // this.devMode = isDevMode();
+    this.devMode = true;
   }
 
   /**
@@ -82,7 +89,12 @@ export class StacksComponent implements OnInit, OnDestroy {
     this.initializeColors();
     this.initializeMaterial();
     this.initializeMediaSubscription();
+  }
 
+  /**
+   * Handles after-view-init lifecycle phase
+   */
+  ngAfterViewInit() {
     this.findEntities();
   }
 

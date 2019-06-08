@@ -1,4 +1,4 @@
-import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
+import {AfterViewInit, Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {SnackbarService} from '../../../../core/ui/services/snackbar.service';
 import {GamesService} from '../../../../core/entity/services/game/games.service';
@@ -24,14 +24,14 @@ import {InformationDialogComponent} from '../../../../ui/information-dialog/info
  * Displays games page
  */
 @Component({
-  selector: 'app-welcome',
+  selector: 'app-games',
   templateUrl: './games.component.html',
   styleUrls: ['./games.component.scss'],
   animations: [
     Animations.teamCountSelectionAnimation,
   ]
 })
-export class GamesComponent implements OnInit, OnDestroy {
+export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
 
   /** App title */
   public title = environment.APP_NAME;
@@ -116,7 +116,12 @@ export class GamesComponent implements OnInit, OnDestroy {
     this.initializeColors();
     this.initializeMaterial();
     this.initializeMediaSubscription();
+  }
 
+  /**
+   * Handles after-view-init lifecycle phase
+   */
+  ngAfterViewInit() {
     this.route.params.subscribe(() => {
       this.id = this.route.snapshot.paramMap.get('id');
 
