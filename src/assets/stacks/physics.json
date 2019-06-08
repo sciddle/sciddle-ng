@@ -1,0 +1,22 @@
+{
+  "id": "1",
+  "entityType": 0,
+  "title": "Physik (Demo)",
+  "game": null,
+  "cards": [
+    {
+      "entityType": 0,
+      "id": "1",
+      "word": "Relativitätstheorie",
+      "taboos": [
+        "Einstein",
+        "Raumzeit",
+        "Lichtgeschwindigkeit",
+        "Energie",
+        "Masse"
+      ],
+      "index": 1,
+      "difficulty": 1
+    }
+  ]
+}
