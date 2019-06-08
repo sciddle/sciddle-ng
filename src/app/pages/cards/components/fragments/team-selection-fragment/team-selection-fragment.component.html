@@ -1,0 +1,23 @@
+<div class="horizontal-center">
+  <div class="description-text ">
+    Welches Team hat richtig geantwortet?
+  </div>
+  <div>
+    <div *ngFor="let team of stack.game.teams">
+      <button mat-flat-button color="primary" class="button"
+              (click)="onSuccessfulTeamSelected(team.index)">
+        <div class="description-text double-size-text">
+          TEAM {{ team.index + 1}}
+        </div>
+      </button>
+    </div>
+    <div>
+      <button mat-button color="primary" class="button"
+              (click)="onSuccessfulTeamSelected(null)">
+        <div class="description-text double-size-text">
+          NIEMAND
+        </div>
+      </button>
+    </div>
+  </div>
+</div>

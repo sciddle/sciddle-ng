@@ -22,7 +22,7 @@
   }
 }
 
-.buttons {
+.horizontal-center {
   margin: 15px auto;
   text-align: center;
 
@@ -61,21 +61,6 @@
 .team-button {
   margin-left: 15px;
   margin-right: 15px;
-}
-
-.difficulty-easy {
-  color: mat-contrast($blue-primary, 400);
-  background-color: mat-color($blue-primary, 400);
-}
-
-.difficulty-medium {
-  color: mat-contrast($blue-primary, 500);
-  background-color: mat-color($blue-primary, 500);
-}
-
-.difficulty-hard {
-  color: mat-contrast($blue-primary, 600);
-  background-color: mat-color($blue-primary, 600);
 }
 
 .description-text {

@@ -1,12 +1,12 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {CardFragmentComponent} from './card-fragment.component';
-import {CardsImports} from '../../../cards.imports';
+import {GameEvaluationFragmentComponent} from './game-evaluation-fragment.component';
 import {CardsDeclarations} from '../../../cards.declarations';
+import {CardsImports} from '../../../cards.imports';
 
-describe('CardFragmentComponent', () => {
-  let component: CardFragmentComponent;
-  let fixture: ComponentFixture<CardFragmentComponent>;
+describe('GameEvaluationFragmentComponent', () => {
+  let component: GameEvaluationFragmentComponent;
+  let fixture: ComponentFixture<GameEvaluationFragmentComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -17,12 +17,12 @@ describe('CardFragmentComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CardFragmentComponent);
+    fixture = TestBed.createComponent(GameEvaluationFragmentComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  xit('should create', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });

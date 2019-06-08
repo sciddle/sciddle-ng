@@ -1,0 +1,27 @@
+<div class="description-text">Schwierigkeit</div>
+<div>
+  <button *ngIf="difficultyEasy" mat-flat-button class="button difficulty-easy"
+          (click)="onDifficultToggled(1)">
+    <div class="description-text">EINFACH</div>
+  </button>
+  <button *ngIf="!difficultyEasy" mat-button class="button"
+          (click)="onDifficultToggled(1)">
+    <div class="description-text">EINFACH</div>
+  </button>
+  <button *ngIf="difficultyMedium" mat-flat-button class="button difficulty-medium"
+          (click)="onDifficultToggled(2)">
+    <div class="description-text">MITTEL</div>
+  </button>
+  <button *ngIf="!difficultyMedium" mat-button class="button"
+          (click)="onDifficultToggled(2)">
+    <div class="description-text">MITTEL</div>
+  </button>
+  <button *ngIf="difficultyHard" mat-flat-button class="button difficulty-hard"
+          (click)="onDifficultToggled(3)">
+    <div class="description-text">SCHWER</div>
+  </button>
+  <button *ngIf="!difficultyHard" mat-button class="button"
+          (click)="onDifficultToggled(3)">
+    <div class="description-text">SCHWER</div>
+  </button>
+</div>

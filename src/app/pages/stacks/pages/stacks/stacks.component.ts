@@ -36,8 +36,6 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
   /** Array of stacks */
   public stacks: Stack[] = [];
 
-  /** Title color */
-  public titleColor = 'black';
   /** Enum of media types */
   public mediaType = Media;
   /** Current media */
@@ -86,7 +84,6 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit() {
     this.initializeStackSubscription();
 
-    this.initializeColors();
     this.initializeMaterial();
     this.initializeMediaSubscription();
   }
@@ -158,13 +155,6 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   // Others
-
-  /**
-   * Initializes colors
-   */
-  private initializeColors() {
-    this.titleColor = this.materialColorService.primary;
-  }
 
   /**
    * Initializes material colors and icons

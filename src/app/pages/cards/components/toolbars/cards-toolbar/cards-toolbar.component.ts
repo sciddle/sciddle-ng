@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation} from '@angular/core';
 import {Media} from '../../../../../core/ui/model/media.enum';
 import {GameMode} from '../../../../../core/entity/model/game-mode.enum';
 import {environment} from '../../../../../../environments/environment';
@@ -10,14 +10,13 @@ import {environment} from '../../../../../../environments/environment';
   selector: 'app-cards-toolbar',
   templateUrl: './cards-toolbar.component.html',
   styleUrls: ['./cards-toolbar.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None
 })
 export class CardsToolbarComponent {
 
   /** Title displayed in the toolbar */
   @Input() title;
-  /** Title color */
-  @Input() titleColor = 'black';
   /** Current media */
   @Input() media: Media;
   /** Game mode */

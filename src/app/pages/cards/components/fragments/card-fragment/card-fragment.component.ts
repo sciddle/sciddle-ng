@@ -5,7 +5,8 @@ import {
   Input,
   isDevMode,
   OnChanges,
-  SimpleChanges
+  SimpleChanges,
+  ViewEncapsulation
 } from '@angular/core';
 import {Stack} from '../../../../../core/entity/model/stack/stack.model';
 import {Media} from '../../../../../core/ui/model/media.enum';
@@ -24,7 +25,8 @@ import {MatDialog} from '@angular/material';
   selector: 'app-card-fragment',
   templateUrl: './card-fragment.component.html',
   styleUrls: ['./card-fragment.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None
 })
 export class CardFragmentComponent implements OnChanges {
 

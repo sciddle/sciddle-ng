@@ -1,0 +1,10 @@
+{
+  "id": "1",
+  "entityType": 0,
+  "title": "Astronomie (Demo)",
+  "game": null,
+  "cards": [
+    { "entityType": 0, "id": "1", "word": "Schwarzes Loch", "taboos": ["Gravitation", "Wurmloch", "Licht", "Singularität", "Masse"], "index": 1, "difficulty": 1 },
+    { "entityType": 0, "id": "2", "word": "Relativitätstheorie", "taboos": ["Einstein", "Raumzeit", "Lichtgeschwindigkeit", "Energie", "Masse"], "index": 2, "difficulty": 1 }
+  ]
+}
