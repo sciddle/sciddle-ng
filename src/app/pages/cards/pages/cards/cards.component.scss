@@ -92,18 +92,18 @@
 }
 
 .difficulty-easy {
-  color: mat-contrast($light-primary, 400);
-  background-color: mat-color($light-primary, 400);
+  color: mat-contrast($blue-primary, 400);
+  background-color: mat-color($blue-primary, 400);
 }
 
 .difficulty-medium {
-  color: mat-contrast($light-primary, 500);
-  background-color: mat-color($light-primary, 500);
+  color: mat-contrast($blue-primary, 500);
+  background-color: mat-color($blue-primary, 500);
 }
 
 .difficulty-hard {
-  color: mat-contrast($light-primary, 600);
-  background-color: mat-color($light-primary, 600);
+  color: mat-contrast($blue-primary, 600);
+  background-color: mat-color($blue-primary, 600);
 }
 
 .animate-translation-100 {

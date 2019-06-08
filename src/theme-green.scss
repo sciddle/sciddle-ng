@@ -1,19 +1,19 @@
 @import '~@angular/material/theming';
 
-$color-sciddle : #049af8;
-$color-sciddle : hsl(203, 97, 49);
+$color-sciddle: #a9c235;
+$color-sciddle: hsl(71, 57, 48);
 
 $mat-sciddle: (
-  50: hsl(203, 97, 99),
-  100: hsl(203, 97, 89),
-  200: hsl(203, 97, 79),
-  300: hsl(203, 97, 69),
-  400: hsl(203, 97, 59),
-  500: hsl(203, 97, 49),
-  600: hsl(203, 97, 39),
-  700: hsl(203, 97, 29),
-  800: hsl(203, 97, 19),
-  900: hsl(203, 97, 9),
+  50: hsl(71, 57, 98),
+  100: hsl(71, 57, 88),
+  200: hsl(71, 57, 78),
+  300: hsl(71, 57, 68),
+  400: hsl(71, 57, 58),
+  500: hsl(71, 57, 48),
+  600: hsl(71, 57, 38),
+  700: hsl(71, 57, 28),
+  800: hsl(71, 57, 18),
+  900: hsl(71, 57, 8),
   A100: $color-sciddle,
   A200: $color-sciddle,
   A400: $color-sciddle,
@@ -36,8 +36,8 @@ $mat-sciddle: (
   )
 );
 
-$light-primary: mat-palette($mat-sciddle, 500, 400, 600);
-$light-accent: mat-palette($mat-sciddle, 700, 600, 800);
-$light-warn: mat-palette($mat-red);
+$green-primary: mat-palette($mat-sciddle, 500, 400, 600);
+$green-accent: mat-palette($mat-sciddle, 700, 600, 800);
+$green-warn: mat-palette($mat-red);
 
-$light-theme: mat-light-theme($light-primary, $light-accent, $light-warn);
+$green-theme: mat-light-theme($green-primary, $green-accent, $green-warn);

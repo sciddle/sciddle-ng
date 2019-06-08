@@ -35,7 +35,7 @@ export class CardFragmentComponent implements OnChanges {
   /** Current media */
   @Input() media: Media;
   /** Default theme to be used */
-  @Input() themeClass = 'light-theme';
+  @Input() themeClass = 'blue-theme';
 
   /** Color of difficulty inidicator */
   difficultyColor = '#fff';

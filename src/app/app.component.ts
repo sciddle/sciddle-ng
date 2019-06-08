@@ -15,7 +15,7 @@ import {environment} from '../environments/environment';
 export class AppComponent implements OnInit, AfterViewInit {
 
   /** Default app theme */
-  themeClass = 'light-theme';
+  themeClass = 'blue-theme';
 
   /**
    * Constructor
