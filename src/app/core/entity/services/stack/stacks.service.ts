@@ -38,6 +38,7 @@ export class StacksService {
   constructor(private http: HttpClient) {
     this.devMode = isDevMode();
     StacksService.stacks.set('0', 'climate.json');
+    StacksService.stacks.set('1', 'physics.json');
   }
 
   /**
