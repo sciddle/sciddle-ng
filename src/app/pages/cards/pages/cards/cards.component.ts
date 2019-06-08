@@ -25,6 +25,7 @@ import {GameState} from '../../../../core/entity/model/game-state.enum';
 import {TurnState} from '../../../../core/entity/model/turn-state.enum';
 import {InformationDialogComponent} from '../../../../ui/information-dialog/information-dialog/information-dialog.component';
 import {HttpClient} from '@angular/common/http';
+import {StacksService} from '../../../../core/entity/services/stack/stacks.service';
 
 export enum DisplayAspect {
   DISPLAY_CARDS,
@@ -628,7 +629,8 @@ export class CardsComponent implements OnInit, OnDestroy {
     // Save stack
     this.stacksPersistenceService.updateStack(this.stack).then(() => {
       // Navigate to game page
-      this.router.navigate([`/games/${this.stack.id}`]).then();
+      // this.router.navigate([`/games/${this.stack.id}`]).then();
+      this.router.navigate([`/stacks`]).then();
     });
   }
 

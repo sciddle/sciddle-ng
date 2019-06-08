@@ -10,6 +10,8 @@ export const environment = {
   TIMER: 30,
   DEFAULT_STACK: 0,
 
+  MIN_CARDS: 20,
+
   NAME: require('../../package.json').name,
   VERSION: require('../../package.json').version,
   AUTHOR_CODE: require('../../package.json').authorCode,

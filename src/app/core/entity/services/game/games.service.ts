@@ -147,12 +147,23 @@ export class GamesService {
    * @param stack to initialize game for
    * @param teamCount number of teams
    * @param useTimeLimit usage of time limit
+   * @param difficultyEasy difficulty easy
+   * @param difficultyMedium difficulty medium
+   * @param difficultyHard difficulty hard
+   * @param cardCount card count
    */
-  initializeMultiPlayerGame(stack: Stack, teamCount: number, useTimeLimit: boolean): Promise<any> {
+  initializeMultiPlayerGame(stack: Stack, teamCount: number, useTimeLimit: boolean,
+                            difficultyEasy: boolean, difficultyMedium: boolean, difficultyHard: boolean,
+                            cardCount: number): Promise<any> {
     return new Promise((resolve) => {
       stack.game = new Game();
       stack.game.teams = [];
       stack.game.useTimeLimit = useTimeLimit;
+      stack.cards = stack.cards.filter(c => {
+        return (c.difficulty === 1 && difficultyEasy)
+          || (c.difficulty === 2 && difficultyMedium)
+          || (c.difficulty === 3 && difficultyHard);
+      }).slice(0, cardCount);
 
       for (let i = 0; i < teamCount; i++) {
         const team = new Team();

@@ -32,6 +32,7 @@
           mit Zeitlimit
         </button>
       </div>
+      <div class="description-text">Anzahl der Teams</div>
       <span *ngFor="let item of arrayOne(4); let i = index;">
         <button *ngIf="teamCount !== i + 2" mat-button color="primary" class="team-button"
                 (click)="onTeamCountSelected(i+2)">
@@ -42,7 +43,47 @@
           {{ i + 2 }}
         </button>
       </span>
-      <button mat-flat-button color="primary" [disabled]="teamCount === -1" (click)="onStartMultiPlayerGameClicked()">
+      <div class="description-text">Schwierigkeit</div>
+      <div>
+        <button *ngIf="difficultyEasy" mat-flat-button class="button difficulty-easy"
+                (click)="onDifficultyEasyToggled()">
+          <div class="description-text">EINFACH</div>
+        </button>
+        <button *ngIf="!difficultyEasy" mat-button class="button"
+                (click)="onDifficultyEasyToggled()">
+          <div class="description-text">EINFACH</div>
+        </button>
+        <button *ngIf="difficultyMedium" mat-flat-button class="button difficulty-medium"
+                (click)="onDifficultyMediumToggled()">
+          <div class="description-text">MITTEL</div>
+        </button>
+        <button *ngIf="!difficultyMedium" mat-button class="button"
+                (click)="onDifficultyMediumToggled()">
+          <div class="description-text">MITTEL</div>
+        </button>
+        <button *ngIf="difficultyHard" mat-flat-button class="button difficulty-hard"
+                (click)="onDifficultyHardToggled()">
+          <div class="description-text">SCHWER</div>
+        </button>
+        <button *ngIf="!difficultyHard" mat-button class="button"
+                (click)="onDifficultyHardToggled()">
+          <div class="description-text">SCHWER</div>
+        </button>
+      </div>
+      <div class="description-text">Anzahl der Karten</div>
+      <div class="flexcontainer">
+        <div class="flexcontainer" style="margin: 0 auto">
+          <div class="full-width">
+            <mat-slider class="slider" [min]="minCardCount" [max]="maxCardCount"
+                        step="1" [value]="cardCount" thumbLabel="true"
+                        (input)="onCardCountChanged($event)"></mat-slider>
+          </div>
+          <span class="cardCountValue">{{ cardCount }}</span>
+        </div>
+      </div>
+      <button mat-flat-button color="primary"
+              [disabled]="teamCount === -1 || (!difficultyEasy && !difficultyMedium && !difficultyHard)"
+              (click)="onStartMultiPlayerGameClicked()">
         STARTEN
       </button>
     </div>

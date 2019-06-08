@@ -36,6 +36,11 @@
   }
 }
 
+.button {
+  margin: 20px;
+  white-space: pre-wrap !important;
+}
+
 .mode-button {
   font-size: 2em;
   padding: 20px;
@@ -56,6 +61,36 @@
 .team-button {
   margin-left: 15px;
   margin-right: 15px;
+}
+
+.difficulty-easy {
+  color: mat-contrast($light-primary, 400);
+  background-color: mat-color($light-primary, 400);
+}
+
+.difficulty-medium {
+  color: mat-contrast($light-primary, 500);
+  background-color: mat-color($light-primary, 500);
+}
+
+.difficulty-hard {
+  color: mat-contrast($light-primary, 600);
+  background-color: mat-color($light-primary, 600);
+}
+
+.description-text {
+  margin-top: 10px;
+  margin-bottom: 5px;
+  white-space: pre-wrap !important;
+}
+
+.slider {
+  width: 80%;
+}
+
+.cardCountValue {
+  margin-top: 13px;
+  margin-left: 15px;
 }
 
 .vertical-center {
