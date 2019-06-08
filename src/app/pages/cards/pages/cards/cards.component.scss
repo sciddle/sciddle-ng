@@ -112,3 +112,10 @@
   -o-transition: .100s ease-out;
   transition: .100s ease-out;
 }
+
+.fixed {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 999;
+}

@@ -100,3 +100,10 @@
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
 }
+
+.fixed {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 999;
+}
