@@ -19,6 +19,7 @@ import {AboutDialogComponent} from '../../../../ui/about-dialog/about-dialog/abo
 import {Animations, TeamCountSelectionState} from './games.animation';
 import {HttpClient} from '@angular/common/http';
 import {InformationDialogComponent} from '../../../../ui/information-dialog/information-dialog/information-dialog.component';
+import {ROUTE_CARDS, ROUTE_STACKS} from '../../../../app.routes';
 
 /**
  * Displays games page
@@ -234,7 +235,7 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
   onMenuItemClicked(menuItem: string) {
     switch (menuItem) {
       case 'back': {
-        this.router.navigate(['/stacks']).then(() => {
+        this.router.navigate([`/${ROUTE_STACKS}`]).then(() => {
         });
         break;
       }
@@ -318,7 +319,7 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
     this.gameService.initializeSinglePlayerGame(this.stack).then(() => {
       this.cardsService.shuffleStack(this.stack).then();
       this.stacksPersistenceService.updateStack(this.stack).then(() => {
-        this.router.navigate([`/cards/${this.stack.id}`]).then();
+        this.router.navigate([`/${ROUTE_CARDS}/${this.stack.id}`]).then();
       });
     });
   }
@@ -386,7 +387,7 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
       this.difficultyEasy, this.difficultyMedium, this.difficultyHard, this.cardCount).then(() => {
       this.cardsService.shuffleStack(this.stack).then();
       this.stacksPersistenceService.updateStack(this.stack).then(() => {
-        this.router.navigate([`/cards/${this.stack.id}`]).then();
+        this.router.navigate([`/${ROUTE_CARDS}/${this.stack.id}`]).then();
       });
     });
   }
@@ -407,6 +408,6 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
    * Navigates back to parent view
    */
   private navigateBack() {
-    this.router.navigate(['/stack']).then();
+    this.router.navigate([`/${ROUTE_STACKS}`]).then();
   }
 }

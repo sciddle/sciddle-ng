@@ -35,6 +35,7 @@ import {GameState} from '../../../../core/entity/model/game-state.enum';
 import {TurnState} from '../../../../core/entity/model/turn-state.enum';
 import {InformationDialogComponent} from '../../../../ui/information-dialog/information-dialog/information-dialog.component';
 import {HttpClient} from '@angular/common/http';
+import {ROUTE_GAMES, ROUTE_STACKS} from '../../../../app.routes';
 
 export enum DisplayAspect {
   DISPLAY_CARDS,
@@ -643,8 +644,8 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
     // Save stack
     this.stacksPersistenceService.updateStack(this.stack).then(() => {
       // Navigate to game page
-      // this.router.navigate([`/games/${this.stack.id}`]).then();
-      this.router.navigate([`/stacks`]).then();
+      // this.router.navigate([`/${ROUTE_GAMES}/${this.stack.id}`]).then();
+      this.router.navigate([`/${ROUTE_STACKS}`]).then();
     });
   }
 
@@ -687,6 +688,6 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    * Navigates back to parent view
    */
   private navigateBack() {
-    this.router.navigate(['/games']).then();
+    this.router.navigate([`/${ROUTE_GAMES}`]).then();
   }
 }
