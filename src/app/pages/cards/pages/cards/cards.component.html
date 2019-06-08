@@ -24,7 +24,7 @@
   </div>
 </div>
 
-<div class="main-content vertical-center horizontal-center " [class]="themeClass">
+<div class="main-content vertical-center horizontal-center" [class]="themeClass">
   <!-- Team -->
   <app-team-information-fragment
     *ngIf="displayAspect === displayAspectType.DISPLAY_TEAM_TAKING_TURN && stack.game != null"
@@ -47,31 +47,24 @@
       </div>
     </div>
     <div *ngIf="gameMode === gameModeType.MULTI_PLAYER && stack.game != null"
-         class="horizontal-center description-text">
+         class="description-text horizontal-center">
       Wisch die Karte zur Seite sobald jemand den Begriff erraten hat
     </div>
   </div>
   <!-- Turn evaluation -->
-  <app-team-selection-fragment *ngIf="displayAspect === displayAspectType.DISPLAY_TURN_EVALUATION && stack.game != null"
-                               [stack]="stack"
-                               (teamSelectedEmitter)="onSuccessfulTeamSelected($event)"></app-team-selection-fragment>
+  <app-team-selection-fragment
+    *ngIf="displayAspect === displayAspectType.DISPLAY_TURN_EVALUATION && stack.game != null"
+    [stack]="stack"
+    (teamSelectedEmitter)="onSuccessfulTeamSelected($event)"></app-team-selection-fragment>
   <!-- Score overview -->
-  <div *ngIf="displayAspect === displayAspectType.DISPLAY_SCORE_OVERVIEW && stack.game != null">
-    <button mat-button class="full-width" (click)="onDisplayScoreOverviewClicked()">
-      <div *ngFor="let team of stack.game.teams" class="explanation-text">
-        <span> TEAM {{ team.index + 1}} - {{ team.score }}</span>
-        <span *ngIf="team.score !== 1">Punkte</span>
-        <span *ngIf="team.score === 1">Punkt</span>
-      </div>
-      <div class="explanation-text">
-        Tippe auf den Bildschirm um weiterzumachen
-      </div>
-    </button>
-  </div>
+  <app-score-overview-fragment
+    *ngIf="displayAspect === displayAspectType.DISPLAY_SCORE_OVERVIEW && stack.game != null"
+    [stack]="stack" (scoreOverviewClickedEmitter)="onDisplayScoreOverviewClicked()">
+  </app-score-overview-fragment>
   <!-- Game evaluation -->
   <app-game-evaluation-fragment
     *ngIf="displayAspect === displayAspectType.DISPLAY_GAME_EVALUATION && stack.game != null"
     [stack]="stack" [winningTeams]="winningTeams"
-    (menuItemEventEmitter)="onMenuItemClicked($event)"
-  ></app-game-evaluation-fragment>
+    (menuItemEventEmitter)="onMenuItemClicked($event)">
+  </app-game-evaluation-fragment>
 </div>
