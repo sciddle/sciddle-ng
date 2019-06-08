@@ -18,7 +18,7 @@ export class StackFragmentComponent implements OnInit {
   /** Stack to be displayed */
   @Input() stack: Stack;
   /** Default theme to be used */
-  @Input() themeClass = 'light-theme';
+  @Input() themeClass = 'blue-theme';
 
   /** Event emitter indicating click on stack */
   @Output() stackEventEmitter = new EventEmitter<{ action: Action, stack: Stack}>();
