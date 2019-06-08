@@ -5,7 +5,7 @@
   "authorContent": "Dennis Rätzel",
   "licenseCode": "AGPLv3",
   "licenseContent": "CC BY 4.0",
-  "homepage": "https://github.com/florianschwanz/sciddle-ng",
+  "homepage": "https://github.com/sciddle/sciddle-ng",
   "angular-cli": {},
   "scripts": {
     "ng": "ng",
