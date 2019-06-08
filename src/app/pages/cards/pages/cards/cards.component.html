@@ -28,7 +28,7 @@
 <div class="main-content vertical-center center">
   <!-- Team -->
   <div *ngIf="displayAspect === displayAspectType.DISPLAY_TEAM_TAKING_TURN && stack.game != null">
-    <button mat-button class="button full-width-button" (click)="onDisplayTeamClicked()">
+    <button mat-button class="button full-width" (click)="onDisplayTeamClicked()">
       <span class="block main-text">Team {{ stack.game.turn.teamID + 1 }} ist am Zug</span>
       <span class="block explanation-text">
           Tippe auf den Bildschirm um weiterzumachen
@@ -112,7 +112,7 @@
   </div>
   <!-- Score overview -->
   <div *ngIf="displayAspect === displayAspectType.DISPLAY_SCORE_OVERVIEW && stack.game != null">
-    <button mat-button class="full-width-button" (click)="onDisplayScoreOverviewClicked()">
+    <button mat-button class="full-width" (click)="onDisplayScoreOverviewClicked()">
       <div *ngFor="let team of stack.game.teams" class="explanation-text">
         <span> TEAM {{ team.index + 1}} - {{ team.score }}</span>
         <span *ngIf="team.score !== 1">Punkte</span>

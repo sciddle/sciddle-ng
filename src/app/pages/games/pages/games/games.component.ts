@@ -11,7 +11,7 @@ import {environment} from '../../../../../environments/environment';
 import {CardsService} from '../../../../core/entity/services/card/cards.service';
 import {Media} from '../../../../core/ui/model/media.enum';
 import {MaterialColorService} from '../../../../core/ui/services/material-color.service';
-import {MatDialog, MatIconRegistry} from '@angular/material';
+import {MatDialog, MatIconRegistry, MatSliderChange} from '@angular/material';
 import {MediaService} from '../../../../core/ui/services/media.service';
 import {MaterialIconService} from '../../../../core/ui/services/material-icon.service';
 import {DomSanitizer} from '@angular/platform-browser';
@@ -45,6 +45,19 @@ export class GamesComponent implements OnInit, OnDestroy {
   public useTimeLimit = false;
   /** Selected team count */
   public teamCount = -1;
+  /** Selected difficulty easy */
+  public difficultyEasy = false;
+  /** Selected difficulty medium */
+  public difficultyMedium = false;
+  /** Selected difficulty hard */
+  public difficultyHard = false;
+  /** Selected card count */
+  public cardCount = 0;
+
+  /** Minimum card count */
+  public minCardCount = environment.MIN_CARDS;
+  /** Maximum card count */
+  public maxCardCount;
 
   /** Title color */
   public titleColor = 'black';
@@ -152,6 +165,9 @@ export class GamesComponent implements OnInit, OnDestroy {
    */
   private initializeStack(stack: Stack) {
     this.stack = stack;
+
+    this.cardCount = environment.MIN_CARDS + ((stack.cards.length - environment.MIN_CARDS) / 2);
+    this.maxCardCount = stack.cards.length;
 
     this.initializeTitle(stack);
   }
@@ -329,10 +345,40 @@ export class GamesComponent implements OnInit, OnDestroy {
   }
 
   /**
+   * Toggles usage of easy cards
+   */
+  onDifficultyEasyToggled() {
+    this.difficultyEasy = !this.difficultyEasy;
+  }
+
+  /**
+   * Toggles usage of medium cards
+   */
+  onDifficultyMediumToggled() {
+    this.difficultyMedium = !this.difficultyMedium;
+  }
+
+  /**
+   * Toggles usage of hard cards
+   */
+  onDifficultyHardToggled() {
+    this.difficultyHard = !this.difficultyHard;
+  }
+
+  /**
+   * Handles card count change
+   * @param event event
+   */
+  onCardCountChanged(event: MatSliderChange) {
+    this.cardCount = event.value;
+  }
+
+  /**
    * Starts a multi-player game
    */
   onStartMultiPlayerGameClicked() {
-    this.gameService.initializeMultiPlayerGame(this.stack, this.teamCount, this.useTimeLimit).then(() => {
+    this.gameService.initializeMultiPlayerGame(this.stack, this.teamCount, this.useTimeLimit,
+      this.difficultyEasy, this.difficultyMedium, this.difficultyHard, this.cardCount).then(() => {
       this.cardsService.shuffleStack(this.stack).then();
       this.stacksPersistenceService.updateStack(this.stack).then(() => {
         this.router.navigate([`/cards/${this.stack.id}`]).then();
@@ -356,7 +402,6 @@ export class GamesComponent implements OnInit, OnDestroy {
    * Navigates back to parent view
    */
   private navigateBack() {
-    console.log(`navigateBack`);
     this.router.navigate(['/stack']).then();
   }
 }

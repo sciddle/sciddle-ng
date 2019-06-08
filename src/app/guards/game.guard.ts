@@ -4,6 +4,7 @@ import {GamesService} from '../core/entity/services/game/games.service';
 import {STACK_PERSISTENCE_POUCHDB} from '../core/entity/entity.module';
 import {StacksPersistenceService} from '../core/entity/services/stack/persistence/stacks-persistence.interface';
 import {Stack} from '../core/entity/model/stack/stack.model';
+import {StacksService} from '../core/entity/services/stack/stacks.service';
 
 /**
  * Checks if it is necessary to show game page
