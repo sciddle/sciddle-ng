@@ -3,7 +3,7 @@
     <button mat-button class="toolbar-menu-item" (click)="onMenuItemClicked('menu')">
       <mat-icon svgIcon="menu"></mat-icon>
     </button>
-    <span *ngIf="media != mediaType.SMALL" class="toolbar-title" [style.color]="titleColor">{{ title }}</span>
+    <span *ngIf="media != mediaType.SMALL" class="toolbar-title">{{ title }}</span>
   </div>
   <div class="flexbox"></div>
   <div class="toolbar-block end">

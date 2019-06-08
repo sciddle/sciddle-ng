@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Inject, OnDestroy, OnInit} from '@angular/core';
+import {AfterViewInit, Component, Inject, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {SnackbarService} from '../../../../core/ui/services/snackbar.service';
 import {GamesService} from '../../../../core/entity/services/game/games.service';
@@ -20,6 +20,9 @@ import {Animations, TeamCountSelectionState} from './games.animation';
 import {HttpClient} from '@angular/common/http';
 import {InformationDialogComponent} from '../../../../ui/information-dialog/information-dialog/information-dialog.component';
 import {ROUTE_CARDS, ROUTE_STACKS} from '../../../../app.routes';
+import {ThemeService} from '../../../../core/ui/services/theme.service';
+import {Theme} from '../../../../core/ui/model/theme.enum';
+import {OverlayContainer} from '@angular/cdk/overlay';
 
 /**
  * Displays games page
@@ -60,8 +63,6 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
   /** Maximum card count */
   public maxCardCount;
 
-  /** Title color */
-  public titleColor = 'black';
   /** Enum of media types */
   public mediaType = Media;
   /** Current media */
@@ -83,11 +84,13 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
    * @param mediaService media service
    * @param materialColorService material color service
    * @param materialIconService material icon service
+   * @param overlayContainer overlay container
    * @param route route
    * @param router router
    * @param sanitizer sanitizer
    * @param snackbarService snackbar service
    * @param stacksPersistenceService stacks persistence service
+   * @param themeService theme service
    */
   constructor(private cardsService: CardsService,
               public dialog: MatDialog,
@@ -97,11 +100,13 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
               private mediaService: MediaService,
               private materialColorService: MaterialColorService,
               private materialIconService: MaterialIconService,
+              private overlayContainer: OverlayContainer,
               private route: ActivatedRoute,
               private router: Router,
               private sanitizer: DomSanitizer,
               private snackbarService: SnackbarService,
-              @Inject(STACK_PERSISTENCE_POUCHDB) private stacksPersistenceService: StacksPersistenceService) {
+              @Inject(STACK_PERSISTENCE_POUCHDB) private stacksPersistenceService: StacksPersistenceService,
+              private themeService: ThemeService) {
   }
 
   //
@@ -114,7 +119,6 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit() {
     this.initializeStackSubscription();
 
-    this.initializeColors();
     this.initializeMaterial();
     this.initializeMediaSubscription();
   }
@@ -172,10 +176,11 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
   private initializeStack(stack: Stack) {
     this.stack = stack;
 
-    this.cardCount = environment.MIN_CARDS + ((stack.cards.length - environment.MIN_CARDS) / 2);
+    this.cardCount = Math.round(environment.MIN_CARDS + ((stack.cards.length - environment.MIN_CARDS) / 2));
     this.maxCardCount = stack.cards.length;
 
     this.initializeTitle(stack);
+    this.initializeTheme(stack);
   }
 
   // Others
@@ -188,13 +193,6 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
     if (id != null) {
       this.stacksPersistenceService.findStackByID(this.id);
     }
-  }
-
-  /**
-   * Initializes colors
-   */
-  private initializeColors() {
-    this.titleColor = this.materialColorService.primary;
   }
 
   /**
@@ -221,7 +219,28 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
    * @param stack stack
    */
   private initializeTitle(stack: Stack) {
-    // this.title = stack != null && stack.title != null ? stack.title : this.title;
+    this.title = stack != null && stack.title != null ? stack.title : this.title;
+  }
+
+  /**
+   * Initializes Theme
+   * @param stack stack
+   */
+  private initializeTheme(stack: Stack) {
+    switch (stack.id) {
+      case '0': {
+        this.themeService.switchTheme(Theme.GREEN);
+        break;
+      }
+      case '1': {
+        this.themeService.switchTheme(Theme.BLUE);
+        break;
+      }
+      default: {
+        this.themeService.switchTheme(Theme.BLUE);
+        break;
+      }
+    }
   }
 
   //
@@ -351,24 +370,24 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   /**
-   * Toggles usage of easy cards
+   * Handles difficulty selection
+   * @param event event
    */
-  onDifficultyEasyToggled() {
-    this.difficultyEasy = !this.difficultyEasy;
-  }
-
-  /**
-   * Toggles usage of medium cards
-   */
-  onDifficultyMediumToggled() {
-    this.difficultyMedium = !this.difficultyMedium;
-  }
-
-  /**
-   * Toggles usage of hard cards
-   */
-  onDifficultyHardToggled() {
-    this.difficultyHard = !this.difficultyHard;
+  onDifficultySelected(event: { difficulty: number, selected: boolean }) {
+    switch (event.difficulty) {
+      case 1: {
+        this.difficultyEasy = event.selected;
+        break;
+      }
+      case 2: {
+        this.difficultyMedium = event.selected;
+        break;
+      }
+      case 3: {
+        this.difficultyHard = event.selected;
+        break;
+      }
+    }
   }
 
   /**

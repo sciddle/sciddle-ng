@@ -1,12 +1,11 @@
 <app-games-toolbar
   class="fixed"
   [title]="title"
-  [titleColor]="titleColor"
   [media]="media"
   (menuItemEventEmitter)="onMenuItemClicked($event)"></app-games-toolbar>
 
 <div class="main-content">
-  <div class="buttons vertical-center">
+  <div class="horizontal-center vertical-center">
     <div>
       <button mat-flat-button color="primary" class="mode-button"
               [disabled]="stack == null"
@@ -43,33 +42,9 @@
           {{ i + 2 }}
         </button>
       </span>
-      <div class="description-text">Schwierigkeit</div>
-      <div>
-        <button *ngIf="difficultyEasy" mat-flat-button class="button difficulty-easy"
-                (click)="onDifficultyEasyToggled()">
-          <div class="description-text">EINFACH</div>
-        </button>
-        <button *ngIf="!difficultyEasy" mat-button class="button"
-                (click)="onDifficultyEasyToggled()">
-          <div class="description-text">EINFACH</div>
-        </button>
-        <button *ngIf="difficultyMedium" mat-flat-button class="button difficulty-medium"
-                (click)="onDifficultyMediumToggled()">
-          <div class="description-text">MITTEL</div>
-        </button>
-        <button *ngIf="!difficultyMedium" mat-button class="button"
-                (click)="onDifficultyMediumToggled()">
-          <div class="description-text">MITTEL</div>
-        </button>
-        <button *ngIf="difficultyHard" mat-flat-button class="button difficulty-hard"
-                (click)="onDifficultyHardToggled()">
-          <div class="description-text">SCHWER</div>
-        </button>
-        <button *ngIf="!difficultyHard" mat-button class="button"
-                (click)="onDifficultyHardToggled()">
-          <div class="description-text">SCHWER</div>
-        </button>
-      </div>
+
+      <app-difficulty-selection-fragment (difficultySelectionChangedEmitter)="onDifficultySelected($event)"></app-difficulty-selection-fragment>
+
       <div class="description-text">Anzahl der Karten</div>
       <div class="flexcontainer">
         <div class="flexcontainer" style="margin: 0 auto">

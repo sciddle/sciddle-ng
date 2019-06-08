@@ -1,0 +1,48 @@
+@import '../../../../../../styles';
+@import '../../../../../../flex';
+@import '../../../../../../sizes';
+
+.button {
+  margin: 20px;
+  white-space: pre-wrap !important;
+}
+
+.description-text {
+  margin-top: 10px;
+  margin-bottom: 5px;
+  white-space: pre-wrap !important;
+}
+
+.blue-theme {
+  .difficulty-easy {
+    color: mat-contrast($blue-primary, 400);
+    background-color: mat-color($blue-primary, 400);
+  }
+
+  .difficulty-medium {
+    color: mat-contrast($blue-primary, 500);
+    background-color: mat-color($blue-primary, 500);
+  }
+
+  .difficulty-hard {
+    color: mat-contrast($blue-primary, 600);
+    background-color: mat-color($blue-primary, 600);
+  }
+}
+
+.green-theme {
+  .difficulty-easy {
+    color: mat-contrast($green-primary, 400);
+    background-color: mat-color($green-primary, 400);
+  }
+
+  .difficulty-medium {
+    color: mat-contrast($green-primary, 500);
+    background-color: mat-color($green-primary, 500);
+  }
+
+  .difficulty-hard {
+    color: mat-contrast($green-primary, 600);
+    background-color: mat-color($green-primary, 600);
+  }
+}

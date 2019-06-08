@@ -1,7 +1,6 @@
 <app-cards-toolbar
   class="fixed"
   [title]="title"
-  [titleColor]="titleColor"
   [media]="media"
   [gameMode]="gameMode"
   [useTimeLimit]="(game != null) ? game.useTimeLimit : false"
@@ -25,51 +24,17 @@
   </div>
 </div>
 
-<div class="main-content vertical-center center">
+<div class="main-content vertical-center horizontal-center " [class]="themeClass">
   <!-- Team -->
-  <div *ngIf="displayAspect === displayAspectType.DISPLAY_TEAM_TAKING_TURN && stack.game != null">
-    <button mat-button class="button full-width" (click)="onDisplayTeamClicked()">
-      <span class="block main-text">Team {{ stack.game.turn.teamID + 1 }} ist am Zug</span>
-      <span class="block explanation-text">
-          Tippe auf den Bildschirm um weiterzumachen
-        </span>
-    </button>
-  </div>
+  <app-team-information-fragment
+    *ngIf="displayAspect === displayAspectType.DISPLAY_TEAM_TAKING_TURN && stack.game != null"
+    [stack]="stack" (teamInformationClickedEmitter)="onDisplayTeamClicked()">
+  </app-team-information-fragment>
   <!-- Difficulty -->
-  <div *ngIf="displayAspect === displayAspectType.DISPLAY_DIFFICULTY_SELECTION && stack.game != null">
-    <div class="explanation-text">
-      Wähle einen Schwierigkeitsgrad aus
-    </div>
-    <div class="buttons">
-      <div>
-        <button mat-flat-button class="button difficulty-easy"
-                [disabled]="cardsEasy.length < 1"
-                (click)="onDifficultySelected(1)">
-          <div class="explanation-text">
-            EINFACH ({{ cardsEasy.length }})
-          </div>
-        </button>
-      </div>
-      <div>
-        <button mat-flat-button class="button difficulty-medium"
-                [disabled]="cardsMedium.length < 1"
-                (click)="onDifficultySelected(2)">
-          <div class="explanation-text">
-            MITTEL ({{ cardsMedium.length }})
-          </div>
-        </button>
-      </div>
-      <div>
-        <button mat-flat-button class="button difficulty-hard"
-                [disabled]="cardsHard.length < 1"
-                (click)="onDifficultySelected(3)">
-          <div class="explanation-text">
-            SCHWER ({{ cardsHard.length }})
-          </div>
-        </button>
-      </div>
-    </div>
-  </div>
+  <app-difficulty-selection-fragment
+    *ngIf="displayAspect === displayAspectType.DISPLAY_DIFFICULTY_SELECTION && stack.game != null"
+    [stack]="stack"
+    (difficultySelectedEmitter)="onDifficultySelected($event)"></app-difficulty-selection-fragment>
   <!-- Cards -->
   <div *ngIf="displayAspect === displayAspectType.DISPLAY_CARDS && stack.game != null">
     <div swing-stack #swingStack
@@ -77,39 +42,19 @@
          (throwout)="onCardThrownOut($event)"
          (throwoutend)="onCardThrownOutEnd($event)">
       <div swing-card class="animate-translation-100">
-        <app-card-fragment [card]="cards[0]" [media]="media">
+        <app-card-fragment [card]="cards[0]" [media]="media" [themeClass]="themeClass">
         </app-card-fragment>
       </div>
     </div>
     <div *ngIf="gameMode === gameModeType.MULTI_PLAYER && stack.game != null"
-         class="explanation-text">
+         class="horizontal-center description-text">
       Wisch die Karte zur Seite sobald jemand den Begriff erraten hat
     </div>
   </div>
   <!-- Turn evaluation -->
-  <div *ngIf="displayAspect === displayAspectType.DISPLAY_TURN_EVALUATION && stack.game != null">
-    <div class="explanation-text">
-      Welches Team hat richtig geantwortet?
-    </div>
-    <div class="buttons">
-      <div *ngFor="let team of stack.game.teams">
-        <button mat-flat-button color="primary" class="button"
-                (click)="onSuccessfulTeamSelected(team.index)">
-          <div class="explanation-text">
-            TEAM {{ team.index + 1}}
-          </div>
-        </button>
-      </div>
-      <div>
-        <button mat-flat-button color="primary" class="button"
-                (click)="onSuccessfulTeamSelected(null)">
-          <div class="explanation-text">
-            NIEMAND
-          </div>
-        </button>
-      </div>
-    </div>
-  </div>
+  <app-team-selection-fragment *ngIf="displayAspect === displayAspectType.DISPLAY_TURN_EVALUATION && stack.game != null"
+                               [stack]="stack"
+                               (teamSelectedEmitter)="onSuccessfulTeamSelected($event)"></app-team-selection-fragment>
   <!-- Score overview -->
   <div *ngIf="displayAspect === displayAspectType.DISPLAY_SCORE_OVERVIEW && stack.game != null">
     <button mat-button class="full-width" (click)="onDisplayScoreOverviewClicked()">
@@ -124,25 +69,9 @@
     </button>
   </div>
   <!-- Game evaluation -->
-  <div *ngIf="displayAspect === displayAspectType.DISPLAY_GAME_EVALUATION && stack.game != null">
-    <div *ngIf="winningTeams.length > 1" class="main-text">
-      <span *ngFor="let team of winningTeams">
-        Team {{ team.index + 1 }}
-      </span>
-      haben gewonnen
-    </div>
-    <div *ngIf="winningTeams.length === 1" class="main-text">
-      Team {{ winningTeams[0].index + 1 }} hat gewonnen
-    </div>
-    <div *ngFor="let team of stack.game.teams" class="explanation-text">
-      TEAM {{ team.index + 1}} - {{ team.score }}
-      <span *ngIf="team.score !== 1">Punkte</span>
-      <span *ngIf="team.score === 1">Punkt</span>
-    </div>
-    <button mat-flat-button color="primary" class="button" (click)="onMenuItemClicked('back')">
-      <div class="explanation-text">
-        ZURÜCK
-      </div>
-    </button>
-  </div>
+  <app-game-evaluation-fragment
+    *ngIf="displayAspect === displayAspectType.DISPLAY_GAME_EVALUATION && stack.game != null"
+    [stack]="stack" [winningTeams]="winningTeams"
+    (menuItemEventEmitter)="onMenuItemClicked($event)"
+  ></app-game-evaluation-fragment>
 </div>

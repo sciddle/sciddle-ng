@@ -1,0 +1,32 @@
+<div class="horizontal-center">
+  <div class="description-text">
+    Wähle einen Schwierigkeitsgrad aus
+  </div>
+  <div>
+    <button mat-flat-button class="button difficulty-easy"
+            [disabled]="cardsEasy.length < 1"
+            (click)="onDifficultySelected(1)">
+      <div class="description-text double-size-text">
+        EINFACH ({{ cardsEasy.length }})
+      </div>
+    </button>
+  </div>
+  <div>
+    <button mat-flat-button class="button difficulty-medium"
+            [disabled]="cardsMedium.length < 1"
+            (click)="onDifficultySelected(2)">
+      <div class="description-text double-size-text">
+        MITTEL ({{ cardsMedium.length }})
+      </div>
+    </button>
+  </div>
+  <div>
+    <button mat-flat-button class="button difficulty-hard"
+            [disabled]="cardsHard.length < 1"
+            (click)="onDifficultySelected(3)">
+      <div class="description-text double-size-text">
+        SCHWER ({{ cardsHard.length }})
+      </div>
+    </button>
+  </div>
+</div>

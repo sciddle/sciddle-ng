@@ -30,10 +30,6 @@
 
 //
 
-.center {
-  text-align: center;
-}
-
 .block {
   display: block;
 }
@@ -46,12 +42,12 @@
 }
 
 .description-text {
-  font-size: 2em;
   margin-top: 10px;
+  margin-bottom: 5px;
   white-space: pre-wrap !important;
 }
 
-.buttons {
+.horizontal-center {
   margin: 15px auto;
   text-align: center;
 
@@ -89,21 +85,6 @@
 .full-width {
   padding: 25px;
   width: 100%;
-}
-
-.difficulty-easy {
-  color: mat-contrast($blue-primary, 400);
-  background-color: mat-color($blue-primary, 400);
-}
-
-.difficulty-medium {
-  color: mat-contrast($blue-primary, 500);
-  background-color: mat-color($blue-primary, 500);
-}
-
-.difficulty-hard {
-  color: mat-contrast($blue-primary, 600);
-  background-color: mat-color($blue-primary, 600);
 }
 
 .animate-translation-100 {

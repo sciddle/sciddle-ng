@@ -1,0 +1,21 @@
+<div class="horizontal-center">
+  <div *ngIf="winningTeams.length > 1" class="main-text">
+      <span *ngFor="let team of winningTeams">
+        Team {{ team.index + 1 }}
+      </span>
+    haben gewonnen
+  </div>
+  <div *ngIf="winningTeams.length === 1" class="main-text">
+    Team {{ winningTeams[0].index + 1 }} hat gewonnen
+  </div>
+  <div *ngFor="let team of stack.game.teams" class="description-text">
+    TEAM {{ team.index + 1}} - {{ team.score }}
+    <span *ngIf="team.score !== 1">Punkte</span>
+    <span *ngIf="team.score === 1">Punkt</span>
+  </div>
+  <button mat-flat-button color="primary" class="button" (click)="onMenuItemClicked('back')">
+    <div class="description-text double-size-text">
+      ZURÜCK
+    </div>
+  </button>
+</div>

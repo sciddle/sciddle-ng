@@ -1,8 +1,10 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {SnackbarService} from './core/ui/services/snackbar.service';
 import {MatSnackBar} from '@angular/material';
 import {PouchDBService} from './core/persistence/services/pouchdb.service';
 import {environment} from '../environments/environment';
+import {ThemeService} from './core/ui/services/theme.service';
+import {OverlayContainer} from '@angular/cdk/overlay';
 
 /**
  * Displays application
@@ -19,13 +21,17 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   /**
    * Constructor
+   * @param overlayContainer overlay container
    * @param pouchDBService pouchDB service
    * @param snackbarService snackbar service
    * @param snackBar snack bar
+   * @param themeService theme service
    */
-  constructor(private pouchDBService: PouchDBService,
+  constructor(private overlayContainer: OverlayContainer,
+              private pouchDBService: PouchDBService,
               private snackbarService: SnackbarService,
-              public snackBar: MatSnackBar) {
+              public snackBar: MatSnackBar,
+              private themeService: ThemeService) {
   }
 
   //
@@ -36,6 +42,8 @@ export class AppComponent implements OnInit, AfterViewInit {
    * Handles on-init lifecycle phase
    */
   ngOnInit() {
+    this.initializeTheme();
+    this.initializeThemeSubscription();
     this.initializeSnackbar();
   }
 
@@ -44,6 +52,35 @@ export class AppComponent implements OnInit, AfterViewInit {
    */
   ngAfterViewInit() {
     this.initializeDatabaseSync();
+  }
+
+  //
+  // Initialization
+  //
+
+  /**
+   * Initializes theme
+   */
+  private initializeTheme() {
+    this.themeClass = this.themeService.theme;
+    this.overlayContainer.getContainerElement().classList.add(this.themeService.theme);
+  }
+
+  /**
+   * Initializes theme subscription
+   */
+  private initializeThemeSubscription() {
+    this.themeService.themeSubject.subscribe(value => {
+      this.themeClass = value;
+
+      // Theme menus and dialogs
+      const overlayContainerClasses = this.overlayContainer.getContainerElement().classList;
+      const themeClassesToRemove = Array.from(overlayContainerClasses).filter((item: string) => item.includes('-theme'));
+      if (themeClassesToRemove.length) {
+        overlayContainerClasses.remove(...themeClassesToRemove);
+      }
+      overlayContainerClasses.add(value);
+    });
   }
 
   //

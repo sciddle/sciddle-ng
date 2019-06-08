@@ -36,6 +36,9 @@ import {TurnState} from '../../../../core/entity/model/turn-state.enum';
 import {InformationDialogComponent} from '../../../../ui/information-dialog/information-dialog/information-dialog.component';
 import {HttpClient} from '@angular/common/http';
 import {ROUTE_GAMES, ROUTE_STACKS} from '../../../../app.routes';
+import {Theme} from '../../../../core/ui/model/theme.enum';
+import {ThemeService} from '../../../../core/ui/services/theme.service';
+import {OverlayContainer} from '@angular/cdk/overlay';
 
 export enum DisplayAspect {
   DISPLAY_CARDS,
@@ -58,6 +61,8 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   /** App title */
   public title = environment.APP_NAME;
+  /** Default app theme */
+  themeClass = 'blue-theme';
 
   /** ID passed as an argument */
   public id: string;
@@ -66,12 +71,6 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
   /** Array of cards */
   public cards: Card[] = [];
 
-  /** Array of easy cards */
-  public cardsEasy: Card[] = [];
-  /** Array of medium cards */
-  public cardsMedium: Card[] = [];
-  /** Array of hard cards */
-  public cardsHard: Card[] = [];
   /** Number of cards in the stack */
   public cardsInStack = 0;
 
@@ -126,6 +125,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    * @param gamesService games service
    * @param http http client
    * @param iconRegistry iconRegistry
+   * @param overlayContainer overlay container
    * @param mediaService media service
    * @param materialColorService material color service
    * @param materialIconService material icon service
@@ -134,6 +134,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    * @param sanitizer sanitizer
    * @param snackbarService snackbar service
    * @param stacksPersistenceService stacks persistence service
+   * @param themeService theme service
    */
   constructor(private cardsService: CardsService,
               public dialog: MatDialog,
@@ -143,11 +144,13 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
               private mediaService: MediaService,
               private materialColorService: MaterialColorService,
               private materialIconService: MaterialIconService,
+              private overlayContainer: OverlayContainer,
               private route: ActivatedRoute,
               private router: Router,
               private sanitizer: DomSanitizer,
               private snackbarService: SnackbarService,
-              @Inject(STACK_PERSISTENCE_POUCHDB) private stacksPersistenceService: StacksPersistenceService) {
+              @Inject(STACK_PERSISTENCE_POUCHDB) private stacksPersistenceService: StacksPersistenceService,
+              private themeService: ThemeService) {
     this.devMode = isDevMode();
   }
 
@@ -164,7 +167,6 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.initializeGameSubscription();
 
-    this.initializeColors();
     this.initializeMaterial();
     this.initializeMediaSubscription();
 
@@ -253,6 +255,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
 
     if (stack != null) {
       this.initializeTitle(stack);
+      this.initializeTheme(stack);
       this.cardsService.initializeCards(stack.cards);
       this.gamesService.initializeGame(stack.game);
     }
@@ -268,11 +271,6 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
 
     // Filter and sort cards
     this.cards = cards.filter(CardsService.isCardPartOfStack).sort(CardsService.sortCards);
-
-    this.cardsEasy = this.cards.filter(CardsService.isEasy);
-    this.cardsMedium = this.cards.filter(CardsService.isMedium);
-    this.cardsHard = this.cards.filter(CardsService.isHard);
-
     this.cardsInStack = this.cards.filter(CardsService.isCardPartOfStack).length;
   }
 
@@ -368,13 +366,6 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   /**
-   * Initializes colors
-   */
-  private initializeColors() {
-    this.titleColor = this.materialColorService.primary;
-  }
-
-  /**
    * Initializes material colors and icons
    */
   private initializeMaterial() {
@@ -398,7 +389,28 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    * @param stack stack
    */
   private initializeTitle(stack: Stack) {
-    // this.title = stack != null && stack.title != null ? stack.title : this.title;
+    this.title = stack != null && stack.title != null ? stack.title : this.title;
+  }
+
+  /**
+   * Initializes Theme
+   * @param stack stack
+   */
+  private initializeTheme(stack: Stack) {
+    switch (stack.id) {
+      case '0': {
+        this.themeService.switchTheme(Theme.GREEN);
+        break;
+      }
+      case '1': {
+        this.themeService.switchTheme(Theme.BLUE);
+        break;
+      }
+      default: {
+        this.themeService.switchTheme(Theme.BLUE);
+        break;
+      }
+    }
   }
 
   /**

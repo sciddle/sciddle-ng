@@ -14,8 +14,6 @@ export class StacksToolbarComponent {
 
   /** Title displayed in the toolbar */
   @Input() title;
-  /** Title color */
-  @Input() titleColor = 'black';
   /** Current media */
   @Input() media: Media;
   /** Event emitter indicating menu items being clicked */
