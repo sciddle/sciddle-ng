@@ -5,6 +5,7 @@ import {DifficultySelectionFragmentComponent} from './components/fragments/diffi
 import {TeamSelectionFragmentComponent} from './components/fragments/team-selection-fragment/team-selection-fragment.component';
 import {GameEvaluationFragmentComponent} from './components/fragments/game-evaluation-fragment/game-evaluation-fragment.component';
 import {TeamInformationFragmentComponent} from './components/fragments/team-information-fragment/team-information-fragment.component';
+import {ScoreOverviewFragmentComponent} from './components/fragments/score-overview-fragment/score-overview-fragment.component';
 
 /**
  * Declarations of cards module
@@ -18,6 +19,7 @@ export const CardsDeclarations = [
   CardFragmentComponent,
   DifficultySelectionFragmentComponent,
   GameEvaluationFragmentComponent,
+  ScoreOverviewFragmentComponent,
   TeamInformationFragmentComponent,
   TeamSelectionFragmentComponent
 ];
