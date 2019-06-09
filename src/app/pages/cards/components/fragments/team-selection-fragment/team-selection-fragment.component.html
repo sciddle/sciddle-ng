@@ -2,7 +2,7 @@
   <div class="description-text ">
     Welches Team hat richtig geantwortet?
   </div>
-  <div>
+  <div *ngIf="stack != null">
     <div *ngFor="let team of stack.game.teams">
       <button mat-flat-button color="primary" class="button"
               (click)="onSuccessfulTeamSelected(team.index)">
