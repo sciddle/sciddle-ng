@@ -73,6 +73,20 @@
   }
 }
 
+.future-theme {
+  .toolbar {
+    border-top: 5px solid #006eb3;
+  }
+
+  .toolbar-title {
+    color: mat-color($future-primary, 500) !important;
+    font-family: 'Black Han Sans', sans-serif;
+    font-size: 1.5em;
+    text-transform: uppercase;
+    vertical-align: bottom;
+  }
+}
+
 .toolbar-block {
   padding-left: 10px;
   padding-right: 10px;
@@ -163,6 +177,13 @@
 .green-theme {
   .card-count {
     color: mat-color($green-primary, 500) !important;
+    font-weight: 900;
+  }
+}
+
+.green-theme {
+  .card-count {
+    color: mat-color($future-primary, 500) !important;
     font-weight: 900;
   }
 }

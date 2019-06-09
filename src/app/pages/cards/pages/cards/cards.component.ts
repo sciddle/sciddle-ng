@@ -61,8 +61,6 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   /** App title */
   public title = environment.APP_NAME;
-  /** Default app theme */
-  themeClass = 'blue-theme';
 
   /** ID passed as an argument */
   public id: string;

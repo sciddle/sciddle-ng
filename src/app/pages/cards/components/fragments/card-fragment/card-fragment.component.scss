@@ -13,6 +13,7 @@
     background-image: url(../../../../../../assets/images/blue_front.png);
     background-size: 100% 100%;
   }
+
 }
 
 .green-theme {
@@ -21,6 +22,17 @@
 
     background-image: url(../../../../../../assets/images/green_front.png);
     background-size: 100% 100%;
+  }
+
+}
+
+.future-theme {
+  .container {
+    min-height: 110px;
+
+    background-image: url(../../../../../../assets/images/future-banner.png);
+    background-repeat: no-repeat;
+    background-size: 100% 30px;
   }
 }
 
@@ -51,6 +63,37 @@
   font-size: 1.2em;
   font-weight: 600;
   margin: 40px;
+}
+
+.blue-theme, .green-theme {
+  .difficultyColorEasy {
+    background-color: mat-color($mat-green, 500) !important;
+  }
+
+  .difficultyColorMedium {
+    background-color: mat-color($mat-amber, 400) !important;
+  }
+
+  .difficultyColorHard {
+    background-color: mat-color($mat-red, 500) !important;
+  }
+}
+
+.future-theme {
+  .difficultyColorEasy {
+    color: mat-contrast($future-primary, 500) !important;
+    background-color: mat-color($future-primary, 500) !important;
+  }
+
+  .difficultyColorMedium {
+    color: mat-contrast($future-semi-accent, 500) !important;
+    background-color: mat-color($future-semi-accent, 500) !important;
+  }
+
+  .difficultyColorHard {
+    color: mat-contrast($future-accent, 700) !important;
+    background-color: mat-color($future-accent, 700) !important;
+  }
 }
 
 //
