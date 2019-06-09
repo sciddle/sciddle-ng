@@ -28,7 +28,7 @@ import {MatDialog} from '@angular/material';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None
 })
-export class CardFragmentComponent implements OnChanges {
+export class CardFragmentComponent {
 
   /** Stack the card is contained in */
   @Input() stack = new Stack();
@@ -36,11 +36,6 @@ export class CardFragmentComponent implements OnChanges {
   @Input() card = new Card();
   /** Current media */
   @Input() media: Media;
-  /** Default theme to be used */
-  @Input() themeClass = 'blue-theme';
-
-  /** Color of difficulty inidicator */
-  difficultyColor = '#fff';
 
   /** Enum for media types */
   mediaType = Media;
@@ -76,44 +71,6 @@ export class CardFragmentComponent implements OnChanges {
     this.devMode = isDevMode();
   }
 
-  //
-  // Lifecycle hooks
-  //
-
-  /**
-   * Handles on-changes lifecycle phase
-   */
-  ngOnChanges(changes: SimpleChanges): void {
-    this.initializeColors();
-  }
-
-  //
-  // Initialization
-  //
-
-  // Others
-
-  /**
-   * Initializes colors
-   */
-  private initializeColors() {
-    if (this.card != null) {
-      switch (this.card.difficulty) {
-        case 1: {
-          this.difficultyColor = this.materialColorService.color(PaletteType.GREEN, HueType._500);
-          break;
-        }
-        case 2: {
-          this.difficultyColor = this.materialColorService.color(PaletteType.AMBER, HueType._400);
-          break;
-        }
-        case 3: {
-          this.difficultyColor = this.materialColorService.color(PaletteType.RED, HueType._500);
-          break;
-        }
-      }
-    }
-  }
 
   //
   // Actions

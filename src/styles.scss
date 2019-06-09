@@ -13,6 +13,10 @@
   @include angular-material-theme($green-theme);
 }
 
+.future-theme {
+  @include angular-material-theme($future-theme);
+}
+
 // Rest
 
 html, body {

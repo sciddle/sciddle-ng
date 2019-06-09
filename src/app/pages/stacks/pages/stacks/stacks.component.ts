@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Inject, isDevMode, OnChanges, OnDestroy, OnInit} from '@angular/core';
+import {AfterViewInit, Component, Inject, isDevMode, OnDestroy, OnInit} from '@angular/core';
 import {MatDialog, MatIconRegistry} from '@angular/material';
 import {InformationDialogComponent} from '../../../../ui/information-dialog/information-dialog/information-dialog.component';
 import {HttpClient} from '@angular/common/http';
@@ -19,6 +19,8 @@ import {SnackbarService} from '../../../../core/ui/services/snackbar.service';
 import {Action} from '../../../../core/entity/model/action.enum';
 import {CloneService} from '../../../../core/entity/services/clone.service';
 import {StacksService} from '../../../../core/entity/services/stack/stacks.service';
+import {ThemeService} from '../../../../core/ui/services/theme.service';
+import {Theme} from '../../../../core/ui/model/theme.enum';
 
 /**
  * Displays stacks
@@ -62,6 +64,7 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
    * @param snackbarService snackbar service
    * @param stacksService stacks service
    * @param stacksPersistenceService stack persistence service
+   * @param themeService theme service
    */
   constructor(public dialog: MatDialog,
               private http: HttpClient,
@@ -73,9 +76,9 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
               private sanitizer: DomSanitizer,
               private snackbarService: SnackbarService,
               private stacksService: StacksService,
-              @Inject(STACK_PERSISTENCE_POUCHDB) private stacksPersistenceService: StacksPersistenceService) {
-    // this.devMode = isDevMode();
-    this.devMode = true;
+              @Inject(STACK_PERSISTENCE_POUCHDB) private stacksPersistenceService: StacksPersistenceService,
+              private themeService: ThemeService) {
+    this.devMode = isDevMode();
   }
 
   /**
@@ -84,6 +87,7 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit() {
     this.initializeStackSubscription();
 
+    this.initializeTheme();
     this.initializeMaterial();
     this.initializeMediaSubscription();
   }
@@ -155,6 +159,13 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   // Others
+
+  /**
+   * Initializes theme
+   */
+  private initializeTheme() {
+    this.themeService.switchTheme(Theme.BLUE);
+  }
 
   /**
    * Initializes material colors and icons

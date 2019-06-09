@@ -3,6 +3,9 @@
 $color-future-primary: #4292c6;
 $color-future-primary: hsl(204, 54%, 52%);
 
+$color-future-semi-accent: 	#fc9272;
+$color-future-semi-accent: 		hsl(14, 96%, 72%);
+
 $color-future-accent: #fb6a4a;
 $color-future-accent: hsl(11, 96%, 64%);
 
@@ -42,6 +45,39 @@ $mat-future-primary: (
   )
 );
 
+$mat-future-semi-accent: (
+  50: hsl(14, 96%, 122%),
+  100: hsl(14, 96%, 112%),
+  200: hsl(14, 96%, 102%),
+  300: hsl(14, 96%, 92%),
+  400: hsl(14, 96%, 82%),
+  500: hsl(14, 96%, 72%),
+  600: hsl(14, 96%, 62%),
+  700: hsl(14, 96%, 52%),
+  800: hsl(14, 96%, 42%),
+  900: hsl(14, 96%, 32%),
+  A100: $color-future-semi-accent,
+  A200: $color-future-semi-accent,
+  A400: $color-future-semi-accent,
+  A700: $color-future-semi-accent,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $dark-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $light-primary-text,
+    A200: $light-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text,
+  )
+);
+
 $mat-future-accent: (
   50: hsl(11, 96%, 114%),
   100: hsl(11, 96%, 104%),
@@ -53,10 +89,10 @@ $mat-future-accent: (
   700: hsl(11, 96%, 44%),
   800: hsl(11, 96%, 34%),
   900: hsl(11, 96%, 24%),
-  A100: $color-sciddle,
-  A200: $color-sciddle,
-  A400: $color-sciddle,
-  A700: $color-sciddle,
+  A100: $color-future-accent,
+  A200: $color-future-accent,
+  A400: $color-future-accent,
+  A700: $color-future-accent,
   contrast: (
     50: $dark-primary-text,
     100: $dark-primary-text,
@@ -65,9 +101,9 @@ $mat-future-accent: (
     400: $dark-primary-text,
     500: $light-primary-text,
     600: $light-primary-text,
-    700: white,
-    800: white,
-    900: white,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
     A100: $dark-primary-text,
     A200: $light-primary-text,
     A400: $light-primary-text,
@@ -110,6 +146,7 @@ $mat-future-warn: (
 
 $future-primary: mat-palette($mat-future-primary, 500, 400, 600);
 $future-accent: mat-palette($mat-future-accent, 500, 400, 600);
+$future-semi-accent: mat-palette($mat-future-semi-accent, 500, 400, 600);
 $future-warn: mat-palette($mat-future-warn);
 
 $future-theme: mat-light-theme($future-primary, $future-accent, $future-warn);

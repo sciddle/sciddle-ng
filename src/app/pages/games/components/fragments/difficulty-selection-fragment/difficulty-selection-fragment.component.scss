@@ -46,3 +46,20 @@
     background-color: mat-color($green-primary, 600);
   }
 }
+
+.future-theme {
+  .difficulty-easy {
+    color: mat-contrast($future-primary, 400);
+    background-color: mat-color($future-primary, 400);
+  }
+
+  .difficulty-medium {
+    color: mat-contrast($future-primary, 500);
+    background-color: mat-color($future-primary, 500);
+  }
+
+  .difficulty-hard {
+    color: mat-contrast($future-primary, 600);
+    background-color: mat-color($future-primary, 600);
+  }
+}

@@ -45,6 +45,16 @@
   }
 }
 
+.future-theme {
+  .toolbar-title {
+    color: mat-color($future-primary, 500);
+    font-family: 'Black Han Sans', sans-serif;
+    font-size: 1.5em;
+    text-transform: uppercase;
+    vertical-align: bottom;
+  }
+}
+
 .toolbar-block {
   padding-left: 10px;
   padding-right: 10px;
