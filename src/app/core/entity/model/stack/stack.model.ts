@@ -14,6 +14,8 @@ export class Stack extends Entity {
   cards: Card[];
   /** Game the stack is used for */
   game: Game;
+  /** Theme */
+  theme: string;
 
   /**
    * Constructor
@@ -24,5 +26,6 @@ export class Stack extends Entity {
     this.title = '';
     this.cards = [];
     this.game = null;
+    this.theme = '';
   }
 }

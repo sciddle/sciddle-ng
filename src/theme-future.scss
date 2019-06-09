@@ -1,0 +1,115 @@
+@import '~@angular/material/theming';
+
+$color-future-primary: #4292c6;
+$color-future-primary: hsl(204, 54%, 52%);
+
+$color-future-accent: #fb6a4a;
+$color-future-accent: hsl(11, 96%, 64%);
+
+$color-future-warn: #ef3b2c;
+$color-future-warn: hsl(5, 86%, 55%);
+
+$mat-future-primary: (
+  50: hsl(204, 54%, 102%),
+  100: hsl(204, 54%, 92%),
+  200: hsl(204, 54%, 82%),
+  300: hsl(204, 54%, 72%),
+  400: hsl(204, 54%, 62%),
+  500: hsl(204, 54%, 52%),
+  600: hsl(204, 54%, 42%),
+  700: hsl(204, 54%, 32%),
+  800: hsl(204, 54%, 22%),
+  900: hsl(204, 54%, 12%),
+  A100: $color-sciddle,
+  A200: $color-sciddle,
+  A400: $color-sciddle,
+  A700: $color-sciddle,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $dark-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: white,
+    800: white,
+    900: white,
+    A100: $dark-primary-text,
+    A200: $light-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text,
+  )
+);
+
+$mat-future-accent: (
+  50: hsl(11, 96%, 114%),
+  100: hsl(11, 96%, 104%),
+  200: hsl(11, 96%, 94%),
+  300: hsl(11, 96%, 84%),
+  400: hsl(11, 96%, 74%),
+  500: hsl(11, 96%, 64%),
+  600: hsl(11, 96%, 54%),
+  700: hsl(11, 96%, 44%),
+  800: hsl(11, 96%, 34%),
+  900: hsl(11, 96%, 24%),
+  A100: $color-sciddle,
+  A200: $color-sciddle,
+  A400: $color-sciddle,
+  A700: $color-sciddle,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $dark-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: white,
+    800: white,
+    900: white,
+    A100: $dark-primary-text,
+    A200: $light-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text,
+  )
+);
+
+$mat-future-warn: (
+  50: hsl(5, 86%, 105%),
+  100: hsl(5, 86%, 95%),
+  200: hsl(5, 86%, 85%),
+  300: hsl(5, 86%, 75%),
+  400: hsl(5, 86%, 65%),
+  500: hsl(5, 86%, 55%),
+  600: hsl(5, 86%, 45%),
+  700: hsl(5, 86%, 35%),
+  800: hsl(5, 86%, 25%),
+  900: hsl(5, 86%, 15%),
+  A100: $color-sciddle,
+  A200: $color-sciddle,
+  A400: $color-sciddle,
+  A700: $color-sciddle,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $dark-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: white,
+    800: white,
+    900: white,
+    A100: $dark-primary-text,
+    A200: $light-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text,
+  )
+);
+
+$future-primary: mat-palette($mat-future-primary, 500, 400, 600);
+$future-accent: mat-palette($mat-future-accent, 500, 400, 600);
+$future-warn: mat-palette($mat-future-warn);
+
+$future-theme: mat-light-theme($future-primary, $future-accent, $future-warn);

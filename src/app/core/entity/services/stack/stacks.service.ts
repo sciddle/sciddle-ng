@@ -68,6 +68,8 @@ export class StacksService {
             const stackFromAsset = data as Stack;
 
             stack.title = stackFromAsset.title;
+            stack.theme = stackFromAsset.theme;
+
             this.mergeCardsFromAssets(stack, stackFromAsset.cards).then(mergedCards => {
               if (mergedCards != null) {
                 stack.cards = mergedCards as Card[];
