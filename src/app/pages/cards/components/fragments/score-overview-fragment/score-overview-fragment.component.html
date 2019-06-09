@@ -1,5 +1,5 @@
 <div class="horizontal-center">
-  <button mat-button class="full-width" (click)="onDisplayScoreOverviewClicked()">
+  <button *ngIf="stack != null" mat-button class="full-width" (click)="onDisplayScoreOverviewClicked()">
     <div *ngFor="let team of stack.game.teams" class="explanation-text">
       <span> TEAM {{ team.index + 1}} - {{ team.score }}</span>
       <span *ngIf="team.score !== 1">Punkte</span>
