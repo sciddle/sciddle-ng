@@ -227,13 +227,17 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
    * @param stack stack
    */
   private initializeTheme(stack: Stack) {
-    switch (stack.id) {
-      case '0': {
+    switch (stack.theme) {
+      case 'green': {
         this.themeService.switchTheme(Theme.GREEN);
         break;
       }
-      case '1': {
+      case 'blue': {
         this.themeService.switchTheme(Theme.BLUE);
+        break;
+      }
+      case 'future': {
+        this.themeService.switchTheme(Theme.FUTURE);
         break;
       }
       default: {
