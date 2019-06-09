@@ -222,7 +222,7 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
   onMenuItemClicked(menuItem: string) {
     switch (menuItem) {
       case 'manual': {
-        this.http.get('assets/manual/manual.md').subscribe(
+        this.http.get('assets/manual/manual-de.md').subscribe(
           () => {
           }, err => {
             this.dialog.open(InformationDialogComponent, {

@@ -263,7 +263,7 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
         break;
       }
       case 'manual': {
-        this.http.get('assets/manual/manual.md').subscribe(
+        this.http.get('assets/manual/manual-de.md').subscribe(
           () => {
           }, err => {
             this.dialog.open(InformationDialogComponent, {
