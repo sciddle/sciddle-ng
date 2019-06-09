@@ -3,6 +3,9 @@ import {Card} from '../../../../../core/entity/model/card/card.model';
 import {CardsService} from '../../../../../core/entity/services/card/cards.service';
 import {Stack} from '../../../../../core/entity/model/stack/stack.model';
 
+/**
+ * Displays difficulty selection fragment
+ */
 @Component({
   selector: 'app-difficulty-selection-fragment',
   templateUrl: './difficulty-selection-fragment.component.html',
