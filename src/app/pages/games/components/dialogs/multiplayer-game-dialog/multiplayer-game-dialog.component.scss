@@ -1,0 +1,36 @@
+@import '../../../../../../styles';
+
+//
+// Custom
+//
+
+.description-text {
+  margin-top: 10px;
+  margin-bottom: 5px;
+  white-space: pre-wrap !important;
+}
+
+.time-limit-button {
+  margin: 0 auto 15px;
+  text-align: left;
+  width: 150px;
+}
+
+.button-icon {
+  margin-right: 10px;
+}
+
+.team-button {
+  margin-left: 10px;
+  margin-right: 10px;
+  min-width: 55px !important;
+}
+
+.slider {
+  width: 80%;
+}
+
+.cardCountValue {
+  margin-top: 13px;
+  margin-left: 15px;
+}

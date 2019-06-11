@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Inject, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
+import {AfterViewInit, Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {SnackbarService} from '../../../../core/ui/services/snackbar.service';
 import {GamesService} from '../../../../core/entity/services/game/games.service';
@@ -11,18 +11,18 @@ import {environment} from '../../../../../environments/environment';
 import {CardsService} from '../../../../core/entity/services/card/cards.service';
 import {Media} from '../../../../core/ui/model/media.enum';
 import {MaterialColorService} from '../../../../core/ui/services/material-color.service';
-import {MatDialog, MatIconRegistry, MatSliderChange} from '@angular/material';
+import {MatDialog, MatIconRegistry} from '@angular/material';
 import {MediaService} from '../../../../core/ui/services/media.service';
 import {MaterialIconService} from '../../../../core/ui/services/material-icon.service';
 import {DomSanitizer} from '@angular/platform-browser';
 import {AboutDialogComponent} from '../../../../ui/about-dialog/about-dialog/about-dialog.component';
-import {Animations, TeamCountSelectionState} from './games.animation';
 import {HttpClient} from '@angular/common/http';
 import {InformationDialogComponent} from '../../../../ui/information-dialog/information-dialog/information-dialog.component';
 import {ROUTE_CARDS, ROUTE_STACKS} from '../../../../app.routes';
 import {ThemeService} from '../../../../core/ui/services/theme.service';
 import {Theme} from '../../../../core/ui/model/theme.enum';
 import {OverlayContainer} from '@angular/cdk/overlay';
+import {MultiplayerGameDialogComponent} from '../../components/dialogs/multiplayer-game-dialog/multiplayer-game-dialog.component';
 
 /**
  * Displays games page
@@ -30,10 +30,7 @@ import {OverlayContainer} from '@angular/cdk/overlay';
 @Component({
   selector: 'app-games',
   templateUrl: './games.component.html',
-  styleUrls: ['./games.component.scss'],
-  animations: [
-    Animations.teamCountSelectionAnimation,
-  ]
+  styleUrls: ['./games.component.scss']
 })
 export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
 
@@ -45,19 +42,8 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
   /** Stack */
   public stack: Stack;
 
-  /** Selected time limit mode */
-  public useTimeLimit = false;
-  /** Selected team count */
-  public teamCount = -1;
-  /** Selected difficulty easy */
-  public difficultyEasy = false;
-  /** Selected difficulty medium */
-  public difficultyMedium = false;
-  /** Selected difficulty hard */
-  public difficultyHard = false;
   /** Selected card count */
   public cardCount = 0;
-
   /** Minimum card count */
   public minCardCount = environment.MIN_CARDS;
   /** Maximum card count */
@@ -70,9 +56,6 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
 
   /** Helper subject used to finish other subscriptions */
   private unsubscribeSubject = new Subject();
-
-  /** Scroll state */
-  public teamCountSelectionState: TeamCountSelectionState = TeamCountSelectionState.DEACTIVATED;
 
   /**
    * Constructor
@@ -351,81 +334,33 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
    * Handles click on multi-player button
    */
   onMultiPlayerClicked() {
-    if (this.teamCountSelectionState === TeamCountSelectionState.DEACTIVATED) {
-      this.teamCountSelectionState = TeamCountSelectionState.ACTIVATED;
-    } else {
-      this.teamCountSelectionState = TeamCountSelectionState.DEACTIVATED;
-    }
-  }
+    const multiplayerGameDialogRef = this.dialog.open(MultiplayerGameDialogComponent, {
+      disableClose: false,
+      data: {
+        title: 'Gegen andere spielen',
+        cardCount: this.cardCount,
+        minCardCount: this.minCardCount,
+        maxCardCount: this.maxCardCount
+      },
+      autoFocus: false
+    });
 
-  /**
-   * Toggles usage of time limit
-   */
-  onTimeLimitToggled() {
-    this.useTimeLimit = !this.useTimeLimit;
-  }
-
-  /**
-   * Handles selection of team count
-   * @param teamCount number of teams
-   */
-  onTeamCountSelected(teamCount: number) {
-    this.teamCount = teamCount;
-  }
-
-  /**
-   * Handles difficulty selection
-   * @param event event
-   */
-  onDifficultySelected(event: { difficulty: number, selected: boolean }) {
-    switch (event.difficulty) {
-      case 1: {
-        this.difficultyEasy = event.selected;
-        break;
+    multiplayerGameDialogRef.afterClosed().subscribe(result => {
+      if (result != null) {
+        this.gameService.initializeMultiPlayerGame(this.stack, result.teamCount, result.useTimeLimit,
+          result.difficultyEasy, result.difficultyMedium, result.difficultyHard, result.cardCount).then(() => {
+          this.cardsService.shuffleStack(this.stack).then();
+          this.stacksPersistenceService.updateStack(this.stack).then(() => {
+            this.router.navigate([`/${ROUTE_CARDS}/${this.stack.id}`]).then();
+          });
+        });
       }
-      case 2: {
-        this.difficultyMedium = event.selected;
-        break;
-      }
-      case 3: {
-        this.difficultyHard = event.selected;
-        break;
-      }
-    }
-  }
-
-  /**
-   * Handles card count change
-   * @param event event
-   */
-  onCardCountChanged(event: MatSliderChange) {
-    this.cardCount = event.value;
-  }
-
-  /**
-   * Starts a multi-player game
-   */
-  onStartMultiPlayerGameClicked() {
-    this.gameService.initializeMultiPlayerGame(this.stack, this.teamCount, this.useTimeLimit,
-      this.difficultyEasy, this.difficultyMedium, this.difficultyHard, this.cardCount).then(() => {
-      this.cardsService.shuffleStack(this.stack).then();
-      this.stacksPersistenceService.updateStack(this.stack).then(() => {
-        this.router.navigate([`/${ROUTE_CARDS}/${this.stack.id}`]).then();
-      });
     });
   }
 
   //
   // Helpers
   //
-
-  /**
-   * Generates an array of a given number of elements
-   * @param n number of elements
-   */
-  arrayOne(n: number): any[] {
-    return Array(n);
-  }
 
   /**
    * Navigates back to parent view

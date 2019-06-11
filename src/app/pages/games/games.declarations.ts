@@ -1,6 +1,7 @@
 import {GamesComponent} from './pages/games/games.component';
 import {GamesToolbarComponent} from './components/toolbars/games-toolbar/games-toolbar.component';
 import {DifficultySelectionFragmentComponent} from './components/fragments/difficulty-selection-fragment/difficulty-selection-fragment.component';
+import {MultiplayerGameDialogComponent} from './components/dialogs/multiplayer-game-dialog/multiplayer-game-dialog.component';
 
 /**
  * Declarations of games module
@@ -10,6 +11,8 @@ export const GamesDeclarations = [
   GamesComponent,
   // Toolbars
   GamesToolbarComponent,
+  // Dialogs
+  MultiplayerGameDialogComponent,
   // Fragments
   DifficultySelectionFragmentComponent
 ];
