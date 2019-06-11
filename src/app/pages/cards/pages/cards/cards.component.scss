@@ -1,7 +1,7 @@
 @import '../../../../../styles';
-@import '../../../../../flex';
-@import '../../../../../sizes';
 
+//
+// Custom
 //
 
 .debug {
@@ -13,8 +13,8 @@
 
   @media #{$breakpoint-small} {
     padding-top: 88px;
-    // margin-left: 10px;
-    // margin-right: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
   }
   @media #{$breakpoint-medium} {
     padding-top: 88px;
@@ -45,6 +45,10 @@
   margin-top: 10px;
   margin-bottom: 5px;
   white-space: pre-wrap !important;
+}
+
+.double-size-text {
+  font-size: 1.5em;
 }
 
 .horizontal-center {

@@ -1,40 +1,8 @@
-@import '../../../../../../flex';
-@import '../../../../../../sizes';
-@import '../../../../../../theme';
+@import '../../../../../../styles';
 
 //
 // Custom
 //
-
-.blue-theme {
-  .container {
-    min-height: 110px;
-
-    background-image: url(../../../../../../assets/images/blue_front.png);
-    background-size: 100% 100%;
-  }
-
-}
-
-.green-theme {
-  .container {
-    min-height: 110px;
-
-    background-image: url(../../../../../../assets/images/green_front.png);
-    background-size: 100% 100%;
-  }
-
-}
-
-.future-theme {
-  .container {
-    min-height: 110px;
-
-    background-image: url(../../../../../../assets/images/future-banner.png);
-    background-repeat: no-repeat;
-    background-size: 100% 30px;
-  }
-}
 
 .card-header-content {
   padding: 5px;
@@ -65,7 +33,39 @@
   margin: 40px;
 }
 
-.blue-theme, .green-theme {
+//
+// Theme specific
+//
+
+.blue-theme {
+  .container {
+    min-height: 110px;
+
+    background-image: url(../../../../../../assets/images/blue_front.png);
+    background-size: 100% 100%;
+  }
+
+  .difficultyColorEasy {
+    background-color: mat-color($mat-green, 500) !important;
+  }
+
+  .difficultyColorMedium {
+    background-color: mat-color($mat-amber, 400) !important;
+  }
+
+  .difficultyColorHard {
+    background-color: mat-color($mat-red, 500) !important;
+  }
+}
+
+.green-theme {
+  .container {
+    min-height: 110px;
+
+    background-image: url(../../../../../../assets/images/green_front.png);
+    background-size: 100% 100%;
+  }
+
   .difficultyColorEasy {
     background-color: mat-color($mat-green, 500) !important;
   }
@@ -80,6 +80,14 @@
 }
 
 .future-theme {
+  .container {
+    min-height: 110px;
+
+    background-image: url(../../../../../../assets/images/future-banner.png);
+    background-repeat: no-repeat;
+    background-size: 100% 30px;
+  }
+
   .difficultyColorEasy {
     color: mat-contrast($future-primary, 500) !important;
     background-color: mat-color($future-primary, 500) !important;

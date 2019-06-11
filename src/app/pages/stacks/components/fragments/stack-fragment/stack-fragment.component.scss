@@ -1,6 +1,24 @@
-@import '../../../../../../flex';
-@import '../../../../../../sizes';
-@import '../../../../../../theme';
+@import '../../../../../../styles';
+
+//
+// Custom
+//
+
+.stack-title {
+  font-family: 'Roboto Slab', serif;
+  font-weight: 700;
+  font-size: 1.8em;
+  width: 255px;
+}
+
+hr {
+  clear: left;
+  border: solid #444 1px;
+}
+
+//
+// Material
+//
 
 mat-card {
   float: left;
@@ -20,57 +38,6 @@ mat-card {
     width: 300px;
     margin-right: 10px;
   }
-}
-
-.stack-title {
-  font-family: 'Roboto Slab', serif;
-  font-weight: 700;
-  font-size: 1.8em;
-  width: 255px;
-}
-
-.icons-holder, .tags-holder {
-  padding: 0 24px 24px;
-}
-
-.tag {
-  background-color: rgba(0, 0, 0, 0.08);
-  -webkit-border-radius: 2px;
-  border-radius: 2px;
-  margin: 6px 6px 0 0;
-  color: rgba(0, 0, 0, .87);
-  direction: ltr;
-  font-family: 'Roboto', arial, sans-serif;
-  font-size: 15px;
-  float: left;
-  align-items: center;
-  height: 18px;
-  padding: 3px 5px;
-  text-align: left;
-}
-
-.language {
-  background-color: mat-color($mat-amber, 500);
-  -webkit-border-radius: 2px;
-  border-radius: 2px;
-  margin: 6px 6px 0 0;
-  color: mat-contrast($mat-amber, 500);
-  direction: ltr;
-  font-family: 'Roboto', arial, sans-serif;
-  font-size: 15px;
-  float: left;
-  align-items: center;
-  height: 18px;
-  padding: 3px 5px;
-  text-align: left;
-}
-
-#more {
-  float: right;
-}
-
-.hidden {
-  display: none;
 }
 
 mat-card {
@@ -96,21 +63,6 @@ mat-card-actions {
 .card-header-content {
   padding: 5px;
   width: 100%;
-}
-
-hr {
-  clear: left;
-  border: solid #444 1px;
-}
-
-.label {
-  display: block;
-  color: rgba(0, 0, 0, .38);
-  padding-bottom: 5px;
-  font-size: 75%;
-  /*-webkit-transform: translateX(-20%) scale(.75);
-  transform: translateX(-12%) scale(.75);
-  width: 133.33333%;*/
 }
 
 .mat-card-actions .mat-button:first-child, .mat-card-actions .mat-raised-button:first-child {

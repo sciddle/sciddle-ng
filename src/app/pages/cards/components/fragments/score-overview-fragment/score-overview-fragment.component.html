@@ -1,11 +1,11 @@
 <div class="horizontal-center">
   <button *ngIf="stack != null" mat-button class="full-width" (click)="onDisplayScoreOverviewClicked()">
-    <div *ngFor="let team of stack.game.teams" class="explanation-text">
+    <div *ngFor="let team of stack.game.teams" class="description-text double-size-text">
       <span> TEAM {{ team.index + 1}} - {{ team.score }}</span>
       <span *ngIf="team.score !== 1">Punkte</span>
       <span *ngIf="team.score === 1">Punkt</span>
     </div>
-    <div class="explanation-text">
+    <div class="description-text double-size-text">
       Tippe auf den Bildschirm um weiterzumachen
     </div>
   </button>

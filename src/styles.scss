@@ -4,6 +4,7 @@
 @include mat-core();
 @import 'theme.scss';
 @import 'sizes.scss';
+@import 'flex.scss';
 
 .blue-theme {
   @include angular-material-theme($blue-theme);
