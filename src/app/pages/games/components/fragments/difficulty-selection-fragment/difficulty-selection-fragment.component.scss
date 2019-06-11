@@ -5,8 +5,31 @@
 //
 
 .button {
-  margin: 20px;
+  @media #{$breakpoint-small} {
+    margin: 5px;
+  }
+  @media #{$breakpoint-medium} {
+    margin: 10px;
+  }
+  @media #{$breakpoint-large} {
+    margin: 20px;
+  }
+
   white-space: pre-wrap !important;
+}
+
+.horizontal-center {
+  margin: 15px auto;
+  text-align: center;
+
+  width: 100%;
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box; /* Firefox, other Gecko */
+  box-sizing: border-box; /* Opera/IE 8+ */
+
+  &:hover .hidden {
+    display: inline-block;
+  }
 }
 
 .description-text {

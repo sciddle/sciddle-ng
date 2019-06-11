@@ -1,19 +1,8 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  Input,
-  isDevMode,
-  OnChanges,
-  SimpleChanges,
-  ViewEncapsulation
-} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, isDevMode, ViewEncapsulation} from '@angular/core';
 import {Stack} from '../../../../../core/entity/model/stack/stack.model';
 import {Media} from '../../../../../core/ui/model/media.enum';
 import {Card} from '../../../../../core/entity/model/card/card.model';
 import {MaterialColorService} from '../../../../../core/ui/services/material-color.service';
-import {PaletteType} from '../../../../../core/ui/model/palette-type.enum';
-import {HueType} from '../../../../../core/ui/model/hue-type.enum';
 import {WikipediaService} from '../../../../../core/wikipedia/services/wikipedia.service';
 import {InformationDialogComponent} from '../../../../../ui/information-dialog/information-dialog/information-dialog.component';
 import {MatDialog} from '@angular/material';

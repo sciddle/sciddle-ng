@@ -10,56 +10,14 @@
       <button mat-flat-button color="primary" class="mode-button"
               [disabled]="stack == null"
               (click)="onSinglePlayerClicked()">
-        ALLEIN SPIELEN
+        <span class="button-text">ALLEIN SPIELEN</span>
       </button>
     </div>
     <div>
       <button mat-flat-button color="primary" class="mode-button"
               [disabled]="stack == null"
               (click)="onMultiPlayerClicked()">
-        GEGEN ANDERE SPIELEN
-      </button>
-    </div>
-    <div [@teamCountSelectionAnimation]="teamCountSelectionState">
-      <div (click)="onTimeLimitToggled()" class="time-limit-button">
-        <button *ngIf="!useTimeLimit" mat-button color="primary">
-          <mat-icon svgIcon="alarm_off" class="button-icon"></mat-icon>
-          ohne Zeitlimit
-        </button>
-        <button *ngIf="useTimeLimit" mat-flat-button color="primary">
-          <mat-icon svgIcon="alarm_on" class="button-icon"></mat-icon>
-          mit Zeitlimit
-        </button>
-      </div>
-      <div class="description-text">Anzahl der Teams</div>
-      <span *ngFor="let item of arrayOne(4); let i = index;">
-        <button *ngIf="teamCount !== i + 2" mat-button color="primary" class="team-button"
-                (click)="onTeamCountSelected(i+2)">
-          {{ i + 2 }}
-        </button>
-        <button *ngIf="teamCount === i + 2" mat-flat-button color="primary" class="team-button"
-                (click)="onTeamCountSelected(i+2)">
-          {{ i + 2 }}
-        </button>
-      </span>
-
-      <app-difficulty-selection-fragment (difficultySelectionChangedEmitter)="onDifficultySelected($event)"></app-difficulty-selection-fragment>
-
-      <div class="description-text">Anzahl der Karten</div>
-      <div class="flexcontainer">
-        <div class="flexcontainer" style="margin: 0 auto">
-          <div class="full-width">
-            <mat-slider class="slider" [min]="minCardCount" [max]="maxCardCount"
-                        step="1" [value]="cardCount" thumbLabel="true"
-                        (input)="onCardCountChanged($event)"></mat-slider>
-          </div>
-          <span class="cardCountValue">{{ cardCount }}</span>
-        </div>
-      </div>
-      <button mat-flat-button color="primary"
-              [disabled]="teamCount === -1 || (!difficultyEasy && !difficultyMedium && !difficultyHard)"
-              (click)="onStartMultiPlayerGameClicked()">
-        STARTEN
+        <span class="button-text">GEGEN ANDERE SPIELEN</span>
       </button>
     </div>
   </div>

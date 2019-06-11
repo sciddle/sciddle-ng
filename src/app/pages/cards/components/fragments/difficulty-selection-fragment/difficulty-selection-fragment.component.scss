@@ -29,9 +29,16 @@
 }
 
 .button {
-  padding: 20px;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  @media #{$breakpoint-small} {
+    margin: 5px;
+  }
+  @media #{$breakpoint-medium} {
+    margin: 10px;
+  }
+  @media #{$breakpoint-large} {
+    margin: 20px;
+  }
+
   white-space: pre-wrap !important;
 }
 
