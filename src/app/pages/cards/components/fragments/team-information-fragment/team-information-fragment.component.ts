@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output, ViewEncapsulation} from '@angular/core';
 import {Stack} from '../../../../../core/entity/model/stack/stack.model';
 
 /**
@@ -7,7 +7,8 @@ import {Stack} from '../../../../../core/entity/model/stack/stack.model';
 @Component({
   selector: 'app-team-information-fragment',
   templateUrl: './team-information-fragment.component.html',
-  styleUrls: ['./team-information-fragment.component.scss']
+  styleUrls: ['./team-information-fragment.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class TeamInformationFragmentComponent {
 

@@ -1,6 +1,6 @@
 <button *ngIf="stack !=null" mat-button class="button full-width" (click)="onDisplayTeamClicked()">
-  <span class="block main-text">Team {{ stack.game.turn.teamID + 1 }} ist am Zug</span>
-  <span class="block explanation-text double-size-text">
-          Tippe auf den Bildschirm um weiterzumachen
+  <span class="block main-text"><span class="team-name">Team {{ stack.game.turn.teamID + 1 }} </span>ist am Zug</span>
+  <span class="block description-text double-size-text">
+          Gib das Gerät weiter und tippe auf den Bildschirm um weiterzumachen
         </span>
 </button>

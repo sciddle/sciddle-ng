@@ -1,6 +1,8 @@
 @import '../../../../../../styles';
-@import '../../../../../../flex';
-@import '../../../../../../sizes';
+
+//
+// Custom
+//
 
 .button {
   margin: 20px;
@@ -12,6 +14,10 @@
   margin-bottom: 5px;
   white-space: pre-wrap !important;
 }
+
+//
+// Theme specific
+//
 
 .blue-theme {
   .difficulty-easy {
@@ -55,11 +61,11 @@
 
   .difficulty-medium {
     color: mat-contrast($future-primary, 500);
-    background-color: mat-color($future-primary, 500);
+    background-color: mat-color($future-semi-accent, 500);
   }
 
   .difficulty-hard {
     color: mat-contrast($future-primary, 600);
-    background-color: mat-color($future-primary, 600);
+    background-color: mat-color($future-accent, 500);
   }
 }
