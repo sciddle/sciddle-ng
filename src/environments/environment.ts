@@ -16,6 +16,7 @@ export const environment = {
   DEFAULT_STACK: 0,
 
   MIN_CARDS: 2,
+  API_TIMEOUT: 1000,
 
   NAME: require('../../package.json').name,
   VERSION: require('../../package.json').version,

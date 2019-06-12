@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {WikipediaService} from '../../../../../core/wikipedia/services/wikipedia.service';
+import {environment} from '../../../../../../environments/environment';
 
 /**
  * Displays wikipedia dialog
@@ -65,9 +66,13 @@ export class WikipediaDialogComponent implements OnInit {
   private initializeExtract() {
     const extractEmitter = new EventEmitter<{ pageURL: string, extract: string }>();
     extractEmitter.subscribe(result => {
-      this.extract = result.extract;
+      if (result != null && result.extract != null) {
+        this.extract = result.extract;
+      } else {
+        this.extract = `Das Extrakt kann nicht abgerufen werden`;
+      }
     });
-    this.wikipediaService.getExtract(this.term, 'de', extractEmitter);
+    this.wikipediaService.getExtract(this.term, 'de', environment.API_TIMEOUT, extractEmitter);
   }
 
   //
