@@ -33,22 +33,6 @@ export class CardFragmentComponent {
   /** Dev mode */
   devMode = false;
 
-  //
-  // Static methods
-  //
-
-  /**
-   * Returns the first n sentences of a given text
-   * @param text text
-   * @param n number of sentences
-   * @param m minimum characters
-   */
-  static getFirstSentences(text: string, n: number, m: number): string {
-    const separator = '. ';
-
-    return text.slice(0, m) + text.slice(m).split(separator).slice(0, n).join(separator) + '.';
-  }
-
   /**
    * Constructor
    * @param dialog dialog
