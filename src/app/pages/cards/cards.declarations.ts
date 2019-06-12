@@ -6,6 +6,7 @@ import {TeamSelectionFragmentComponent} from './components/fragments/team-select
 import {GameEvaluationFragmentComponent} from './components/fragments/game-evaluation-fragment/game-evaluation-fragment.component';
 import {TeamInformationFragmentComponent} from './components/fragments/team-information-fragment/team-information-fragment.component';
 import {ScoreOverviewFragmentComponent} from './components/fragments/score-overview-fragment/score-overview-fragment.component';
+import {WikipediaDialogComponent} from './components/dialogs/wikpedia-dialog/wikipedia-dialog.component';
 
 /**
  * Declarations of cards module
@@ -15,6 +16,8 @@ export const CardsDeclarations = [
   CardsComponent,
   // Toolbars
   CardsToolbarComponent,
+  // Dialogs
+  WikipediaDialogComponent,
   // Fragments
   CardFragmentComponent,
   DifficultySelectionFragmentComponent,

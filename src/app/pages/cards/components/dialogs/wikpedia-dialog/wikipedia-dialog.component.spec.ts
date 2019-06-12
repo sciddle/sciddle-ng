@@ -1,18 +1,18 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {InformationDialogComponent} from './information-dialog.component';
+import {WikipediaDialogComponent} from './wikipedia-dialog.component';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {InformationDialogDeclarations} from '../information-dialog.declarations';
-import {InformationDialogImports} from '../information-dialog.imports';
+import {CardsDeclarations} from '../../../cards.declarations';
+import {CardsImports} from '../../../cards.imports';
 
 describe('WikipediaDialogComponent', () => {
-  let component: InformationDialogComponent;
-  let fixture: ComponentFixture<InformationDialogComponent>;
+  let component: WikipediaDialogComponent;
+  let fixture: ComponentFixture<WikipediaDialogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [InformationDialogDeclarations],
-      imports: [InformationDialogImports],
+      declarations: [CardsDeclarations],
+      imports: [CardsImports],
       providers: [
         {provide: MAT_DIALOG_DATA, useValue: {}}, {
           provide: MatDialogRef, useValue: {
@@ -24,7 +24,7 @@ describe('WikipediaDialogComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(InformationDialogComponent);
+    fixture = TestBed.createComponent(WikipediaDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

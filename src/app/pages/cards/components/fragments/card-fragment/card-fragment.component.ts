@@ -6,6 +6,7 @@ import {MaterialColorService} from '../../../../../core/ui/services/material-col
 import {WikipediaService} from '../../../../../core/wikipedia/services/wikipedia.service';
 import {InformationDialogComponent} from '../../../../../ui/information-dialog/information-dialog/information-dialog.component';
 import {MatDialog} from '@angular/material';
+import {WikipediaDialogComponent} from '../../dialogs/wikpedia-dialog/wikipedia-dialog.component';
 
 /**
  * Displays a card
@@ -71,13 +72,11 @@ export class CardFragmentComponent {
   onHelpClicked() {
     const abstractEmitter = new EventEmitter<{ pageURL: string, extract: string }>();
     abstractEmitter.subscribe(result => {
-      this.dialog.open(InformationDialogComponent, {
+      this.dialog.open(WikipediaDialogComponent, {
         disableClose: false,
         data: {
-          title: this.card.word,
-          text: CardFragmentComponent.getFirstSentences(result.extract, 2, 100) + ` Mehr auf [Wikipedia](` + result.pageURL + `)`,
+          term: this.card.word,
           action: 'Verstanden',
-          value: null
         },
         autoFocus: false
       });
