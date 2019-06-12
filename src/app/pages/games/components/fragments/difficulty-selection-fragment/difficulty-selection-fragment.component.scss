@@ -44,51 +44,51 @@
 
 .blue-theme {
   .difficulty-easy {
-    color: mat-contrast($blue-primary, 400);
-    background-color: mat-color($blue-primary, 400);
+    color: mat-contrast($blue-primary, 400) !important;
+    background-color: mat-color($blue-primary, 400) !important;
   }
 
   .difficulty-medium {
-    color: mat-contrast($blue-primary, 500);
-    background-color: mat-color($blue-primary, 500);
+    color: mat-contrast($blue-primary, 500) !important;
+    background-color: mat-color($blue-primary, 500) !important;
   }
 
   .difficulty-hard {
-    color: mat-contrast($blue-primary, 600);
-    background-color: mat-color($blue-primary, 600);
+    color: mat-contrast($blue-primary, 600) !important;
+    background-color: mat-color($blue-primary, 600) !important;
   }
 }
 
 .green-theme {
   .difficulty-easy {
-    color: mat-contrast($green-primary, 400);
-    background-color: mat-color($green-primary, 400);
+    color: mat-contrast($green-primary, 400) !important;
+    background-color: mat-color($green-primary, 400) !important;
   }
 
   .difficulty-medium {
-    color: mat-contrast($green-primary, 500);
-    background-color: mat-color($green-primary, 500);
+    color: mat-contrast($green-primary, 500) !important;
+    background-color: mat-color($green-primary, 500) !important;
   }
 
   .difficulty-hard {
-    color: mat-contrast($green-primary, 600);
-    background-color: mat-color($green-primary, 600);
+    color: mat-contrast($green-primary, 600) !important;
+    background-color: mat-color($green-primary, 600) !important;
   }
 }
 
 .future-theme {
   .difficulty-easy {
-    color: mat-contrast($future-primary, 400);
-    background-color: mat-color($future-primary, 400);
+    color: mat-contrast($future-primary, 400) !important;
+    background-color: mat-color($future-primary, 400) !important;
   }
 
   .difficulty-medium {
-    color: mat-contrast($future-primary, 500);
-    background-color: mat-color($future-semi-accent, 500);
+    color: mat-contrast($future-primary, 500) !important;
+    background-color: mat-color($future-semi-accent, 500) !important;
   }
 
   .difficulty-hard {
-    color: mat-contrast($future-primary, 600);
-    background-color: mat-color($future-accent, 500);
+    color: mat-contrast($future-primary, 600) !important;
+    background-color: mat-color($future-accent, 500) !important;
   }
 }

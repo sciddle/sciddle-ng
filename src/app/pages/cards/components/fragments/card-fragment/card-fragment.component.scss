@@ -11,8 +11,8 @@
 
 .word {
   font-family: 'Roboto Slab', serif;
-  font-size: 2.0em;
-  font-weight: 800;
+  font-size: 2.0em !important;
+  font-weight: 800 !important;
   margin-top: 20px !important;
   margin-bottom: 40px !important;
   text-align: center;
@@ -41,8 +41,8 @@
   .container {
     min-height: 110px;
 
-    background-image: url(../../../../../../assets/images/blue_front.png);
-    background-size: 100% 100%;
+    background-image: url(../../../../../../assets/images/blue_front.png) !important;
+    background-size: 100% 100% !important;
   }
 
   .difficultyColorEasy {
@@ -62,8 +62,8 @@
   .container {
     min-height: 110px;
 
-    background-image: url(../../../../../../assets/images/green_front.png);
-    background-size: 100% 100%;
+    background-image: url(../../../../../../assets/images/green_front.png) !important;
+    background-size: 100% 100% !important;
   }
 
   .difficultyColorEasy {
@@ -83,9 +83,9 @@
   .container {
     min-height: 110px;
 
-    background-image: url(../../../../../../assets/images/future-banner.png);
-    background-repeat: no-repeat;
-    background-size: 100% 30px;
+    background-image: url(../../../../../../assets/images/future-banner.png) !important;
+    background-repeat: no-repeat !important;
+    background-size: 100% 30px !important;
   }
 
   .difficultyColorEasy {
