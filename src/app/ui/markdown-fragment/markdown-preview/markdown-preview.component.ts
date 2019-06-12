@@ -89,6 +89,8 @@ export class MarkdownPreviewComponent implements OnChanges {
    * Updates markdown
    */
   updateMarkdown() {
-    this.htmlText = md.render(this.markdownText);
+    if (this.markdownText != null) {
+      this.htmlText = md.render(this.markdownText);
+    }
   }
 }
