@@ -1,0 +1,14 @@
+<h2 mat-dialog-title>{{ dialogTitle }}</h2>
+<mat-dialog-content>
+  <div *ngIf="extract === null" class="full-width">
+    <mat-progress-spinner class="horizontal-center" color="accent" mode="indeterminate">
+    </mat-progress-spinner>
+  </div>
+  <app-markdown-preview *ngIf="extract !== null" [markdownText]="extract"></app-markdown-preview>
+</mat-dialog-content>
+<mat-dialog-actions class="flexcontainer">
+  <div class="flexbox"></div>
+  <button mat-button (click)="confirm()">
+    {{ action }}
+  </button>
+</mat-dialog-actions>

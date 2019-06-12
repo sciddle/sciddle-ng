@@ -9,6 +9,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {StopWatchModule} from '../../ui/stop-watch/stop-watch.module';
 import {InformationDialogModule} from '../../ui/information-dialog/information-dialog.module';
 import {WikipediaModule} from '../../core/wikipedia/wikipedia.module';
+import {MarkdownFragmentModule} from '../../ui/markdown-fragment/markdown-fragment.module';
 
 /**
  * Imports of cards module
@@ -27,6 +28,7 @@ export const CardsImports = [
   AboutDialogModule,
   ConfirmationDialogModule,
   InformationDialogModule,
+  MarkdownFragmentModule,
   StopWatchModule,
   WikipediaModule
 ];
