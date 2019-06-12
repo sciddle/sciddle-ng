@@ -34,3 +34,28 @@
     display: inline-block;
   }
 }
+
+//
+// Theme specific
+//
+
+.blue-theme {
+  .team-name {
+    color: mat-color($blue-accent, 500) !important;
+    font-weight: 700;
+  }
+}
+
+.green-theme {
+  .team-name {
+    color: mat-color($green-accent, 500) !important;
+    font-weight: 700;
+  }
+}
+
+.future-theme {
+  .team-name {
+    color: mat-color($future-accent, 500) !important;
+    font-weight: 700;
+  }
+}

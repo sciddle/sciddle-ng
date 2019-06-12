@@ -49,6 +49,8 @@ export class DifficultySelectionFragmentComponent implements OnInit {
       this.cardsEasy = this.stack.cards.filter(CardsService.isEasy);
       this.cardsMedium = this.stack.cards.filter(CardsService.isMedium);
       this.cardsHard = this.stack.cards.filter(CardsService.isHard);
+
+      console.log(`hard ${JSON.stringify(this.cardsHard)}`);
     }
   }
 

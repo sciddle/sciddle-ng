@@ -74,7 +74,7 @@ export class CardsService {
    * @param card card
    */
   static isEasy(card: Card): boolean {
-    return card.difficulty === 1;
+    return CardsService.isCardPartOfStack(card) && card.difficulty === 1;
   }
 
   /**
@@ -82,7 +82,7 @@ export class CardsService {
    * @param card card
    */
   static isMedium(card: Card): boolean {
-    return card.difficulty === 2;
+    return CardsService.isCardPartOfStack(card) && card.difficulty === 2;
   }
 
   /**
@@ -90,7 +90,7 @@ export class CardsService {
    * @param card card
    */
   static isHard(card: Card): boolean {
-    return card.difficulty === 3;
+    return CardsService.isCardPartOfStack(card) && card.difficulty === 3;
   }
 
   //
@@ -149,7 +149,6 @@ export class CardsService {
       this.notify();
     }
   }
-
 
 
   /**
@@ -228,7 +227,7 @@ export class CardsService {
   public putCardToEnd(stack: Stack, card: Card): Promise<any> {
     return new Promise((resolve) => {
 
-      const maxIndex = CardsService.getMaxIndex(Array.from(this.cards.values()));
+      // const maxIndex = CardsService.getMaxIndex(Array.from(this.cards.values()));
       const minIndex = CardsService.getMinIndex(Array.from(this.cards.values()));
 
       // Move card to last position

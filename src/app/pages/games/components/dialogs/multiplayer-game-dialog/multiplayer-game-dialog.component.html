@@ -41,7 +41,8 @@
 </mat-dialog-content>
 <mat-dialog-actions class="flexcontainer">
   <div class="flexbox"></div>
-  <button mat-button [disabled]="teamCount === -1 || (!difficultyEasy && !difficultyMedium && !difficultyHard)"
+  <button mat-button color="primary"
+          [disabled]="teamCount === -1 || (!difficultyEasy && !difficultyMedium && !difficultyHard)"
           (click)="startGame()">
     STARTEN
   </button>
