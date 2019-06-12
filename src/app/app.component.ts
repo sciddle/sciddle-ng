@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {AfterViewInit, Component, isDevMode, OnInit, ViewEncapsulation} from '@angular/core';
 import {SnackbarService} from './core/ui/services/snackbar.service';
 import {MatSnackBar} from '@angular/material';
 import {PouchDBService} from './core/persistence/services/pouchdb.service';
@@ -19,6 +19,9 @@ export class AppComponent implements OnInit, AfterViewInit {
   /** Default app theme */
   themeClass = 'blue-theme';
 
+  /** Dev mode */
+  devMode = false;
+
   /**
    * Constructor
    * @param overlayContainer overlay container
@@ -32,6 +35,7 @@ export class AppComponent implements OnInit, AfterViewInit {
               private snackbarService: SnackbarService,
               public snackBar: MatSnackBar,
               private themeService: ThemeService) {
+    this.devMode = isDevMode();
   }
 
   //
@@ -101,7 +105,9 @@ export class AppComponent implements OnInit, AfterViewInit {
    * Initializes database sync
    */
   private initializeDatabaseSync() {
-    this.pouchDBService.sync(`http://localhost:5984/${environment.DATABASE_ENTITIES}`);
+    if (this.devMode) {
+      this.pouchDBService.sync(`http://localhost:5984/${environment.DATABASE_ENTITIES}`);
+    }
   }
 
   //
