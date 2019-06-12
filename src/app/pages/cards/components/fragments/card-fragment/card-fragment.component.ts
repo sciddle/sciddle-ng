@@ -70,17 +70,13 @@ export class CardFragmentComponent {
    * Handles click on help button
    */
   onHelpClicked() {
-    const abstractEmitter = new EventEmitter<{ pageURL: string, extract: string }>();
-    abstractEmitter.subscribe(result => {
-      this.dialog.open(WikipediaDialogComponent, {
-        disableClose: false,
-        data: {
-          term: this.card.word,
-          action: 'Verstanden',
-        },
-        autoFocus: false
-      });
+    this.dialog.open(WikipediaDialogComponent, {
+      disableClose: false,
+      data: {
+        term: this.card.word,
+        action: 'Verstanden',
+      },
+      autoFocus: false
     });
-    this.wikipediaService.getExtract(this.card.word, 'de', abstractEmitter);
   }
 }
