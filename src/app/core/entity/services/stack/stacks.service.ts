@@ -40,6 +40,7 @@ export class StacksService {
     StacksService.stacks.set('0', 'climate.json');
     StacksService.stacks.set('1', 'astronomy.json');
     StacksService.stacks.set('2', 'future.json');
+    StacksService.stacks.set('3', 'physics.json');
   }
 
   /**
