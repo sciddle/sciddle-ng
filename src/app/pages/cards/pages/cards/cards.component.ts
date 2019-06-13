@@ -584,6 +584,10 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
         break;
       }
       case GameMode.MULTI_PLAYER: {
+        // Deactivate timer
+        this.startTime = null;
+
+        // Evaluate turn
         this.gamesService.showTurnEvaluation(this.game).then(() => {
         });
         break;
