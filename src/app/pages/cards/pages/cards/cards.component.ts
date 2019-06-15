@@ -456,6 +456,11 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
         }
         break;
       }
+      case 'sort-cards': {
+        this.sortCards().then(() => {
+        });
+        break;
+      }
       case 'shuffle-cards': {
         this.shuffleCards().then(() => {
         });
@@ -686,6 +691,19 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
         console.error(err);
         reject();
       });
+    });
+  }
+
+  /**
+   * Sorts cards
+   */
+  private sortCards(): Promise<any> {
+    return new Promise(() => {
+      this.cardsService.sortStack(this.stack).then((() => {
+        this.stacksPersistenceService.updateStack(this.stack).then(() => {
+          this.snackbarService.showSnackbar('Karten sortiert');
+        });
+      }));
     });
   }
 

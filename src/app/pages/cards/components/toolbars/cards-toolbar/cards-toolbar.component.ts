@@ -1,4 +1,12 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation} from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  isDevMode,
+  Output,
+  ViewEncapsulation
+} from '@angular/core';
 import {Media} from '../../../../../core/ui/model/media.enum';
 import {GameMode} from '../../../../../core/entity/model/game-mode.enum';
 import {environment} from '../../../../../../environments/environment';
@@ -39,6 +47,16 @@ export class CardsToolbarComponent {
   mediaType = Media;
   /** Enum of game mode types */
   gameModeType = GameMode;
+
+  /** Dev mode */
+  devMode = false;
+
+  /**
+   * Constructor
+   */
+  constructor() {
+    this.devMode = isDevMode();
+  }
 
   //
   // Actions

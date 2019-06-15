@@ -7,6 +7,10 @@
   </div>
   <div class="flexbox"></div>
   <div class="toolbar-block end">
+    <button *ngIf="gameMode === gameModeType.SINGLE_PLAYER && devMode" mat-button class="toolbar-menu-item right"
+            (click)="onMenuItemClicked('sort-cards')">
+      <mat-icon svgIcon="sort_by_alpha"></mat-icon>
+    </button>
     <button *ngIf="gameMode === gameModeType.SINGLE_PLAYER" mat-button class="toolbar-menu-item right"
             (click)="onMenuItemClicked('shuffle-cards')">
       <mat-icon svgIcon="shuffle"></mat-icon>
