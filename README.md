@@ -4,7 +4,7 @@
 
 ## Demo
 
-A demo of this app can be found on [https://sciddle.intero.berlin](https://sciddle.intero.berlin)
+A demo of this app can be found on [https://sciddle-1bab1.firebaseapp.com](https://sciddle-1bab1.firebaseapp.com)
 
 ## Purpose
 
