@@ -15,6 +15,9 @@ export class Card extends Entity {
   /** Difficulty of the term to be explained */
   difficulty: number;
 
+  /** Alternate Wikipedia article */
+  alternateWikipediaArticle: string;
+
   /**
    * Constructor
    */
@@ -25,5 +28,7 @@ export class Card extends Entity {
     this.word = '';
     this.taboos = [];
     this.difficulty = 1;
+
+    this.alternateWikipediaArticle = null;
   }
 }

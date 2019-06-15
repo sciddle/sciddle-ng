@@ -18,7 +18,7 @@ export const environment = {
   MIN_CARDS: 2,
   API_DELAY: 500,
   API_TIMEOUT: 2500,
-  MAX_CARD_COUNT: 1000,
+  MAX_CARD_COUNT: 10,
 
   NAME: require('../../package.json').name,
   VERSION: require('../../package.json').version,

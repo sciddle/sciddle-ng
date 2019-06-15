@@ -57,10 +57,25 @@ export class CardFragmentComponent {
     this.dialog.open(WikipediaDialogComponent, {
       disableClose: false,
       data: {
-        term: this.card.word,
+        term: this.getTerm(this.card),
         action: 'Verstanden',
       },
       autoFocus: false
     });
+  }
+
+  //
+  // Helpers
+  //
+
+  /**
+   * Determines term to display in explanation dialog
+   * @param card card
+   */
+  private getTerm(card: Card) {
+    console.log(`this.card ${JSON.stringify(this.card)}`);
+
+    return this.card.alternateWikipediaArticle != null && this.card.alternateWikipediaArticle !== ''
+      ? this.card.alternateWikipediaArticle : this.card.word;
   }
 }
