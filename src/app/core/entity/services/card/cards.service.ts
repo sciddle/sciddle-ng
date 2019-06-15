@@ -37,6 +37,19 @@ export class CardsService {
   }
 
   /**
+   * Sorts cards based on their word
+   * @param cardA first card
+   * @param cardB seconds card
+   */
+  static sortCardsByWord(cardA: Card, cardB: Card) {
+    if (cardA.word != null && cardB.word != null) {
+      return (cardA.word > cardB.word) ? -1 : 1;
+    } else {
+      return 0;
+    }
+  }
+
+  /**
    * Shuffles cards
    * @param cards cards
    */
@@ -162,6 +175,26 @@ export class CardsService {
   //
   // State
   //
+
+  /**
+   * Sorts cards of a given stack
+   * @param stack stack
+   */
+  public sortStack(stack: Stack): Promise<any> {
+    return new Promise((resolve) => {
+      let index = 0;
+
+      // Assign new indices to shuffled cards
+      stack.cards
+        .filter(CardsService.isCardPartOfStack)
+        .sort(CardsService.sortCardsByWord)
+        .forEach(card => {
+          card.index = index++;
+        });
+
+      resolve();
+    });
+  }
 
   /**
    * Shuffles cards of a given stack
