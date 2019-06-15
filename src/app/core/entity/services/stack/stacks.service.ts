@@ -3,6 +3,7 @@ import {Stack} from '../../model/stack/stack.model';
 import {CloneService} from '../clone.service';
 import {Card} from '../../model/card/card.model';
 import {HttpClient} from '@angular/common/http';
+import {environment} from '../../../../../environments/environment';
 
 /**
  * Handles stacks
@@ -103,7 +104,7 @@ export class StacksService {
     const cardsBefore = CloneService.cloneCards(Array.from(cards.values()));
 
     return new Promise((resolve) => {
-      cardsFromAssets.slice(0, this.devMode ? 10 : cardsFromAssets.length).forEach(card => {
+      cardsFromAssets.slice(0, environment.MAX_CARD_COUNT).forEach(card => {
 
         // Get existing card
         const existingCard = cards.get(card.id);

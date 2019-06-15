@@ -2,6 +2,7 @@ import {EventEmitter, Injectable} from '@angular/core';
 import {ConnectionService} from '../../util/services/connection.service';
 import {HttpClient} from '@angular/common/http';
 import {delay, timeout} from 'rxjs/operators';
+import {environment} from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -20,9 +21,10 @@ export class WikipediaService {
    * @param word word
    * @param language language
    * @param t timeout
+   * @param d delay
    * @param abstractEmitter abstract emitter
    */
-  getExtract(word: string, language: string, t: number, abstractEmitter: EventEmitter<{ pageURL?: string, extract: string }>) {
+  getExtract(word: string, language: string, t: number, d: number, abstractEmitter: EventEmitter<{ pageURL?: string, extract: string }>) {
 
     if (abstractEmitter != null) {
 
@@ -52,7 +54,7 @@ export class WikipediaService {
 
       // Call post
       this.http.post(queryURL, [], options)
-        .pipe(timeout(t), delay(500))
+        .pipe(timeout(t), delay(d))
         .subscribe(data => {
           const query = data['query'];
           const pages = query != null ? query['pages'] : null;

@@ -91,7 +91,7 @@ export class WikipediaDialogComponent implements OnInit {
         this.extract = `Das Extrakt kann nicht abgerufen werden`;
       }
     });
-    this.wikipediaService.getExtract(this.term, 'de', environment.API_TIMEOUT, extractEmitter);
+    this.wikipediaService.getExtract(this.term, 'de', environment.API_TIMEOUT, environment.API_DELAY, extractEmitter);
   }
 
   //
