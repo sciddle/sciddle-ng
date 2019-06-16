@@ -129,7 +129,6 @@ export class StacksService {
 
       // Check if cards have been changed
       if (JSON.stringify(cardsAfter).toString() !== JSON.stringify(cardsBefore).toString()) {
-        console.log('DIFF');
         resolve(Array.from(cards.values()));
       }
     });
