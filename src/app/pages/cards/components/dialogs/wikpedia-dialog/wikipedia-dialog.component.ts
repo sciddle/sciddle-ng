@@ -71,7 +71,7 @@ export class WikipediaDialogComponent implements OnInit {
    * Initializes data
    */
   private initializeData() {
-    this.dialogTitle = this.data.term;
+    this.dialogTitle = this.data.term.replace(/_/g, ' ');
     this.term = this.data.term;
     this.action = this.data.action;
   }

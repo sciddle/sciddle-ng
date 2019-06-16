@@ -127,9 +127,6 @@ export class StacksService {
       // Save stacks after merge
       const cardsAfter = CloneService.cloneCards(Array.from(cards.values()));
 
-      console.log(`cardsBefore ${JSON.stringify(cardsBefore)}`);
-      console.log(`cardsAfter ${JSON.stringify(cardsAfter)}`);
-
       // Check if cards have been changed
       if (JSON.stringify(cardsAfter).toString() !== JSON.stringify(cardsBefore).toString()) {
         console.log('DIFF');
