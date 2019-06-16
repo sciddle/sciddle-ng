@@ -48,7 +48,7 @@
     { "entityType": 0, "id": "46", "word": "Fluchtgeschwindigkeit", "taboos": ["Tempo", "Gravitation", "Anziehung", "Unendlich", "Energie" ], "index": 46, "difficulty": 3 },
     { "entityType": 0, "id": "47", "word": "Erwartungswert", "taboos": ["Wahrscheinlichkeit", "Messung", "Quantenphysik", "Integral", "Operator" ], "index": 47, "difficulty": 3 },
     { "entityType": 0, "id": "48", "word": "Experiment", "taboos": ["Überprüfung", "Labor", "Bestätigung", "Messung", "Hypothese" ], "index": 48, "difficulty": 1 },
-    { "entityType": 0, "id": "49", "word": "Faktor", "taboos": ["Koeffizient", "Term", "Ausdruck", "Funktion", "variable" ], "index": 49, "difficulty": 1 },
+    { "entityType": 0, "id": "49", "word": "Faktor", "taboos": ["Koeffizient", "Term", "Ausdruck", "Funktion", "variable" ], "index": 49, "difficulty": 1, "alternateWikipediaArticle": "Umweltfaktor" },
     { "entityType": 0, "id": "50", "word": "Fermion", "taboos": ["Boson", "Teilchen", "Spin", "Pauli-Prinzip", "Elektron" ], "index": 50, "difficulty": 3 },
     { "entityType": 0, "id": "51", "word": "Spaltung", "taboos": ["Kern", "Reaktion", "Zerfall", "Neutron", "Energie" ], "index": 51, "difficulty": 2 },
     { "entityType": 0, "id": "52", "word": "Flüssigkeit", "taboos": ["Flüssigkeit", "Zustand", "Verformung", "Phase", "Substanz" ], "index": 52, "difficulty": 2 },
