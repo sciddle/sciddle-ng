@@ -103,7 +103,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
   public json = JSON;
 
   /** Swing stack control */
-  @ViewChild('swingStack') swingStack: SwingStackComponent;
+  @ViewChild('swingStack', {static: false}) swingStack: SwingStackComponent;
   /** Swing cards control */
   @ViewChildren('swingCards') swingCards: QueryList<SwingCardComponent>;
 

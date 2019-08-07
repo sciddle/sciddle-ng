@@ -1,5 +1,5 @@
 import {Injectable, isDevMode} from '@angular/core';
-import {Subject} from 'rxjs/Subject';
+import {Subject} from 'rxjs';
 import {StacksPersistenceService} from './stacks-persistence.interface';
 import {Stack} from '../../../model/stack/stack.model';
 import {PouchDBService} from '../../../../persistence/services/pouchdb.service';

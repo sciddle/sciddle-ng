@@ -1,5 +1,5 @@
 import {Stack} from '../../../model/stack/stack.model';
-import {Subject} from 'rxjs/Subject';
+import {Subject} from 'rxjs';
 
 /**
  * Interface containing stacks persistence methods
