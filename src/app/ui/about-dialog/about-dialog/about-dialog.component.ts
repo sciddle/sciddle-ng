@@ -22,6 +22,8 @@ export class AboutDialogComponent implements OnInit {
   authorCode = '';
   /** Author of content */
   authorContent = '';
+  /** Scientific supervision */
+  authorScientificSupervision = '';
   /** License of code */
   licenseCode = '';
   /** License of content */

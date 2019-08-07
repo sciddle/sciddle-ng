@@ -510,6 +510,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
             version: environment.VERSION,
             authorCode: environment.AUTHOR_CODE,
             authorContent: environment.AUTHOR_CONTENT,
+            authorScientificSupervision: environment.AUTHOR_SCIENTIFIC_SUPERVISION,
             licenseCode: environment.LICENSE_CODE,
             licenseContent: environment.LICENSE_CONTENT,
             homepage: environment.HOMEPAGE,
