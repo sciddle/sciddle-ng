@@ -5,7 +5,7 @@ import {CardsDeclarations} from '../../cards.declarations';
 import {CardsImports} from '../../cards.imports';
 import {ActivatedRoute, Router} from '@angular/router';
 import {StacksPouchdbService} from '../../../../core/entity/services/stack/persistence/stacks-pouchdb.service';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {BehaviorSubject, Observable, of} from 'rxjs';
 
 describe('CardsComponent', () => {
   let component: CardsComponent;
@@ -18,8 +18,7 @@ describe('CardsComponent', () => {
       providers: [
         {
           provide: ActivatedRoute, useValue: {
-            params: Observable.create(),
-            snapshot: {}
+            params: of({id: 'mock'})
           }
         },
         {provide: Router},
