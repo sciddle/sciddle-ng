@@ -4,6 +4,9 @@ import {HttpClient} from '@angular/common/http';
 import {delay, timeout} from 'rxjs/operators';
 import {environment} from '../../../../environments/environment';
 
+/**
+ * Handles requests against wikipedia API
+ */
 @Injectable({
   providedIn: 'root'
 })

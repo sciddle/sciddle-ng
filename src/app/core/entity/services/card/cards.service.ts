@@ -3,6 +3,9 @@ import {Stack} from '../../model/stack/stack.model';
 import {Card} from '../../model/card/card.model';
 import {Subject} from 'rxjs';
 
+/**
+ * Handles cards management
+ */
 @Injectable({
   providedIn: 'root'
 })

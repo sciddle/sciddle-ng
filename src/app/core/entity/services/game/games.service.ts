@@ -12,6 +12,9 @@ import {GameState} from '../../model/game-state.enum';
 import {TurnState} from '../../model/turn-state.enum';
 import {Card} from '../../model/card/card.model';
 
+/**
+ * Handles games lifecycle
+ */
 @Injectable({
   providedIn: 'root'
 })
