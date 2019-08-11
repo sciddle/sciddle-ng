@@ -11,7 +11,6 @@ pipeline {
         buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
     }
     parameters {
-        string(name: 'REPO_URL', defaultValue: 'git@gitlab.intero.berlin:sciddle-app/sciddlegit', description: 'URL of the repository')
         string(name: 'BASE_REF', defaultValue: 'https://sciddle.intero.berlin', description: 'URL the app shall be accessible from')
         string(name: 'WEB_ROOT', defaultValue: '/var/www/sciddle', description: 'Web root directory for this app')
     }
