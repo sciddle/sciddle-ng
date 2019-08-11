@@ -64,6 +64,7 @@ export class AboutDialogComponent implements OnInit {
     this.version = this.data.version;
     this.authorCode = this.data.authorCode;
     this.authorContent = this.data.authorContent;
+    this.authorScientificSupervision = this.data.authorScientificSupervision;
     this.licenseCode = this.data.licenseCode;
     this.licenseContent = this.data.licenseContent;
     this.homepage = this.data.homepage;
