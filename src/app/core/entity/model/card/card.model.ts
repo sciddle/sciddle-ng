@@ -7,7 +7,7 @@ import {EntityType} from '../entity-type.enum';
 export class Card extends Entity {
 
   /** Index of this card */
-  index: number;
+  index?: number;
   /** Word to be explained */
   word: string;
   /** Words that must not be used during description */
@@ -15,8 +15,12 @@ export class Card extends Entity {
   /** Difficulty of the term to be explained */
   difficulty: number;
 
+  /** Alternate explanation text */
+  alternateExplanationText: string;
   /** Alternate Wikipedia article */
   alternateWikipediaArticle: string;
+  /** Alternate URL */
+  alternateURL: string;
 
   /**
    * Constructor
@@ -29,6 +33,8 @@ export class Card extends Entity {
     this.taboos = [];
     this.difficulty = 1;
 
+    this.alternateExplanationText = null;
     this.alternateWikipediaArticle = null;
+    this.alternateURL = null;
   }
 }

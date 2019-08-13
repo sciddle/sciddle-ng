@@ -1,10 +1,9 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, isDevMode, ViewEncapsulation} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, isDevMode, ViewEncapsulation} from '@angular/core';
 import {Stack} from '../../../../../core/entity/model/stack/stack.model';
 import {Media} from '../../../../../core/ui/model/media.enum';
 import {Card} from '../../../../../core/entity/model/card/card.model';
 import {MaterialColorService} from '../../../../../core/ui/services/material-color.service';
 import {WikipediaService} from '../../../../../core/wikipedia/services/wikipedia.service';
-import {InformationDialogComponent} from '../../../../../ui/information-dialog/information-dialog/information-dialog.component';
 import {MatDialog} from '@angular/material';
 import {WikipediaDialogComponent} from '../../dialogs/wikpedia-dialog/wikipedia-dialog.component';
 
@@ -58,6 +57,9 @@ export class CardFragmentComponent {
       disableClose: false,
       data: {
         term: this.getTerm(this.card),
+        article: this.card.alternateWikipediaArticle,
+        extract: this.card.alternateExplanationText,
+        url: this.card.alternateURL,
         action: 'Verstanden',
       },
       autoFocus: false
@@ -73,8 +75,6 @@ export class CardFragmentComponent {
    * @param card card
    */
   private getTerm(card: Card) {
-    console.log(`this.card ${JSON.stringify(this.card)}`);
-
     return this.card.alternateWikipediaArticle != null && this.card.alternateWikipediaArticle !== ''
       ? this.card.alternateWikipediaArticle : this.card.word;
   }

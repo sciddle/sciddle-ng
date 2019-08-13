@@ -104,7 +104,10 @@ export class StacksService {
     const cardsBefore = CloneService.cloneCards(Array.from(cards.values()));
 
     return new Promise((resolve) => {
-      cardsFromAssets.slice(0, environment.MAX_CARD_COUNT).forEach(card => {
+      cardsFromAssets.slice(0, environment.MAX_CARD_COUNT).forEach((card, index) => {
+        // Dynamically set id and index
+        card.id = index.toString();
+        card.index = index;
 
         // Get existing card
         const existingCard = cards.get(card.id);
@@ -114,6 +117,7 @@ export class StacksService {
           existingCard.word = card.word;
           existingCard.taboos = card.taboos;
           existingCard.difficulty = card.difficulty;
+          existingCard.alternateExplanationText = card.alternateExplanationText;
           existingCard.alternateWikipediaArticle = card.alternateWikipediaArticle;
 
           // Add updated card to map

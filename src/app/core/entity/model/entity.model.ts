@@ -9,7 +9,7 @@ export abstract class Entity {
   /** Entity type */
   entityType: EntityType;
   /** Unique identifier */
-  id: string;
+  id?: string;
 
   /**
    * Constructor
