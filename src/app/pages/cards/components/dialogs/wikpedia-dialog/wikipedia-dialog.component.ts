@@ -18,11 +18,14 @@ export class WikipediaDialogComponent implements OnInit {
 
   /** Term to be displayed */
   term = '';
-  /** Action */
-  action = '';
-
+  /** Wikipedia article */
+  article;
   /** Extract to the given term */
   extract;
+  /** URL to given term */
+  alternateURL;
+  /** Action */
+  action = '';
 
   //
   // Static methods
@@ -73,6 +76,9 @@ export class WikipediaDialogComponent implements OnInit {
   private initializeData() {
     this.dialogTitle = this.data.term.replace(/_/g, ' ');
     this.term = this.data.term;
+    this.article = this.data.article;
+    this.extract = this.data.extract;
+    this.alternateURL = this.data.alternateURL;
     this.action = this.data.action;
   }
 
@@ -80,18 +86,25 @@ export class WikipediaDialogComponent implements OnInit {
    * Initializes extract
    */
   private initializeExtract() {
-    const extractEmitter = new EventEmitter<{ pageURL: string, extract: string }>();
-    extractEmitter.subscribe(result => {
-      if (result != null && result.extract != null) {
-        const extract = WikipediaDialogComponent.getFirstSentences(result.extract, 2, 100);
-        const more = result.pageURL != null ? ` Mehr auf [Wikipedia](` + result.pageURL + `)` : ``;
+    if (this.alternateURL != null) {
+      this.extract = 'Mehr auf [https://fridaysforfuture.de/forderungen/](https://fridaysforfuture.de/forderungen/)';
+    } else if (this.extract == null) {
+      const extractEmitter = new EventEmitter<{ pageURL: string, extract: string }>();
+      extractEmitter.subscribe(result => {
+        if (result != null && result.extract != null) {
+          const extract = WikipediaDialogComponent.getFirstSentences(result.extract, 2, 100);
+          const more = result.pageURL != null ? ` Mehr auf [Wikipedia](` + result.pageURL + `)` : ``;
 
-        this.extract = extract + more;
-      } else {
-        this.extract = `Das Extrakt kann nicht abgerufen werden`;
-      }
-    });
-    this.wikipediaService.getExtract(this.term, 'de', environment.API_TIMEOUT, environment.API_DELAY, extractEmitter);
+          this.extract = extract + more;
+        } else {
+          this.extract = `Das Extrakt kann nicht abgerufen werden`;
+        }
+      });
+      this.wikipediaService.getExtract(this.term, 'de', environment.API_TIMEOUT, environment.API_DELAY, extractEmitter);
+    } else if (this.article != null) {
+      const more = ` Mehr auf [Wikipedia](` + this.article + `)`;
+      this.extract = this.extract + more;
+    }
   }
 
   //
