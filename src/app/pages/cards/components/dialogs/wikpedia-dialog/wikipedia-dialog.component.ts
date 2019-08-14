@@ -18,11 +18,11 @@ export class WikipediaDialogComponent implements OnInit {
 
   /** Term to be displayed */
   term = '';
-  /** Wikipedia article */
-  article;
-  /** Extract to the given term */
-  extract;
-  /** URL to given term */
+  /** Explanation text */
+  explanationText;
+  /** Alternate Wikipedia article */
+  alternateWikipediaArticle;
+  /** Alternate URL */
   alternateURL;
   /** Action */
   action = '';
@@ -82,8 +82,8 @@ export class WikipediaDialogComponent implements OnInit {
   private initializeData() {
     this.dialogTitle = this.data.term.replace(/_/g, ' ');
     this.term = this.data.term;
-    this.article = this.data.article;
-    this.extract = this.data.extract;
+    this.explanationText = this.data.explanationText;
+    this.alternateWikipediaArticle = this.data.alternateWikipediaArticle;
     this.alternateURL = this.data.alternateURL;
     this.action = this.data.action;
   }
@@ -93,25 +93,25 @@ export class WikipediaDialogComponent implements OnInit {
    */
   private initializeExtract() {
     if (this.alternateURL != null) {
-      this.extract = 'Mehr auf [https://fridaysforfuture.de/forderungen/](https://fridaysforfuture.de/forderungen/)';
-    } else if (this.extract == null) {
+      this.explanationText = `Mehr auf [${this.alternateURL}](${this.alternateURL})`;
+    } else {
+      const article = this.alternateWikipediaArticle == null ? this.term : this.alternateWikipediaArticle;
+      console.log(`article ${article}`);
       const extractEmitter = new EventEmitter<{ pageURL: string, extract: string }>();
       extractEmitter.subscribe(result => {
-
+        console.log(`result ${JSON.stringify(result)}`);
         if (result != null && result.extract != null) {
-          const extract = WikipediaDialogComponent.getFirstSentences(result.extract, 2, 100);
-          console.log(`extract ${extract}`);
+          console.log(`alternateExplanationText ${this.explanationText}`);
+
+          const extract = this.explanationText == null ? WikipediaDialogComponent.getFirstSentences(result.extract, 2, 100) : this.explanationText;
           const more = result.pageURL != null ? ` Mehr auf [Wikipedia](` + result.pageURL.replace(' ', '%20') + `)` : ``;
 
-          this.extract = extract + more;
+          this.explanationText = extract + more;
         } else {
-          this.extract = `Das Extrakt kann nicht abgerufen werden`;
+          this.explanationText = `Das Extrakt kann nicht abgerufen werden`;
         }
       });
-      this.wikipediaService.getExtract(this.term, 'de', environment.API_TIMEOUT, environment.API_DELAY, extractEmitter);
-    } else if (this.article != null) {
-      const more = ` Mehr auf [Wikipedia](` + this.article.replace(' ', '%20') + `)`;
-      this.extract = this.extract + more;
+      this.wikipediaService.getExtract(article, 'de', environment.API_TIMEOUT, environment.API_DELAY, extractEmitter);
     }
   }
 
