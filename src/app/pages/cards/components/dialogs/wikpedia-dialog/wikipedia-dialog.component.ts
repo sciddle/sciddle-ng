@@ -32,7 +32,7 @@ export class WikipediaDialogComponent implements OnInit {
   //
 
   /**
-   * Returns the first n sentences of a given text
+   * Returns m characters minimum + the consecutive n sentences of a given text
    * @param text text
    * @param n number of sentences
    * @param m minimum characters
@@ -40,7 +40,13 @@ export class WikipediaDialogComponent implements OnInit {
   static getFirstSentences(text: string, n: number, m: number): string {
     const separator = '. ';
 
-    return text.slice(0, m) + text.slice(m).split(separator).slice(0, n).join(separator) + '.';
+    return text.slice(0, m) // Take first m characters
+      + text.slice(m) // Take everything after first m characters
+        .split(separator) // Split into array of sentences
+        .slice(0, n) // Take first n sentences
+        .join(separator) // Link sentences back together
+        .replace(/\.\s*/g, '. ') // Add blanks after period if needed
+      + '.';
   }
 
   /**
@@ -91,9 +97,11 @@ export class WikipediaDialogComponent implements OnInit {
     } else if (this.extract == null) {
       const extractEmitter = new EventEmitter<{ pageURL: string, extract: string }>();
       extractEmitter.subscribe(result => {
+
         if (result != null && result.extract != null) {
           const extract = WikipediaDialogComponent.getFirstSentences(result.extract, 2, 100);
-          const more = result.pageURL != null ? ` Mehr auf [Wikipedia](` + result.pageURL + `)` : ``;
+          console.log(`extract ${extract}`);
+          const more = result.pageURL != null ? ` Mehr auf [Wikipedia](` + result.pageURL.replace(' ', '%20') + `)` : ``;
 
           this.extract = extract + more;
         } else {
@@ -102,7 +110,7 @@ export class WikipediaDialogComponent implements OnInit {
       });
       this.wikipediaService.getExtract(this.term, 'de', environment.API_TIMEOUT, environment.API_DELAY, extractEmitter);
     } else if (this.article != null) {
-      const more = ` Mehr auf [Wikipedia](` + this.article + `)`;
+      const more = ` Mehr auf [Wikipedia](` + this.article.replace(' ', '%20') + `)`;
       this.extract = this.extract + more;
     }
   }
