@@ -53,13 +53,14 @@ export class CardFragmentComponent {
    * Handles click on help button
    */
   onHelpClicked() {
+    console.log(`alternateExplanationText ${this.card.alternateExplanationText}`);
     this.dialog.open(WikipediaDialogComponent, {
       disableClose: false,
       data: {
         term: this.getTerm(this.card),
-        article: this.card.alternateWikipediaArticle,
-        extract: this.card.alternateExplanationText,
-        url: this.card.alternateURL,
+        explanationText: this.card.alternateExplanationText,
+        alternateWikipediaArticle: this.card.alternateWikipediaArticle,
+        alternateURL: this.card.alternateURL,
         action: 'Verstanden',
       },
       autoFocus: false
