@@ -110,6 +110,8 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
   /** Stack configuration */
   stackConfig: StackConfig;
 
+  /** Factor by which the card is being considered thrown-out, 1=default, 0.5=at half the distance*/
+  private throwOutFactor = 1;
   /** Number of pixels the card needs to be moved before it counts as swiped */
   private throwOutDistance = 800;
 
@@ -168,6 +170,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.initializeMaterial();
     this.initializeMediaSubscription();
 
+    this.initializeThrowOutFactor();
     this.initializeStackConfig();
   }
 
@@ -379,6 +382,8 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
       takeUntil(this.unsubscribeSubject)
     ).subscribe((value) => {
       this.media = value as Media;
+      this.initializeThrowOutFactor();
+      this.initializeStackConfig();
     });
   }
 
@@ -416,13 +421,35 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   /**
+   * Initializes throw-out factor
+   */
+  private initializeThrowOutFactor() {
+    switch (this.media) {
+      case Media.LARGE: {
+        this.throwOutFactor = 0.5;
+        break;
+      }
+      case Media.MEDIUM: {
+        this.throwOutFactor = 0.9;
+        break;
+      }
+      case Media.SMALL: {
+        this.throwOutFactor = 1;
+        break;
+      }
+    }
+  }
+
+  /**
    * Initializes stack config
    */
   private initializeStackConfig() {
+    this.throwOutDistance = 800 * this.throwOutFactor;
     this.stackConfig = {
       allowedDirections: [Direction.LEFT, Direction.RIGHT],
       throwOutConfidence: (offsetX, offsetY, element) => {
-        return Math.min(Math.abs(offsetX) / (element.offsetWidth / 2), 1);
+        console.log(`confidence ${Math.min((Math.abs(offsetX) / (element.offsetWidth / 2)) / this.throwOutFactor, 1)}`);
+        return Math.min((Math.abs(offsetX) / (element.offsetWidth / 2)) / this.throwOutFactor, 1);
       },
       transform: (element, x, y, r) => {
         this.onItemMove(element, x, y, r);
