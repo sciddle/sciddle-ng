@@ -16,5 +16,3 @@ Für jeden richtig geratenen Begriff erhalten das Team dessen Spieler den Begrif
 Auf den Karten ist die Schwierigkeit des Begriffs als Zahl angegeben zwischen 1 (leicht), 2 (mittel) und 3 (schwer). Diese dienen nur zur Orientierung der Spieler.
 #### Das Ende des Spiels: 
 Nachdem jeder Spieler mindestens einen Versuch unternommen hat und alle Teams die gleiche Anzahl von Chancen hatten, Begriffe zu erklären, endet das Spiel. Die Mannschaft mit den meisten Punkten gewinnt.
-
-(Note that this is only one possible way to play Sciddle. You can experiment with the game and ﬁ nd your own versions.)
