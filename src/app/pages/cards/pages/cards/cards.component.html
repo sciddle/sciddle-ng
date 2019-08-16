@@ -46,9 +46,20 @@
         </app-card-fragment>
       </div>
     </div>
-    <div *ngIf="gameMode === gameModeType.MULTI_PLAYER && stack.game != null"
-         class="description-text horizontal-center">
-      Wisch die Karte zur Seite sobald jemand den Begriff erraten hat
+
+    <!-- Non-mobile version -->
+    <div *ngIf="stack.game != null && media !== mediaType.SMALL">
+      <button *ngIf="gameMode === gameModeType.SINGLE_PLAYER" mat-button (click)="onCardThrownOut(null)">NÄCHSTE KARTE
+      </button>
+      <button *ngIf="gameMode === gameModeType.MULTI_PLAYER" mat-button (click)="onCardThrownOut(null)">KARTE WURDE
+        ERRATEN
+      </button>
+    </div>
+    <!-- Mobile version -->
+    <div *ngIf="stack.game != null && media === mediaType.SMALL">
+      <div class="description-text horizontal-center">
+        Wisch die Karte zur Seite sobald jemand den Begriff erraten hat
+      </div>
     </div>
   </div>
   <!-- Turn evaluation -->
