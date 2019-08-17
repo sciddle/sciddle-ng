@@ -32,7 +32,8 @@
   </app-team-information-fragment>
   <!-- Difficulty -->
   <app-difficulty-selection-fragment
-    *ngIf="displayAspect === displayAspectType.DISPLAY_DIFFICULTY_SELECTION && stack.game != null"
+    *ngIf="displayAspect === displayAspectType.DISPLAY_DIFFICULTY_SELECTION
+    && stack.game != null"
     [stack]="stack"
     (difficultySelectedEmitter)="onDifficultySelected($event)"></app-difficulty-selection-fragment>
   <!-- Cards -->

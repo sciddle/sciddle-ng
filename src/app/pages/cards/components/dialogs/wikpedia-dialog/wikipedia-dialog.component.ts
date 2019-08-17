@@ -103,8 +103,12 @@ export class WikipediaDialogComponent implements OnInit {
         if (result != null && result.extract != null) {
           console.log(`alternateExplanationText ${this.explanationText}`);
 
-          const extract = this.explanationText == null ? WikipediaDialogComponent.getFirstSentences(result.extract, 2, 100) : this.explanationText;
-          const more = result.pageURL != null ? ` Mehr auf [Wikipedia](` + result.pageURL.replace(' ', '%20') + `)` : ``;
+          const extract = this.explanationText == null
+            ? WikipediaDialogComponent.getFirstSentences(result.extract, 2, 100)
+            : this.explanationText;
+          const more = result.pageURL != null
+            ? ` Mehr auf [Wikipedia](` + result.pageURL.replace(' ', '%20') + `)`
+            : ``;
 
           this.explanationText = extract + more;
         } else {

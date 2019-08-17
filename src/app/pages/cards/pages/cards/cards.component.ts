@@ -110,7 +110,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
   /** Stack configuration */
   stackConfig: StackConfig;
 
-  /** Factor by which the card is being considered thrown-out, 1=default, 0.5=at half the distance*/
+  /** Factor by which the card is being considered thrown-out, 1=default, 0.5=at half the distance */
   private throwOutFactor = 1;
   /** Number of pixels the card needs to be moved before it counts as swiped */
   private throwOutDistance = 800;
