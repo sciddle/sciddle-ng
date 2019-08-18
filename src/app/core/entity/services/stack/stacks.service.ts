@@ -52,7 +52,20 @@ export class StacksService {
 
     return Array.from(this.stacks.keys()).filter(id => {
       return (!stacks.some(existingStack => {
-        return existingStack.id === id;
+        return existingStack != null && existingStack.id === id;
+      }));
+    });
+  }
+
+  /**
+   * Returns IDs of uninitialized stacks
+   * @param stacks already existing stacks
+   */
+  static getUninitializedDefaultStackIDs(stacks: Stack[]): string[] {
+
+    return [environment.DEFAULT_STACK.toString()].filter(id => {
+      return (!stacks.some(existingStack => {
+        return existingStack != null && existingStack.id === id;
       }));
     });
   }

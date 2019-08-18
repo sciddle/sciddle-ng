@@ -22,35 +22,6 @@
   }
 }
 
-.blue-theme {
-  .toolbar-title {
-    color: mat-color($blue-primary, 500);
-    font-family: 'Black Han Sans', sans-serif;
-    font-size: 1.5em;
-    text-transform: uppercase;
-    vertical-align: bottom;
-  }
-}
-
-.green-theme {
-  .toolbar-title {
-    color: mat-color($green-primary, 500);
-    font-family: 'Black Han Sans', sans-serif;
-    font-size: 1.5em;
-    text-transform: uppercase;
-    vertical-align: bottom;
-  }
-}
-
-.future-theme {
-  .toolbar-title {
-    color: mat-color($future-primary, 500);
-    font-family: 'Montserrat', sans-serif !important;
-    font-size: 1.5em;
-    vertical-align: bottom;
-  }
-}
-
 .toolbar-block {
   padding-left: 10px;
   padding-right: 10px;
@@ -72,6 +43,70 @@
 
 .end {
   text-align: end;
+}
+
+//
+// Theme specific
+//
+
+.blue-theme {
+  .toolbar-title {
+    color: mat-color($blue-primary, 500);
+    font-family: 'Black Han Sans', sans-serif;
+    font-size: 1.5em;
+    text-transform: uppercase;
+    vertical-align: bottom;
+  }
+}
+
+.green-theme {
+  .toolbar-title {
+    color: mat-color($green-primary, 500);
+    font-family: 'Black Han Sans', sans-serif;
+    font-size: 1.5em;
+    text-transform: uppercase;
+    vertical-align: bottom;
+  }
+}
+
+.future-theme {
+  .toolbar {
+    border-top: 5px solid #006eb3;
+
+    @media #{$breakpoint-medium} {
+      background: white !important;
+
+      height: 80px;
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+
+    @media #{$breakpoint-large} {
+      background: white !important;
+
+      height: 80px;
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+  }
+
+  .toolbar-title {
+    color: mat-color($future-primary, 800) !important;
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 1.4em;
+    font-weight: 800;
+    vertical-align: bottom;
+  }
+
+  .toolbar-logo {
+    height: 35px;
+    vertical-align: middle;
+    margin-right: 10px;
+  }
+
+  .icon {
+    fill: mat-color($future-primary, 800) !important;
+  }
 }
 
 .search-form-field {

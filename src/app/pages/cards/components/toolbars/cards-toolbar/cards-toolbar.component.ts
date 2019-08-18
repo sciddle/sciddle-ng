@@ -10,6 +10,8 @@ import {
 import {Media} from '../../../../../core/ui/model/media.enum';
 import {GameMode} from '../../../../../core/entity/model/game-mode.enum';
 import {environment} from '../../../../../../environments/environment';
+import {Variant} from '../../../../../core/util/model/variant.enum';
+import {VariantService} from '../../../../../core/util/services/variant.service';
 
 /**
  * Displays stacks toolbar
@@ -47,12 +49,14 @@ export class CardsToolbarComponent {
   mediaType = Media;
   /** Enum of game mode types */
   gameModeType = GameMode;
+  /** Enum of variants */
+  variantType = Variant;
 
   /** Dev mode */
   devMode = false;
 
   /** App variant */
-  variant = environment.VARIANT;
+  variant = VariantService.getVariant();
 
   /**
    * Constructor

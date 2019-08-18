@@ -85,7 +85,7 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
    * Handles on-init lifecycle phase
    */
   ngOnInit() {
-    this.initializeStackSubscription();
+    this.initializeStacksSubscription();
 
     this.initializeTheme();
     this.initializeMaterial();
@@ -112,9 +112,9 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
   //
 
   /**
-   * Initializes stack subscription
+   * Initializes stacks subscription
    */
-  private initializeStackSubscription() {
+  private initializeStacksSubscription() {
     this.stacksPersistenceService.stacksSubject.pipe(
       takeUntil(this.unsubscribeSubject)
     ).subscribe((value) => {
@@ -141,14 +141,14 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
         this.stacksPersistenceService.updateStack(mergedStack).then(() => {
         });
         this.snackbarService.showSnackbar('Neue Karten geladen');
-      }, reject => {
+      }, () => {
       });
     });
   }
 
   /**
    * Initialize uninitialized stacks
-   * @param stacks existing stack
+   * @param stacks existing stacks
    */
   private initializeUninitializedStacks(stacks: Stack[]) {
     StacksService.getUninitializedStackIDs(stacks).forEach(stackID => {

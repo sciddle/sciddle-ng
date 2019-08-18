@@ -114,7 +114,9 @@ export class StacksPouchdbService implements StacksPersistenceService {
       // Create stack
       return this.pouchDBService.upsert(stack.id, stack).then(() => {
         this.stacks.set(stack.id, stack);
+        this.stack = stack;
         this.notifyMultipleStacks();
+        this.notifySingleStack();
         resolve();
       });
     });
@@ -145,6 +147,7 @@ export class StacksPouchdbService implements StacksPersistenceService {
       // Update stack
       return this.pouchDBService.upsert(stack.id, stack).then(() => {
         this.stacks.set(stack.id, stack);
+        this.stack = stack;
         this.notifyMultipleStacks();
         this.notifySingleStack();
         resolve();
@@ -177,6 +180,7 @@ export class StacksPouchdbService implements StacksPersistenceService {
       return this.pouchDBService.remove(stack.id, stack).then(() => {
         this.stacks.delete(stack.id);
         this.notifyMultipleStacks();
+        this.notifySingleStack();
         resolve();
       });
     });

@@ -22,20 +22,6 @@
   }
 }
 
-.toolbar-menu-item {
-  vertical-align: top;
-
-  @media #{$breakpoint-small} {
-    padding: 0 10px;
-  }
-  @media #{$breakpoint-medium} {
-    padding: 0 10px;
-  }
-  @media #{$breakpoint-large} {
-    padding: 0 20px;
-  }
-}
-
 .toolbar-block {
   padding-left: 10px;
   padding-right: 10px;
@@ -114,18 +100,18 @@
     }
   }
 
-  .toolbar-logo {
-    height: 35px;
-    vertical-align: middle;
-    margin-right: 10px;
-  }
-
   .toolbar-title {
     color: mat-color($future-primary, 800) !important;
     font-family: 'Montserrat', sans-serif !important;
     font-size: 1.4em;
     font-weight: 800;
     vertical-align: bottom;
+  }
+
+  .toolbar-logo {
+    height: 35px;
+    vertical-align: middle;
+    margin-right: 10px;
   }
 
   .card-count {
