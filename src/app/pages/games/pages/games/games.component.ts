@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Inject, OnDestroy, OnInit} from '@angular/core';
+import {AfterViewInit, Component, Inject, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {SnackbarService} from '../../../../core/ui/services/snackbar.service';
 import {GamesService} from '../../../../core/entity/services/game/games.service';
@@ -57,6 +57,9 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
   /** Helper subject used to finish other subscriptions */
   private unsubscribeSubject = new Subject();
 
+  /** App variant */
+  variant = environment.VARIANT;
+
   /**
    * Constructor
    * @param cardsService cards service
@@ -104,6 +107,8 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.initializeMaterial();
     this.initializeMediaSubscription();
+
+    this.fetchEntities();
   }
 
   /**
@@ -198,11 +203,29 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   /**
+   * Fetches entities if necessary
+   */
+  private fetchEntities() {
+    if (this.variant === 'S4F') {
+      this.stacksPersistenceService.findStackByID(environment.DEFAULT_STACK.toString());
+    }
+  }
+
+  /**
    * Initializes title
    * @param stack stack
    */
   private initializeTitle(stack: Stack) {
-    this.title = stack != null && stack.title != null ? stack.title : this.title;
+    switch (this.variant) {
+      case 'Sciddle': {
+        this.title = stack != null && stack.title != null ? stack.title : this.title;
+        break;
+      }
+      case 'S4F': {
+        this.title = 'Sciddle';
+        break;
+      }
+    }
   }
 
   /**

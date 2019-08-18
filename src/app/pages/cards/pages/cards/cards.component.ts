@@ -118,6 +118,9 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
   /** Dev mode */
   devMode = false;
 
+  /** App variant */
+  variant = environment.VARIANT;
+
   /**
    * Constructor
    * @param cardsService cards service
@@ -392,7 +395,16 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    * @param stack stack
    */
   private initializeTitle(stack: Stack) {
-    this.title = stack != null && stack.title != null ? stack.title : this.title;
+    switch (this.variant) {
+      case 'Sciddle': {
+        this.title = stack != null && stack.title != null ? stack.title : this.title;
+        break;
+      }
+      case 'S4F': {
+        this.title = 'Sciddle';
+        break;
+      }
+    }
   }
 
   /**
@@ -426,11 +438,11 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
   private initializeThrowOutFactor() {
     switch (this.media) {
       case Media.LARGE: {
-        this.throwOutFactor = 0.5;
+        this.throwOutFactor = 1;
         break;
       }
       case Media.MEDIUM: {
-        this.throwOutFactor = 0.9;
+        this.throwOutFactor = 1;
         break;
       }
       case Media.SMALL: {
@@ -448,7 +460,6 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.stackConfig = {
       allowedDirections: [Direction.LEFT, Direction.RIGHT],
       throwOutConfidence: (offsetX, offsetY, element) => {
-        console.log(`confidence ${Math.min((Math.abs(offsetX) / (element.offsetWidth / 2)) / this.throwOutFactor, 1)}`);
         return Math.min((Math.abs(offsetX) / (element.offsetWidth / 2)) / this.throwOutFactor, 1);
       },
       transform: (element, x, y, r) => {
@@ -694,8 +705,6 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
 
     // Save stack
     this.stacksPersistenceService.updateStack(this.stack).then(() => {
-      // Navigate to game page
-      // this.router.navigate([`/${ROUTE_GAMES}/${this.stack.id}`]).then();
       this.router.navigate([`/${ROUTE_STACKS}`]).then();
     });
   }

@@ -4,7 +4,8 @@ import {GamesService} from '../core/entity/services/game/games.service';
 import {STACK_PERSISTENCE_POUCHDB} from '../core/entity/entity.module';
 import {StacksPersistenceService} from '../core/entity/services/stack/persistence/stacks-persistence.interface';
 import {Stack} from '../core/entity/model/stack/stack.model';
-import {ROUTE_CARDS, ROUTE_STACKS} from '../app.routes';
+import {ROUTE_CARDS, ROUTE_GAMES, ROUTE_STACKS} from '../app.routes';
+import {environment} from '../../environments/environment';
 
 /**
  * Checks if it is necessary to show game page
@@ -31,24 +32,19 @@ export class GameGuard implements CanActivate {
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
     return new Promise((resolve) => {
 
-      this.stacksPersistenceService.stackSubject.subscribe((value) => {
-        if (value != null) {
-          const stack = value as Stack;
+      const variant = environment.VARIANT;
 
-          if (GamesService.existsGame(stack)) {
-            this.router.navigate([`${ROUTE_CARDS}/${stack.id}`]).then();
-            resolve(false);
-          } else {
-            resolve(true);
-          }
-        } else {
-          this.router.navigate([`${ROUTE_STACKS}`]).then();
-          resolve(false);
+      switch (variant) {
+        case 'Sciddle': {
+          resolve(true);
+          break;
         }
-      });
-
-      const id = next.paramMap.get('id');
-      this.stacksPersistenceService.findStackByID(id);
+        case 'S4F': {
+          this.router.navigate([`${ROUTE_GAMES}`]).then();
+          resolve(false);
+          break;
+        }
+      }
     });
   }
 }
