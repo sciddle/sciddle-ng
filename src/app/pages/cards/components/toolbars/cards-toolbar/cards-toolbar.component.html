@@ -1,19 +1,20 @@
 <mat-toolbar class="toolbar flexcontainer">
   <div class="toolbar-block start">
     <button mat-button class="toolbar-menu-item" (click)="onMenuItemClicked('back')">
-      <mat-icon svgIcon="arrow_back"></mat-icon>
+      <mat-icon class="icon" svgIcon="arrow_back"></mat-icon>
     </button>
+    <img  *ngIf="media != mediaType.SMALL" class="toolbar-logo" style="height: 35px" src="../../../../../../assets/images/sf4_logo_b.png" alt="logo"/>
     <span *ngIf="media != mediaType.SMALL" class="toolbar-title">{{ title }}</span>
   </div>
   <div class="flexbox"></div>
   <div class="toolbar-block end">
     <button *ngIf="gameMode === gameModeType.SINGLE_PLAYER && devMode" mat-button class="toolbar-menu-item right"
             (click)="onMenuItemClicked('sort-cards')">
-      <mat-icon svgIcon="sort_by_alpha"></mat-icon>
+      <mat-icon class="icon" svgIcon="sort_by_alpha"></mat-icon>
     </button>
     <button *ngIf="gameMode === gameModeType.SINGLE_PLAYER" mat-button class="toolbar-menu-item right"
             (click)="onMenuItemClicked('shuffle-cards')">
-      <mat-icon svgIcon="shuffle"></mat-icon>
+      <mat-icon class="icon" svgIcon="shuffle"></mat-icon>
     </button>
     <button *ngIf="useTimeLimit && startTime != null" mat-flat-button color="primary" class="toolbar-menu-item right">
       <app-stop-watch [duration]=timerDuration [startTime]="startTime"
@@ -23,20 +24,20 @@
       <span class="card-count">{{ cardCount }}</span>
     </button>
     <button mat-button class="toolbar-menu-item right" [matMenuTriggerFor]="menu">
-      <mat-icon svgIcon="more_vert"></mat-icon>
+      <mat-icon class="icon" svgIcon="more_vert"></mat-icon>
     </button>
     <mat-menu #menu="matMenu">
       <button mat-menu-item (click)="onMenuItemClicked('manual')">
-        <mat-icon svgIcon="format_align_left"></mat-icon>
+        <mat-icon class="icon" svgIcon="format_align_left"></mat-icon>
         <span>Anleitung</span>
       </button>
       <mat-divider></mat-divider>
       <button mat-menu-item (click)="onMenuItemClicked('open-source')">
-        <mat-icon svgIcon="open_source_initiative"></mat-icon>
+        <mat-icon class="icon" svgIcon="open_source_initiative"></mat-icon>
         <span>Open Source</span>
       </button>
       <button mat-menu-item (click)="onMenuItemClicked('about')">
-        <mat-icon svgIcon="blank"></mat-icon>
+        <mat-icon class="icon" svgIcon="blank"></mat-icon>
         <span>Über die App</span>
       </button>
     </mat-menu>

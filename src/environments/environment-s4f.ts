@@ -12,10 +12,10 @@ export const environment = {
   DATABASE_ENTITIES: 'sciddle-dev',
   DATABASE_SETTINGS: 'sciddle_settings-dev',
 
-  VARIANT: 'Sciddle',
+  VARIANT: 'S4F',
 
   TIMER: 10,
-  DEFAULT_STACK: 0,
+  DEFAULT_STACK: 2,
 
   MIN_CARDS: 2,
   API_DELAY: 500,

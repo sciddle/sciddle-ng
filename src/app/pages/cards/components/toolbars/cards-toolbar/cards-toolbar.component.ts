@@ -51,6 +51,9 @@ export class CardsToolbarComponent {
   /** Dev mode */
   devMode = false;
 
+  /** App variant */
+  variant = environment.VARIANT;
+
   /**
    * Constructor
    */

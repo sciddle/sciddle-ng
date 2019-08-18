@@ -1,0 +1,49 @@
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Monterrat';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Monterrat'), local('Monterrat-Regular');
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Monterrat';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Monterrat'), local('Monterrat-Regular');
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Monterrat';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Monterrat'), local('Monterrat-Regular');
+}
+/* greek */
+@font-face {
+  font-family: 'Monterrat';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Monterrat'), local('Monterrat-Regular');
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Monterrat';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Monterrat'), local('Monterrat-Regular');
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Monterrat';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Monterrat'), local('Monterrat-Regular');
+}
+/* latin */
+@font-face {
+  font-family: 'Monterrat';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Monterrat'), local('Monterrat-Regular');
+}

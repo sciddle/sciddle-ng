@@ -7,6 +7,8 @@ export const environment = {
   DATABASE_ENTITIES: 'sciddle',
   DATABASE_SETTINGS: 'sciddle_settings',
 
+  VARIANT: 'Sciddle',
+
   TIMER: 30,
   DEFAULT_STACK: 0,
 

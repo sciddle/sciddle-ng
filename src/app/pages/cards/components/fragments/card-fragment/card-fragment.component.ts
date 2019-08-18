@@ -53,7 +53,6 @@ export class CardFragmentComponent {
    * Handles click on help button
    */
   onHelpClicked() {
-    console.log(`alternateExplanationText ${this.card.alternateExplanationText}`);
     this.dialog.open(WikipediaDialogComponent, {
       disableClose: false,
       data: {
