@@ -1,6 +1,8 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation} from '@angular/core';
 import {Media} from '../../../../../core/ui/model/media.enum';
 import {environment} from '../../../../../../environments/environment';
+import {Variant} from '../../../../../core/util/model/variant.enum';
+import {VariantService} from '../../../../../core/util/services/variant.service';
 
 /**
  * Displays games toolbar
@@ -23,9 +25,11 @@ export class GamesToolbarComponent {
 
   /** Enum for media types */
   mediaType = Media;
+  /** Enum of variants */
+  variantType = Variant;
 
   /** App variant */
-  variant = environment.VARIANT;
+  variant = VariantService.getVariant();
 
   //
   // Actions

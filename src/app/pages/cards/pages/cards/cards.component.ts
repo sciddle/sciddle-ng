@@ -1,14 +1,4 @@
-import {
-  AfterViewInit,
-  Component,
-  Inject,
-  isDevMode,
-  OnDestroy,
-  OnInit,
-  QueryList,
-  ViewChild,
-  ViewChildren
-} from '@angular/core';
+import {AfterViewInit, Component, Inject, isDevMode, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {Media} from '../../../../core/ui/model/media.enum';
 import {environment} from '../../../../../environments/environment';
 import {MatDialog, MatIconRegistry} from '@angular/material';
@@ -39,6 +29,8 @@ import {ROUTE_GAMES, ROUTE_STACKS} from '../../../../app.routes';
 import {Theme} from '../../../../core/ui/model/theme.enum';
 import {ThemeService} from '../../../../core/ui/services/theme.service';
 import {OverlayContainer} from '@angular/cdk/overlay';
+import {VariantService} from '../../../../core/util/services/variant.service';
+import {Variant} from '../../../../core/util/model/variant.enum';
 
 export enum DisplayAspect {
   DISPLAY_CARDS,
@@ -181,16 +173,25 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    * Handles after-view-init lifecycle phase
    */
   ngAfterViewInit() {
-    this.route.params.subscribe(() => {
-      this.id = this.route.snapshot.paramMap.get('id');
+    // Try to load existing stack
+    switch (VariantService.getVariant()) {
+      case Variant.SCIDDLE: {
+        this.route.params.subscribe(() => {
+          this.id = this.route.snapshot.paramMap.get('id');
+          if (this.id != null) {
+            this.findEntities(this.id);
+          } else {
+            this.navigateBack();
+          }
+        });
 
-      // Try to load existing stack
-      if (this.id != null) {
-        this.findEntities(this.id);
-      } else {
-        this.navigateBack();
+        break;
       }
-    });
+      case Variant.S4F: {
+        this.stacksPersistenceService.findStackByID(environment.DEFAULT_STACK.toString());
+        break;
+      }
+    }
   }
 
   /**
@@ -395,12 +396,12 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    * @param stack stack
    */
   private initializeTitle(stack: Stack) {
-    switch (this.variant) {
-      case 'Sciddle': {
+    switch (VariantService.getVariant()) {
+      case Variant.SCIDDLE: {
         this.title = stack != null && stack.title != null ? stack.title : this.title;
         break;
       }
-      case 'S4F': {
+      case Variant.S4F: {
         this.title = 'Sciddle';
         break;
       }
