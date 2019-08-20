@@ -167,7 +167,15 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
         this.navigateBack();
       }
 
-      this.initializeUninitializedStack(stack);
+      switch (VariantService.getVariant()) {
+        case Variant.SCIDDLE: {
+          break;
+        }
+        case Variant.S4F: {
+          this.initializeUninitializedStack(stack);
+          break;
+        }
+      }
     });
   }
 
