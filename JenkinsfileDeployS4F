@@ -4,9 +4,6 @@ pipeline {
             label 'master'
         }
     }
-    triggers {
-        pollSCM('H/5 * * * *')
-    }
     options {
         buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
     }
@@ -28,7 +25,7 @@ pipeline {
         stage('Build Angular') {
             steps {
                 sh "npm install"
-                sh "npm run build-prod -- --configuration='production-s4f' --verbose --base-href ${params.BASE_REF}"
+                sh "npm run build-prod -- --deleteOutputPath=true --configuration=production-s4f --outputPath=dist/sciddle-s4f"
             }
         }
         stage('Lint') {
@@ -54,6 +51,11 @@ pipeline {
             steps {
                 sh "npm run test"
                 junit allowEmptyResults: true, testResults: 'reports/**/test-results.xml'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                sh "firebase deploy --project sciddle-riddle --only hosting:sciddle-s4f --token ${FIREBASE_TOKEN}"
             }
         }
     }
