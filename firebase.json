@@ -1,0 +1,16 @@
+{
+  "hosting": [
+    {
+      "target": "sciddle-riddle",
+      "public": "dist/sciddle-riddle",
+      "ignore": [ "firebase.json", "**/.*", "**/node_modules/**" ],
+      "rewrites": [ { "source": "**", "destination": "/index.html" } ]
+    },
+    {
+      "target": "sciddle-s4f",
+      "public": "dist/sciddle-s4f",
+      "ignore": [ "firebase.json", "**/.*", "**/node_modules/**" ],
+      "rewrites": [ { "source": "**", "destination": "/index.html" } ]
+    }
+  ]
+}
