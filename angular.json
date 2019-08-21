@@ -65,6 +65,10 @@
                 {
                   "replace": "src/app/app-routing.module.ts",
                   "with": "src/app/app-routing-s4f.module.ts"
+                },
+                {
+                  "replace": "src/manifest.json",
+                  "with": "src/manifest-s4f.json"
                 }
               ],
               "optimization": false,
@@ -95,6 +99,10 @@
                 {
                   "replace": "src/app/app-routing.module.ts",
                   "with": "src/app/app-routing-s4f.module.ts"
+                },
+                {
+                  "replace": "src/manifest.json",
+                  "with": "src/manifest-s4f.json"
                 }
               ],
               "optimization": true,
