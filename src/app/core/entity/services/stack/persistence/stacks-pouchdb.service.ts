@@ -137,8 +137,9 @@ export class StacksPouchdbService implements StacksPersistenceService {
   /**
    * Updates an existing stack
    * @param stack stack to be updated
+   * @param notify whether or not to notify subscribers
    */
-  public updateStack(stack: Stack): Promise<any> {
+  public updateStack(stack: Stack, notify = true): Promise<any> {
     return new Promise((resolve, reject) => {
       if (stack == null) {
         reject();
@@ -148,11 +149,21 @@ export class StacksPouchdbService implements StacksPersistenceService {
       return this.pouchDBService.upsert(stack.id, stack).then(() => {
         this.stacks.set(stack.id, stack);
         this.stack = stack;
-        this.notifyMultipleStacks();
-        this.notifySingleStack();
+        if (notify) {
+          this.notifyMultipleStacks();
+          this.notifySingleStack();
+        }
         resolve();
       });
     });
+  }
+
+  /**
+   * Updates an existing stack without triggering notification
+   * @param stack stack to be updated
+   */
+  public updateStackWithoutNotification(stack: Stack): Promise<any> {
+    return this.updateStack(stack, false);
   }
 
   /**

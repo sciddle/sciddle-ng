@@ -579,8 +579,38 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    * Handles click on display team
    */
   onDisplayTeamClicked() {
-    this.gamesService.showDifficultySelection(this.game).then(() => {
-    });
+    // Count cards by difficulty
+    const easyCardsInStack = this.cards.filter(CardsService.isCardPartOfStack).filter(CardsService.isEasy).length > 0;
+    const mediumCardsInStack = this.cards.filter(CardsService.isCardPartOfStack).filter(CardsService.isMedium).length > 0;
+    const hardCardsInStack = this.cards.filter(CardsService.isCardPartOfStack).filter(CardsService.isHard).length > 0;
+
+    // Count how many different difficulties the stack contains
+    let difficultyCount = 0;
+    difficultyCount += (easyCardsInStack) ? 1 : 0;
+    difficultyCount += (mediumCardsInStack) ? 1 : 0;
+    difficultyCount += (hardCardsInStack) ? 1 : 0;
+
+    // Check if more than one kind of difficulty is contained in stack
+    if (difficultyCount > 1) {
+      // Show difficulty selection
+      this.gamesService.showDifficultySelection(this.game).then(() => {
+      });
+    } else {
+      // Skip difficulty selection and continue
+
+      let difficulty = 0;
+      if (easyCardsInStack) {
+        difficulty = 1;
+      }
+      if (mediumCardsInStack) {
+        difficulty = 2;
+      }
+      if (hardCardsInStack) {
+        difficulty = 3;
+      }
+
+      this.onDifficultySelected(difficulty);
+    }
   }
 
   /**

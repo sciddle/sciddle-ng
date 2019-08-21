@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output, ViewEncapsulation} from '@angular/core';
+import {Component, EventEmitter, Input, Output, ViewEncapsulation} from '@angular/core';
 
 /**
  * Displays difficulty selection fragment
@@ -11,15 +11,15 @@ import {Component, EventEmitter, Output, ViewEncapsulation} from '@angular/core'
 })
 export class DifficultySelectionFragmentComponent {
 
+  /** Selected difficulty easy */
+  @Input() difficultyEasy;
+  /** Selected difficulty medium */
+  @Input() difficultyMedium;
+  /** Selected difficulty hard */
+  @Input() difficultyHard;
   /** Event emitter indicating changes in difficulty selection */
   @Output() difficultySelectionChangedEmitter = new EventEmitter<{ difficulty: number, selected: boolean }>();
 
-  /** Selected difficulty easy */
-  public difficultyEasy = false;
-  /** Selected difficulty medium */
-  public difficultyMedium = false;
-  /** Selected difficulty hard */
-  public difficultyHard = false;
 
   //
   // Actions

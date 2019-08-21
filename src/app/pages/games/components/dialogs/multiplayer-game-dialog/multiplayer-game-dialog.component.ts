@@ -18,13 +18,13 @@ export class MultiplayerGameDialogComponent implements OnInit {
   /** Selected time limit mode */
   public useTimeLimit = false;
   /** Selected team count */
-  public teamCount = -1;
+  public teamCount = 3;
   /** Selected difficulty easy */
-  public difficultyEasy = false;
+  public difficultyEasy = true;
   /** Selected difficulty medium */
-  public difficultyMedium = false;
+  public difficultyMedium = true;
   /** Selected difficulty hard */
-  public difficultyHard = false;
+  public difficultyHard = true;
   /** Selected card count */
   public cardCount = 0;
 
