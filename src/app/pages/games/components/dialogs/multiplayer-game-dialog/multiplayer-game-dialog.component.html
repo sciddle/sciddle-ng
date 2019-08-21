@@ -23,7 +23,11 @@
         </button>
       </span>
 
-    <app-difficulty-selection-fragment (difficultySelectionChangedEmitter)="onDifficultySelected($event)">
+    <app-difficulty-selection-fragment
+      [difficultyEasy]="difficultyEasy"
+      [difficultyMedium]="difficultyMedium"
+      [difficultyHard]="difficultyHard"
+      (difficultySelectionChangedEmitter)="onDifficultySelected($event)">
     </app-difficulty-selection-fragment>
 
     <div class="description-text">Anzahl der Karten</div>

@@ -424,10 +424,17 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
 
     multiplayerGameDialogRef.afterClosed().subscribe(result => {
       if (result != null) {
-        this.gameService.initializeMultiPlayerGame(this.stack, result.teamCount, result.useTimeLimit,
-          result.difficultyEasy, result.difficultyMedium, result.difficultyHard, result.cardCount).then(() => {
+        this.gameService.initializeMultiPlayerGame(
+          this.stack,
+          result.teamCount,
+          result.useTimeLimit,
+          result.difficultyEasy,
+          result.difficultyMedium,
+          result.difficultyHard,
+          result.cardCount).then(() => {
+
           this.cardsService.shuffleStack(this.stack).then();
-          this.stacksPersistenceService.updateStack(this.stack).then(() => {
+          this.stacksPersistenceService.updateStackWithoutNotification(this.stack).then(() => {
             switch (VariantService.getVariant()) {
               case Variant.SCIDDLE: {
                 this.router.navigate([`/${ROUTE_CARDS}/${this.stack.id}`]).then();
