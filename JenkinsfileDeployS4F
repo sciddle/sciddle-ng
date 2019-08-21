@@ -25,7 +25,7 @@ pipeline {
         stage('Build Angular') {
             steps {
                 sh "npm install"
-                sh "npm run build-prod -- --deleteOutputPath=true --configuration=production-s4f --outputPath=dist/sciddle-s4f"
+                sh "npm run build-prod-s4f"
             }
         }
         stage('Lint') {
@@ -56,6 +56,17 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh "firebase deploy --project sciddle-riddle --only hosting:sciddle-s4f --token ${FIREBASE_TOKEN}"
+            }
+        }
+        stage('Release') {
+            steps {
+                sh "npm run release-only-web-s4f"
+            }
+        }
+        stage('Results') {
+            steps {
+                // junit '**/jslint-test-results.xml'
+                archive '**/*.zip'
             }
         }
     }
