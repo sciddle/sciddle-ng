@@ -101,11 +101,15 @@
   }
 
   .toolbar-title {
-    color: mat-color($future-primary, 800) !important;
+    color: #213665 !important;
     font-family: 'Montserrat', sans-serif !important;
     font-size: 1.4em;
     font-weight: 800;
     vertical-align: text-top;
+
+    .secondary {
+      color: #006eb3 !important;
+    }
   }
 
   .toolbar-logo {
