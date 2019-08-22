@@ -3,7 +3,7 @@ import {
   Component,
   EventEmitter,
   Input,
-  isDevMode,
+  isDevMode, OnInit,
   Output,
   ViewEncapsulation
 } from '@angular/core';

@@ -9,7 +9,8 @@
     <button mat-button class="toolbar-menu-item" (click)="onMenuItemClicked('back')">
       <mat-icon svgIcon="arrow_back"></mat-icon>
     </button>
-    <img  *ngIf="media != mediaType.SMALL" class="toolbar-logo" style="height: 35px" src="../../../../../../assets/images/sf4_logo_b.png" alt="logo"/>
+    <img *ngIf="media != mediaType.SMALL" class="toolbar-logo" style="height: 35px"
+         src="../../../../../../assets/images/sf4_logo_b.png" alt="logo"/>
     <span *ngIf="media != mediaType.SMALL" class="toolbar-title">
        Cards<span class="secondary"> for </span> Future
     </span>
