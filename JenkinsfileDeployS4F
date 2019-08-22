@@ -24,6 +24,9 @@ pipeline {
         }
         stage('Build Angular') {
             steps {
+                // Hack since angular.json replacement cannot replace files other than ts at the moment
+                sh "cp ${WORKSPACE}/src/index-s4f.html ${WORKSPACE}/src/index.html"
+                sh "cp ${WORKSPACE}/src/favicon-s4f.ico ${WORKSPACE}/src/favicon.ico"
                 sh "npm install"
                 sh "npm run build-prod-s4f"
             }
@@ -55,17 +58,11 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                // Hack since angular.json replacement cannot replace files other than ts at the moment
-                sh "cp ${WORKSPACE}/src/index-s4f.html ${WORKSPACE}/dist/sciddle-s4f/index.html"
-                sh "cp ${WORKSPACE}/src/favicon-s4f.ico ${WORKSPACE}/dist/sciddle-s4f/favicon.ico"
                 sh "firebase deploy --project sciddle-riddle --only hosting:sciddle-s4f --token ${FIREBASE_TOKEN}"
             }
         }
         stage('Release') {
             steps {
-                // Hack since angular.json replacement cannot replace files other than ts at the moment
-                sh "cp ${WORKSPACE}/src/index-s4f.html ${WORKSPACE}/dist/sciddle-s4f/index.html"
-                sh "cp ${WORKSPACE}/src/favicon-s4f.ico ${WORKSPACE}/dist/sciddle-s4f/favicon.ico"
                 sh "npm run release-only-web-s4f"
             }
         }
