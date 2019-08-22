@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Inject, OnDestroy, OnInit} from '@angular/core';
+import {AfterViewInit, Component, Inject, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {SnackbarService} from '../../../../core/ui/services/snackbar.service';
 import {GamesService} from '../../../../core/entity/services/game/games.service';
@@ -33,7 +33,8 @@ import {StacksService} from '../../../../core/entity/services/stack/stacks.servi
 @Component({
   selector: 'app-games',
   templateUrl: './games.component.html',
-  styleUrls: ['./games.component.scss']
+  styleUrls: ['./games.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
 
@@ -62,6 +63,11 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
 
   /** App variant */
   variant = environment.VARIANT;
+
+  /** Caption for single player mode */
+  gameModeSinglePlayer = environment.GAME_MODE_SINGLE_PLAYER;
+  /** Caption for multi player mode */
+  gameModeMultiPlayer = environment.GAME_MODE_MULTI_PLAYER;
 
   /**
    * Constructor
@@ -414,7 +420,7 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
     const multiplayerGameDialogRef = this.dialog.open(MultiplayerGameDialogComponent, {
       disableClose: false,
       data: {
-        title: 'Wettkampf-Modus',
+        title: this.gameModeMultiPlayer,
         cardCount: this.cardCount,
         minCardCount: this.minCardCount,
         maxCardCount: this.maxCardCount

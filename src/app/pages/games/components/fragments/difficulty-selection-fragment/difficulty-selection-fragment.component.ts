@@ -20,7 +20,6 @@ export class DifficultySelectionFragmentComponent {
   /** Event emitter indicating changes in difficulty selection */
   @Output() difficultySelectionChangedEmitter = new EventEmitter<{ difficulty: number, selected: boolean }>();
 
-
   //
   // Actions
   //

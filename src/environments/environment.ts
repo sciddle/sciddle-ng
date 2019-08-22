@@ -14,6 +14,9 @@ export const environment = {
 
   VARIANT: 'Sciddle',
 
+  GAME_MODE_SINGLE_PLAYER: 'Freies Spiel',
+  GAME_MODE_MULTI_PLAYER: 'Spielrunde starten',
+
   TIMER: 10,
   DEFAULT_STACK: 0,
 

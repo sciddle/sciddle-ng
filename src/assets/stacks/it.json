@@ -1,0 +1,10 @@
+{
+  "id": "4",
+  "entityType": 0,
+  "title": "IT (Demo)",
+  "game": null,
+  "theme":"blue",
+  "cards": [
+    { "entityType": 0, "word": "Webserver", "taboos": ["HTTP", "HTML", "CSS", "Apache", "Hosting"], "difficulty": 2 ,"alternateExplanationText": "" }
+  ]
+}
