@@ -414,7 +414,7 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
     const multiplayerGameDialogRef = this.dialog.open(MultiplayerGameDialogComponent, {
       disableClose: false,
       data: {
-        title: 'Gegen andere spielen',
+        title: 'Wettkampf-Modus',
         cardCount: this.cardCount,
         minCardCount: this.minCardCount,
         maxCardCount: this.maxCardCount
