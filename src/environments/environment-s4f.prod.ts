@@ -3,7 +3,7 @@
  */
 export const environment = {
   production: true,
-  APP_NAME: 'Sciddle',
+  APP_NAME: 'Cards for Future',
   DATABASE_ENTITIES: 'sciddle',
   DATABASE_SETTINGS: 'sciddle_settings',
 

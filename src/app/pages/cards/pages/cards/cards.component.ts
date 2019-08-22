@@ -545,7 +545,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
           disableClose: false,
           data: {
             title: 'Über die App',
-            name: environment.NAME,
+            name: environment.APP_NAME,
             version: environment.VERSION,
             authorCode: environment.AUTHOR_CODE,
             authorContent: environment.AUTHOR_CONTENT,

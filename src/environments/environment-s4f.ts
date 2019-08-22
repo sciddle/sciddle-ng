@@ -8,7 +8,7 @@
  */
 export const environment = {
   production: false,
-  APP_NAME: 'Sciddle Dev',
+  APP_NAME: 'Cards for Future Dev',
   DATABASE_ENTITIES: 'sciddle-dev',
   DATABASE_SETTINGS: 'sciddle_settings-dev',
 
