@@ -1,4 +1,5 @@
 @import '../../../../../styles';
+@import '../../../../../theme';
 
 //
 // Custom
@@ -46,13 +47,13 @@
 
 .button {
   @media #{$breakpoint-small} {
-    margin: 5px;
+    margin: 5px !important;
   }
   @media #{$breakpoint-medium} {
-    margin: 10px;
+    margin: 10px !important;
   }
   @media #{$breakpoint-large} {
-    margin: 20px;
+    margin: 20px !important;
   }
 
   white-space: pre-wrap !important;
@@ -62,11 +63,47 @@
   white-space: pre-wrap !important;
 }
 
+.blue-theme {
+  .single-player {
+    color: white !important;
+    background-color: mat-color($blue-primary, 400) !important;
+  }
+
+  .multi-player {
+    color: white !important;
+    background-color: mat-color($blue-primary, 600) !important;
+  }
+}
+
+.green-theme {
+  .single-player {
+    color: white !important;
+    background-color: mat-color($green-primary, 400) !important;
+  }
+
+  .multi-player {
+    color: white !important;
+    background-color: mat-color($green-primary, 600) !important;
+  }
+}
+
+.future-theme {
+  .single-player {
+    color: white !important;
+    background-color: mat-color($future-primary, 400) !important;
+  }
+
+  .multi-player {
+    color: white !important;
+    background-color: mat-color($future-primary, 600) !important;
+  }
+}
+
 .mode-button {
-  font-size: 2em;
-  padding: 20px;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  font-size: 2em !important;
+  padding: 20px !important;
+  margin-top: 20px !important;
+  margin-bottom: 20px !important;
 }
 
 .fixed {
