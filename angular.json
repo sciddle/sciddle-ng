@@ -69,6 +69,14 @@
                 {
                   "replace": "src/manifest.json",
                   "with": "src/manifest-s4f.json"
+                },
+                {
+                  "replace": "src/index.html",
+                  "with": "src/index-s4f.html"
+                },
+                {
+                  "replace": "src/favicon.ico",
+                  "with": "src/favicon-s4f.ico"
                 }
               ],
               "optimization": false,
@@ -103,6 +111,14 @@
                 {
                   "replace": "src/manifest.json",
                   "with": "src/manifest-s4f.json"
+                },
+                {
+                  "replace": "src/index.html",
+                  "with": "src/index-s4f.html"
+                },
+                {
+                  "replace": "src/favicon.ico",
+                  "with": "src/favicon-s4f.ico"
                 }
               ],
               "optimization": true,
