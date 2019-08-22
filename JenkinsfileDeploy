@@ -64,7 +64,7 @@ pipeline {
             steps {
                 sh "mkdir -p ${params.WEB_ROOT}"
                 sh "rm -rf ${params.WEB_ROOT}/*"
-                sh "cp -R ${WORKSPACE}/dist/* ${params.WEB_ROOT}"
+                sh "cp -R ${WORKSPACE}/dist/sciddle-riddle/* ${params.WEB_ROOT}"
             }
         }
     }
