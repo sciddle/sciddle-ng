@@ -2,8 +2,10 @@
   "name": "sciddle",
   "version": "1.2.0",
   "authorCode": "Florian Schwanz",
+  "authorOriginal": "Anne Braun, Anne Dippel, Thomas Klose, Britta Kussin, Dennis Rätzel",
   "authorContent": "Dennis Rätzel, Kiri Mochrie, Jana Mochrie und Julia Mochrie",
   "authorScientificSupervision": "Maria Zeitz (Potsdam-Institut für Klimafolgenforschung)",
+  "githubUrl": "https://github.com/sciddle/sciddle-ng",
   "licenseCode": "AGPLv3",
   "licenseContent": "CC BY 4.0",
   "scripts": {

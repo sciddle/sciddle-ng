@@ -1,8 +1,8 @@
 <h2 mat-dialog-title>{{ dialogTitle }}</h2>
 <mat-dialog-content>
-  <p>{{ name }} (Version {{ version }}) basierend auf <span class="highlight">Sciddle - The Science Riddle</span> von Anne Braun, Anne Dippel, Thomas Klose, Britta Kussin, Dennis Rätzel.</p>
+  <p>{{ name }} (Version {{ version }}) basierend auf <span class="highlight">Sciddle - The Science Riddle</span> von {{ authorOriginal }}.</p>
   <p>Idee, Texte und Grafiken von {{ authorContent }}, lizenziert unter {{ licenseContent }}.</p>
-  <p>Implementierung durch {{ authorCode }}, lizenziert unter {{ licenseCode }}.</p>
+  <p>Implementierung durch {{ authorCode }}, lizenziert unter {{ licenseCode }}. Quellcode verfügbar auf <a [attr.href]="githubUrl" target="_blank">{{ githubUrl }}</a></p>
   <p>Wissenschaftliche Betreuung durch {{ authorScientificSupervision }}.</p>
 </mat-dialog-content>
 <mat-dialog-actions class="flexcontainer">

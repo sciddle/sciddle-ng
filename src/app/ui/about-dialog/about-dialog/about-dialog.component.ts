@@ -20,10 +20,14 @@ export class AboutDialogComponent implements OnInit {
   version = '';
   /** Author of code */
   authorCode = '';
+  /** Author of orginal idea */
+  authorOriginal = '';
   /** Author of content */
   authorContent = '';
   /** Scientific supervision */
   authorScientificSupervision = '';
+  /** Github URL */
+  githubUrl = '';
   /** License of code */
   licenseCode = '';
   /** License of content */
@@ -63,8 +67,10 @@ export class AboutDialogComponent implements OnInit {
     this.name = this.data.name;
     this.version = this.data.version;
     this.authorCode = this.data.authorCode;
+    this.authorOriginal = this.data.authorOriginal;
     this.authorContent = this.data.authorContent;
     this.authorScientificSupervision = this.data.authorScientificSupervision;
+    this.githubUrl = this.data.githubUrl;
     this.licenseCode = this.data.licenseCode;
     this.licenseContent = this.data.licenseContent;
     this.homepage = this.data.homepage;
