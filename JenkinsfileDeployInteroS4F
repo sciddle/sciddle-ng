@@ -11,8 +11,8 @@ pipeline {
         buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
     }
     parameters {
-        string(name: 'BASE_REF', defaultValue: 'https://sciddle.intero.berlin/sciddle-riddle/', description: 'URL the app shall be accessible from')
-        string(name: 'WEB_ROOT', defaultValue: '/var/www/sciddle/sciddle-riddle', description: 'Web root directory for this app')
+        string(name: 'BASE_REF', defaultValue: 'https://sciddle.intero.berlin/sciddle-s4f/', description: 'URL the app shall be accessible from')
+        string(name: 'WEB_ROOT', defaultValue: '/var/www/sciddle/sciddle-s4f', description: 'Web root directory for this app')
     }
     stages {
         stage('Clean') {
@@ -32,7 +32,7 @@ pipeline {
         stage('Build Angular') {
             steps {
                 sh "npm install"
-                sh "npm run build-prod -- --verbose --base-href ${params.BASE_REF}"
+                sh "npm run build-prod-s4f -- --verbose --base-href ${params.BASE_REF}"
             }
         }
         stage('Lint') {
@@ -64,7 +64,7 @@ pipeline {
             steps {
                 sh "mkdir -p ${params.WEB_ROOT}"
                 sh "rm -rf ${params.WEB_ROOT}/*"
-                sh "cp -R ${WORKSPACE}/dist/sciddle-riddle/* ${params.WEB_ROOT}"
+                sh "cp -R ${WORKSPACE}/dist/sciddle-s4f/* ${params.WEB_ROOT}"
             }
         }
     }
