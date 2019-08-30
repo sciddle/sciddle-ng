@@ -16,6 +16,9 @@ export interface StacksPersistenceService {
   /** Subject that publishes stack */
   stackSubject: Subject<Stack>;
 
+  /** Subject that publishes database errors */
+  databaseErrorSubject: Subject<string>;
+
   //
   // Cancel
   //
@@ -118,4 +121,10 @@ export interface StacksPersistenceService {
    * Informs subscribers that something has changed
    */
   notifySingleStack();
+
+  /**
+   * Notifies subscribers that a database error occurs
+   * @param error error
+   */
+  notifyDatabaseError(error: any);
 }
