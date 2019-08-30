@@ -124,6 +124,7 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
       if (value != null) {
         stacks = value as Stack[];
         this.initializeStacks(stacks);
+        this.mergeStacksFromAssets();
       }
 
       this.initializeUninitializedStacks(stacks);
@@ -137,15 +138,17 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
     this.stacksPersistenceService.databaseErrorSubject.pipe(
       takeUntil(this.unsubscribeSubject)
     ).subscribe((value) => {
-      if (value != null && value[name] === 'indexed_db_went_bad') {
-        this.stacksService.getStacksFromAssets().then(stacks => {
-          if (stacks != null) {
-            this.initializeStacks(stacks);
-            this.snackbarService.showSnackbar('Speicherplatz knapp. Spiel wird nicht gespeichert.');
-          }
-        });
+      // TODO Check error more specifically
+      if (value != null) {
+        Array.from(StacksService.stacks.values()).forEach(fileName =>
+          this.stacksService.getStackFromAssets(fileName).then(stackFromAssets => {
+            if (stackFromAssets != null) {
+              this.initializeStacks(this.stacks.concat([stackFromAssets]));
+              this.snackbarService.showSnackbar('Speicherplatz knapp. Spiel wird nicht gespeichert.');
+            }
+          })
+        );
       }
-      this.snackbarService.showSnackbar(value[name]);
     });
   }
 
@@ -155,6 +158,12 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
    */
   private initializeStacks(stacks: Stack[]) {
     this.stacks = stacks;
+  }
+
+  /**
+   * Initializes stacks
+   */
+  private mergeStacksFromAssets() {
     this.stacks.forEach(stack => {
       this.stacksService.mergeStackFromAssets(stack).then(resolve => {
         const mergedStack = resolve as Stack;

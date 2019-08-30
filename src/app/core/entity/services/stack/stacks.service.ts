@@ -79,20 +79,17 @@ export class StacksService {
       const fileName = StacksService.stacks.get(stack.id);
 
       if (fileName != null) {
-        this.http.get(`assets/stacks/${fileName}`).subscribe(
-          data => {
-            const stackFromAsset = data as Stack;
+        this.getStackFromAssets(fileName).then(stackFromAsset => {
+          stack.title = stackFromAsset.title;
+          stack.theme = stackFromAsset.theme;
 
-            stack.title = stackFromAsset.title;
-            stack.theme = stackFromAsset.theme;
-
-            this.mergeCardsFromAssets(stack, stackFromAsset.cards).then(mergedCards => {
-              if (mergedCards != null) {
-                stack.cards = mergedCards as Card[];
-              }
-              resolve(stack);
-            });
+          this.mergeCardsFromAssets(stack, stackFromAsset.cards).then(mergedCards => {
+            if (mergedCards != null) {
+              stack.cards = mergedCards as Card[];
+            }
+            resolve(stack);
           });
+        });
       } else {
         reject();
       }
@@ -101,20 +98,15 @@ export class StacksService {
 
   /**
    * Loads all stacks from assets
+   * @param fileName fileName
    */
-  public getStacksFromAssets(): Promise<Stack[]> {
+  public getStackFromAssets(fileName: string): Promise<Stack> {
     return new Promise((resolve) => {
-      Array.from(StacksService.stacks.values()).forEach(fileName => {
-        const stacks = [];
-
-        this.http.get(`assets/stacks/${fileName}`).subscribe(
-          data => {
-            const stackFromAsset = data as Stack;
-            stacks.push(stackFromAsset);
-          });
-
-        resolve(stacks);
-      });
+      this.http.get(`assets/stacks/${fileName}`).subscribe(
+        data => {
+          const stackFromAsset = data as Stack;
+          resolve(stackFromAsset);
+        });
     });
   }
 

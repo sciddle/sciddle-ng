@@ -115,6 +115,7 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
    */
   ngOnInit() {
     this.initializeStackSubscription();
+    this.initializeDatabaseErrorSubscription();
 
     this.initializeMaterial();
     this.initializeMediaSubscription();
@@ -169,6 +170,7 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
       if (value != null) {
         stack = value as Stack;
         this.initializeStack(stack);
+        this.mergeStacksFromAssets(stack);
       } else {
         this.navigateBack();
       }
@@ -185,6 +187,26 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
+  /**
+   * Initializes database error subscription
+   */
+  private initializeDatabaseErrorSubscription() {
+    this.stacksPersistenceService.databaseErrorSubject.pipe(
+      takeUntil(this.unsubscribeSubject)
+    ).subscribe((value) => {
+      // TODO Check error more specifically
+      if (value != null) {
+        const fileName = StacksService.stacks.get(environment.DEFAULT_STACK.toString());
+        this.stacksService.getStackFromAssets(fileName).then(stackFromAssets => {
+          if (stackFromAssets != null) {
+            this.initializeStack(stackFromAssets);
+            this.snackbarService.showSnackbar('Speicherplatz knapp. Spiel wird nicht gespeichert.');
+          }
+        });
+      }
+    });
+  }
+
   // Stack
 
   /**
@@ -194,6 +216,18 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
   private initializeStack(stack: Stack) {
     this.stack = stack;
 
+    this.cardCount = Math.round(environment.MIN_CARDS + ((stack.cards.length - environment.MIN_CARDS) / 2));
+    this.maxCardCount = stack.cards.length;
+
+    this.initializeTitle(stack);
+    this.initializeTheme(stack);
+  }
+
+  /**
+   * Initializes stacks
+   * @param stack stack
+   */
+  private mergeStacksFromAssets(stack: Stack) {
     this.stacksService.mergeStackFromAssets(stack).then(resolve => {
       const mergedStack = resolve as Stack;
       this.stacksPersistenceService.updateStack(mergedStack).then(() => {
@@ -201,12 +235,6 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
       this.snackbarService.showSnackbar('Neue Karten geladen');
     }, () => {
     });
-
-    this.cardCount = Math.round(environment.MIN_CARDS + ((stack.cards.length - environment.MIN_CARDS) / 2));
-    this.maxCardCount = stack.cards.length;
-
-    this.initializeTitle(stack);
-    this.initializeTheme(stack);
   }
 
   /**
