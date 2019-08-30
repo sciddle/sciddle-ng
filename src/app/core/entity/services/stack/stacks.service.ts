@@ -100,6 +100,25 @@ export class StacksService {
   }
 
   /**
+   * Loads all stacks from assets
+   */
+  public getStacksFromAssets(): Promise<Stack[]> {
+    return new Promise((resolve) => {
+      Array.from(StacksService.stacks.values()).forEach(fileName => {
+        const stacks = [];
+
+        this.http.get(`assets/stacks/${fileName}`).subscribe(
+          data => {
+            const stackFromAsset = data as Stack;
+            stacks.push(stackFromAsset);
+          });
+
+        resolve(stacks);
+      });
+    });
+  }
+
+  /**
    * Takes stacks from assets and merges them into existing stack
    *
    * @param stack stack

@@ -86,6 +86,7 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
    */
   ngOnInit() {
     this.initializeStacksSubscription();
+    this.initializeDatabaseErrorSubscription();
 
     this.initializeTheme();
     this.initializeMaterial();
@@ -126,6 +127,25 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
       }
 
       this.initializeUninitializedStacks(stacks);
+    });
+  }
+
+  /**
+   * Initializes database error subscription
+   */
+  private initializeDatabaseErrorSubscription() {
+    this.stacksPersistenceService.databaseErrorSubject.pipe(
+      takeUntil(this.unsubscribeSubject)
+    ).subscribe((value) => {
+      if (value != null && value[name] === 'indexed_db_went_bad') {
+        this.stacksService.getStacksFromAssets().then(stacks => {
+          if (stacks != null) {
+            this.initializeStacks(stacks);
+            this.snackbarService.showSnackbar('Speicherplatz knapp. Spiel wird nicht gespeichert.');
+          }
+        });
+      }
+      this.snackbarService.showSnackbar(value[name]);
     });
   }
 

@@ -23,6 +23,9 @@ export class StacksPouchdbService implements StacksPersistenceService {
   /** Subject that publishes stack */
   stackSubject = new Subject<Stack>();
 
+  /** Subject that publishes database errors */
+  databaseErrorSubject = new Subject<string>();
+
   /**
    * Constructor
    * @param pouchDBService PouchDB service
@@ -243,6 +246,14 @@ export class StacksPouchdbService implements StacksPersistenceService {
     this.stackSubject.next(this.stack);
   }
 
+  /**
+   * Notifies subscribers that a database error occurs
+   * @param error error
+   */
+  public notifyDatabaseError(error: any) {
+    this.databaseErrorSubject.next(error);
+  }
+
   //
   // Internal
   //
@@ -263,6 +274,8 @@ export class StacksPouchdbService implements StacksPersistenceService {
         if (isDevMode()) {
           console.error(error);
         }
+
+        this.notifyDatabaseError(error);
       }
     );
   }
@@ -282,6 +295,8 @@ export class StacksPouchdbService implements StacksPersistenceService {
         if (isDevMode()) {
           console.error(error);
         }
+
+        this.notifyDatabaseError(error);
       }
     );
   }
