@@ -1,13 +1,11 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import {PersistenceImports} from './persistence.imports';
+import {PersistenceProviders} from './persistence.providers';
 
 @NgModule({
-  imports: [
-    CommonModule
-  ],
+  imports: [PersistenceImports],
   declarations: [],
-  providers: [
-  ]
+  providers: [PersistenceProviders]
 })
 /**
  * Contains services related to persistence
