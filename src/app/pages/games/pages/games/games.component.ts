@@ -5,7 +5,7 @@ import {GamesService} from '../../../../core/entity/services/game/games.service'
 import {Stack} from '../../../../core/entity/model/stack/stack.model';
 import {STACK_PERSISTENCE_POUCHDB} from '../../../../core/entity/entity.module';
 import {StacksPersistenceService} from '../../../../core/entity/services/stack/persistence/stacks-persistence.interface';
-import {takeUntil} from 'rxjs/operators';
+import {filter, takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 import {environment} from '../../../../../environments/environment';
 import {CardsService} from '../../../../core/entity/services/card/cards.service';
@@ -26,6 +26,11 @@ import {MultiplayerGameDialogComponent} from '../../components/dialogs/multiplay
 import {VariantService} from '../../../../core/util/services/variant.service';
 import {Variant} from '../../../../core/util/model/variant.enum';
 import {StacksService} from '../../../../core/entity/services/stack/stacks.service';
+import {Setting} from '../../../../core/settings/model/setting.model';
+import {SettingsService} from '../../../../core/settings/services/settings.service';
+import {SettingType} from '../../../../core/settings/model/setting-type.enum';
+// tslint:disable-next-line:max-line-length
+import {CheckableInformationDialogComponent} from '../../../../ui/information-dialog/checkable-information-dialog/checkable-information-dialog.component';
 
 /**
  * Displays games page
@@ -45,6 +50,11 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
   public id: string;
   /** Stack */
   public stack: Stack;
+
+  /** Map of settings */
+  public settingsMap = new Map<string, Setting>();
+  /** Setting dont-show-manual-on-startup */
+  public dontShowManualOnStartup = false;
 
   /** Selected card count */
   public cardCount = 0;
@@ -83,6 +93,7 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
    * @param route route
    * @param router router
    * @param sanitizer sanitizer
+   * @param settingsService settings service
    * @param snackbarService snackbar service
    * @param stacksPersistenceService stacks persistence service
    * @param stacksService stacks service
@@ -100,6 +111,7 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
               private route: ActivatedRoute,
               private router: Router,
               private sanitizer: DomSanitizer,
+              private settingsService: SettingsService,
               private snackbarService: SnackbarService,
               @Inject(STACK_PERSISTENCE_POUCHDB) private stacksPersistenceService: StacksPersistenceService,
               private stacksService: StacksService,
@@ -115,6 +127,7 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
    */
   ngOnInit() {
     this.initializeStackSubscription();
+    this.initializeSettingsSubscription();
     this.initializeDatabaseErrorSubscription();
 
     this.initializeMaterial();
@@ -144,6 +157,7 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     }
 
+    this.findSettings();
   }
 
   /**
@@ -183,6 +197,21 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
           this.initializeUninitializedStack(stack);
           break;
         }
+      }
+    });
+  }
+
+  /**
+   * Initializes settings subscription
+   */
+  private initializeSettingsSubscription() {
+    this.settingsService.settingsSubject.pipe(
+      takeUntil(this.unsubscribeSubject),
+      filter(value => value != null)
+    ).subscribe(value => {
+      if (value != null) {
+        const settings = value as Map<string, Setting>;
+        this.initializeSettings(settings);
       }
     });
   }
@@ -249,6 +278,21 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
+  // Settings
+
+  /**
+   * Initializes settings
+   * @param settingsMap settings map
+   */
+  private initializeSettings(settingsMap: Map<string, Setting>) {
+    this.settingsMap = new Map(settingsMap);
+    this.dontShowManualOnStartup = SettingsService.isSettingActive(SettingType.DONT_SHOW_MANUAL_ON_STARTUP, this.settingsMap);
+
+    if (this.dontShowManualOnStartup !== null && this.dontShowManualOnStartup === false) {
+      this.onMenuItemClicked('manual');
+    }
+  }
+
   // Others
 
   /**
@@ -268,6 +312,13 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
         break;
       }
     }
+  }
+
+  /**
+   * Finds settings
+   */
+  private findSettings() {
+    this.settingsService.fetch();
   }
 
   /**
@@ -350,16 +401,26 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
         this.http.get('assets/manual/manual-de.md').subscribe(
           () => {
           }, err => {
-            this.dialog.open(InformationDialogComponent, {
-              disableClose: false,
+            const dialogRef = this.dialog.open(CheckableInformationDialogComponent, {
+              disableClose: true,
               data: {
                 title: 'Anleitung',
                 text: JSON.stringify(err.error.text)
                   .replace(/"/g, '')
                   .replace(/\\n/g, '\n')
                   .replace(/\\r/g, '\r'),
-                action: 'Alles klar',
-                value: null
+                checkboxValue: this.dontShowManualOnStartup,
+                checkboxText: 'Anleitung beim Starten nicht mehr anzeigen',
+                action: 'Alles klar'
+              }
+            });
+
+            dialogRef.afterClosed().subscribe(result => {
+              if (result != null) {
+                this.dontShowManualOnStartup = result.checkboxValue as boolean;
+                this.settingsService.updateSetting(
+                  new Setting(SettingType.DONT_SHOW_MANUAL_ON_STARTUP, this.dontShowManualOnStartup),
+                  false);
               }
             });
           });
