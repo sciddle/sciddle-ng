@@ -87,6 +87,8 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
   public mediaType = Media;
   /** Current media */
   public media: Media = Media.UNDEFINED;
+  /** Current theme */
+  public theme: Theme = Theme.BLUE;
 
   /** Helper subject used to finish other subscriptions */
   private unsubscribeSubject = new Subject();
@@ -164,6 +166,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.initializeMaterial();
     this.initializeMediaSubscription();
+    this.initializeThemeSubscription();
 
     this.initializeThrowOutFactor();
     this.initializeStackConfig();
@@ -392,6 +395,18 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   /**
+   * Initializes theme subscription
+   */
+  private initializeThemeSubscription() {
+    this.theme = this.themeService.theme;
+    this.themeService.themeSubject.pipe(
+      takeUntil(this.unsubscribeSubject)
+    ).subscribe((value) => {
+      this.theme = value as Theme;
+    });
+  }
+
+  /**
    * Initializes title
    * @param stack stack
    */
@@ -544,11 +559,13 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
         this.dialog.open(AboutDialogComponent, {
           disableClose: false,
           data: {
+            themeClass: this.theme,
             title: 'Über die App',
             name: environment.APP_NAME,
             version: environment.VERSION,
             authorOriginal: environment.AUTHOR_ORIGINAL,
             authorCode: environment.AUTHOR_CODE,
+            authorCodeUrl: environment.AUTHOR_CODE_URL,
             authorContent: environment.AUTHOR_CONTENT,
             authorScientificSupervision: environment.AUTHOR_SCIENTIFIC_SUPERVISION,
             githubUrl: environment.GITHUB_URL,
