@@ -1,0 +1,16 @@
+<h2 mat-dialog-title>{{ dialogTitle }}</h2>
+<mat-dialog-content>
+  <app-markdown-preview [markdownText]="text"></app-markdown-preview>
+</mat-dialog-content>
+<mat-dialog-actions class="flexcontainer">
+  <mat-checkbox
+    labelPosition="after"
+    [checked]="checkboxValue"
+    (change)="onCheckboxChanged($event)">
+    {{ checkboxText }}
+  </mat-checkbox>
+  <div class="flexbox"></div>
+  <button mat-button (click)="confirm()">
+    {{ action }}
+  </button>
+</mat-dialog-actions>

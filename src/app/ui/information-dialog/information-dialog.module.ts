@@ -2,15 +2,18 @@ import {NgModule} from '@angular/core';
 import {InformationDialogComponent} from './information-dialog/information-dialog.component';
 import {InformationDialogDeclarations} from './information-dialog.declarations';
 import {InformationDialogImports} from './information-dialog.imports';
+import {CheckableInformationDialogComponent} from './checkable-information-dialog/checkable-information-dialog.component';
 
 @NgModule({
   imports: [InformationDialogImports],
   declarations: [InformationDialogDeclarations],
   entryComponents: [
-    InformationDialogComponent
+    InformationDialogComponent,
+    CheckableInformationDialogComponent
   ],
   exports: [
-    InformationDialogComponent
+    InformationDialogComponent,
+    CheckableInformationDialogComponent
   ]
 })
 export class InformationDialogModule {
