@@ -5,7 +5,7 @@ import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../../../environments/environment';
 import {AboutDialogComponent} from '../../../../ui/about-dialog/about-dialog/about-dialog.component';
 import {Media} from '../../../../core/ui/model/media.enum';
-import {takeUntil} from 'rxjs/operators';
+import {filter, takeUntil} from 'rxjs/operators';
 import {Stack} from '../../../../core/entity/model/stack/stack.model';
 import {Subject} from 'rxjs';
 import {MediaService} from '../../../../core/ui/services/media.service';
@@ -21,6 +21,11 @@ import {CloneService} from '../../../../core/entity/services/clone.service';
 import {StacksService} from '../../../../core/entity/services/stack/stacks.service';
 import {ThemeService} from '../../../../core/ui/services/theme.service';
 import {Theme} from '../../../../core/ui/model/theme.enum';
+import {SettingsService} from '../../../../core/settings/services/settings.service';
+import {Setting} from '../../../../core/settings/model/setting.model';
+import {SettingType} from '../../../../core/settings/model/setting-type.enum';
+// tslint:disable-next-line:max-line-length
+import {CheckableInformationDialogComponent} from '../../../../ui/information-dialog/checkable-information-dialog/checkable-information-dialog.component';
 
 /**
  * Displays stacks
@@ -37,6 +42,11 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
 
   /** Array of stacks */
   public stacks: Stack[] = [];
+
+  /** Map of settings */
+  public settingsMap = new Map<string, Setting>();
+  /** Setting dont-show-manual-on-startup */
+  public dontShowManualOnStartup = false;
 
   /** Enum of media types */
   public mediaType = Media;
@@ -61,6 +71,7 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
    * @param materialIconService material icon service
    * @param router router
    * @param sanitizer sanitizer
+   * @param settingsService settings service
    * @param snackbarService snackbar service
    * @param stacksService stacks service
    * @param stacksPersistenceService stack persistence service
@@ -74,6 +85,7 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
               private materialIconService: MaterialIconService,
               private router: Router,
               private sanitizer: DomSanitizer,
+              private settingsService: SettingsService,
               private snackbarService: SnackbarService,
               private stacksService: StacksService,
               @Inject(STACK_PERSISTENCE_POUCHDB) private stacksPersistenceService: StacksPersistenceService,
@@ -86,6 +98,7 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
    */
   ngOnInit() {
     this.initializeStacksSubscription();
+    this.initializeSettingsSubscription();
     this.initializeDatabaseErrorSubscription();
 
     this.initializeTheme();
@@ -98,6 +111,7 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
    */
   ngAfterViewInit() {
     this.findEntities();
+    this.findSettings();
   }
 
   /**
@@ -128,6 +142,21 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
       }
 
       this.initializeUninitializedStacks(stacks);
+    });
+  }
+
+  /**
+   * Initializes settings subscription
+   */
+  private initializeSettingsSubscription() {
+    this.settingsService.settingsSubject.pipe(
+      takeUntil(this.unsubscribeSubject),
+      filter(value => value != null)
+    ).subscribe(value => {
+      if (value != null) {
+        const settings = value as Map<string, Setting>;
+        this.initializeSettings(settings);
+      }
     });
   }
 
@@ -187,7 +216,36 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
+  // Settings
+
+  /**
+   * Initializes settings
+   * @param settingsMap settings map
+   */
+  private initializeSettings(settingsMap: Map<string, Setting>) {
+    this.settingsMap = new Map(settingsMap);
+    this.dontShowManualOnStartup = SettingsService.isSettingActive(SettingType.DONT_SHOW_MANUAL_ON_STARTUP, this.settingsMap);
+
+    if (this.dontShowManualOnStartup !== null && this.dontShowManualOnStartup === false) {
+      this.onMenuItemClicked('manual');
+    }
+  }
+
   // Others
+
+  /**
+   * Finds entities
+   */
+  private findEntities() {
+    this.stacksPersistenceService.findStacks();
+  }
+
+  /**
+   * Finds settings
+   */
+  private findSettings() {
+    this.settingsService.fetch();
+  }
 
   /**
    * Initializes theme
@@ -213,13 +271,6 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
     ).subscribe((value) => {
       this.media = value as Media;
     });
-  }
-
-  /**
-   * Finds entities
-   */
-  private findEntities() {
-    this.stacksPersistenceService.findStacks();
   }
 
   //
@@ -254,16 +305,26 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
         this.http.get('assets/manual/manual-de.md').subscribe(
           () => {
           }, err => {
-            this.dialog.open(InformationDialogComponent, {
-              disableClose: false,
+            const dialogRef = this.dialog.open(CheckableInformationDialogComponent, {
+              disableClose: true,
               data: {
                 title: 'Anleitung',
                 text: JSON.stringify(err.error.text)
                   .replace(/"/g, '')
                   .replace(/\\n/g, '\n')
                   .replace(/\\r/g, '\r'),
-                action: 'Alles klar',
-                value: null
+                checkboxValue: this.dontShowManualOnStartup,
+                checkboxText: 'Anleitung beim Starten nicht mehr anzeigen',
+                action: 'Alles klar'
+              }
+            });
+
+            dialogRef.afterClosed().subscribe(result => {
+              if (result != null) {
+                this.dontShowManualOnStartup = result.checkboxValue as boolean;
+                this.settingsService.updateSetting(
+                  new Setting(SettingType.DONT_SHOW_MANUAL_ON_STARTUP, this.dontShowManualOnStartup),
+                  false);
               }
             });
           });

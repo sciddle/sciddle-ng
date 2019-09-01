@@ -5,6 +5,7 @@ import {PouchDBService} from './core/persistence/services/pouchdb.service';
 import {environment} from '../environments/environment';
 import {ThemeService} from './core/ui/services/theme.service';
 import {OverlayContainer} from '@angular/cdk/overlay';
+import {PouchDBSettingsService} from './core/persistence/services/pouchdb-settings.service';
 
 /**
  * Displays application
@@ -26,12 +27,14 @@ export class AppComponent implements OnInit, AfterViewInit {
    * Constructor
    * @param overlayContainer overlay container
    * @param pouchDBService pouchDB service
+   * @param pouchDBSettingsService pouchDB settings service
    * @param snackbarService snackbar service
    * @param snackBar snack bar
    * @param themeService theme service
    */
   constructor(private overlayContainer: OverlayContainer,
               private pouchDBService: PouchDBService,
+              private pouchDBSettingsService: PouchDBSettingsService,
               private snackbarService: SnackbarService,
               public snackBar: MatSnackBar,
               private themeService: ThemeService) {
@@ -107,6 +110,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   private initializeDatabaseSync() {
     if (this.devMode) {
       this.pouchDBService.sync(`http://localhost:5984/${environment.DATABASE_ENTITIES}`);
+      this.pouchDBSettingsService.sync(`http://localhost:5984/${environment.DATABASE_SETTINGS}`);
     }
   }
 
