@@ -8,7 +8,7 @@ pipeline {
         buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
     }
     parameters {
-        string(name: 'BASE_REF', defaultValue: 'http://apps.scientists4future.org/cards-for-future/', description: 'URL the app shall be accessible from')
+        string(name: 'BASE_REF', defaultValue: 'https://apps.scientists4future.org/cards-for-future/', description: 'URL the app shall be accessible from')
     }
     stages {
         stage('Clean') {
