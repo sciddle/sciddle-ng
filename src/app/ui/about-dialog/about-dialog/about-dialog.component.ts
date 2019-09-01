@@ -11,6 +11,8 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 })
 export class AboutDialogComponent implements OnInit {
 
+  /** Default theme to be used */
+  themeClass = 'blue-theme';
   /** Dialog title */
   dialogTitle = '';
 
@@ -20,6 +22,8 @@ export class AboutDialogComponent implements OnInit {
   version = '';
   /** Author of code */
   authorCode = '';
+  /** Author of code's URL */
+  authorCodeUrl = '';
   /** Author of orginal idea */
   authorOriginal = '';
   /** Author of content */
@@ -63,10 +67,12 @@ export class AboutDialogComponent implements OnInit {
    * Initializes data
    */
   private initializeData() {
+    this.themeClass = this.data.themeClass;
     this.dialogTitle = this.data.title;
     this.name = this.data.name;
     this.version = this.data.version;
     this.authorCode = this.data.authorCode;
+    this.authorCodeUrl = this.data.authorCodeUrl;
     this.authorOriginal = this.data.authorOriginal;
     this.authorContent = this.data.authorContent;
     this.authorScientificSupervision = this.data.authorScientificSupervision;

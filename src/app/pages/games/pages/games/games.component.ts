@@ -67,6 +67,8 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
   public mediaType = Media;
   /** Current media */
   public media: Media = Media.UNDEFINED;
+  /** Current theme */
+  public theme: Theme = Theme.BLUE;
 
   /** Helper subject used to finish other subscriptions */
   private unsubscribeSubject = new Subject();
@@ -132,6 +134,7 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.initializeMaterial();
     this.initializeMediaSubscription();
+    this.initializeThemeSubscription();
   }
 
   /**
@@ -341,6 +344,18 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   /**
+   * Initializes theme subscription
+   */
+  private initializeThemeSubscription() {
+    this.theme = this.themeService.theme;
+    this.themeService.themeSubject.pipe(
+      takeUntil(this.unsubscribeSubject)
+    ).subscribe((value) => {
+      this.theme = value as Theme;
+    });
+  }
+
+  /**
    * Initializes title
    * @param stack stack
    */
@@ -402,7 +417,7 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
           () => {
           }, err => {
             const dialogRef = this.dialog.open(CheckableInformationDialogComponent, {
-              disableClose: true,
+              disableClose: false,
               data: {
                 title: 'Anleitung',
                 text: JSON.stringify(err.error.text)
@@ -449,6 +464,7 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
         this.dialog.open(InformationDialogComponent, {
           disableClose: false,
           data: {
+            themeClass: this.themeService.theme,
             title: 'Open Source Komponenten',
             text: Object.keys(environment.DEPENDENCIES).map(key => {
               return `${key} ${environment.DEPENDENCIES[key]}`;
@@ -465,11 +481,13 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
         this.dialog.open(AboutDialogComponent, {
           disableClose: false,
           data: {
+            themeClass: this.theme,
             title: 'Über die App',
             name: environment.APP_NAME,
             version: environment.VERSION,
             authorOriginal: environment.AUTHOR_ORIGINAL,
             authorCode: environment.AUTHOR_CODE,
+            authorCodeUrl: environment.AUTHOR_CODE_URL,
             authorContent: environment.AUTHOR_CONTENT,
             authorScientificSupervision: environment.AUTHOR_SCIENTIFIC_SUPERVISION,
             githubUrl: environment.GITHUB_URL,

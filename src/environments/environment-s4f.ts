@@ -28,6 +28,7 @@ export const environment = {
   NAME: require('../../package.json').name,
   VERSION: require('../../package.json').version,
   AUTHOR_CODE: require('../../package.json').authorCode,
+  AUTHOR_CODE_URL: require('../../package.json').authorCodeUrl,
   AUTHOR_ORIGINAL: require('../../package.json').authorOriginal,
   AUTHOR_CONTENT: require('../../package.json').authorContent,
   AUTHOR_SCIENTIFIC_SUPERVISION: require('../../package.json').authorScientificSupervision,
