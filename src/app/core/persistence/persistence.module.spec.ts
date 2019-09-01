@@ -1,4 +1,4 @@
-import {PersistenceModule} from './persistence.module';
+import { PersistenceModule } from './persistence.module';
 
 describe('PersistenceModule', () => {
   let persistenceModule: PersistenceModule;
