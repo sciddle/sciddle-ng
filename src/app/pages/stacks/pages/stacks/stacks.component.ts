@@ -26,6 +26,7 @@ import {Setting} from '../../../../core/settings/model/setting.model';
 import {SettingType} from '../../../../core/settings/model/setting-type.enum';
 // tslint:disable-next-line:max-line-length
 import {CheckableInformationDialogComponent} from '../../../../ui/information-dialog/checkable-information-dialog/checkable-information-dialog.component';
+import {ROUTE_GAMES} from '../../../../app.routes';
 
 /**
  * Displays stacks
@@ -301,7 +302,7 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
 
     switch (event.action) {
       case Action.GO_INTO: {
-        this.router.navigate([`/games/${stack.id}`]).then();
+        this.router.navigate([`/${ROUTE_GAMES}/${stack.id}`]).then();
         break;
       }
       default: {
