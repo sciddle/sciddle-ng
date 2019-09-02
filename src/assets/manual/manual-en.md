@@ -13,5 +13,4 @@ For each term correctly guessed the team that explained the term and the team th
 #### The end of the game: 
 After each player has had at least one go and all teams had the same number of chances to explain a term, the team with the most points wins. 
 
-
-(Note that this is only one possible way to play Sciddle. You can experiment with the game and ﬁ nd your own versions.)
+(Note that this is only one possible way to play _Sciddle_. You can experiment with the game and ﬁ nd your own versions.)

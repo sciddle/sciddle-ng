@@ -77,6 +77,10 @@
                 {
                   "replace": "src/favicon.ico",
                   "with": "src/favicon-s4f.ico"
+                },
+                {
+                  "replace": "src/assets/manual/manual-de.md",
+                  "with": "src/assets/manual/manual-de-s4f.md"
                 }
               ],
               "optimization": false,
@@ -119,6 +123,10 @@
                 {
                   "replace": "src/favicon.ico",
                   "with": "src/favicon-s4f.ico"
+                },
+                {
+                  "replace": "src/assets/manual/manual-de.md",
+                  "with": "src/assets/manual/manual-de-s4f.md"
                 }
               ],
               "optimization": true,
