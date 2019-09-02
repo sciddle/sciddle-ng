@@ -1,5 +1,5 @@
 #### Eine Variante des Spiels:
-(Beachte, dass dies nur eine Möglichkeit ist, _Sciddle_ zu spielen. Du kannst mit dem Spiel experimentieren und deine eigenen Varianten erfinden.)
+(Beachte, dass dies nur eine Möglichkeit ist, _Cards for Future_ zu spielen. Du kannst mit dem Spiel experimentieren und deine eigenen Varianten erfinden.)
 
 #### Anzahl der Spieler: 
 3+

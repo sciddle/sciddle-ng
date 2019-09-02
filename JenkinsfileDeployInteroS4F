@@ -34,6 +34,7 @@ pipeline {
                 // Hack since angular.json replacement cannot replace files other than ts at the moment
                 sh "cp ${WORKSPACE}/src/index-s4f.html ${WORKSPACE}/src/index.html"
                 sh "cp ${WORKSPACE}/src/favicon-s4f.ico ${WORKSPACE}/src/favicon.ico"
+                sh "cp ${WORKSPACE}/src/assets/manual/manual-de-s4f.md ${WORKSPACE}/src/assets/manual/manual-de.md"
                 sh "npm install"
                 sh "npm run build-prod-s4f -- --verbose --base-href ${params.BASE_REF}"
             }
