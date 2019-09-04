@@ -64,7 +64,13 @@ export class GameGuard implements CanActivate {
       switch (VariantService.getVariant()) {
         case Variant.SCIDDLE: {
           const id = next.paramMap.get('id');
-          this.stacksPersistenceService.findStackByID(id);
+
+          if (id != null) {
+            this.stacksPersistenceService.findStackByID(id);
+          } else {
+            // No id has been passed
+            resolve(true);
+          }
           break;
         }
         case Variant.S4F: {
