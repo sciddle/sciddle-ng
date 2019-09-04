@@ -8,7 +8,7 @@ const routes: Routes = [
   {path: `${ROUTE_GAMES}`, loadChildren: './pages/games/games.module#GamesModule', canActivate: [GameGuard]},
   {path: `${ROUTE_CARDS}`, loadChildren: './pages/cards/cards.module#CardsModule'},
   {path: '', redirectTo: `${ROUTE_GAMES}`, pathMatch: 'full'},
-  {path: '**', redirectTo: '', pathMatch: 'full'},
+  {path: '**', redirectTo: `${ROUTE_GAMES}`},
 ];
 
 @NgModule({
