@@ -25,7 +25,7 @@ import {GameState} from '../../../../core/entity/model/game-state.enum';
 import {TurnState} from '../../../../core/entity/model/turn-state.enum';
 import {InformationDialogComponent} from '../../../../ui/information-dialog/information-dialog/information-dialog.component';
 import {HttpClient} from '@angular/common/http';
-import {ROUTE_GAMES, ROUTE_STACKS} from '../../../../app.routes';
+import {ROUTE_GAMES} from '../../../../app.routes';
 import {Theme} from '../../../../core/ui/model/theme.enum';
 import {ThemeService} from '../../../../core/ui/services/theme.service';
 import {OverlayContainer} from '@angular/cdk/overlay';
@@ -765,7 +765,16 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
 
     // Save stack
     this.stacksPersistenceService.updateStack(this.stack).then(() => {
-      this.router.navigate([`/${ROUTE_STACKS}`]).then();
+      switch (VariantService.getVariant()) {
+        case Variant.SCIDDLE: {
+          this.router.navigate([`/${ROUTE_GAMES}/${this.stack.id}`]).then();
+          break;
+        }
+        case Variant.S4F: {
+          this.router.navigate([`/${ROUTE_GAMES}`]).then();
+          break;
+        }
+      }
     });
   }
 
