@@ -10,7 +10,7 @@ const routes: Routes = [
   {path: `${ROUTE_GAMES}/:id`, loadChildren: './pages/games/games.module#GamesModule', canActivate: [GameGuard]},
   {path: `${ROUTE_CARDS}`, loadChildren: './pages/cards/cards.module#CardsModule'},
   {path: `${ROUTE_CARDS}/:id`, loadChildren: './pages/cards/cards.module#CardsModule'},
-  {path: '', redirectTo: `${ROUTE_GAMES}/${environment.DEFAULT_STACK}`, pathMatch: 'full'},
+  {path: '', redirectTo: `${ROUTE_STACKS}`, pathMatch: 'full'},
   {path: '**', redirectTo: '', pathMatch: 'full'},
 ];
 

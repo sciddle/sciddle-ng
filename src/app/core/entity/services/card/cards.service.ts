@@ -2,6 +2,7 @@ import {Injectable, isDevMode} from '@angular/core';
 import {Stack} from '../../model/stack/stack.model';
 import {Card} from '../../model/card/card.model';
 import {Subject} from 'rxjs';
+import {LogService} from '../../../log/services/log.service';
 
 /**
  * Handles cards management
@@ -57,6 +58,7 @@ export class CardsService {
    * @param cards cards
    */
   static shuffleCards(cards: Card[]): Card[] {
+    LogService.trace(`shuffleCards ${cards.length}`);
     let currentIndex = cards.length;
     let temporaryValue;
     let randomIndex;
@@ -299,8 +301,7 @@ export class CardsService {
    * @param stack stack
    * @param card card to be updated
    */
-  public updateCard(stack: Stack, card: Card):
-    Promise<any> {
+  public updateCard(stack: Stack, card: Card): Promise<any> {
     return new Promise((resolve, reject) => {
       if (card == null) {
         reject();

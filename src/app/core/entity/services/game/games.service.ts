@@ -11,6 +11,7 @@ import {Subject} from 'rxjs';
 import {GameState} from '../../model/game-state.enum';
 import {TurnState} from '../../model/turn-state.enum';
 import {Card} from '../../model/card/card.model';
+import {LogService} from '../../../log/services/log.service';
 
 /**
  * Handles games lifecycle
@@ -34,6 +35,7 @@ export class GamesService {
    * @param stack stack
    */
   static existsGame(stack: Stack) {
+    LogService.trace(`existsGame ${stack != null && stack.game != null}`);
     return stack != null && stack.game != null;
   }
 
@@ -157,7 +159,7 @@ export class GamesService {
    */
   initializeMultiPlayerGame(stack: Stack, teamCount: number, useTimeLimit: boolean,
                             difficultyEasy: boolean, difficultyMedium: boolean, difficultyHard: boolean,
-                            cardCount: number): Promise<any> {
+                            cardCount: number): Promise<Stack> {
     return new Promise((resolve) => {
       stack.game = new Game();
       stack.game.teams = [];
@@ -175,7 +177,7 @@ export class GamesService {
         stack.game.teams.push(team);
       }
 
-      resolve();
+      resolve(stack);
     });
   }
 

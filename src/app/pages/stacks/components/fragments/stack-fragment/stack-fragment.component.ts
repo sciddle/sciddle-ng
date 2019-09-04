@@ -4,6 +4,7 @@ import {SnackbarService} from '../../../../../core/ui/services/snackbar.service'
 import {Stack} from '../../../../../core/entity/model/stack/stack.model';
 import {StacksService} from '../../../../../core/entity/services/stack/stacks.service';
 import {Action} from '../../../../../core/entity/model/action.enum';
+import {CardsService} from '../../../../../core/entity/services/card/cards.service';
 
 /**
  * Displays a stack
@@ -25,6 +26,8 @@ export class StackFragmentComponent implements OnInit {
 
   /** Title color */
   titleColor = 'black';
+  /** Cards count */
+  cardsCount = 0;
 
   /** Dev mode */
   devMode = false;
@@ -49,6 +52,7 @@ export class StackFragmentComponent implements OnInit {
    * Handles on-init lifecycle phase
    */
   ngOnInit() {
+    this.cardsCount = this.stack.cards.filter(CardsService.isCardPartOfStack).length;
   }
 
   //

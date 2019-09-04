@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import {LogService} from '../../log/services/log.service';
 
 export declare type Permission = 'denied' | 'granted' | 'default';
 
@@ -33,7 +34,7 @@ export class NotificationService {
   public requestPermission() {
     if (NotificationService.isSupported()) {
       Notification.requestPermission().then((result) => {
-        console.log(result);
+        LogService.info(result);
       });
     }
   }
