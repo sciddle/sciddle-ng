@@ -1,7 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {GameGuard} from './guards/game.guard';
-import {environment} from '../environments/environment';
 import {ROUTE_CARDS, ROUTE_GAMES, ROUTE_STACKS} from './app.routes';
 
 const routes: Routes = [
