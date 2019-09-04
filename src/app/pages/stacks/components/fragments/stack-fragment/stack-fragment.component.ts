@@ -5,6 +5,7 @@ import {Stack} from '../../../../../core/entity/model/stack/stack.model';
 import {StacksService} from '../../../../../core/entity/services/stack/stacks.service';
 import {Action} from '../../../../../core/entity/model/action.enum';
 import {CardsService} from '../../../../../core/entity/services/card/cards.service';
+import {GamesService} from '../../../../../core/entity/services/game/games.service';
 
 /**
  * Displays a stack
@@ -22,15 +23,18 @@ export class StackFragmentComponent implements OnInit {
   @Input() themeClass = 'blue-theme';
 
   /** Event emitter indicating click on stack */
-  @Output() stackEventEmitter = new EventEmitter<{ action: Action, stack: Stack}>();
+  @Output() stackEventEmitter = new EventEmitter<{ action: Action, stack: Stack }>();
 
   /** Title color */
   titleColor = 'black';
   /** Cards count */
   cardsCount = 0;
+  /** Whether there exists an ongoing game with this stack */
+  existingGame = false;
 
   /** Dev mode */
   devMode = false;
+
 
   /**
    * Constructor
@@ -53,6 +57,7 @@ export class StackFragmentComponent implements OnInit {
    */
   ngOnInit() {
     this.cardsCount = this.stack.cards.filter(CardsService.isCardPartOfStack).length;
+    this.existingGame = GamesService.existsGame(this.stack);
   }
 
   //
