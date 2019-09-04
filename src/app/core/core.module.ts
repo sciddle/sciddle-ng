@@ -6,12 +6,14 @@ import {NotificationModule} from './notification/notification.module';
 import {PersistenceModule} from './persistence/persistence.module';
 import {UtilModule} from './util/util.module';
 import {WikipediaModule} from './wikipedia/wikipedia.module';
+import {LogModule} from './log/log.module';
 
 @NgModule({
   imports: [
     CommonModule,
 
     EntityModule,
+    LogModule,
     NotificationModule,
     PersistenceModule,
     UiModule,
