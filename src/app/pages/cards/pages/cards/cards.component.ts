@@ -31,6 +31,7 @@ import {ThemeService} from '../../../../core/ui/services/theme.service';
 import {OverlayContainer} from '@angular/cdk/overlay';
 import {VariantService} from '../../../../core/util/services/variant.service';
 import {Variant} from '../../../../core/util/model/variant.enum';
+import {LogService} from '../../../../core/log/services/log.service';
 
 export enum DisplayAspect {
   DISPLAY_CARDS,
@@ -370,6 +371,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    * @param id ID
    */
   private findEntities(id: string) {
+    LogService.trace(`findEntities ${id}`);
     this.stacksPersistenceService.findStackByID(this.id);
   }
 
@@ -598,6 +600,8 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    * Handles click on display team
    */
   onDisplayTeamClicked() {
+    LogService.trace(`onDisplayTeamClicked ${this.stack.cards.length}`);
+
     // Count cards by difficulty
     const easyCardsInStack = this.cards.filter(CardsService.isCardPartOfStack).filter(CardsService.isEasy).length > 0;
     const mediumCardsInStack = this.cards.filter(CardsService.isCardPartOfStack).filter(CardsService.isMedium).length > 0;
@@ -637,6 +641,8 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    * @param difficulty difficulty
    */
   onDifficultySelected(difficulty: number) {
+    LogService.trace(`onDifficultySelected ${this.stack.cards.length}`);
+
     this.cardsService.moveCardWithSpecificDifficultyToTop(this.stack, difficulty).then((resolve) => {
       if (resolve != null) {
         const stack = resolve as Stack;
@@ -706,6 +712,8 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    * @param teamID team ID
    */
   onSuccessfulTeamSelected(teamID: number) {
+    LogService.trace(`onSuccessfulTeamSelected ${this.stack.cards.length}`);
+
     this.gamesService.evaluateTurn(this.game, teamID, this.cards[0].difficulty).then(() => {
       this.cardsService.putCardAway(this.stack, this.stack.cards[0]).then();
       this.stacksPersistenceService.updateStack(this.stack).then(() => {
@@ -717,6 +725,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    * Handles click on score overview
    */
   onDisplayScoreOverviewClicked() {
+    LogService.trace(`onDisplayScoreOverviewClicked ${this.stack.cards.length}`);
     this.winningTeams = GamesService.determineWinningTeams(this.game);
     this.gamesService.closeTurn(this.stack.cards.filter(CardsService.isCardPartOfStack), this.game).then();
   }
@@ -750,6 +759,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    * Handles back action
    */
   private handleBackAction() {
+    LogService.trace(`handleBackAction`);
     // Remove existing game
     this.stack.game = null;
 
@@ -785,6 +795,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    * Sorts cards
    */
   private sortCards(): Promise<any> {
+    LogService.trace(`sortCards`);
     return new Promise(() => {
       this.cardsService.sortStack(this.stack).then((() => {
         this.stacksPersistenceService.updateStack(this.stack).then(() => {

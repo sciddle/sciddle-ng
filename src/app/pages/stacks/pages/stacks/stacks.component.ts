@@ -27,6 +27,7 @@ import {SettingType} from '../../../../core/settings/model/setting-type.enum';
 // tslint:disable-next-line:max-line-length
 import {CheckableInformationDialogComponent} from '../../../../ui/information-dialog/checkable-information-dialog/checkable-information-dialog.component';
 import {ROUTE_GAMES} from '../../../../app.routes';
+import {GamesService} from '../../../../core/entity/services/game/games.service';
 
 /**
  * Displays stacks
@@ -198,13 +199,16 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
    */
   private mergeStacksFromAssets() {
     this.stacks.forEach(stack => {
-      this.stacksService.mergeStackFromAssets(stack).then(resolve => {
-        const mergedStack = resolve as Stack;
-        this.stacksPersistenceService.updateStack(mergedStack).then(() => {
+      // Merge cards from assets for stacks without ongoing game
+      if (!GamesService.existsGame(stack)) {
+        this.stacksService.mergeStackFromAssets(stack).then(resolve => {
+          const mergedStack = resolve as Stack;
+          this.stacksPersistenceService.updateStack(mergedStack).then(() => {
+          });
+          this.snackbarService.showSnackbar('Neue Karten geladen');
+        }, () => {
         });
-        this.snackbarService.showSnackbar('Neue Karten geladen');
-      }, () => {
-      });
+      }
     });
   }
 

@@ -4,6 +4,7 @@ import {StacksPersistenceService} from './stacks-persistence.interface';
 import {Stack} from '../../../model/stack/stack.model';
 import {PouchDBService} from '../../../../persistence/services/pouchdb.service';
 import {EntityType} from '../../../model/entity-type.enum';
+import {LogService} from '../../../../log/services/log.service';
 
 /**
  * Handles stack persistence via PouchDB
@@ -86,6 +87,8 @@ export class StacksPouchdbService implements StacksPersistenceService {
    * @param id ID of filter by
    */
   public findStackByID(id: string) {
+    LogService.trace(`findStackByID ${id}`);
+
     const index = {fields: ['entityType', 'id', 'creationDate']};
     const options = {
       selector: {
@@ -143,6 +146,8 @@ export class StacksPouchdbService implements StacksPersistenceService {
    * @param notify whether or not to notify subscribers
    */
   public updateStack(stack: Stack, notify = true): Promise<any> {
+    LogService.trace(`updateStack ${stack.cards.length}`);
+
     return new Promise((resolve, reject) => {
       if (stack == null) {
         reject();
@@ -166,6 +171,7 @@ export class StacksPouchdbService implements StacksPersistenceService {
    * @param stack stack to be updated
    */
   public updateStackWithoutNotification(stack: Stack): Promise<any> {
+    LogService.trace(`updateStackWithoutNotification`);
     return this.updateStack(stack, false);
   }
 
@@ -234,15 +240,15 @@ export class StacksPouchdbService implements StacksPersistenceService {
    * Informs subscribers that something has changed
    */
   public notifyMultipleStacks() {
-    this.stacksSubject.next(Array.from(this.stacks.values()).sort((t1, t2) => {
-      return 1;
-    }));
+    LogService.trace(`notifyMultipleStacks`);
+    this.stacksSubject.next(Array.from(this.stacks.values()));
   }
 
   /**
    * Informs subscribers that something has changed
    */
   public notifySingleStack() {
+    LogService.trace(`notifySingleStack`);
     this.stackSubject.next(this.stack);
   }
 

@@ -1,6 +1,6 @@
 <div *ngIf="card != null">
   <mat-card class="container">
-    <div *ngIf="devMode" class="debug">id {{ card.id.slice(0, 19)  }}...</div>
+    <div *ngIf="devMode &&  card.id != null" class="debug">id {{ card.id.slice(0, 19)  }}...</div>
     <div *ngIf="devMode" class="debug">index {{ card.index }}</div>
     <div *ngIf="devMode" class="debug">difficulty {{ card.difficulty }}</div>
 

@@ -5,8 +5,9 @@
     <div class="flexcontainer">
       <mat-card-header (click)="onStackClicked()">
         <mat-card-title class="stack-title" [style.color]="titleColor">{{ stack.title }}</mat-card-title>
-        <mat-card-subtitle *ngIf="stack.cards.length !== 1">{{ stack.cards.length }} Karten</mat-card-subtitle>
-        <mat-card-subtitle *ngIf="stack.cards.length === 1">{{ stack.cards.length }} Karte</mat-card-subtitle>
+        <mat-card-subtitle>
+          {{ cardsCount }} Karte<span *ngIf="cardsCount !== 1">n</span>
+        </mat-card-subtitle>
       </mat-card-header>
       <div class="flexbox"></div>
     </div>

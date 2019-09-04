@@ -31,6 +31,7 @@ import {SettingsService} from '../../../../core/settings/services/settings.servi
 import {SettingType} from '../../../../core/settings/model/setting-type.enum';
 // tslint:disable-next-line:max-line-length
 import {CheckableInformationDialogComponent} from '../../../../ui/information-dialog/checkable-information-dialog/checkable-information-dialog.component';
+import {LogService} from '../../../../core/log/services/log.service';
 
 /**
  * Displays games page
@@ -179,6 +180,7 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
    * Initializes stack subscription
    */
   private initializeStackSubscription() {
+    LogService.trace(`initializeStackSubscription`);
     this.stacksPersistenceService.stackSubject.pipe(
       takeUntil(this.unsubscribeSubject)
     ).subscribe((value) => {
@@ -187,7 +189,12 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
       if (value != null) {
         stack = value as Stack;
         this.initializeStack(stack);
-        this.mergeStacksFromAssets(stack);
+        this.initializeCards(stack);
+        this.initializeTitle(stack);
+        this.initializeTheme(stack);
+        this.mergeStacksFromAssets(stack).then(() => {
+          this.stacksPersistenceService.updateStackWithoutNotification(stack).then();
+        });
       } else {
         this.navigateBack();
       }
@@ -232,6 +239,8 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
         this.stacksService.getStackFromAssets(fileName).then(stackFromAssets => {
           if (stackFromAssets != null) {
             this.initializeStack(stackFromAssets);
+            this.initializeTitle(stackFromAssets);
+            this.initializeTheme(stackFromAssets);
             this.snackbarService.showSnackbar('Speicherplatz knapp. Spiel wird nicht gespeichert.');
           }
         });
@@ -242,6 +251,23 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
   // Stack
 
   /**
+   * Checks if there is already an ongoing game and forwards to it in this case
+   * @param stack stack
+   */
+  private jumpIntoExistingGame(stack: Stack) {
+    switch (VariantService.getVariant()) {
+      case Variant.SCIDDLE: {
+        this.router.navigate([`${ROUTE_CARDS}/${stack.id}`]).then();
+        break;
+      }
+      case Variant.S4F: {
+        this.router.navigate([`${ROUTE_CARDS}`]).then();
+        break;
+      }
+    }
+  }
+
+  /**
    * Initializes stack
    * @param stack stack
    */
@@ -250,22 +276,34 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.cardCount = Math.round(environment.MIN_CARDS + ((stack.cards.length - environment.MIN_CARDS) / 2));
     this.maxCardCount = stack.cards.length;
+  }
 
-    this.initializeTitle(stack);
-    this.initializeTheme(stack);
+  /**
+   * Initializes cards
+   * @param stack stack
+   */
+  private initializeCards(stack: Stack) {
+    stack.cards.forEach((card, index) => {
+      card.index = index;
+    });
   }
 
   /**
    * Initializes stacks
    * @param stack stack
    */
-  private mergeStacksFromAssets(stack: Stack) {
-    this.stacksService.mergeStackFromAssets(stack).then(resolve => {
-      const mergedStack = resolve as Stack;
-      this.stacksPersistenceService.updateStack(mergedStack).then(() => {
+  private mergeStacksFromAssets(stack: Stack): Promise<Stack> {
+    LogService.trace(`mergeStacksFromAssets`);
+
+    return new Promise((resolve) => {
+      this.stacksService.mergeStackFromAssets(stack).then(result => {
+        const mergedStack = result as Stack;
+        this.stacksPersistenceService.updateStackWithoutNotification(mergedStack).then(() => {
+          this.snackbarService.showSnackbar('Neue Karten geladen');
+          resolve(mergedStack);
+        });
+      }, () => {
       });
-      this.snackbarService.showSnackbar('Neue Karten geladen');
-    }, () => {
     });
   }
 
@@ -546,7 +584,9 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
           result.difficultyEasy,
           result.difficultyMedium,
           result.difficultyHard,
-          result.cardCount).then(() => {
+          result.cardCount).then((initializedStack) => {
+
+          this.stack = initializedStack;
 
           this.cardsService.shuffleStack(this.stack).then();
           this.stacksPersistenceService.updateStackWithoutNotification(this.stack).then(() => {
