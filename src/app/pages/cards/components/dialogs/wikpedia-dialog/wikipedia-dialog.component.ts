@@ -13,6 +13,8 @@ import {environment} from '../../../../../../environments/environment';
 })
 export class WikipediaDialogComponent implements OnInit {
 
+  /** Default theme to be used */
+  themeClass = 'blue-theme';
   /** Dialog title */
   dialogTitle = '';
 
@@ -20,6 +22,10 @@ export class WikipediaDialogComponent implements OnInit {
   term = '';
   /** Explanation text */
   explanationText;
+  /** Text to more information */
+  more;
+  /** Link to more information */
+  moreLink;
   /** Alternate Wikipedia article */
   alternateWikipediaArticle;
   /** Alternate URL */
@@ -80,6 +86,7 @@ export class WikipediaDialogComponent implements OnInit {
    * Initializes data
    */
   private initializeData() {
+    this.themeClass = this.data.themeClass;
     this.dialogTitle = this.data.term.replace(/_/g, ' ');
     this.term = this.data.term;
     this.explanationText = this.data.explanationText;
@@ -93,20 +100,18 @@ export class WikipediaDialogComponent implements OnInit {
    */
   private initializeExtract() {
     if (this.alternateURL != null) {
-      this.explanationText = `Mehr auf [${this.alternateURL}](${this.alternateURL})`;
+      this.more = `Mehr auf ${this.alternateURL}`;
+      this.moreLink = this.alternateURL;
     } else {
       const article = this.alternateWikipediaArticle == null ? this.term : this.alternateWikipediaArticle;
       const extractEmitter = new EventEmitter<{ pageURL: string, extract: string }>();
       extractEmitter.subscribe(result => {
         if (result != null && result.extract != null) {
-          const extract = this.explanationText == null
+          this.explanationText = this.explanationText == null
             ? WikipediaDialogComponent.getFirstSentences(result.extract, 2, 100)
             : this.explanationText;
-          const more = result.pageURL != null
-            ? ` Mehr auf [Wikipedia](` + result.pageURL.replace(' ', '%20') + `)`
-            : ``;
-
-          this.explanationText = extract + more;
+          this.more = result.pageURL != null ? ` Mehr auf Wikipedia` : ``;
+          this.moreLink = result.pageURL.replace(' ', '%20');
         } else {
           this.explanationText = `Das Extrakt kann nicht abgerufen werden`;
         }
