@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, Input, isDevMode, ViewEncapsulation} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, isDevMode, OnInit, ViewEncapsulation} from '@angular/core';
 import {Stack} from '../../../../../core/entity/model/stack/stack.model';
 import {Media} from '../../../../../core/ui/model/media.enum';
 import {Card} from '../../../../../core/entity/model/card/card.model';
@@ -6,6 +6,7 @@ import {MaterialColorService} from '../../../../../core/ui/services/material-col
 import {WikipediaService} from '../../../../../core/wikipedia/services/wikipedia.service';
 import {MatDialog} from '@angular/material';
 import {WikipediaDialogComponent} from '../../dialogs/wikpedia-dialog/wikipedia-dialog.component';
+import {Theme} from '../../../../../core/ui/model/theme.enum';
 
 /**
  * Displays a card
@@ -25,6 +26,8 @@ export class CardFragmentComponent {
   @Input() card = new Card();
   /** Current media */
   @Input() media: Media;
+  /** Current theme */
+  @Input() theme: Theme = Theme.BLUE;
 
   /** Enum for media types */
   mediaType = Media;
@@ -44,7 +47,6 @@ export class CardFragmentComponent {
     this.devMode = isDevMode();
   }
 
-
   //
   // Actions
   //
@@ -56,6 +58,7 @@ export class CardFragmentComponent {
     this.dialog.open(WikipediaDialogComponent, {
       disableClose: false,
       data: {
+        themeClass: this.theme,
         term: this.getTerm(this.card),
         explanationText: this.card.alternateExplanationText,
         alternateWikipediaArticle: this.card.alternateWikipediaArticle,
