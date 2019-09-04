@@ -4,7 +4,7 @@ import {environment} from '../../../../../environments/environment';
 import {MatDialog, MatIconRegistry} from '@angular/material';
 import {MaterialColorService} from '../../../../core/ui/services/material-color.service';
 import {MediaService} from '../../../../core/ui/services/media.service';
-import {takeUntil} from 'rxjs/operators';
+import {filter, takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 import {MaterialIconService} from '../../../../core/ui/services/material-icon.service';
 import {DomSanitizer} from '@angular/platform-browser';
@@ -32,6 +32,10 @@ import {OverlayContainer} from '@angular/cdk/overlay';
 import {VariantService} from '../../../../core/util/services/variant.service';
 import {Variant} from '../../../../core/util/model/variant.enum';
 import {LogService} from '../../../../core/log/services/log.service';
+import {CheckableInformationDialogComponent} from '../../../../ui/information-dialog/checkable-information-dialog/checkable-information-dialog.component';
+import {Setting} from '../../../../core/settings/model/setting.model';
+import {SettingType} from '../../../../core/settings/model/setting-type.enum';
+import {SettingsService} from '../../../../core/settings/services/settings.service';
 
 export enum DisplayAspect {
   DISPLAY_CARDS,
@@ -82,6 +86,11 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
   /** Enum of display aspect types */
   public displayAspectType = DisplayAspect;
 
+  /** Map of settings */
+  public settingsMap = new Map<string, Setting>();
+  /** Setting dont-show-manual-on-startup */
+  public dontShowManualOnStartup = false;
+
   /** Title color */
   public titleColor = 'black';
   /** Enum of media types */
@@ -130,6 +139,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    * @param route route
    * @param router router
    * @param sanitizer sanitizer
+   * @param settingsService settings service
    * @param snackbarService snackbar service
    * @param stacksPersistenceService stacks persistence service
    * @param themeService theme service
@@ -146,6 +156,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
               private route: ActivatedRoute,
               private router: Router,
               private sanitizer: DomSanitizer,
+              private settingsService: SettingsService,
               private snackbarService: SnackbarService,
               @Inject(STACK_PERSISTENCE_POUCHDB) private stacksPersistenceService: StacksPersistenceService,
               private themeService: ThemeService) {
@@ -162,8 +173,9 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit() {
     this.initializeStackSubscription();
     this.initializeCardSubscription();
-
     this.initializeGameSubscription();
+
+    this.initializeSettingsSubscription();
 
     this.initializeMaterial();
     this.initializeMediaSubscription();
@@ -184,6 +196,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
           this.id = this.route.snapshot.paramMap.get('id');
           if (this.id != null) {
             this.findEntities(this.id);
+            this.findSettings();
           } else {
             this.navigateBack();
           }
@@ -249,6 +262,21 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
     ).subscribe((value) => {
       if (value != null) {
         this.initializeGame(value as Game);
+      }
+    });
+  }
+
+  /**
+   * Initializes settings subscription
+   */
+  private initializeSettingsSubscription() {
+    this.settingsService.settingsSubject.pipe(
+      takeUntil(this.unsubscribeSubject),
+      filter(value => value != null)
+    ).subscribe(value => {
+      if (value != null) {
+        const settings = value as Map<string, Setting>;
+        this.initializeSettings(settings);
       }
     });
   }
@@ -364,6 +392,21 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.gameMode = GamesService.getGameModeByStack(stack);
   }
 
+  // Settings
+
+  /**
+   * Initializes settings
+   * @param settingsMap settings map
+   */
+  private initializeSettings(settingsMap: Map<string, Setting>) {
+    this.settingsMap = new Map(settingsMap);
+    this.dontShowManualOnStartup = SettingsService.isSettingActive(SettingType.DONT_SHOW_MANUAL_ON_STARTUP, this.settingsMap);
+
+    if (this.dontShowManualOnStartup !== null && this.dontShowManualOnStartup === false) {
+      this.onMenuItemClicked('manual');
+    }
+  }
+
   // Others
 
   /**
@@ -373,6 +416,13 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
   private findEntities(id: string) {
     LogService.trace(`findEntities ${id}`);
     this.stacksPersistenceService.findStackByID(this.id);
+  }
+
+  /**
+   * Finds settings
+   */
+  private findSettings() {
+    this.settingsService.fetch();
   }
 
   /**
@@ -526,7 +576,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
         this.http.get('assets/manual/manual-de.md').subscribe(
           () => {
           }, err => {
-            this.dialog.open(InformationDialogComponent, {
+            const dialogRef = this.dialog.open(CheckableInformationDialogComponent, {
               disableClose: false,
               data: {
                 title: 'Anleitung',
@@ -534,8 +584,18 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
                   .replace(/"/g, '')
                   .replace(/\\n/g, '\n')
                   .replace(/\\r/g, '\r'),
-                action: 'Alles klar',
-                value: null
+                checkboxValue: this.dontShowManualOnStartup,
+                checkboxText: 'Anleitung beim Starten nicht mehr anzeigen',
+                action: 'Alles klar'
+              }
+            });
+
+            dialogRef.afterClosed().subscribe(result => {
+              if (result != null) {
+                this.dontShowManualOnStartup = result.checkboxValue as boolean;
+                this.settingsService.updateSetting(
+                  new Setting(SettingType.DONT_SHOW_MANUAL_ON_STARTUP, this.dontShowManualOnStartup),
+                  false);
               }
             });
           });
