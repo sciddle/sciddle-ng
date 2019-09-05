@@ -32,6 +32,7 @@ import {OverlayContainer} from '@angular/cdk/overlay';
 import {VariantService} from '../../../../core/util/services/variant.service';
 import {Variant} from '../../../../core/util/model/variant.enum';
 import {LogService} from '../../../../core/log/services/log.service';
+// tslint:disable-next-line:max-line-length
 import {CheckableInformationDialogComponent} from '../../../../ui/information-dialog/checkable-information-dialog/checkable-information-dialog.component';
 import {Setting} from '../../../../core/settings/model/setting.model';
 import {SettingType} from '../../../../core/settings/model/setting-type.enum';

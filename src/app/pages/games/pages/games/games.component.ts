@@ -251,23 +251,6 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
   // Stack
 
   /**
-   * Checks if there is already an ongoing game and forwards to it in this case
-   * @param stack stack
-   */
-  private jumpIntoExistingGame(stack: Stack) {
-    switch (VariantService.getVariant()) {
-      case Variant.SCIDDLE: {
-        this.router.navigate([`${ROUTE_CARDS}/${stack.id}`]).then();
-        break;
-      }
-      case Variant.S4F: {
-        this.router.navigate([`${ROUTE_CARDS}`]).then();
-        break;
-      }
-    }
-  }
-
-  /**
    * Initializes stack
    * @param stack stack
    */
