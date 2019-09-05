@@ -55,8 +55,13 @@ export class GameGuard implements CanActivate {
             }
           } else {
             // No game exists on this stack
+            LogService.debug('No game exists on this stack');
             resolve(true);
           }
+        } else {
+          // No stack initialized yet
+          LogService.debug('No stack initialized yet');
+          resolve(true);
         }
       });
 
