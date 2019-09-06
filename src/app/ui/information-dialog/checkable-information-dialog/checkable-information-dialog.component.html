@@ -7,7 +7,7 @@
     labelPosition="after"
     [checked]="checkboxValue"
     (change)="onCheckboxChanged($event)">
-    {{ checkboxText }}
+    <span class="checkbox-label">{{ checkboxText }}</span>
   </mat-checkbox>
   <div class="flexbox"></div>
   <button mat-button (click)="confirm()">
