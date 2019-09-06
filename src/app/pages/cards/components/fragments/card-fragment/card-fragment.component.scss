@@ -18,6 +18,10 @@
   text-align: center;
 }
 
+.help-icon {
+  margin-left: 15px;
+}
+
 .taboo {
   font-family: 'Roboto Slab', serif;
   font-size: 1.4em;
@@ -34,7 +38,7 @@
 }
 
 .button-wrapper {
-  height: 100px;
+  height: 115px;
 }
 
 //
@@ -50,14 +54,17 @@
   }
 
   .difficultyColorEasy {
+    color: white !important;
     background-color: mat-color($mat-green, 500) !important;
   }
 
   .difficultyColorMedium {
+    color: white !important;
     background-color: mat-color($mat-amber, 400) !important;
   }
 
   .difficultyColorHard {
+    color: white !important;
     background-color: mat-color($mat-red, 500) !important;
   }
 }
@@ -71,14 +78,17 @@
   }
 
   .difficultyColorEasy {
+    color: white !important;
     background-color: mat-color($mat-green, 500) !important;
   }
 
   .difficultyColorMedium {
+    color: white !important;
     background-color: mat-color($mat-amber, 400) !important;
   }
 
   .difficultyColorHard {
+    color: white !important;
     background-color: mat-color($mat-red, 500) !important;
   }
 }

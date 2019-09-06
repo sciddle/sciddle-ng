@@ -1,6 +1,8 @@
 <mat-toolbar class="toolbar flexcontainer">
   <div *ngIf="variant === variantType.SCIDDLE" class="toolbar-block start">
-    <button mat-button class="toolbar-menu-item" (click)="onMenuItemClicked('back')">
+    <button mat-button mat-icon-button matTooltip="Spiel beenden"
+            class="toolbar-menu-item"
+            (click)="onMenuItemClicked('back')">
       <mat-icon svgIcon="arrow_back"></mat-icon>
     </button>
     <span *ngIf="media != mediaType.SMALL" class="toolbar-title">{{ title }}</span>
@@ -17,11 +19,11 @@
   </div>
   <div class="flexbox"></div>
   <div class="toolbar-block end">
-    <button *ngIf="gameMode === gameModeType.SINGLE_PLAYER && devMode" mat-button class="toolbar-menu-item right"
+    <button *ngIf="gameMode === gameModeType.SINGLE_PLAYER && devMode" mat-button matTooltip="Karten sortieren" class="toolbar-menu-item right"
             (click)="onMenuItemClicked('sort-cards')">
       <mat-icon class="icon" svgIcon="sort_by_alpha"></mat-icon>
     </button>
-    <button *ngIf="gameMode === gameModeType.SINGLE_PLAYER" mat-button class="toolbar-menu-item right"
+    <button *ngIf="gameMode === gameModeType.SINGLE_PLAYER" mat-button matTooltip="Karten mischen" class="toolbar-menu-item right"
             (click)="onMenuItemClicked('shuffle-cards')">
       <mat-icon class="icon" svgIcon="shuffle"></mat-icon>
     </button>
@@ -32,7 +34,7 @@
     <button *ngIf="gameMode === gameModeType.MULTI_PLAYER" mat-button class="toolbar-menu-item right">
       <span class="card-count">{{ cardCount }}</span>
     </button>
-    <button mat-button class="toolbar-menu-item right" [matMenuTriggerFor]="menu">
+    <button mat-button matTooltip="Menü öffnen" class="toolbar-menu-item right" [matMenuTriggerFor]="menu">
       <mat-icon class="icon" svgIcon="more_vert"></mat-icon>
     </button>
     <mat-menu #menu="matMenu">
