@@ -5,21 +5,30 @@
     <div *ngIf="devMode" class="debug">difficulty {{ card.difficulty }}</div>
 
     <mat-card-title class="word">
-      {{ card.word }}
-      <mat-icon svgIcon="help_outline" (click)="onHelpClicked()"></mat-icon>
+      <span matTooltip="Erkläre diesen Begriff"
+            matTooltipPosition="above"
+            matTooltipShowDelay="250">{{ card.word }}</span>
+      <mat-icon svgIcon="help_outline"
+                matTooltip="Hinweis anzeigen"
+                matTooltipPosition="above"
+                matTooltipShowDelay="250" class="help-icon" (click)="onHelpClicked()"></mat-icon>
     </mat-card-title>
-    <div *ngFor="let taboo of card.taboos" class="taboo">
-      {{ taboo }}
+    <div matTooltip="Verwende diese Wörter nicht"
+         matTooltipPosition="above"
+         matTooltipShowDelay="250">
+      <div *ngFor="let taboo of card.taboos" class="taboo">
+        {{ taboo }}
+      </div>
     </div>
     <mat-card-footer class="flexcontainer">
       <div class="flexbox"></div>
       <div class="button-wrapper">
-        <button *ngIf="!difficultyDisplayLongText" mat-mini-fab class="difficulty"
+        <button *ngIf="!difficultyDisplayLongText" mat-mini-fab [matTooltip]="difficultyCombinedText" class="difficulty"
                 [ngClass]="difficultyClass"
                 (click)="onDifficultyClicked()">
           {{ difficultyText }}
         </button>
-        <button *ngIf="difficultyDisplayLongText" mat-raised-button class="difficulty"
+        <button *ngIf="difficultyDisplayLongText" mat-raised-button [matTooltip]="difficultyCombinedText" class="difficulty"
                 [ngClass]="difficultyClass"
                 (click)="onDifficultyClicked()">
           {{ difficultyLongText }}

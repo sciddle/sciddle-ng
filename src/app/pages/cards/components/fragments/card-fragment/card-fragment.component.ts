@@ -53,6 +53,8 @@ export class CardFragmentComponent implements OnChanges {
   difficultyText = '';
   /** Difficulty long text */
   difficultyLongText = '';
+  /** Difficulty combined text */
+  difficultyCombinedText = '';
 
   /**
    * Constructor
@@ -92,18 +94,21 @@ export class CardFragmentComponent implements OnChanges {
         this.difficultyClass = 'difficultyColorEasy';
         this.difficultyText = '1';
         this.difficultyLongText = 'EINFACH';
+        this.difficultyCombinedText = `${this.difficultyLongText} / ${this.difficultyText} Punkt`;
         break;
       }
       case 2: {
         this.difficultyClass = 'difficultyColorMedium';
         this.difficultyText = '2';
         this.difficultyLongText = 'MITTEL';
+        this.difficultyCombinedText = `${this.difficultyLongText} / ${this.difficultyText} Punkte`;
         break;
       }
       case 3: {
         this.difficultyClass = 'difficultyColorHard';
         this.difficultyText = '3';
         this.difficultyLongText = 'SCHWER';
+        this.difficultyCombinedText = `${this.difficultyLongText} / ${this.difficultyText} Punkte`;
         break;
       }
     }
