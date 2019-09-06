@@ -13,9 +13,18 @@
     </div>
     <mat-card-footer class="flexcontainer">
       <div class="flexbox"></div>
-      <button *ngIf="card.difficulty === 1" mat-mini-fab class="difficulty difficultyColorEasy">{{ card.difficulty }}</button>
-      <button *ngIf="card.difficulty === 2" mat-mini-fab class="difficulty difficultyColorMedium">{{ card.difficulty }}</button>
-      <button *ngIf="card.difficulty === 3" mat-mini-fab class="difficulty difficultyColorHard">{{ card.difficulty }}</button>
+      <div class="button-wrapper">
+        <button *ngIf="!difficultyDisplayLongText" mat-mini-fab class="difficulty"
+                [ngClass]="difficultyClass"
+                (click)="onDifficultyClicked()">
+          {{ difficultyText }}
+        </button>
+        <button *ngIf="difficultyDisplayLongText" mat-raised-button class="difficulty"
+                [ngClass]="difficultyClass"
+                (click)="onDifficultyClicked()">
+          {{ difficultyLongText }}
+        </button>
+      </div>
     </mat-card-footer>
   </mat-card>
 </div>

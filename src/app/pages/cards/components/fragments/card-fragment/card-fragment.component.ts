@@ -1,4 +1,14 @@
-import {ChangeDetectionStrategy, Component, Input, isDevMode, OnInit, ViewEncapsulation} from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  isDevMode,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+  ViewEncapsulation
+} from '@angular/core';
 import {Stack} from '../../../../../core/entity/model/stack/stack.model';
 import {Media} from '../../../../../core/ui/model/media.enum';
 import {Card} from '../../../../../core/entity/model/card/card.model';
@@ -18,7 +28,7 @@ import {Theme} from '../../../../../core/ui/model/theme.enum';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None
 })
-export class CardFragmentComponent {
+export class CardFragmentComponent implements OnChanges {
 
   /** Stack the card is contained in */
   @Input() stack = new Stack();
@@ -35,6 +45,15 @@ export class CardFragmentComponent {
   /** Dev mode */
   devMode = false;
 
+  /** Difficulty display long text */
+  difficultyDisplayLongText = false;
+  /** Difficulty class */
+  difficultyClass = '';
+  /** Difficulty text */
+  difficultyText = '';
+  /** Difficulty long text */
+  difficultyLongText = '';
+
   /**
    * Constructor
    * @param dialog dialog
@@ -45,6 +64,49 @@ export class CardFragmentComponent {
               private materialColorService: MaterialColorService,
               private wikipediaService: WikipediaService) {
     this.devMode = isDevMode();
+  }
+
+  //
+  // Lifecycle hooks
+  //
+
+  /**
+   * Handles on-changes lifecycle phase
+   */
+  ngOnChanges(changes: SimpleChanges) {
+    this.initializeDifficultyDisplaySettings();
+  }
+
+  //
+  // Initialization
+  //
+
+  /**
+   * Initializes difficulty display settings
+   */
+  private initializeDifficultyDisplaySettings() {
+    this.difficultyDisplayLongText = false;
+
+    switch (this.card.difficulty) {
+      case 1: {
+        this.difficultyClass = 'difficultyColorEasy';
+        this.difficultyText = '1';
+        this.difficultyLongText = 'EINFACH';
+        break;
+      }
+      case 2: {
+        this.difficultyClass = 'difficultyColorMedium';
+        this.difficultyText = '2';
+        this.difficultyLongText = 'MITTEL';
+        break;
+      }
+      case 3: {
+        this.difficultyClass = 'difficultyColorHard';
+        this.difficultyText = '3';
+        this.difficultyLongText = 'SCHWER';
+        break;
+      }
+    }
   }
 
   //
@@ -67,6 +129,13 @@ export class CardFragmentComponent {
       },
       autoFocus: false
     });
+  }
+
+  /**
+   * Handles click on difficulty indicator
+   */
+  onDifficultyClicked() {
+    this.difficultyDisplayLongText = !this.difficultyDisplayLongText;
   }
 
   //
