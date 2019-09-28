@@ -1,9 +1,21 @@
+@import '../../../../theme';
+@import '../../../../sizes';
+
 .flexcontainer {
   display: flex;
 }
 
 .flexbox {
   flex-grow: 1;
+}
+
+.checkbox {
+  @media #{$breakpoint-small} {
+    max-width: 65%;
+  }
+  @media #{$breakpoint-medium} {
+    max-width: 65%;
+  }
 }
 
 //
