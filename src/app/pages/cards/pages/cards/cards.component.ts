@@ -411,43 +411,6 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
   // Others
 
   /**
-   * Finds entities by a given ID
-   * @param id ID
-   */
-  private findEntities(id: string) {
-    LogService.trace(`findEntities ${id}`);
-    this.stacksPersistenceService.findStackByID(this.id);
-  }
-
-  /**
-   * Finds settings
-   */
-  private findSettings() {
-    this.settingsService.fetch();
-  }
-
-  /**
-   * Initializes material colors and icons
-   */
-  private initializeMaterial() {
-    this.materialIconService.initializeIcons(this.iconRegistry, this.sanitizer);
-  }
-
-  /**
-   * Initializes media subscription
-   */
-  private initializeMediaSubscription() {
-    this.media = this.mediaService.media;
-    this.mediaService.mediaSubject.pipe(
-      takeUntil(this.unsubscribeSubject)
-    ).subscribe((value) => {
-      this.media = value as Media;
-      this.initializeThrowOutFactor();
-      this.initializeStackConfig();
-    });
-  }
-
-  /**
    * Initializes theme subscription
    */
   private initializeThemeSubscription() {
@@ -538,6 +501,47 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
         return this.throwOutDistance;
       }
     };
+  }
+
+  //
+  // Find
+  //
+
+  /**
+   * Finds entities by a given ID
+   * @param id ID
+   */
+  private findEntities(id: string) {
+    LogService.trace(`findEntities ${id}`);
+    this.stacksPersistenceService.findStackByID(this.id);
+  }
+
+  /**
+   * Finds settings
+   */
+  private findSettings() {
+    this.settingsService.fetch();
+  }
+
+  /**
+   * Initializes material colors and icons
+   */
+  private initializeMaterial() {
+    this.materialIconService.initializeIcons(this.iconRegistry, this.sanitizer);
+  }
+
+  /**
+   * Initializes media subscription
+   */
+  private initializeMediaSubscription() {
+    this.media = this.mediaService.media;
+    this.mediaService.mediaSubject.pipe(
+      takeUntil(this.unsubscribeSubject)
+    ).subscribe((value) => {
+      this.media = value as Media;
+      this.initializeThrowOutFactor();
+      this.initializeStackConfig();
+    });
   }
 
   //
