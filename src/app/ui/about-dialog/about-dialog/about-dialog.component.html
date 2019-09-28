@@ -2,11 +2,11 @@
 <mat-dialog-content [class]="themeClass">
   <p>{{ name }} (Version {{ version }}) basierend auf <span class="highlight">Sciddle - The Science Riddle</span>
     von {{ authorOriginal }}.</p>
-  <p>Idee, Texte und Grafiken von {{ authorContent }}, lizenziert unter {{ licenseContent }}.</p>
+  <p>Idee und Texte von <a>{{ authorContent }}</a>, lizenziert unter {{ licenseContent }}.</p>
   <p>Implementierung durch <a [attr.href]="authorCodeUrl" target="_blank">{{ authorCode }}</a>.
     Quellcode verfügbar auf <a [attr.href]="githubUrl" target="_blank">GitHub</a>, lizenziert
     unter {{ licenseCode }}.</p>
-  <p>Wissenschaftliche Betreuung durch {{ authorScientificSupervision }}.</p>
+  <p>Wissenschaftliche Betreuung durch <a>{{ authorScientificSupervision }}</a>.</p>
 </mat-dialog-content>
 <mat-dialog-actions class="flexcontainer">
   <div class="flexbox"></div>
