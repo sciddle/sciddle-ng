@@ -1,5 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {Variant} from '../../../core/util/model/variant.enum';
 
 /**
  * Displays about dialog
@@ -21,23 +22,32 @@ export class AboutDialogComponent implements OnInit {
   /** App version */
   version = '';
   /** Author of code */
-  authorCode = '';
+  authorCode;
   /** Author of code's URL */
-  authorCodeUrl = '';
-  /** Author of orginal idea */
-  authorOriginal = '';
+  authorCodeUrl;
+  /** Author of original idea */
+  authorOriginal;
   /** Author of content */
-  authorContent = '';
+  authorContent;
+  /** Author of graphics */
+  authorGraphics;
+  /** Author of graphics' URL */
+  authorGraphicsUrl;
   /** Scientific supervision */
-  authorScientificSupervision = '';
+  authorScientificSupervision;
   /** Github URL */
-  githubUrl = '';
+  githubUrl;
   /** License of code */
-  licenseCode = '';
+  licenseCode;
   /** License of content */
-  licenseContent = '';
+  licenseContent;
   /** App homepage */
-  homepage = '';
+  homepage;
+  /** Variant */
+  variant: Variant;
+
+  /** Variant type sciddle */
+  variantTypeSciddle = Variant.SCIDDLE.toString();
 
   /**
    * Constructor
@@ -75,10 +85,13 @@ export class AboutDialogComponent implements OnInit {
     this.authorCodeUrl = this.data.authorCodeUrl;
     this.authorOriginal = this.data.authorOriginal;
     this.authorContent = this.data.authorContent;
+    this.authorGraphics = this.data.authorGraphics;
+    this.authorGraphicsUrl = this.data.authorGraphicsUrl;
     this.authorScientificSupervision = this.data.authorScientificSupervision;
     this.githubUrl = this.data.githubUrl;
     this.licenseCode = this.data.licenseCode;
     this.licenseContent = this.data.licenseContent;
     this.homepage = this.data.homepage;
+    this.variant = this.data.variant;
   }
 }

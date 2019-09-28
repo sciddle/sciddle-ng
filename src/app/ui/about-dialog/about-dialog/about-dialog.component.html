@@ -1,12 +1,24 @@
 <h2 mat-dialog-title>{{ dialogTitle }}</h2>
 <mat-dialog-content [class]="themeClass">
-  <p>{{ name }} (Version {{ version }}) basierend auf <span class="highlight">Sciddle - The Science Riddle</span>
-    von {{ authorOriginal }}.</p>
-  <p>Idee und Texte von <a>{{ authorContent }}</a>, lizenziert unter {{ licenseContent }}.</p>
-  <p>Implementierung durch <a [attr.href]="authorCodeUrl" target="_blank">{{ authorCode }}</a>.
-    Quellcode verfügbar auf <a [attr.href]="githubUrl" target="_blank">GitHub</a>, lizenziert
-    unter {{ licenseCode }}.</p>
-  <p>Wissenschaftliche Betreuung durch <a>{{ authorScientificSupervision }}</a>.</p>
+  <p>{{ name }} (Version {{ version }})
+    <span *ngIf="authorOriginal != null">basierend auf <span
+      class="highlight">Sciddle - The Science Riddle</span> von {{ authorOriginal }}
+    </span>.
+  </p>
+  <p *ngIf="authorContent != null">
+    Idee und Texte von <a>{{ authorContent }}</a>, lizenziert unter {{ licenseContent }}.
+  </p>
+  <p *ngIf="variant.toString() === variantTypeSciddle && authorGraphics != null">
+    Grafiken von <a [attr.href]="authorGraphicsUrl" target="_blank">{{ authorGraphics }}</a>.
+  </p>
+  <p *ngIf="authorCode != null">
+    Implementierung durch <a [attr.href]="authorCodeUrl" target="_blank">{{ authorCode }}</a>.
+    Quellcode verfügbar auf <a [attr.href]="githubUrl" target="_blank">GitHub</a>
+    <span *ngIf="licenseCode != null">, lizenziert unter {{ licenseCode }}</span>.
+  </p>
+  <p *ngIf="authorScientificSupervision != null">
+    Wissenschaftliche Betreuung durch <a>{{ authorScientificSupervision }}</a>.
+  </p>
 </mat-dialog-content>
 <mat-dialog-actions class="flexcontainer">
   <div class="flexbox"></div>
