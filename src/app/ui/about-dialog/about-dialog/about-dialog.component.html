@@ -8,7 +8,7 @@
   <p *ngIf="authorContent != null">
     Idee und Texte von <a>{{ authorContent }}</a>, lizenziert unter {{ licenseContent }}.
   </p>
-  <p *ngIf="variant.toString() === variantTypeSciddle && authorGraphics != null">
+  <p *ngIf="variant != null && variant.toString() === variantTypeSciddle && authorGraphics != null">
     Grafiken von <a [attr.href]="authorGraphicsUrl" target="_blank">{{ authorGraphics }}</a>.
   </p>
   <p *ngIf="authorCode != null">

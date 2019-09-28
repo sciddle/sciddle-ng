@@ -47,7 +47,7 @@ export class AboutDialogComponent implements OnInit {
   variant: Variant;
 
   /** Variant type sciddle */
-  variantTypeSciddle = Variant.SCIDDLE.toString();
+  variantTypeSciddle = Variant.SCIDDLE;
 
   /**
    * Constructor
