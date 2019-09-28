@@ -242,20 +242,6 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
   // Others
 
   /**
-   * Finds entities
-   */
-  private findEntities() {
-    this.stacksPersistenceService.findStacks();
-  }
-
-  /**
-   * Finds settings
-   */
-  private findSettings() {
-    this.settingsService.fetch();
-  }
-
-  /**
    * Initializes theme
    */
   private initializeTheme() {
@@ -291,6 +277,24 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
     ).subscribe((value) => {
       this.theme = value as Theme;
     });
+  }
+
+  //
+  // Find
+  //
+
+  /**
+   * Finds entities
+   */
+  private findEntities() {
+    this.stacksPersistenceService.findStacks();
+  }
+
+  /**
+   * Finds settings
+   */
+  private findSettings() {
+    this.settingsService.fetch();
   }
 
   //

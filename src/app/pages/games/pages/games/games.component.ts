@@ -320,32 +320,6 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
   // Others
 
   /**
-   * Finds entities by a given ID
-   * @param id ID
-   */
-  private findEntities(id: string) {
-    switch (VariantService.getVariant()) {
-      case Variant.SCIDDLE: {
-        if (id != null) {
-          this.stacksPersistenceService.findStackByID(id);
-        }
-        break;
-      }
-      case Variant.S4F: {
-        this.stacksPersistenceService.findStackByID(id);
-        break;
-      }
-    }
-  }
-
-  /**
-   * Finds settings
-   */
-  private findSettings() {
-    this.settingsService.fetch();
-  }
-
-  /**
    * Initializes material colors and icons
    */
   private initializeMaterial() {
@@ -416,6 +390,36 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
         break;
       }
     }
+  }
+
+  //
+  // Find
+  //
+
+  /**
+   * Finds entities by a given ID
+   * @param id ID
+   */
+  private findEntities(id: string) {
+    switch (VariantService.getVariant()) {
+      case Variant.SCIDDLE: {
+        if (id != null) {
+          this.stacksPersistenceService.findStackByID(id);
+        }
+        break;
+      }
+      case Variant.S4F: {
+        this.stacksPersistenceService.findStackByID(id);
+        break;
+      }
+    }
+  }
+
+  /**
+   * Finds settings
+   */
+  private findSettings() {
+    this.settingsService.fetch();
   }
 
   //
