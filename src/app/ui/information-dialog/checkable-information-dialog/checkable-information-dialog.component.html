@@ -4,13 +4,14 @@
 </mat-dialog-content>
 <mat-dialog-actions class="flexcontainer">
   <mat-checkbox
+    class="checkbox"
     labelPosition="after"
     [checked]="checkboxValue"
     (change)="onCheckboxChanged($event)">
     <span class="checkbox-label">{{ checkboxText }}</span>
   </mat-checkbox>
   <div class="flexbox"></div>
-  <button mat-button (click)="confirm()">
+  <button mat-flat-button color="accent" (click)="confirm()">
     {{ action }}
   </button>
 </mat-dialog-actions>
