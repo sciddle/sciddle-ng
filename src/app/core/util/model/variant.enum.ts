@@ -3,6 +3,6 @@
  */
 export enum Variant {
 
-  SCIDDLE,
-  S4F,
+  SCIDDLE = 'Sciddle',
+  S4F = 'S4F',
 }

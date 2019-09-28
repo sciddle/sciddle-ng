@@ -634,11 +634,14 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
             authorCode: environment.AUTHOR_CODE,
             authorCodeUrl: environment.AUTHOR_CODE_URL,
             authorContent: environment.AUTHOR_CONTENT,
+            authorGraphics: environment.AUTHOR_GRAPHICS,
+            authorGraphicsUrl: environment.AUTHOR_GRAPHICS_URL,
             authorScientificSupervision: environment.AUTHOR_SCIENTIFIC_SUPERVISION,
             githubUrl: environment.GITHUB_URL,
             licenseCode: environment.LICENSE_CODE,
             licenseContent: environment.LICENSE_CONTENT,
             homepage: environment.HOMEPAGE,
+            variant: this.variant
           }
         });
         break;

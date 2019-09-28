@@ -31,6 +31,8 @@ export const environment = {
   AUTHOR_CODE_URL: require('../../package.json').authorCodeUrl,
   AUTHOR_ORIGINAL: require('../../package.json').authorOriginal,
   AUTHOR_CONTENT: require('../../package.json').authorContent,
+  AUTHOR_GRAPHICS: require('../../package.json').authorGraphics,
+  AUTHOR_GRAPHICS_URL: require('../../package.json').authorGraphicsUrl,
   AUTHOR_SCIENTIFIC_SUPERVISION: require('../../package.json').authorScientificSupervision,
   GITHUB_URL: require('../../package.json').githubUrl,
   LICENSE_CODE: require('../../package.json').licenseCode,
