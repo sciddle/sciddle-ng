@@ -6,6 +6,9 @@ import {environment} from '../environments/environment';
 import {ThemeService} from './core/ui/services/theme.service';
 import {OverlayContainer} from '@angular/cdk/overlay';
 import {PouchDBSettingsService} from './core/persistence/services/pouchdb-settings.service';
+import {VariantService} from './core/util/services/variant.service';
+import {Variant} from './core/util/model/variant.enum';
+import {Theme} from './core/ui/model/theme.enum';
 
 /**
  * Displays application
@@ -69,8 +72,18 @@ export class AppComponent implements OnInit, AfterViewInit {
    * Initializes theme
    */
   private initializeTheme() {
-    this.themeClass = this.themeService.theme;
-    this.overlayContainer.getContainerElement().classList.add(this.themeService.theme);
+    switch (VariantService.getVariant()) {
+      case Variant.SCIDDLE: {
+        this.themeClass = Theme.BLUE;
+        this.overlayContainer.getContainerElement().classList.add(Theme.BLUE);
+        break;
+      }
+      case Variant.S4F: {
+        this.themeClass = Theme.FUTURE;
+        this.overlayContainer.getContainerElement().classList.add(Theme.FUTURE);
+        break;
+      }
+    }
   }
 
   /**

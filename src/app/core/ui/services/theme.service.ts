@@ -18,22 +18,6 @@ export class ThemeService {
   themeSubject = new Subject<Theme>();
 
   /**
-   * Constructor
-   */
-  constructor() {
-    switch (VariantService.getVariant()) {
-      case Variant.SCIDDLE: {
-        this.theme = Theme.BLUE;
-        break;
-      }
-      case Variant.S4F: {
-        this.theme = Theme.FUTURE;
-        break;
-      }
-    }
-  }
-
-  /**
    * Switches theme
    * @param theme new theme
    */
