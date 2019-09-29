@@ -26,6 +26,11 @@
       "src": "assets/logos-s4f/logo-192x192.png",
       "sizes": "192x192",
       "type": "image/png"
+    },
+    {
+      "src": "assets/logos-s4f/logo-4167x4167.png",
+      "sizes": "4167x4167",
+      "type": "image/png"
     }
   ]
 }
