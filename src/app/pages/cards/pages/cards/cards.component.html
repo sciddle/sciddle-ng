@@ -1,5 +1,5 @@
 <app-cards-toolbar
-  class="fixed"
+  class="fixed background"
   [title]="title"
   [media]="media"
   [gameMode]="gameMode"
@@ -50,15 +50,15 @@
 
     <!-- Non-mobile version -->
     <div *ngIf="stack.game != null && media !== mediaType.SMALL">
-      <button *ngIf="gameMode === gameModeType.SINGLE_PLAYER" mat-button (click)="onCardThrownOut(null)">NÄCHSTE KARTE
+      <button *ngIf="gameMode === gameModeType.SINGLE_PLAYER" mat-button class="background" (click)="onCardThrownOut(null)">NÄCHSTE KARTE
       </button>
-      <button *ngIf="gameMode === gameModeType.MULTI_PLAYER" mat-button (click)="onCardThrownOut(null)">BEGRIFF WURDE
+      <button *ngIf="gameMode === gameModeType.MULTI_PLAYER" mat-button class="background" (click)="onCardThrownOut(null)">BEGRIFF WURDE
         ERRATEN
       </button>
     </div>
     <!-- Mobile version -->
     <div *ngIf="stack.game != null && media === mediaType.SMALL">
-      <div class="description-text horizontal-center">
+      <div class="description-text horizontal-center" class="background">
         Wisch die Karte zur Seite sobald jemand den Begriff erraten hat
       </div>
     </div>
