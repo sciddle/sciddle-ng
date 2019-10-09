@@ -1,11 +1,13 @@
 <mat-toolbar class="toolbar flexcontainer">
   <div *ngIf="variant === variantType.SCIDDLE" class="toolbar-block start">
-    <button mat-button mat-icon-button matTooltip="Spiel beenden"
+    <button mat-button matTooltip="Spiel beenden"
             class="toolbar-menu-item"
             (click)="onMenuItemClicked('back')">
       <mat-icon svgIcon="arrow_back"></mat-icon>
     </button>
-    <span *ngIf="media != mediaType.SMALL" class="toolbar-title">{{ title }}</span>
+    <span *ngIf="media != mediaType.SMALL" class="toolbar-title">
+      <span>{{ title }}</span>
+    </span>
   </div>
   <div *ngIf="variant === variantType.S4F" class="toolbar-block start">
     <button mat-button class="toolbar-menu-item" (click)="onMenuItemClicked('back')">
