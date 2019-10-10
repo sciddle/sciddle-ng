@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, isDevMode, OnInit, ViewEncapsulation} from '@angular/core';
+import {AfterViewInit, Component, isDevMode, OnInit} from '@angular/core';
 import {SnackbarService} from './core/ui/services/snackbar.service';
 import {MatSnackBar} from '@angular/material';
 import {PouchDBService} from './core/persistence/services/pouchdb.service';
@@ -6,9 +6,6 @@ import {environment} from '../environments/environment';
 import {ThemeService} from './core/ui/services/theme.service';
 import {OverlayContainer} from '@angular/cdk/overlay';
 import {PouchDBSettingsService} from './core/persistence/services/pouchdb-settings.service';
-import {VariantService} from './core/util/services/variant.service';
-import {Variant} from './core/util/model/variant.enum';
-import {Theme} from './core/ui/model/theme.enum';
 
 /**
  * Displays application
@@ -52,7 +49,6 @@ export class AppComponent implements OnInit, AfterViewInit {
    * Handles on-init lifecycle phase
    */
   ngOnInit() {
-    this.initializeTheme();
     this.initializeThemeSubscription();
     this.initializeSnackbar();
   }
@@ -67,24 +63,6 @@ export class AppComponent implements OnInit, AfterViewInit {
   //
   // Initialization
   //
-
-  /**
-   * Initializes theme
-   */
-  private initializeTheme() {
-    switch (VariantService.getVariant()) {
-      case Variant.SCIDDLE: {
-        this.themeClass = Theme.BLUE;
-        this.overlayContainer.getContainerElement().classList.add(Theme.BLUE);
-        break;
-      }
-      case Variant.S4F: {
-        this.themeClass = Theme.FUTURE;
-        this.overlayContainer.getContainerElement().classList.add(Theme.FUTURE);
-        break;
-      }
-    }
-  }
 
   /**
    * Initializes theme subscription
