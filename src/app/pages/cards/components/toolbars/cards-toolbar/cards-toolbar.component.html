@@ -1,7 +1,7 @@
 <mat-toolbar class="toolbar flexcontainer">
   <div *ngIf="variant === variantType.SCIDDLE" class="toolbar-block start">
     <button mat-button matTooltip="Spiel beenden"
-            class="toolbar-menu-item"
+            class="toolbar-menu-item" aria-label="Spiel beenden"
             (click)="onMenuItemClicked('back')">
       <mat-icon svgIcon="arrow_back"></mat-icon>
     </button>
@@ -10,7 +10,7 @@
     </span>
   </div>
   <div *ngIf="variant === variantType.S4F" class="toolbar-block start">
-    <button mat-button class="toolbar-menu-item" (click)="onMenuItemClicked('back')">
+    <button mat-button class="toolbar-menu-item" aria-label="Back" (click)="onMenuItemClicked('back')">
       <mat-icon svgIcon="arrow_back"></mat-icon>
     </button>
     <img *ngIf="media != mediaType.SMALL" class="toolbar-logo" style="height: 35px"
@@ -21,22 +21,27 @@
   </div>
   <div class="flexbox"></div>
   <div class="toolbar-block end">
-    <button *ngIf="gameMode === gameModeType.SINGLE_PLAYER && devMode" mat-button matTooltip="Karten sortieren" class="toolbar-menu-item right"
+    <button *ngIf="gameMode === gameModeType.SINGLE_PLAYER && devMode" mat-button matTooltip="Karten sortieren"
+            class="toolbar-menu-item right" aria-label="Sort cards"
             (click)="onMenuItemClicked('sort-cards')">
       <mat-icon class="icon" svgIcon="sort_by_alpha"></mat-icon>
     </button>
-    <button *ngIf="gameMode === gameModeType.SINGLE_PLAYER" mat-button matTooltip="Karten mischen" class="toolbar-menu-item right"
+    <button *ngIf="gameMode === gameModeType.SINGLE_PLAYER" mat-button matTooltip="Karten mischen"
+            class="toolbar-menu-item right" aria-label="Shuffle cards"
             (click)="onMenuItemClicked('shuffle-cards')">
       <mat-icon class="icon" svgIcon="shuffle"></mat-icon>
     </button>
-    <button *ngIf="useTimeLimit && startTime != null" mat-flat-button color="primary" class="toolbar-menu-item right">
+    <button *ngIf="useTimeLimit && startTime != null" mat-flat-button color="primary" class="toolbar-menu-item right"
+            aria-label="Stop watch">
       <app-stop-watch [duration]=timerDuration [startTime]="startTime"
                       (timeLeftEmitter)="onTimeLeft($event)"></app-stop-watch>
     </button>
-    <button *ngIf="gameMode === gameModeType.MULTI_PLAYER" mat-button class="toolbar-menu-item right">
+    <button *ngIf="gameMode === gameModeType.MULTI_PLAYER" mat-button class="toolbar-menu-item right"
+            aria-label="Card count">
       <span class="card-count">{{ cardCount }}</span>
     </button>
-    <button mat-button matTooltip="Menü öffnen" class="toolbar-menu-item right" [matMenuTriggerFor]="menu">
+    <button mat-button matTooltip="Menü öffnen" class="toolbar-menu-item right" aria-label="Menu"
+            [matMenuTriggerFor]="menu">
       <mat-icon class="icon" svgIcon="more_vert"></mat-icon>
     </button>
     <mat-menu #menu="matMenu">
