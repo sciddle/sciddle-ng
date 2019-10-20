@@ -34,16 +34,15 @@ export class CardsToolbarComponent {
   /** Selected time limit mode */
   @Input() useTimeLimit = false;
   /** Timer start time */
-  @Input() startTime;
+  @Input() timerStartTime;
+  /** Timer duration */
+  @Input() timerDuration;
   /** Card count */
   @Input() cardCount: number;
   /** Event emitter indicating menu items being clicked */
   @Output() menuItemEventEmitter = new EventEmitter<string>();
   /** Event emitter indicating timer to be over */
   @Output() timerOverEmitter = new EventEmitter<any>();
-
-  /** Timer duration in seconds */
-  timerDuration = environment.TIMER / 60;
 
   /** Enum for media types */
   mediaType = Media;

@@ -80,7 +80,9 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
   public winningTeams = [];
 
   /** Timer start time */
-  public startTime;
+  public timerStartTime;
+  /** Timer duration */
+  public timerDuration;
 
   /** Current display aspect */
   public displayAspect: DisplayAspect;
@@ -667,7 +669,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
       this.snackbarService.showSnackbar('Zeit ist abgelaufen');
       this.gamesService.showTurnEvaluation(this.game).then();
     } else {
-      this.startTime = null;
+      this.timerStartTime = null;
     }
   }
 
@@ -728,7 +730,21 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
         this.cards = stack.cards;
         this.gamesService.showCard(this.game, difficulty).then(() => {
           // Set timer
-          this.startTime = new Date();
+          this.timerStartTime = new Date();
+          switch (difficulty) {
+            case 1: {
+              this.timerDuration = environment.TIMER_EASY / 60;
+              break;
+            }
+            case 2: {
+              this.timerDuration = environment.TIMER_MEDIUM / 60;
+              break;
+            }
+            case 3: {
+              this.timerDuration = environment.TIMER_HARD / 60;
+              break;
+            }
+          }
         });
       }
     });
@@ -762,7 +778,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
       }
       case GameMode.MULTI_PLAYER: {
         // Deactivate timer
-        this.startTime = null;
+        this.timerStartTime = null;
 
         // Evaluate turn
         this.gamesService.showTurnEvaluation(this.game).then(() => {
