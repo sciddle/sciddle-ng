@@ -4,7 +4,8 @@
   [media]="media"
   [gameMode]="gameMode"
   [useTimeLimit]="(game != null) ? game.useTimeLimit : false"
-  [startTime]="startTime"
+  [timerStartTime]="timerStartTime"
+  [timerDuration]="timerDuration"
   [cardCount]="cardsInStack"
   (menuItemEventEmitter)="onMenuItemClicked($event)"
   (timerOverEmitter)="onTimerOver()"></app-cards-toolbar>

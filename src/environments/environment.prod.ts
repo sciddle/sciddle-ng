@@ -12,7 +12,9 @@ export const environment = {
   GAME_MODE_SINGLE_PLAYER: 'Freies Spiel',
   GAME_MODE_MULTI_PLAYER: 'Spielrunde starten',
 
-  TIMER: 30,
+  TIMER_EASY: 30,
+  TIMER_MEDIUM: 45,
+  TIMER_HARD: 60,
   DEFAULT_STACK: 0,
 
   MIN_CARDS: 20,
