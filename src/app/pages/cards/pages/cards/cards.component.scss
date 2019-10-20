@@ -113,5 +113,10 @@
 }
 
 .background {
-  z-index: 0;
+  @media #{$breakpoint-medium} {
+    z-index: 0;
+  }
+  @media #{$breakpoint-large} {
+    z-index: 0;
+  }
 }
