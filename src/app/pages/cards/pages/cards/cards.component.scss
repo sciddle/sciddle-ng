@@ -117,15 +117,6 @@
   z-index: 999;
 }
 
-.background {
-  @media #{$breakpoint-medium} {
-    z-index: 0;
-  }
-  @media #{$breakpoint-large} {
-    z-index: 0;
-  }
-}
-
 .card-width {
   @media #{$breakpoint-small} {
     width: 100%;
