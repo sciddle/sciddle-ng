@@ -6,6 +6,7 @@
   [useTimeLimit]="(game != null) ? game.useTimeLimit : false"
   [timerStartTime]="timerStartTime"
   [timerDuration]="timerDuration"
+  [timerOver]="timerOver"
   [cardCount]="cardsInStack"
   (menuItemEventEmitter)="onMenuItemClicked($event)"
   (timerOverEmitter)="onTimerOver()"></app-cards-toolbar>
@@ -26,58 +27,65 @@
 </div>
 
 <div class="main-content vertical-center horizontal-center">
-  <!-- Team -->
-  <app-team-information-fragment
-    *ngIf="displayAspect === displayAspectType.DISPLAY_TEAM_TAKING_TURN && stack.game != null"
-    [stack]="stack" (teamInformationClickedEmitter)="onDisplayTeamClicked()">
-  </app-team-information-fragment>
-  <!-- Difficulty -->
-  <app-difficulty-selection-fragment
-    *ngIf="displayAspect === displayAspectType.DISPLAY_DIFFICULTY_SELECTION
+  <div class="margin">
+    <!-- Team -->
+    <app-team-information-fragment
+      *ngIf="displayAspect === displayAspectType.DISPLAY_TEAM_TAKING_TURN && stack.game != null"
+      [stack]="stack" (teamInformationClickedEmitter)="onDisplayTeamClicked()">
+    </app-team-information-fragment>
+    <!-- Difficulty -->
+    <app-difficulty-selection-fragment
+      *ngIf="displayAspect === displayAspectType.DISPLAY_DIFFICULTY_SELECTION
     && stack.game != null"
-    [stack]="stack"
-    (difficultySelectedEmitter)="onDifficultySelected($event)"></app-difficulty-selection-fragment>
-  <!-- Cards -->
-  <div *ngIf="displayAspect === displayAspectType.DISPLAY_CARDS && stack.game != null">
-    <div swing-stack #swingStack
-         [stackConfig]="stackConfig"
-         (throwout)="onCardThrownOut($event)"
-         (throwoutend)="onCardThrownOutEnd($event)">
-      <div swing-card class="animate-translation-100">
-        <app-card-fragment [card]="cards[0]" [media]="media" [theme]="theme">
-        </app-card-fragment>
+      [stack]="stack"
+      (difficultySelectedEmitter)="onDifficultySelected($event)"></app-difficulty-selection-fragment>
+    <!-- Cards -->
+    <div *ngIf="displayAspect === displayAspectType.DISPLAY_CARDS && stack.game != null"
+         class="margin">
+      <div swing-stack #swingStack
+           [stackConfig]="stackConfig"
+           (throwout)="onCardThrownOut($event)"
+           (throwoutend)="onCardThrownOutEnd($event)">
+        <div swing-card class="animate-translation-100">
+          <app-card-fragment [card]="cards[0]" [media]="media" [theme]="theme" [isTimerOver]="timerOver">
+          </app-card-fragment>
+        </div>
       </div>
-    </div>
 
-    <!-- Non-mobile version -->
-    <div *ngIf="stack.game != null && media !== mediaType.SMALL">
-      <button *ngIf="gameMode === gameModeType.SINGLE_PLAYER" mat-button class="background" (click)="onCardThrownOut(null)">NÄCHSTE KARTE
-      </button>
-      <button *ngIf="gameMode === gameModeType.MULTI_PLAYER" mat-button class="background" (click)="onCardThrownOut(null)">BEGRIFF WURDE
-        ERRATEN
-      </button>
-    </div>
-    <!-- Mobile version -->
-    <div *ngIf="stack.game != null && media === mediaType.SMALL">
-      <div class="description-text horizontal-center" class="background">
-        Wisch die Karte zur Seite sobald jemand den Begriff erraten hat
+      <!-- Non-mobile version -->
+      <div *ngIf="stack.game != null && media !== mediaType.SMALL">
+        <button *ngIf="gameMode === gameModeType.SINGLE_PLAYER" mat-button class="background"
+                (click)="onCardThrownOut(null)">NÄCHSTE KARTE
+        </button>
+        <button *ngIf="gameMode === gameModeType.MULTI_PLAYER" mat-button class="background"
+                (click)="onCardThrownOut(null)">
+          <span *ngIf="!timerOver">BEGRIFF WURDE ERRATEN</span>
+          <span *ngIf="timerOver">WEITER</span>
+        </button>
+      </div>
+      <!-- Mobile version -->
+      <div *ngIf="stack.game != null && media === mediaType.SMALL">
+        <div class="description-text horizontal-center background card-width">
+          <span *ngIf="!timerOver">Wisch die Karte zur Seite sobald jemand den Begriff erraten hat</span>
+          <span *ngIf="timerOver">Die Zeit ist abgelaufen. Wisch die Karte zur Seite um weiterzumachen</span>
+        </div>
       </div>
     </div>
+    <!-- Turn evaluation -->
+    <app-team-selection-fragment
+      *ngIf="displayAspect === displayAspectType.DISPLAY_TURN_EVALUATION && stack.game != null"
+      [stack]="stack"
+      (teamSelectedEmitter)="onSuccessfulTeamSelected($event)"></app-team-selection-fragment>
+    <!-- Score overview -->
+    <app-score-overview-fragment
+      *ngIf="displayAspect === displayAspectType.DISPLAY_SCORE_OVERVIEW && stack.game != null"
+      [stack]="stack" (scoreOverviewClickedEmitter)="onDisplayScoreOverviewClicked()">
+    </app-score-overview-fragment>
+    <!-- Game evaluation -->
+    <app-game-evaluation-fragment
+      *ngIf="displayAspect === displayAspectType.DISPLAY_GAME_EVALUATION && stack.game != null"
+      [stack]="stack" [winningTeams]="winningTeams"
+      (menuItemEventEmitter)="onMenuItemClicked($event)">
+    </app-game-evaluation-fragment>
   </div>
-  <!-- Turn evaluation -->
-  <app-team-selection-fragment
-    *ngIf="displayAspect === displayAspectType.DISPLAY_TURN_EVALUATION && stack.game != null"
-    [stack]="stack"
-    (teamSelectedEmitter)="onSuccessfulTeamSelected($event)"></app-team-selection-fragment>
-  <!-- Score overview -->
-  <app-score-overview-fragment
-    *ngIf="displayAspect === displayAspectType.DISPLAY_SCORE_OVERVIEW && stack.game != null"
-    [stack]="stack" (scoreOverviewClickedEmitter)="onDisplayScoreOverviewClicked()">
-  </app-score-overview-fragment>
-  <!-- Game evaluation -->
-  <app-game-evaluation-fragment
-    *ngIf="displayAspect === displayAspectType.DISPLAY_GAME_EVALUATION && stack.game != null"
-    [stack]="stack" [winningTeams]="winningTeams"
-    (menuItemEventEmitter)="onMenuItemClicked($event)">
-  </app-game-evaluation-fragment>
 </div>

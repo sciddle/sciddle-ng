@@ -3,8 +3,8 @@ import {
   Component,
   EventEmitter,
   Input,
-  isDevMode, OnInit,
-  Output,
+  isDevMode, OnChanges, OnInit,
+  Output, SimpleChanges,
   ViewEncapsulation
 } from '@angular/core';
 import {Media} from '../../../../../core/ui/model/media.enum';
@@ -12,6 +12,7 @@ import {GameMode} from '../../../../../core/entity/model/game-mode.enum';
 import {environment} from '../../../../../../environments/environment';
 import {Variant} from '../../../../../core/util/model/variant.enum';
 import {VariantService} from '../../../../../core/util/services/variant.service';
+import {LogService} from '../../../../../core/log/services/log.service';
 
 /**
  * Displays stacks toolbar
@@ -23,7 +24,7 @@ import {VariantService} from '../../../../../core/util/services/variant.service'
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None
 })
-export class CardsToolbarComponent {
+export class CardsToolbarComponent implements OnChanges {
 
   /** Title displayed in the toolbar */
   @Input() title;
@@ -37,12 +38,17 @@ export class CardsToolbarComponent {
   @Input() timerStartTime;
   /** Timer duration */
   @Input() timerDuration;
+  /** Indicator that timer is over */
+  @Input() timerOver = false;
   /** Card count */
   @Input() cardCount: number;
   /** Event emitter indicating menu items being clicked */
   @Output() menuItemEventEmitter = new EventEmitter<string>();
   /** Event emitter indicating timer to be over */
   @Output() timerOverEmitter = new EventEmitter<any>();
+
+  /** Timer color */
+  timerColor = 'primary';
 
   /** Enum for media types */
   mediaType = Media;
@@ -64,6 +70,25 @@ export class CardsToolbarComponent {
     this.devMode = isDevMode();
   }
 
+  /**
+   * Handles on-change lifecycle phase
+   * @param changes simple changes
+   */
+  ngOnChanges(changes: SimpleChanges) {
+    this.initializeTimerColor();
+  }
+
+  //
+  // Initialization
+  //
+
+  /**
+   * Initializes timer color
+   */
+  private initializeTimerColor() {
+    this.timerColor = (this.timerOver) ? 'warn' : 'primary';
+  }
+
   //
   // Actions
   //
@@ -81,6 +106,7 @@ export class CardsToolbarComponent {
    */
   onTimeLeft(timeLeft: number) {
     if (timeLeft <= 0) {
+      LogService.debug(`time left <= 0`);
       this.timerOverEmitter.emit();
     }
   }

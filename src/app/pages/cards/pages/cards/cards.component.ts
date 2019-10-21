@@ -83,6 +83,8 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
   public timerStartTime;
   /** Timer duration */
   public timerDuration;
+  /** Indicator that timer is over */
+  public timerOver = false;
 
   /** Current display aspect */
   public displayAspect: DisplayAspect;
@@ -664,10 +666,11 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    * Handles timer running out
    */
   onTimerOver() {
+    LogService.trace(`onTimerOver`);
     // Check if timer is over during cards state
     if (this.game.turn.state === TurnState.DISPLAY_CARDS) {
       this.snackbarService.showSnackbar('Zeit ist abgelaufen');
-      this.gamesService.showTurnEvaluation(this.game).then();
+      this.timerOver = true;
     } else {
       this.timerStartTime = null;
     }
@@ -730,6 +733,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
         this.cards = stack.cards;
         this.gamesService.showCard(this.game, difficulty).then(() => {
           // Set timer
+          this.timerOver = false;
           this.timerStartTime = new Date();
           switch (difficulty) {
             case 1: {

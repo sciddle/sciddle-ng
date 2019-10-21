@@ -31,9 +31,11 @@
             (click)="onMenuItemClicked('shuffle-cards')">
       <mat-icon class="icon" svgIcon="shuffle"></mat-icon>
     </button>
-    <button *ngIf="useTimeLimit && timerStartTime != null" mat-flat-button color="primary" class="toolbar-menu-item right"
+    <button *ngIf="useTimeLimit && timerStartTime != null" mat-flat-button [color]=timerColor
+            class="toolbar-menu-item right"
             aria-label="Stop watch">
-      <app-stop-watch [duration]=timerDuration [startTime]="timerStartTime"
+      <span *ngIf="timerOver">ZEIT ABGELAUFEN</span>
+      <app-stop-watch *ngIf="!timerOver" [duration]=timerDuration [startTime]="timerStartTime"
                       (timeLeftEmitter)="onTimeLeft($event)"></app-stop-watch>
     </button>
     <button *ngIf="gameMode === gameModeType.MULTI_PLAYER" mat-button class="toolbar-menu-item right"

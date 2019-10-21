@@ -6,19 +6,21 @@
 
 <div class="main-content">
   <div class="horizontal-center vertical-center">
-    <div>
-      <button mat-flat-button class="mode-button multi-player"
-              [disabled]="stack == null"
-              (click)="onMultiPlayerClicked()">
-        <span class="button-text">{{ gameModeMultiPlayer| uppercase }}</span>
-      </button>
-    </div>
-    <div>
-      <button mat-flat-button class="mode-button single-player"
-              [disabled]="stack == null"
-              (click)="onSinglePlayerClicked()">
-        <span class="button-text">{{ gameModeSinglePlayer | uppercase }}</span>
-      </button>
+    <div class="margin">
+      <div>
+        <button mat-flat-button class="mode-button multi-player"
+                [disabled]="stack == null"
+                (click)="onMultiPlayerClicked()">
+          <span class="button-text">{{ gameModeMultiPlayer| uppercase }}</span>
+        </button>
+      </div>
+      <div>
+        <button mat-flat-button class="mode-button single-player"
+                [disabled]="stack == null"
+                (click)="onSinglePlayerClicked()">
+          <span class="button-text">{{ gameModeSinglePlayer | uppercase }}</span>
+        </button>
+      </div>
     </div>
   </div>
 </div>
