@@ -13,8 +13,6 @@
 
   @media #{$breakpoint-small} {
     padding-top: 56px;
-    // margin-left: 5px;
-    // margin-right: 5px;
   }
   @media #{$breakpoint-medium} {
     padding-top: 88px;
@@ -62,6 +60,13 @@
 
   &:hover .hidden {
     display: inline-block;
+  }
+}
+
+.margin {
+  @media #{$breakpoint-small} {
+    margin-left: 10px;
+    margin-right: 10px;
   }
 }
 
@@ -118,5 +123,18 @@
   }
   @media #{$breakpoint-large} {
     z-index: 0;
+  }
+}
+
+.card-width {
+  @media #{$breakpoint-small} {
+    width: 100%;
+    max-width: 400px;
+  }
+  @media #{$breakpoint-medium} {
+    width: 400px;
+  }
+  @media #{$breakpoint-large} {
+    width: 400px;
   }
 }

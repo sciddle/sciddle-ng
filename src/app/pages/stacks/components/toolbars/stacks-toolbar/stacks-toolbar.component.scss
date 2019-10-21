@@ -35,10 +35,10 @@
   padding-right: 10px;
 
   @media #{$breakpoint-small} {
-    width: 145px;
+    width: 75%;
   }
   @media #{$breakpoint-medium} {
-    width: 145px;
+    width: 200px;
   }
   @media #{$breakpoint-large} {
     width: 350px;
@@ -124,6 +124,12 @@ mat-toolbar {
   // box-shadow: 0 3px 5px -1px rgba(250, 250, 250, 1.2), 0 6px 10px 0 rgba(250, 250, 250, 1.14), 0 1px 18px 0 rgba(250, 250, 250, 1.12);
   box-shadow: 0 0 0 0 transparent !important;
   font-weight: bolder;
+}
+
+mat-toolbar {
+  @media #{$breakpoint-small} {
+    padding: 0 !important;
+  }
 }
 
 .mat-form-field-infix {

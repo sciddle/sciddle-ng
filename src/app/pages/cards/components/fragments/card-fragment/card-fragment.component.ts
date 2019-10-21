@@ -34,6 +34,8 @@ export class CardFragmentComponent implements OnChanges {
   @Input() stack = new Stack();
   /** Card to be displayed */
   @Input() card = new Card();
+  /** Indicator that timer is over */
+  @Input() isTimerOver = false;
   /** Current media */
   @Input() media: Media;
   /** Current theme */
@@ -55,6 +57,8 @@ export class CardFragmentComponent implements OnChanges {
   difficultyLongText = '';
   /** Difficulty combined text */
   difficultyCombinedText = '';
+  /** CSS class applied to card */
+  public cardClassName;
 
   /**
    * Constructor
@@ -77,6 +81,7 @@ export class CardFragmentComponent implements OnChanges {
    */
   ngOnChanges(changes: SimpleChanges) {
     this.initializeDifficultyDisplaySettings();
+    this.initializeCssClass();
   }
 
   //
@@ -112,6 +117,13 @@ export class CardFragmentComponent implements OnChanges {
         break;
       }
     }
+  }
+
+  /**
+   * Initialize CSS class
+   */
+  private initializeCssClass() {
+    this.cardClassName = (this.isTimerOver) ? 'grayscale' : null;
   }
 
   //

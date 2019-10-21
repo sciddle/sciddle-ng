@@ -8,8 +8,6 @@
 .main-content {
   @media #{$breakpoint-small} {
     padding-top: 56px;
-    // margin-left: 10px;
-    // margin-right: 10px;
   }
   @media #{$breakpoint-medium} {
     padding-top: 88px;
@@ -43,6 +41,13 @@
   top: 50%;
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
+}
+
+.margin {
+  @media #{$breakpoint-small} {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
 }
 
 .button {

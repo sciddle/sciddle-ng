@@ -5,7 +5,9 @@
   (menuItemEventEmitter)="onMenuItemClicked($event)"></app-stacks-toolbar>
 
 <div class="main-content">
-  <app-stack-fragment *ngFor="let s of stacks" [stack]="s"
-                      (stackEventEmitter)="onStackEvent($event)">
-  </app-stack-fragment>
+  <div class="margin">
+    <app-stack-fragment *ngFor="let s of stacks" [stack]="s"
+                        (stackEventEmitter)="onStackEvent($event)">
+    </app-stack-fragment>
+  </div>
 </div>
