@@ -33,16 +33,7 @@
 .toolbar-block {
   padding-left: 10px;
   padding-right: 10px;
-
-  @media #{$breakpoint-small} {
-    width: 75%;
-  }
-  @media #{$breakpoint-medium} {
-    width: 200px;
-  }
-  @media #{$breakpoint-large} {
-    width: 350px;
-  }
+  width: 75%;
 }
 
 .start {
