@@ -155,12 +155,13 @@ export class GamesService {
    * @param stack to initialize game for
    * @param teamCount number of teams
    * @param useTimeLimit usage of time limit
+   * @param useAlarm usage of acoustic alarm
    * @param difficultyEasy difficulty easy
    * @param difficultyMedium difficulty medium
    * @param difficultyHard difficulty hard
    * @param cardCount card count
    */
-  initializeMultiPlayerGame(stack: Stack, teamCount: number, useTimeLimit: boolean,
+  initializeMultiPlayerGame(stack: Stack, teamCount: number, useTimeLimit: boolean, useAlarm: boolean,
                             difficultyEasy: boolean, difficultyMedium: boolean, difficultyHard: boolean,
                             cardCount: number): Promise<Stack> {
     LogService.trace(`GamesService#initializeMultiPlayerGame`);
@@ -170,6 +171,7 @@ export class GamesService {
       this.game = new Game();
       this.game.teams = [];
       this.game.useTimeLimit = useTimeLimit;
+      this.game.useAlarm = useAlarm;
 
       stack.game = this.game;
       stack.cards = stack.cards.filter(c => {

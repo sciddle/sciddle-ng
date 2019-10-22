@@ -15,8 +15,10 @@ export class Game extends Entity {
   turn: Turn;
   /** Teams that play the game */
   teams: Team[];
-  /** User time limit */
+  /** Use time limit */
   useTimeLimit: boolean;
+  /** Use acoustic alarm */
+  useAlarm: boolean;
 
   /**
    * Constructor
@@ -28,5 +30,6 @@ export class Game extends Entity {
     this.turn = new Turn();
     this.teams = [];
     this.useTimeLimit = false;
+    this.useAlarm = false;
   }
 }

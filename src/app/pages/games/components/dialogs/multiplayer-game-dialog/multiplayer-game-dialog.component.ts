@@ -17,6 +17,8 @@ export class MultiplayerGameDialogComponent implements OnInit {
 
   /** Selected time limit mode */
   public useTimeLimit = false;
+  /** Selected acoustic alarm mode */
+  public useAlarm = false;
   /** Selected team count */
   public teamCount = 3;
   /** Selected difficulty easy */
@@ -79,6 +81,13 @@ export class MultiplayerGameDialogComponent implements OnInit {
   }
 
   /**
+   * Toggles usage of acoustic alarm
+   */
+  onAlarmToggled() {
+    this.useAlarm = !this.useAlarm;
+  }
+
+  /**
    * Handles selection of team count
    * @param teamCount number of teams
    */
@@ -127,6 +136,7 @@ export class MultiplayerGameDialogComponent implements OnInit {
       {
         teamCount: this.teamCount,
         useTimeLimit: this.useTimeLimit,
+        useAlarm: this.useAlarm,
         difficultyEasy: this.difficultyEasy,
         difficultyMedium: this.difficultyMedium,
         difficultyHard: this.difficultyHard,
