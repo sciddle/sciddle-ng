@@ -35,7 +35,7 @@ export class GamesService {
    * @param stack stack
    */
   static existsGame(stack: Stack) {
-    LogService.trace(`existsGame ${stack != null && stack.game != null}`);
+    LogService.trace(`GamesService#existsGame ${stack != null && stack.game != null}`);
     return stack != null && stack.game != null;
   }
 
@@ -140,8 +140,11 @@ export class GamesService {
    * @param stack to initialize game for
    */
   initializeSinglePlayerGame(stack: Stack): Promise<any> {
+    LogService.trace(`GamesService#initializeSinglePlayerGame`);
     return new Promise((resolve) => {
-      stack.game = new Game();
+      this.game = new Game();
+
+      stack.game = this.game;
       resolve();
     });
   }
@@ -160,10 +163,15 @@ export class GamesService {
   initializeMultiPlayerGame(stack: Stack, teamCount: number, useTimeLimit: boolean,
                             difficultyEasy: boolean, difficultyMedium: boolean, difficultyHard: boolean,
                             cardCount: number): Promise<Stack> {
+    LogService.trace(`GamesService#initializeMultiPlayerGame`);
     return new Promise((resolve) => {
-      stack.game = new Game();
-      stack.game.teams = [];
-      stack.game.useTimeLimit = useTimeLimit;
+      this.game = new Game();
+
+      this.game = new Game();
+      this.game.teams = [];
+      this.game.useTimeLimit = useTimeLimit;
+
+      stack.game = this.game;
       stack.cards = stack.cards.filter(c => {
         return (c.difficulty === 1 && difficultyEasy)
           || (c.difficulty === 2 && difficultyMedium)
@@ -186,6 +194,7 @@ export class GamesService {
    * @param game game
    */
   initializeGame(game: Game) {
+    LogService.trace(`GamesService#initialiteGame`);
     if (game != null) {
       this.game = game;
       this.notify();
@@ -202,6 +211,7 @@ export class GamesService {
    * @param game game to be started
    */
   public startGame(game: Game): Promise<any> {
+    LogService.trace(`GamesService#startGame`);
     return new Promise(resolve => {
       this.game = game;
       this.game.state = GameState.ONGOING;
@@ -216,6 +226,7 @@ export class GamesService {
    * @param game game
    */
   public startTurn(game: Game): Promise<Game> {
+    LogService.trace(`GamesService#startTurn`);
     return new Promise(resolve => {
       this.game = game;
       this.game.turn.state = TurnState.DISPLAY_TEAM_TAKING_TURN;
@@ -231,6 +242,7 @@ export class GamesService {
    * @param game game
    */
   public showDifficultySelection(game: Game): Promise<any> {
+    LogService.trace(`GamesService#showDifficultySelection`);
     return new Promise(resolve => {
       this.game = game;
       this.game.turn.state = TurnState.DISPLAY_DIFFICULTY_SELECTION;
@@ -246,6 +258,7 @@ export class GamesService {
    * @param difficulty difficulty
    */
   public showCard(game: Game, difficulty: number): Promise<any> {
+    LogService.trace(`GamesService#showCard`);
     return new Promise(resolve => {
       this.game = game;
       this.game.turn.state = TurnState.DISPLAY_CARDS;
@@ -260,6 +273,7 @@ export class GamesService {
    * @param game game
    */
   public showTurnEvaluation(game: Game): Promise<any> {
+    LogService.trace(`GamesService#showTurnEvaluation`);
     return new Promise(resolve => {
       this.game = game;
       this.game.turn.state = TurnState.DISPLAY_TURN_EVALUATION;
@@ -277,6 +291,7 @@ export class GamesService {
    * @param difficulty difficulty
    */
   public evaluateTurn(game: Game, teamID: number, difficulty: number): Promise<any> {
+    LogService.trace(`GamesService#evaluateTurn`);
     return new Promise(resolve => {
       this.game = game;
       this.game.turn.state = TurnState.DISPLAY_SCORE_OVERVIEW;
@@ -304,6 +319,7 @@ export class GamesService {
    * @param game game
    */
   public closeTurn(cards: Card[], game: Game) {
+    LogService.trace(`GamesService#closeTurn`);
     return new Promise(resolve => {
 
       if (GamesService.isGameOver(cards)) {
@@ -327,6 +343,7 @@ export class GamesService {
    * Informs subscribers that something has changed
    */
   private notify() {
+    LogService.trace(`GamesService#notify`);
     this.gameSubject.next(this.game);
   }
 }

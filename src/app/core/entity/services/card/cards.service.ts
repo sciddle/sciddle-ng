@@ -3,6 +3,7 @@ import {Stack} from '../../model/stack/stack.model';
 import {Card} from '../../model/card/card.model';
 import {Subject} from 'rxjs';
 import {LogService} from '../../../log/services/log.service';
+import {UUID} from '../../model/uuid';
 
 /**
  * Handles cards management
@@ -15,6 +16,8 @@ export class CardsService {
   /** Index of cards being put away */
   static CARD_INDEX_OUT_OF_STACK = null;
 
+  /** Currently displayed stack */
+  stack: Stack;
   /** Map of all cards */
   cards = new Map<string, Card>();
   /** Subject that publishes cards */
@@ -58,7 +61,7 @@ export class CardsService {
    * @param cards cards
    */
   static shuffleCards(cards: Card[]): Card[] {
-    LogService.trace(`shuffleCards ${cards.length}`);
+    LogService.trace(`CardsService#shuffleCards ${cards.length}`);
     let currentIndex = cards.length;
     let temporaryValue;
     let randomIndex;
@@ -156,25 +159,25 @@ export class CardsService {
 
   /**
    * Initializes cards
-   * @param cards cards
+   * @param stack stack
    */
-  public initializeCards(cards: Card[]) {
-    if (cards != null) {
-      this.clearCards();
-      cards.forEach(card => {
+  public initializeCards(stack: Stack) {
+    if (stack != null && stack.cards != null) {
+      LogService.trace(`CardsService#initializeCards ${stack.cards.length}`);
+
+      this.stack = stack;
+      this.cards.clear();
+      let index = 10_000;
+      stack.cards.forEach(card => {
+        if (card.id == null) {
+          card.id = index.toString();
+          card.index = index;
+          index++;
+        }
         this.cards.set(card.id, card);
       });
       this.notify();
     }
-  }
-
-
-  /**
-   * Clears cards
-   */
-  public clearCards() {
-    this.cards.clear();
-    this.notify();
   }
 
   //
@@ -185,7 +188,7 @@ export class CardsService {
    * Sorts cards of a given stack
    * @param stack stack
    */
-  public sortStack(stack: Stack): Promise<any> {
+  public sortStack(stack: Stack): Promise<Stack> {
     return new Promise((resolve) => {
       let index = 0;
 
@@ -197,7 +200,7 @@ export class CardsService {
           card.index = index++;
         });
 
-      resolve();
+      resolve(stack);
     });
   }
 
@@ -205,7 +208,7 @@ export class CardsService {
    * Shuffles cards of a given stack
    * @param stack stack
    */
-  public shuffleStack(stack: Stack): Promise<any> {
+  public shuffleStack(stack: Stack): Promise<Stack> {
     return new Promise((resolve) => {
       let index = 0;
 
@@ -216,7 +219,7 @@ export class CardsService {
           card.index = index++;
         });
 
-      resolve();
+      resolve(stack);
     });
   }
 
@@ -262,8 +265,8 @@ export class CardsService {
    * @param stack stack
    * @param card card
    */
-  public putCardToEnd(stack: Stack, card: Card): Promise<any> {
-    return new Promise((resolve) => {
+  public putCardToEnd(stack: Stack, card: Card): Promise<Stack> {
+    return new Promise((resolve, reject) => {
 
       // const maxIndex = CardsService.getMaxIndex(Array.from(this.cards.values()));
       const minIndex = CardsService.getMinIndex(Array.from(this.cards.values()));
@@ -277,7 +280,9 @@ export class CardsService {
       // });
 
       this.updateCard(stack, card).then(() => {
-        resolve();
+        resolve(stack);
+      }, () => {
+        reject(stack);
       });
     });
   }
@@ -302,6 +307,7 @@ export class CardsService {
    * @param card card to be updated
    */
   public updateCard(stack: Stack, card: Card): Promise<any> {
+    LogService.trace(`updateCard`);
     return new Promise((resolve, reject) => {
       if (card == null) {
         reject();
@@ -335,6 +341,7 @@ export class CardsService {
    * Informs subscribers that something has changed
    */
   public notify() {
+    LogService.trace(`CardsService#notify ${Array.from(this.cards.values()).length}`);
     this.cardsSubject.next(Array.from(this.cards.values()).sort(CardsService.sortCards));
   }
 }

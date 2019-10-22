@@ -1,6 +1,7 @@
 import {EventEmitter, Injectable, isDevMode} from '@angular/core';
 import PouchDB from 'pouchdb';
 import {environment} from '../../../../environments/environment';
+import {LogService} from '../../log/services/log.service';
 
 /**
  * Handles pouchdb operations for settings database
@@ -90,7 +91,7 @@ export class PouchDBSettingsService {
       });
     }, error => {
       if (isDevMode()) {
-        console.error(error);
+        LogService.fatal(error);
       }
     });
   }
@@ -106,7 +107,7 @@ export class PouchDBSettingsService {
     }).on('change', change => {
       this.listener.emit(change);
     }).on('error', error => {
-      console.error(JSON.stringify(error));
+      LogService.fatal(JSON.stringify(error));
     });
   }
 
@@ -127,7 +128,7 @@ export class PouchDBSettingsService {
     }).on('change', change => {
       this.listener.emit(change);
     }).on('error', error => {
-      console.error(JSON.stringify(error));
+      LogService.fatal(JSON.stringify(error));
     });
   }
 

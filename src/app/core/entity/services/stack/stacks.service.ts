@@ -4,6 +4,7 @@ import {CloneService} from '../clone.service';
 import {Card} from '../../model/card/card.model';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../../../environments/environment';
+import {LogService} from '../../../log/services/log.service';
 
 /**
  * Handles stacks
@@ -33,18 +34,6 @@ export class StacksService {
   }
 
   /**
-   * Constructor
-   * @param http http client
-   */
-  constructor(private http: HttpClient) {
-    this.devMode = isDevMode();
-    StacksService.stacks.set('0', 'climate.json');
-    StacksService.stacks.set('1', 'astronomy.json');
-    StacksService.stacks.set('2', 'future.json');
-    StacksService.stacks.set('3', 'physics.json');
-  }
-
-  /**
    * Returns IDs of uninitialized stacks
    * @param stacks already existing stacks
    */
@@ -68,6 +57,18 @@ export class StacksService {
         return existingStack != null && existingStack.id === id;
       }));
     });
+  }
+
+  /**
+   * Constructor
+   * @param http http client
+   */
+  constructor(private http: HttpClient) {
+    this.devMode = isDevMode();
+    StacksService.stacks.set('0', 'climate.json');
+    StacksService.stacks.set('1', 'astronomy.json');
+    StacksService.stacks.set('2', 'future.json');
+    StacksService.stacks.set('3', 'physics.json');
   }
 
   /**
@@ -101,6 +102,8 @@ export class StacksService {
    * @param fileName fileName
    */
   public getStackFromAssets(fileName: string): Promise<Stack> {
+    LogService.trace(`StacksService#getStackFromAssets ${fileName}`);
+
     return new Promise((resolve) => {
       this.http.get(`assets/stacks/${fileName}`).subscribe(
         data => {

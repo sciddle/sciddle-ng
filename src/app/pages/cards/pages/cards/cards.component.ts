@@ -37,6 +37,7 @@ import {CheckableInformationDialogComponent} from '../../../../ui/information-di
 import {Setting} from '../../../../core/settings/model/setting.model';
 import {SettingType} from '../../../../core/settings/model/setting-type.enum';
 import {SettingsService} from '../../../../core/settings/services/settings.service';
+import {StacksService} from '../../../../core/entity/services/stack/stacks.service';
 
 export enum DisplayAspect {
   DISPLAY_CARDS,
@@ -147,6 +148,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    * @param settingsService settings service
    * @param snackbarService snackbar service
    * @param stacksPersistenceService stacks persistence service
+   * @param stacksService stacks service
    * @param themeService theme service
    */
   constructor(private cardsService: CardsService,
@@ -164,7 +166,9 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
               private settingsService: SettingsService,
               private snackbarService: SnackbarService,
               @Inject(STACK_PERSISTENCE_POUCHDB) private stacksPersistenceService: StacksPersistenceService,
+              private stacksService: StacksService,
               private themeService: ThemeService) {
+    LogService.trace(`CardsComponent#constructor`);
     this.devMode = isDevMode();
   }
 
@@ -176,11 +180,13 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    * Handles on-init lifecycle phase
    */
   ngOnInit() {
+    LogService.trace(`CardsComponent#ngOnInit`);
     this.initializeStackSubscription();
     this.initializeCardSubscription();
     this.initializeGameSubscription();
 
     this.initializeSettingsSubscription();
+    this.initializeDatabaseErrorSubscription();
 
     this.initializeMaterial();
     this.initializeMediaSubscription();
@@ -194,6 +200,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    * Handles after-view-init lifecycle phase
    */
   ngAfterViewInit() {
+    LogService.trace(`CardsComponent#ngAfterViewInit`);
     // Try to load existing stack
     switch (VariantService.getVariant()) {
       case Variant.SCIDDLE: {
@@ -220,6 +227,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    * Handles on-destroy lifecycle phase
    */
   ngOnDestroy() {
+    LogService.trace(`CardsComponent#ngOnDestroy`);
     this.unsubscribeSubject.next();
     this.unsubscribeSubject.complete();
   }
@@ -232,9 +240,11 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    * Initializes stack subscription
    */
   private initializeStackSubscription() {
+    LogService.trace(`CardsComponent#initializeStackSubscription`);
     this.stacksPersistenceService.stackSubject.pipe(
       takeUntil(this.unsubscribeSubject)
     ).subscribe((value) => {
+      LogService.debug(`NEW STACK`);
       if (value != null) {
         const stack = value as Stack;
         this.initializeStack(stack);
@@ -249,9 +259,11 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    * Initializes card subscription
    */
   private initializeCardSubscription() {
+    LogService.trace(`CardsComponent#initializeCardSubscription`);
     this.cardsService.cardsSubject.pipe(
       takeUntil(this.unsubscribeSubject)
     ).subscribe((value) => {
+      LogService.debug(`NEW CARDS`);
       if (value != null) {
         this.initializeCards(value as Card[]);
       }
@@ -262,9 +274,11 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    * Initializes turn subscription
    */
   private initializeGameSubscription() {
+    LogService.trace(`CardsComponent#initializeGameSubscription`);
     this.gamesService.gameSubject.pipe(
       takeUntil(this.unsubscribeSubject)
     ).subscribe((value) => {
+      LogService.debug(`NEW GAME`);
       if (value != null) {
         this.initializeGame(value as Game);
       }
@@ -275,13 +289,76 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    * Initializes settings subscription
    */
   private initializeSettingsSubscription() {
+    LogService.trace(`CardsComponent#initializeSettingsSubscription`);
     this.settingsService.settingsSubject.pipe(
       takeUntil(this.unsubscribeSubject),
       filter(value => value != null)
     ).subscribe(value => {
+      LogService.debug(`NEW SETTINGS`);
       if (value != null) {
         const settings = value as Map<string, Setting>;
         this.initializeSettings(settings);
+      }
+    });
+  }
+
+  /**
+   * Initializes database error subscription (which handles the case that IndexedDB is not available) by
+   * <li>loading data from services if the user navigated here from a previous screen
+   * <li>loading data from assets if there is no data stored in services
+   */
+  private initializeDatabaseErrorSubscription() {
+    LogService.trace(`CardsComponent#initializeDatabaseErrorSubscription`);
+    this.stacksPersistenceService.databaseErrorSubject.pipe(
+      takeUntil(this.unsubscribeSubject)
+    ).subscribe((value) => {
+      // TODO Check error more specifically
+      this.snackbarService.showSnackbar('Achtung: Spiel wird nicht gespeichert.');
+
+      if (value != null) {
+        // Build stack template
+        let stack = new Stack();
+        switch (VariantService.getVariant()) {
+          case Variant.SCIDDLE: {
+            stack.id = this.route.snapshot.paramMap.get('id');
+            break;
+          }
+          case Variant.S4F: {
+            stack.id = environment.DEFAULT_STACK.toString();
+            break;
+          }
+        }
+
+        if (this.cardsService.stack != null && this.gamesService.game != null) {
+          // Load cards and game stored in services
+          LogService.debug(`Load stack and game stored in services`);
+          stack = this.cardsService.stack;
+          stack.game = this.gamesService.game;
+
+          this.initializeStack(stack);
+          this.initializeCards(stack.cards);
+          this.initializeGameMode(stack);
+        } else {
+          // Load cards from assets and initialize new game
+          LogService.debug(`Load cards from assets and initialize new game`);
+
+          if (stack.id == null) {
+            this.navigateBack();
+          }
+
+          const fileName = StacksService.stacks.get(stack.id);
+
+          this.stacksService.getStackFromAssets(fileName).then(stackFromAssets => {
+            if (stackFromAssets != null) {
+              stack = stackFromAssets;
+              stack.game = new Game();
+            }
+
+            this.initializeStack(stack);
+            this.initializeCards(stack.cards);
+            this.initializeGameMode(stack);
+          });
+        }
       }
     });
   }
@@ -293,12 +370,13 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    * @param stack stack
    */
   private initializeStack(stack: Stack) {
+    LogService.trace(`CardsComponent#initializeStack`);
     this.stack = stack;
 
     if (stack != null) {
       this.initializeTitle(stack);
       this.initializeTheme(stack);
-      this.cardsService.initializeCards(stack.cards);
+      this.cardsService.initializeCards(stack);
       this.gamesService.initializeGame(stack.game);
     }
   }
@@ -310,7 +388,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    * @param cards cards
    */
   private initializeCards(cards: Card[]) {
-
+    LogService.trace(`CardsComponent#initializeCards ${cards.length}`);
     // Filter and sort cards
     this.cards = cards.filter(CardsService.isCardPartOfStack).sort(CardsService.sortCards);
     this.cardsInStack = this.cards.filter(CardsService.isCardPartOfStack).length;
@@ -323,6 +401,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    * @param game game
    */
   private initializeGame(game: Game) {
+    LogService.trace(`CardsComponent#initializeGame`);
     this.game = game;
 
     switch (GamesService.getGameMode(game)) {
@@ -351,6 +430,9 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
                     this.stack.game = resolve as Game;
                     this.stacksPersistenceService.updateStack(this.stack).then(() => {
                       this.snackbarService.showSnackbar('Runde gestarted');
+                    }, (stack) => {
+                      this.snackbarService.showSnackbar('Runde gestarted');
+                      this.initializeCards(stack.cards);
                     });
                   }
                 });
@@ -394,6 +476,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    * @param stack stack
    */
   private initializeGameMode(stack: Stack) {
+    LogService.trace(`CardsComponent#initializeGameMode`);
     this.gameMode = GamesService.getGameModeByStack(stack);
   }
 
@@ -404,6 +487,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    * @param settingsMap settings map
    */
   private initializeSettings(settingsMap: Map<string, Setting>) {
+    LogService.trace(`CardsComponent#initializeSettings`);
     this.settingsMap = new Map(settingsMap);
     this.dontShowManualOnStartup = SettingsService.isSettingActive(SettingType.DONT_SHOW_MANUAL_ON_STARTUP, this.settingsMap);
 
@@ -418,6 +502,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    * Initializes theme subscription
    */
   private initializeThemeSubscription() {
+    LogService.trace(`CardsComponent#initializeThemeSubscription`);
     this.theme = this.themeService.theme;
     this.themeService.themeSubject.pipe(
       takeUntil(this.unsubscribeSubject)
@@ -431,6 +516,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    * @param stack stack
    */
   private initializeTitle(stack: Stack) {
+    LogService.trace(`CardsComponent#initializeTitle`);
     switch (VariantService.getVariant()) {
       case Variant.SCIDDLE: {
         this.title = stack != null && stack.title != null ? stack.title : this.title;
@@ -448,6 +534,9 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    * @param stack stack
    */
   private initializeTheme(stack: Stack) {
+    LogService.trace(`CardsComponent#initializeTheme`);
+    LogService.debug(`stack.theme ${stack.theme}`);
+
     switch (stack.theme) {
       case 'green': {
         this.themeService.switchTheme(Theme.GREEN);
@@ -481,6 +570,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    * Initializes throw-out factor
    */
   private initializeThrowOutFactor() {
+    LogService.trace(`CardsComponent#initializeThrowOutFactor`);
     switch (this.media) {
       case Media.LARGE: {
         this.throwOutFactor = 1;
@@ -501,6 +591,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    * Initializes stack config
    */
   private initializeStackConfig() {
+    LogService.trace(`CardsComponent#initializeStackConfig`);
     this.throwOutDistance = 800 * this.throwOutFactor;
     this.stackConfig = {
       allowedDirections: [Direction.LEFT, Direction.RIGHT],
@@ -525,7 +616,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    * @param id ID
    */
   private findEntities(id: string) {
-    LogService.trace(`findEntities ${id}`);
+    LogService.trace(`CardsComponent#findEntities ${id}`);
     this.stacksPersistenceService.findStackByID(this.id);
   }
 
@@ -533,6 +624,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    * Finds settings
    */
   private findSettings() {
+    LogService.trace(`CardsComponent#findSettings`);
     this.settingsService.fetch();
   }
 
@@ -540,6 +632,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    * Initializes material colors and icons
    */
   private initializeMaterial() {
+    LogService.trace(`CardsComponent#initializeMaterial`);
     this.materialIconService.initializeIcons(this.iconRegistry, this.sanitizer);
   }
 
@@ -547,6 +640,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    * Initializes media subscription
    */
   private initializeMediaSubscription() {
+    LogService.trace(`CardsComponent#initializeMediaSubscription`);
     this.media = this.mediaService.media;
     this.mediaService.mediaSubject.pipe(
       takeUntil(this.unsubscribeSubject)
@@ -566,6 +660,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    * @param menuItem menu item that has been clicked
    */
   onMenuItemClicked(menuItem: string) {
+    LogService.trace(`CardsComponent#onMenuItemClicked ${menuItem}`);
     switch (menuItem) {
       case 'back': {
         switch (GamesService.getGameModeByStack(this.stack)) {
@@ -581,13 +676,11 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
         break;
       }
       case 'sort-cards': {
-        this.sortCards().then(() => {
-        });
+        this.sortCards(this.stack).then();
         break;
       }
       case 'shuffle-cards': {
-        this.shuffleCards().then(() => {
-        });
+        this.shuffleCards(this.stack).then();
         break;
       }
       case 'manual': {
@@ -666,7 +759,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    * Handles timer running out
    */
   onTimerOver() {
-    LogService.trace(`onTimerOver`);
+    LogService.trace(`CardsComponent#onTimerOver`);
     // Check if timer is over during cards state
     if (this.game.turn.state === TurnState.DISPLAY_CARDS) {
       this.snackbarService.showSnackbar('Zeit ist abgelaufen');
@@ -682,7 +775,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    * Handles click on display team
    */
   onDisplayTeamClicked() {
-    LogService.trace(`onDisplayTeamClicked ${this.stack.cards.length}`);
+    LogService.trace(`CardsComponent#onDisplayTeamClicked ${this.stack.cards.length}`);
 
     // Count cards by difficulty
     const easyCardsInStack = this.cards.filter(CardsService.isCardPartOfStack).filter(CardsService.isEasy).length > 0;
@@ -723,7 +816,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    * @param difficulty difficulty
    */
   onDifficultySelected(difficulty: number) {
-    LogService.trace(`onDifficultySelected ${this.stack.cards.length}`);
+    LogService.trace(`CardsComponent#onDifficultySelected ${this.stack.cards.length}`);
 
     this.cardsService.moveCardWithSpecificDifficultyToTop(this.stack, difficulty).then((resolve) => {
       if (resolve != null) {
@@ -773,9 +866,12 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
   onCardThrownOut(event: ThrowEvent) {
     switch (GamesService.getGameModeByStack(this.stack)) {
       case GameMode.SINGLE_PLAYER: {
-        this.cardsService.putCardToEnd(this.stack, this.cards[0]).then(() => {
+        this.cardsService.putCardToEnd(this.stack, this.cards[0]).then((stack) => {
           this.updateCard(this.stack, this.cards[0]).then(() => {
             this.snackbarService.showSnackbar('Karte ans Ende gelegt');
+          }, () => {
+            this.snackbarService.showSnackbar('Karte ans Ende gelegt');
+            this.initializeStack(stack);
           });
         });
         break;
@@ -809,11 +905,12 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    * @param teamID team ID
    */
   onSuccessfulTeamSelected(teamID: number) {
-    LogService.trace(`onSuccessfulTeamSelected ${this.stack.cards.length}`);
+    LogService.trace(`CardsComponent#onSuccessfulTeamSelected ${this.stack.cards.length}`);
 
     this.gamesService.evaluateTurn(this.game, teamID, this.cards[0].difficulty).then(() => {
       this.cardsService.putCardAway(this.stack, this.stack.cards[0]).then();
       this.stacksPersistenceService.updateStack(this.stack).then(() => {
+      }, () => {
       });
     });
   }
@@ -822,7 +919,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    * Handles click on score overview
    */
   onDisplayScoreOverviewClicked() {
-    LogService.trace(`onDisplayScoreOverviewClicked ${this.stack.cards.length}`);
+    LogService.trace(`CardsComponent#onDisplayScoreOverviewClicked ${this.stack.cards.length}`);
     this.winningTeams = GamesService.determineWinningTeams(this.game);
     this.gamesService.closeTurn(this.stack.cards.filter(CardsService.isCardPartOfStack), this.game).then();
   }
@@ -835,6 +932,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    * Handles back action
    */
   private handleBackActionWithConfirmation() {
+    LogService.trace(`CardsComponent#handleBackActionWithConfirmation`);
     const confirmationDialogRef = this.dialog.open(ConfirmationDialogComponent, {
       disableClose: false,
       data: {
@@ -856,12 +954,23 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    * Handles back action
    */
   private handleBackAction() {
-    LogService.trace(`handleBackAction`);
+    LogService.trace(`CardsComponent#handleBackAction`);
     // Remove existing game
     this.stack.game = null;
 
     // Save stack
     this.stacksPersistenceService.updateStack(this.stack).then(() => {
+      switch (VariantService.getVariant()) {
+        case Variant.SCIDDLE: {
+          this.router.navigate([`/${ROUTE_GAMES}/${this.stack.id}`]).then();
+          break;
+        }
+        case Variant.S4F: {
+          this.router.navigate([`/${ROUTE_GAMES}`]).then();
+          break;
+        }
+      }
+    }, () => {
       switch (VariantService.getVariant()) {
         case Variant.SCIDDLE: {
           this.router.navigate([`/${ROUTE_GAMES}/${this.stack.id}`]).then();
@@ -881,17 +990,16 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    * @param card card
    */
   private updateCard(stack: Stack, card: Card): Promise<any> {
+    LogService.trace(`updateCard`);
     return new Promise((resolve, reject) => {
       this.cardsService.updateCard(stack, card).then(() => {
         this.stacksPersistenceService.clearStacks();
         this.stacksPersistenceService.updateStack(stack).then(() => {
           resolve();
-        }).catch(err => {
-          console.error(err);
+        }).catch(() => {
           reject();
         });
-      }).catch(err => {
-        console.error(err);
+      }).catch(() => {
         reject();
       });
     });
@@ -899,28 +1007,43 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   /**
    * Sorts cards
+   * @param stack stack
    */
-  private sortCards(): Promise<any> {
-    LogService.trace(`sortCards`);
+  private sortCards(stack: Stack): Promise<any> {
+    LogService.trace(`CardsComponent#sortCards`);
     return new Promise(() => {
-      this.cardsService.sortStack(this.stack).then((() => {
-        this.stacksPersistenceService.updateStack(this.stack).then(() => {
-          this.snackbarService.showSnackbar('Karten sortiert');
-        });
-      }));
+      if (stack != null) {
+        this.cardsService.sortStack(stack).then(((sortedStack) => {
+          this.stacksPersistenceService.updateStack(sortedStack).then(() => {
+            this.snackbarService.showSnackbar('Karten sortiert');
+          }, (updatedStack) => {
+            this.snackbarService.showSnackbar('Karten sortiert');
+            this.initializeStack(updatedStack);
+            this.initializeGameMode(updatedStack);
+          });
+        }));
+      }
     });
   }
 
   /**
    * Shuffles cards
+   * @param stack stack
    */
-  private shuffleCards(): Promise<any> {
+  private shuffleCards(stack: Stack): Promise<any> {
+    LogService.trace(`CardsComponent#shuffleCards`);
     return new Promise(() => {
-      this.cardsService.shuffleStack(this.stack).then((() => {
-        this.stacksPersistenceService.updateStack(this.stack).then(() => {
-          this.snackbarService.showSnackbar('Karten gemischt');
-        });
-      }));
+      if (stack != null) {
+        this.cardsService.shuffleStack(stack).then(((shuffledStack) => {
+          this.stacksPersistenceService.updateStack(shuffledStack).then(() => {
+            this.snackbarService.showSnackbar('Karten gemischt');
+          }, (updatedStack) => {
+            this.snackbarService.showSnackbar('Karten gemischt');
+            this.initializeStack(updatedStack);
+            this.initializeGameMode(updatedStack);
+          });
+        }));
+      }
     });
   }
 
@@ -928,6 +1051,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    * Navigates back to parent view
    */
   private navigateBack() {
+    LogService.trace(`CardsComponent#navigateBack`);
     this.router.navigate([`/${ROUTE_GAMES}`]).then();
   }
 }

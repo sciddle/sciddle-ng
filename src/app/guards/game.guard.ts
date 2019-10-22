@@ -33,7 +33,7 @@ export class GameGuard implements CanActivate {
    * @param state router state
    */
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
-    LogService.trace(`canActivate`);
+    LogService.trace(`GameGuard#canActivate`);
     return new Promise((resolve) => {
       this.stacksPersistenceService.stackSubject.subscribe((value) => {
         let stack = null;
@@ -63,6 +63,10 @@ export class GameGuard implements CanActivate {
           LogService.debug('No stack initialized yet');
           resolve(true);
         }
+      });
+
+      this.stacksPersistenceService.databaseErrorSubject.subscribe(() => {
+        resolve(true);
       });
 
       // Load stack
