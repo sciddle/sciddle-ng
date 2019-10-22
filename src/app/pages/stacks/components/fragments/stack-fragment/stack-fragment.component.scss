@@ -27,6 +27,8 @@ hr {
 mat-card {
   float: left;
   margin-top: 10px;
+  margin-right: 10px;
+  text-align: start;
 
   @media #{$breakpoint-small} {
     width: 100%;

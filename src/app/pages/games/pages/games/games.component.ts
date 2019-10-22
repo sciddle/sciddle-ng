@@ -180,7 +180,7 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
    * Initializes stack subscription
    */
   private initializeStackSubscription() {
-    LogService.trace(`initializeStackSubscription`);
+    LogService.trace(`GamesComponent#initializeStackSubscription`);
     this.stacksPersistenceService.stackSubject.pipe(
       takeUntil(this.unsubscribeSubject)
     ).subscribe((value) => {
@@ -227,23 +227,53 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   /**
-   * Initializes database error subscription
+   * Initializes database error subscription (which handles the case that IndexedDB is not available) by
+   * <li>loading data from services if the user navigated here from a previous screen
+   * <li>loading data from assets if there is no data stored in services
    */
   private initializeDatabaseErrorSubscription() {
     this.stacksPersistenceService.databaseErrorSubject.pipe(
       takeUntil(this.unsubscribeSubject)
     ).subscribe((value) => {
       // TODO Check error more specifically
+      this.snackbarService.showSnackbar('Achtung: Spiel wird nicht gespeichert.');
+
       if (value != null) {
-        const fileName = StacksService.stacks.get(environment.DEFAULT_STACK.toString());
-        this.stacksService.getStackFromAssets(fileName).then(stackFromAssets => {
-          if (stackFromAssets != null) {
-            this.initializeStack(stackFromAssets);
-            this.initializeTitle(stackFromAssets);
-            this.initializeTheme(stackFromAssets);
-            this.snackbarService.showSnackbar('Speicherplatz knapp. Spiel wird nicht gespeichert.');
+        switch (VariantService.getVariant()) {
+          case Variant.SCIDDLE: {
+            this.id = this.route.snapshot.paramMap.get('id');
+            if (this.id != null) {
+              const fileName = StacksService.stacks.get(this.id);
+              this.stacksService.getStackFromAssets(fileName).then(stackFromAssets => {
+                if (stackFromAssets != null) {
+                  this.initializeStack(stackFromAssets);
+                  this.initializeCards(stackFromAssets);
+                  this.initializeTitle(stackFromAssets);
+                  this.initializeTheme(stackFromAssets);
+
+                  // Store cards in service
+                  this.cardsService.initializeCards(stackFromAssets);
+                }
+              });
+            } else {
+              this.navigateBack();
+            }
+
+            break;
           }
-        });
+          case Variant.S4F: {
+            const fileName = StacksService.stacks.get(environment.DEFAULT_STACK.toString());
+            this.stacksService.getStackFromAssets(fileName).then(stackFromAssets => {
+              if (stackFromAssets != null) {
+                this.initializeStack(stackFromAssets);
+                this.initializeTitle(stackFromAssets);
+                this.initializeTheme(stackFromAssets);
+                this.snackbarService.showSnackbar('Achtung: Spiel wird nicht gespeichert.');
+              }
+            });
+            break;
+          }
+        }
       }
     });
   }
@@ -276,7 +306,7 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
    * @param stack stack
    */
   private mergeStacksFromAssets(stack: Stack): Promise<Stack> {
-    LogService.trace(`mergeStacksFromAssets`);
+    LogService.trace(`GamesComponent#mergeStacksFromAssets`);
 
     return new Promise((resolve) => {
       this.stacksService.mergeStackFromAssets(stack).then(result => {
@@ -372,7 +402,7 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
    * @param stack stack
    */
   private initializeTheme(stack: Stack) {
-    LogService.trace(`initializeTheme`);
+    LogService.trace(`GamesComponent#initializeTheme`);
     LogService.debug(`stack.theme ${stack.theme}`);
     switch (stack.theme) {
       case 'green': {
@@ -444,8 +474,7 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
   onMenuItemClicked(menuItem: string) {
     switch (menuItem) {
       case 'back': {
-        this.router.navigate([`/${ROUTE_STACKS}`]).then(() => {
-        });
+        this.navigateBack();
         break;
       }
       case 'manual': {
@@ -557,6 +586,17 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
             break;
           }
         }
+      }, () => {
+        switch (VariantService.getVariant()) {
+          case Variant.SCIDDLE: {
+            this.router.navigate([`/${ROUTE_CARDS}/${this.stack.id}`]).then();
+            break;
+          }
+          case Variant.S4F: {
+            this.router.navigate([`/${ROUTE_CARDS}`]).then();
+            break;
+          }
+        }
       });
     });
   }
@@ -591,6 +631,17 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
 
           this.cardsService.shuffleStack(this.stack).then();
           this.stacksPersistenceService.updateStackWithoutNotification(this.stack).then(() => {
+            switch (VariantService.getVariant()) {
+              case Variant.SCIDDLE: {
+                this.router.navigate([`/${ROUTE_CARDS}/${this.stack.id}`]).then();
+                break;
+              }
+              case Variant.S4F: {
+                this.router.navigate([`/${ROUTE_CARDS}`]).then();
+                break;
+              }
+            }
+          }, () => {
             switch (VariantService.getVariant()) {
               case Variant.SCIDDLE: {
                 this.router.navigate([`/${ROUTE_CARDS}/${this.stack.id}`]).then();

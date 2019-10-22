@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs';
+import {LogService} from '../../log/services/log.service';
 
 /**
  * Handles snack bars
@@ -17,6 +18,7 @@ export class SnackbarService {
    * @param message message
    */
   showSnackbar(message: string) {
+    LogService.traceSnack(`${message}`);
     this.messageSubject.next([message, '', null]);
   }
 

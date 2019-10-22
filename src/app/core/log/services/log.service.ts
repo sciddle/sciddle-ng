@@ -27,6 +27,14 @@ export class LogService {
   }
 
   /**
+   * Logs message with threshold TRACE
+   * @param message message
+   */
+  static traceSnack(message: string) {
+    console.log(`%c++ ${message}`, 'color: blue');
+  }
+
+  /**
    * Logs message with threshold DEBUG
    * @param message message
    */

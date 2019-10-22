@@ -177,11 +177,13 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
     ).subscribe((value) => {
       // TODO Check error more specifically
       if (value != null) {
+        this.stacks = [];
+
         Array.from(StacksService.stacks.values()).forEach(fileName =>
           this.stacksService.getStackFromAssets(fileName).then(stackFromAssets => {
             if (stackFromAssets != null) {
               this.initializeStacks(this.stacks.concat([stackFromAssets]));
-              this.snackbarService.showSnackbar('Speicherplatz knapp. Spiel wird nicht gespeichert.');
+              this.snackbarService.showSnackbar('Achtung: Spiel wird nicht gespeichert.');
             }
           })
         );
@@ -194,7 +196,7 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
    * @param stacks stack
    */
   private initializeStacks(stacks: Stack[]) {
-    this.stacks = stacks;
+    this.stacks = stacks.sort(StacksService.sortStacks);
   }
 
   /**

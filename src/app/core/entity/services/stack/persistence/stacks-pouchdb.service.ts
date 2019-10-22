@@ -87,7 +87,7 @@ export class StacksPouchdbService implements StacksPersistenceService {
    * @param id ID of filter by
    */
   public findStackByID(id: string) {
-    LogService.trace(`findStackByID ${id}`);
+    LogService.trace(`StacksPouchDbService#findStackByID ${id}`);
 
     const index = {fields: ['entityType', 'id', 'creationDate']};
     const options = {
@@ -145,12 +145,12 @@ export class StacksPouchdbService implements StacksPersistenceService {
    * @param stack stack to be updated
    * @param notify whether or not to notify subscribers
    */
-  public updateStack(stack: Stack, notify = true): Promise<any> {
-    LogService.trace(`updateStack ${stack.cards.length}`);
+  public updateStack(stack: Stack, notify = true): Promise<Stack> {
+    LogService.trace(`StacksPouchDbService#updateStack`);
 
     return new Promise((resolve, reject) => {
       if (stack == null) {
-        reject();
+        reject(stack);
       }
 
       // Update stack
@@ -161,7 +161,11 @@ export class StacksPouchdbService implements StacksPersistenceService {
           this.notifyMultipleStacks();
           this.notifySingleStack();
         }
-        resolve();
+        console.log(`RESOLVE`);
+        resolve(stack);
+      }, () => {
+        console.log(`REJECT`);
+        reject(stack);
       });
     });
   }
@@ -171,7 +175,7 @@ export class StacksPouchdbService implements StacksPersistenceService {
    * @param stack stack to be updated
    */
   public updateStackWithoutNotification(stack: Stack): Promise<any> {
-    LogService.trace(`updateStackWithoutNotification`);
+    LogService.trace(`StacksPouchDbService#updateStackWithoutNotification`);
     return this.updateStack(stack, false);
   }
 
@@ -240,7 +244,7 @@ export class StacksPouchdbService implements StacksPersistenceService {
    * Informs subscribers that something has changed
    */
   public notifyMultipleStacks() {
-    LogService.trace(`notifyMultipleStacks`);
+    LogService.trace(`StacksPouchDbService#notifyMultipleStacks`);
     this.stacksSubject.next(Array.from(this.stacks.values()));
   }
 
@@ -248,7 +252,7 @@ export class StacksPouchdbService implements StacksPersistenceService {
    * Informs subscribers that something has changed
    */
   public notifySingleStack() {
-    LogService.trace(`notifySingleStack`);
+    LogService.trace(`StacksPouchDbService#notifySingleStack`);
     this.stackSubject.next(this.stack);
   }
 
