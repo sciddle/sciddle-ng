@@ -86,6 +86,8 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
   public timerDuration;
   /** Indicator that timer is over */
   public timerOver = false;
+  /** Timer alarm sound */
+  private timerAlarm: any;
 
   /** Current display aspect */
   public displayAspect: DisplayAspect;
@@ -121,7 +123,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
   stackConfig: StackConfig;
 
   /** Factor by which the card is being considered thrown-out, 1=default, 0.5=at half the distance */
-  private throwOutFactor = 1;
+  private throwOutFactor = 0.1;
   /** Number of pixels the card needs to be moved before it counts as swiped */
   private throwOutDistance = 800;
 
@@ -194,6 +196,8 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.initializeThrowOutFactor();
     this.initializeStackConfig();
+
+    this.initializeSounds();
   }
 
   /**
@@ -592,7 +596,6 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    */
   private initializeStackConfig() {
     LogService.trace(`CardsComponent#initializeStackConfig`);
-    this.throwOutDistance = 800 * this.throwOutFactor;
     this.stackConfig = {
       allowedDirections: [Direction.LEFT, Direction.RIGHT],
       throwOutConfidence: (offsetX, offsetY, element) => {
@@ -602,9 +605,20 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
         this.onItemMove(element, x, y, r);
       },
       throwOutDistance: () => {
-        return this.throwOutDistance;
+        return this.throwOutDistance * this.throwOutFactor;
       }
     };
+  }
+
+  /**
+   * Initializes sounds
+   */
+  private initializeSounds() {
+    LogService.trace(`initializeSounds`);
+
+    this.timerAlarm = new Audio();
+    this.timerAlarm.src = '../../../../assets/sounds/enough.mp3';
+    this.timerAlarm.load();
   }
 
   //
@@ -764,6 +778,10 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.game.turn.state === TurnState.DISPLAY_CARDS) {
       this.snackbarService.showSnackbar('Zeit ist abgelaufen');
       this.timerOver = true;
+
+      if (this.game.useAlarm) {
+        this.timerAlarm.play();
+      }
     } else {
       this.timerStartTime = null;
     }

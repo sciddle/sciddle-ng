@@ -622,6 +622,7 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
           this.stack,
           result.teamCount,
           result.useTimeLimit,
+          result.useAlarm,
           result.difficultyEasy,
           result.difficultyMedium,
           result.difficultyHard,

@@ -1,15 +1,29 @@
 <h2 mat-dialog-title>{{ dialogTitle }}</h2>
 <mat-dialog-content>
   <div class="horizontal-center">
-    <div (click)="onTimeLimitToggled()" class="time-limit-button">
-      <button *ngIf="!useTimeLimit" mat-button color="primary">
-        <mat-icon svgIcon="alarm_off" class="button-icon"></mat-icon>
-        ohne Zeitlimit
-      </button>
-      <button *ngIf="useTimeLimit" mat-flat-button color="primary">
-        <mat-icon svgIcon="alarm_on" class="button-icon"></mat-icon>
-        mit Zeitlimit
-      </button>
+    <div class="flexcontainer">
+      <div class="flexbox"></div>
+      <div (click)="onTimeLimitToggled()" class="time-limit-button">
+        <button *ngIf="!useTimeLimit" mat-button color="primary">
+          <mat-icon svgIcon="alarm_off" class="button-icon"></mat-icon>
+          ohne Zeitlimit
+        </button>
+        <button *ngIf="useTimeLimit" mat-flat-button color="primary">
+          <mat-icon svgIcon="alarm_on" class="button-icon"></mat-icon>
+          mit Zeitlimit
+        </button>
+      </div>
+      <div (click)="onAlarmToggled()" class="alarm-button">
+        <button *ngIf="!useAlarm" mat-button color="accent" [disabled]="!useTimeLimit">
+          <mat-icon svgIcon="bell_outline_off" class="button-icon"></mat-icon>
+          ohne Ton
+        </button>
+        <button *ngIf="useAlarm" mat-flat-button color="accent" [disabled]="!useTimeLimit">
+          <mat-icon svgIcon="bell_outline" class="button-icon"></mat-icon>
+          mit Ton
+        </button>
+      </div>
+      <div class="flexbox"></div>
     </div>
     <div class="description-text">Anzahl der Teams</div>
     <span *ngFor="let item of arrayOne(3); let i = index;">
