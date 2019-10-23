@@ -3,22 +3,22 @@
   <div class="horizontal-center">
     <div class="flexcontainer">
       <div class="flexbox"></div>
-      <div (click)="onTimeLimitToggled()" class="time-limit-button">
-        <button *ngIf="!useTimeLimit" mat-button color="primary">
+      <div class="time-limit-button">
+        <button *ngIf="!useTimeLimit" mat-button color="primary" (click)="onTimeLimitToggled()">
           <mat-icon svgIcon="alarm_off" class="button-icon"></mat-icon>
           ohne Zeitlimit
         </button>
-        <button *ngIf="useTimeLimit" mat-flat-button color="primary">
+        <button *ngIf="useTimeLimit" mat-flat-button color="primary" (click)="onTimeLimitToggled()">
           <mat-icon svgIcon="alarm_on" class="button-icon"></mat-icon>
           mit Zeitlimit
         </button>
       </div>
-      <div (click)="onAlarmToggled()" class="alarm-button">
-        <button *ngIf="!useAlarm" mat-button color="accent" [disabled]="!useTimeLimit">
+      <div class="alarm-button">
+        <button *ngIf="!useAlarm" mat-button color="accent" [disabled]="!useTimeLimit" (click)="onAlarmToggled()">
           <mat-icon svgIcon="bell_outline_off" class="button-icon"></mat-icon>
           ohne Ton
         </button>
-        <button *ngIf="useAlarm" mat-flat-button color="accent" [disabled]="!useTimeLimit">
+        <button *ngIf="useAlarm" mat-flat-button color="accent" [disabled]="!useTimeLimit" (click)="onAlarmToggled()">
           <mat-icon svgIcon="bell_outline" class="button-icon"></mat-icon>
           mit Ton
         </button>
