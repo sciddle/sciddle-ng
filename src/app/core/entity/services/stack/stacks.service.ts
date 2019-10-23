@@ -90,7 +90,7 @@ export class StacksService {
             }
             resolve(stack);
           }, () => {
-            resolve(stack);
+            reject(stack);
           });
         });
       } else {
