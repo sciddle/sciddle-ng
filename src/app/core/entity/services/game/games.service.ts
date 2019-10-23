@@ -139,13 +139,13 @@ export class GamesService {
    * Initializes a single-player game
    * @param stack to initialize game for
    */
-  initializeSinglePlayerGame(stack: Stack): Promise<any> {
+  initializeSinglePlayerGame(stack: Stack): Promise<Stack> {
     LogService.trace(`GamesService#initializeSinglePlayerGame`);
     return new Promise((resolve) => {
       this.game = new Game();
 
       stack.game = this.game;
-      resolve();
+      resolve(stack);
     });
   }
 

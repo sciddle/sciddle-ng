@@ -82,6 +82,20 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
   /** Caption for multi player mode */
   gameModeMultiPlayer = environment.GAME_MODE_MULTI_PLAYER;
 
+  //
+  // Static methods
+  //
+
+  /**
+   * Initializes cards
+   * @param stack stack
+   */
+  private static initializeCards(stack: Stack) {
+    stack.cards.forEach((card, index) => {
+      card.index = index;
+    });
+  }
+
   /**
    * Constructor
    * @param cardsService cards service
@@ -189,7 +203,7 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
       if (value != null) {
         stack = value as Stack;
         this.initializeStack(stack);
-        this.initializeCards(stack);
+        GamesComponent.initializeCards(stack);
         this.initializeTitle(stack);
         this.initializeTheme(stack);
         this.mergeStacksFromAssets(stack).then(() => {
@@ -247,7 +261,7 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
               this.stacksService.getStackFromAssets(fileName).then(stackFromAssets => {
                 if (stackFromAssets != null) {
                   this.initializeStack(stackFromAssets);
-                  this.initializeCards(stackFromAssets);
+                  GamesComponent.initializeCards(stackFromAssets);
                   this.initializeTitle(stackFromAssets);
                   this.initializeTheme(stackFromAssets);
 
@@ -289,16 +303,6 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.cardCount = Math.round(environment.MIN_CARDS + ((stack.cards.length - environment.MIN_CARDS) / 2));
     this.maxCardCount = stack.cards.length;
-  }
-
-  /**
-   * Initializes cards
-   * @param stack stack
-   */
-  private initializeCards(stack: Stack) {
-    stack.cards.forEach((card, index) => {
-      card.index = index;
-    });
   }
 
   /**
@@ -573,30 +577,13 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
    * Handles click on single-player button
    */
   onSinglePlayerClicked() {
-    this.gameService.initializeSinglePlayerGame(this.stack).then(() => {
-      this.cardsService.shuffleStack(this.stack).then();
-      this.stacksPersistenceService.updateStack(this.stack).then(() => {
-        switch (VariantService.getVariant()) {
-          case Variant.SCIDDLE: {
-            this.router.navigate([`/${ROUTE_CARDS}/${this.stack.id}`]).then();
-            break;
-          }
-          case Variant.S4F: {
-            this.router.navigate([`/${ROUTE_CARDS}`]).then();
-            break;
-          }
-        }
-      }, () => {
-        switch (VariantService.getVariant()) {
-          case Variant.SCIDDLE: {
-            this.router.navigate([`/${ROUTE_CARDS}/${this.stack.id}`]).then();
-            break;
-          }
-          case Variant.S4F: {
-            this.router.navigate([`/${ROUTE_CARDS}`]).then();
-            break;
-          }
-        }
+    this.gameService.initializeSinglePlayerGame(this.stack).then((initializedStack) => {
+      this.cardsService.shuffleStack(initializedStack).then(shuffledStack => {
+        this.stacksPersistenceService.updateStack(shuffledStack).then((updatedStack) => {
+          this.navigateToCardsPage(updatedStack);
+        }, (updatedStack) => {
+          this.navigateToCardsPage(updatedStack);
+        });
       });
     });
   }
@@ -630,29 +617,12 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
 
           this.stack = initializedStack;
 
-          this.cardsService.shuffleStack(this.stack).then();
-          this.stacksPersistenceService.updateStackWithoutNotification(this.stack).then(() => {
-            switch (VariantService.getVariant()) {
-              case Variant.SCIDDLE: {
-                this.router.navigate([`/${ROUTE_CARDS}/${this.stack.id}`]).then();
-                break;
-              }
-              case Variant.S4F: {
-                this.router.navigate([`/${ROUTE_CARDS}`]).then();
-                break;
-              }
-            }
-          }, () => {
-            switch (VariantService.getVariant()) {
-              case Variant.SCIDDLE: {
-                this.router.navigate([`/${ROUTE_CARDS}/${this.stack.id}`]).then();
-                break;
-              }
-              case Variant.S4F: {
-                this.router.navigate([`/${ROUTE_CARDS}`]).then();
-                break;
-              }
-            }
+          this.cardsService.shuffleStack(this.stack).then(shuffledStack => {
+            this.stacksPersistenceService.updateStackWithoutNotification(shuffledStack).then((updatedStack) => {
+              this.navigateToCardsPage(updatedStack);
+            }, (updatedStack) => {
+              this.navigateToCardsPage(updatedStack);
+            });
           });
         });
       }
@@ -662,6 +632,23 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
   //
   // Helpers
   //
+
+  /**
+   * Navigates to cards page
+   * @param stack stack
+   */
+  private navigateToCardsPage(stack: Stack) {
+    switch (VariantService.getVariant()) {
+      case Variant.SCIDDLE: {
+        this.router.navigate([`/${ROUTE_CARDS}/${stack.id}`]).then();
+        break;
+      }
+      case Variant.S4F: {
+        this.router.navigate([`/${ROUTE_CARDS}`]).then();
+        break;
+      }
+    }
+  }
 
   /**
    * Navigates back to parent view

@@ -73,7 +73,7 @@ export interface StacksPersistenceService {
    * Updates an existing stack
    * @param stack stack to be updated
    */
-  updateStackWithoutNotification(stack: Stack): Promise<any>;
+  updateStackWithoutNotification(stack: Stack): Promise<Stack>;
 
   /**
    * Updates existing stacks
