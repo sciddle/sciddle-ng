@@ -161,10 +161,8 @@ export class StacksPouchdbService implements StacksPersistenceService {
           this.notifyMultipleStacks();
           this.notifySingleStack();
         }
-        console.log(`RESOLVE`);
         resolve(stack);
       }, () => {
-        console.log(`REJECT`);
         reject(stack);
       });
     });
@@ -174,7 +172,7 @@ export class StacksPouchdbService implements StacksPersistenceService {
    * Updates an existing stack without triggering notification
    * @param stack stack to be updated
    */
-  public updateStackWithoutNotification(stack: Stack): Promise<any> {
+  public updateStackWithoutNotification(stack: Stack): Promise<Stack> {
     LogService.trace(`StacksPouchDbService#updateStackWithoutNotification`);
     return this.updateStack(stack, false);
   }

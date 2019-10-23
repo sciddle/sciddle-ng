@@ -232,7 +232,7 @@ export class CardsService {
 
     return new Promise((resolve) => {
       // Find card in stack with desired difficulty
-      const card = stack.cards
+      const card = CardsService.shuffleCards(stack.cards)
         .filter(CardsService.isCardPartOfStack)
         .filter(c => {
           return c.difficulty === difficulty;
