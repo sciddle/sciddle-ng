@@ -214,7 +214,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
             this.findEntities(this.id);
             this.findSettings();
           } else {
-            this.navigateBack();
+            this.navigateToGamesPage();
           }
         });
 
@@ -248,13 +248,15 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.stacksPersistenceService.stackSubject.pipe(
       takeUntil(this.unsubscribeSubject)
     ).subscribe((value) => {
-      LogService.debug(`NEW STACK`);
+      LogService.debug(`>>> STACK`);
       if (value != null) {
         const stack = value as Stack;
-        this.initializeStack(stack);
-        this.initializeGameMode(stack);
+        this.initializeStack(stack).then((initializedStack) => {
+          this.stack = initializedStack;
+          this.gamesService.initializeGame(initializedStack.game);
+        });
       } else {
-        this.navigateBack();
+        this.navigateToGamesPage();
       }
     });
   }
@@ -267,7 +269,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.cardsService.cardsSubject.pipe(
       takeUntil(this.unsubscribeSubject)
     ).subscribe((value) => {
-      LogService.debug(`NEW CARDS`);
+      LogService.debug(`>>> CARDS`);
       if (value != null) {
         this.initializeCards(value as Card[]);
       }
@@ -282,7 +284,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.gamesService.gameSubject.pipe(
       takeUntil(this.unsubscribeSubject)
     ).subscribe((value) => {
-      LogService.debug(`NEW GAME`);
+      LogService.debug(`>>> GAME`);
       if (value != null) {
         this.initializeGame(value as Game);
       }
@@ -298,7 +300,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
       takeUntil(this.unsubscribeSubject),
       filter(value => value != null)
     ).subscribe(value => {
-      LogService.debug(`NEW SETTINGS`);
+      LogService.debug(`>>> SETTINGS`);
       if (value != null) {
         const settings = value as Map<string, Setting>;
         this.initializeSettings(settings);
@@ -339,15 +341,16 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
           stack = this.cardsService.stack;
           stack.game = this.gamesService.game;
 
-          this.initializeStack(stack);
-          this.initializeCards(stack.cards);
-          this.initializeGameMode(stack);
+          this.initializeStack(stack).then((initializedStack) => {
+            this.stack = initializedStack;
+            this.gamesService.initializeGame(initializedStack.game);
+          });
         } else {
           // Load cards from assets and initialize new game
           LogService.debug(`Load cards from assets and initialize new game`);
 
           if (stack.id == null) {
-            this.navigateBack();
+            this.navigateToGamesPage();
           }
 
           const fileName = StacksService.stacks.get(stack.id);
@@ -358,9 +361,13 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
               stack.game = new Game();
             }
 
-            this.initializeStack(stack);
-            this.initializeCards(stack.cards);
-            this.initializeGameMode(stack);
+            this.initializeStack(stack).then((initializedStack) => {
+              this.stack = initializedStack;
+              this.gamesService.initializeGame(initializedStack.game);
+
+              // Store cards in service
+              this.cardsService.initializeStack(initializedStack);
+            });
           });
         }
       }
@@ -373,16 +380,20 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    * Initializes stack
    * @param stack stack
    */
-  private initializeStack(stack: Stack) {
+  private initializeStack(stack: Stack): Promise<Stack> {
     LogService.trace(`CardsComponent#initializeStack`);
-    this.stack = stack;
+    return new Promise((resolve) => {
+      if (stack != null) {
+        this.initializeTitle(stack);
+        this.initializeTheme(stack);
+        this.cardsService.initializeStack(stack);
 
-    if (stack != null) {
-      this.initializeTitle(stack);
-      this.initializeTheme(stack);
-      this.cardsService.initializeCards(stack);
-      this.gamesService.initializeGame(stack.game);
-    }
+        this.initializeCards(stack.cards);
+        this.initializeGameMode(stack);
+      }
+
+      resolve(stack);
+    });
   }
 
   // Cards
@@ -392,8 +403,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    * @param cards cards
    */
   private initializeCards(cards: Card[]) {
-    LogService.trace(`CardsComponent#initializeCards ${cards.length}`);
-    // Filter and sort cards
+    LogService.trace(`CardsComponent#initializeCards`);
     this.cards = CardsService.shuffleCards(cards)
       .filter(CardsService.isCardPartOfStack)
       .sort(CardsService.sortCards);
@@ -429,7 +439,6 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
             switch (game.turn.state) {
               case TurnState.NEW: {
                 this.gamesService.startTurn(this.game).then((resolve) => {
-
                   // Persist data once per turn
                   if (resolve != null) {
                     this.game = resolve as Game;
@@ -616,7 +625,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    * Initializes sounds
    */
   private initializeSounds() {
-    LogService.trace(`initializeSounds`);
+    LogService.trace(`CardsComponent#initializeSounds`);
 
     this.timerAlarm = new Audio();
     this.timerAlarm.src = '../../../../assets/sounds/enough.mp3';
@@ -977,30 +986,13 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
     LogService.trace(`CardsComponent#handleBackAction`);
     // Remove existing game
     this.stack.game = null;
-
-    // Save stack
-    this.stacksPersistenceService.updateStack(this.stack).then(() => {
-      switch (VariantService.getVariant()) {
-        case Variant.SCIDDLE: {
-          this.router.navigate([`/${ROUTE_GAMES}/${this.stack.id}`]).then();
-          break;
-        }
-        case Variant.S4F: {
-          this.router.navigate([`/${ROUTE_GAMES}`]).then();
-          break;
-        }
-      }
-    }, () => {
-      switch (VariantService.getVariant()) {
-        case Variant.SCIDDLE: {
-          this.router.navigate([`/${ROUTE_GAMES}/${this.stack.id}`]).then();
-          break;
-        }
-        case Variant.S4F: {
-          this.router.navigate([`/${ROUTE_GAMES}`]).then();
-          break;
-        }
-      }
+    this.cardsService.putCardsBackToStack(this.stack).then((restoredStack) => {
+      // Save stack
+      this.stacksPersistenceService.updateStack(restoredStack).then(() => {
+        this.navigateToGamesPage();
+      }, () => {
+        this.navigateToGamesPage();
+      });
     });
   }
 
@@ -1010,7 +1002,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    * @param card card
    */
   private updateCard(stack: Stack, card: Card): Promise<any> {
-    LogService.trace(`updateCard`);
+    LogService.trace(`CardsComponent#updateCard`);
     return new Promise((resolve, reject) => {
       this.cardsService.updateCard(stack, card).then(() => {
         this.stacksPersistenceService.clearStacks();
@@ -1070,8 +1062,17 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
   /**
    * Navigates back to parent view
    */
-  private navigateBack() {
+  private navigateToGamesPage() {
     LogService.trace(`CardsComponent#navigateBack`);
-    this.router.navigate([`/${ROUTE_GAMES}`]).then();
+    switch (VariantService.getVariant()) {
+      case Variant.SCIDDLE: {
+        this.router.navigate([`/${ROUTE_GAMES}/${this.stack.id}`]).then();
+        break;
+      }
+      case Variant.S4F: {
+        this.router.navigate([`/${ROUTE_GAMES}`]).then();
+        break;
+      }
+    }
   }
 }
