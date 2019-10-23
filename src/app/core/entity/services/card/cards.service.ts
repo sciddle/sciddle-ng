@@ -13,6 +13,8 @@ import {UUID} from '../../model/uuid';
 })
 export class CardsService {
 
+  /** Default index of cards */
+  static CARD_INDEX_DEFAULT = 0;
   /** Index of cards being put away */
   static CARD_INDEX_OUT_OF_STACK = null;
 
@@ -158,10 +160,10 @@ export class CardsService {
   //
 
   /**
-   * Initializes cards
+   * Initializes stack
    * @param stack stack
    */
-  public initializeCards(stack: Stack) {
+  public initializeStack(stack: Stack) {
     if (stack != null && stack.cards != null) {
       LogService.trace(`CardsService#initializeCards ${stack.cards.length}`);
 
@@ -302,12 +304,29 @@ export class CardsService {
   }
 
   /**
+   * Puts all cards back to stack
+   * @param stack stack
+   */
+  public putCardsBackToStack(stack: Stack): Promise<Stack> {
+    return new Promise((resolve) => {
+      stack.cards.forEach(card => {
+        if (card.index === CardsService.CARD_INDEX_OUT_OF_STACK) {
+          card.index = CardsService.CARD_INDEX_DEFAULT;
+        }
+        this.updateCard(stack, card);
+      });
+
+      resolve(stack);
+    });
+  }
+
+  /**
    * Updates an existing card
    * @param stack stack
    * @param card card to be updated
    */
   public updateCard(stack: Stack, card: Card): Promise<any> {
-    LogService.trace(`updateCard`);
+    LogService.trace(`CardsService#updateCard`);
     return new Promise((resolve, reject) => {
       if (card == null) {
         reject();

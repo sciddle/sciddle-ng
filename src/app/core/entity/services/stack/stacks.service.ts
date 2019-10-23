@@ -89,6 +89,8 @@ export class StacksService {
               stack.cards = mergedCards as Card[];
             }
             resolve(stack);
+          }, () => {
+            resolve(stack);
           });
         });
       } else {
@@ -130,7 +132,7 @@ export class StacksService {
     // Save stacks before merge
     const cardsBefore = CloneService.cloneCards(Array.from(cards.values()));
 
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       cardsFromAssets.slice(0, environment.MAX_CARD_COUNT).forEach((card, index) => {
         // Dynamically set id and index
         card.id = index.toString();
@@ -161,6 +163,8 @@ export class StacksService {
       // Check if cards have been changed
       if (JSON.stringify(cardsAfter).toString() !== JSON.stringify(cardsBefore).toString()) {
         resolve(Array.from(cards.values()));
+      } else {
+        reject();
       }
     });
   }
