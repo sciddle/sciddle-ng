@@ -404,7 +404,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    */
   private initializeCards(cards: Card[]) {
     LogService.trace(`CardsComponent#initializeCards`);
-    this.cards = CardsService.shuffleCards(cards)
+    this.cards = cards
       .filter(CardsService.isCardPartOfStack)
       .sort(CardsService.sortCards);
     this.cardsInStack = this.cards.length;
