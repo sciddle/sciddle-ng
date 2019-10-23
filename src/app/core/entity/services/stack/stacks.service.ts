@@ -30,7 +30,7 @@ export class StacksService {
    * @param stackB seconds stack
    */
   static sortStacks(stackA: Stack, stackB: Stack) {
-    return 1;
+    return stackA.id > stackB.id ? 1 : -1;
   }
 
   /**
