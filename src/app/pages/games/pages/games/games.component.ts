@@ -395,6 +395,8 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
         this.stacksPersistenceService.updateStackWithoutNotification(mergedStack).then((updatedStack) => {
           this.snackbarService.showSnackbar('Neue Karten geladen');
           resolve(updatedStack);
+        }, (updatedStack) => {
+          resolve(updatedStack);
         });
       }, () => {
         resolve(stack);
