@@ -1064,6 +1064,9 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    */
   private navigateToGamesPage() {
     LogService.trace(`CardsComponent#navigateBack`);
+
+    this.cardsService.stack = null;
+
     switch (VariantService.getVariant()) {
       case Variant.SCIDDLE: {
         this.router.navigate([`/${ROUTE_GAMES}/${this.stack.id}`]).then();
