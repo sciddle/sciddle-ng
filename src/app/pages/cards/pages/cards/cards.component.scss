@@ -1,4 +1,5 @@
 @import '../../../../../styles';
+@import '../../../../../theme';
 
 //
 // Custom
@@ -128,4 +129,63 @@
   @media #{$breakpoint-large} {
     width: 400px;
   }
+}
+
+.card-background {
+  padding: 10px;
+  min-height: 455px;
+  margin: 15px auto;
+
+  box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
+
+  @media #{$breakpoint-small} {
+    width: 100%;
+    max-width: 380px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+  @media #{$breakpoint-medium} {
+    width: 380px;
+  }
+  @media #{$breakpoint-large} {
+    width: 380px;
+  }
+
+  &:hover .hidden {
+    display: inline-block;
+  }
+}
+
+.green-theme {
+  .card-background {
+    border-radius: 40px !important;
+    background-image: url(../../../../../assets/images/green_back.webp) !important;
+    background-size: 100% 100%;
+  }
+}
+
+.blue-theme {
+  .card-background {
+    border-radius: 40px !important;
+    background-image: url(../../../../../assets/images/blue_back.webp) !important;
+    background-size: 100% 100%;
+  }
+}
+
+.future-theme {
+  .card-background {
+    border: #FFF solid 10px;
+    border-radius: 10px !important;
+    background: #d6e8f2;
+    background-image: url(../../../../../assets/logos-s4f/logo-transparent144x144.png) !important;
+    background-repeat: no-repeat !important;
+    background-size: 144px 144px;
+
+    background-position: center;
+  }
+}
+
+.card-background-margin {
+  margin: -12px 0 !important;
 }
