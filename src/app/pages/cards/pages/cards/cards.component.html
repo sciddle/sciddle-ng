@@ -42,7 +42,7 @@
     <!-- Cards -->
     <div *ngIf="displayAspect === displayAspectType.DISPLAY_CARDS && stack != null && stack.game != null"
          class="margin">
-      <div class="horizontal-center card-background-margin" style="position: absolute;">
+      <div *ngIf="cardsInStack > 1" class="horizontal-center card-background-margin" style="position: absolute;">
         <div class="card-background"></div>
       </div>
       <div swing-stack #swingStack
