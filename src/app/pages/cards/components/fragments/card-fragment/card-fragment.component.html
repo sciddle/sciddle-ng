@@ -1,5 +1,5 @@
 <div *ngIf="card != null" [className]="cardClassName">
-  <mat-card class="container">
+  <mat-card class="container flexcontainer-vertical">
     <div *ngIf="devMode &&  card.id != null" class="debug">id {{ card.id.slice(0, 19)  }}...</div>
     <div *ngIf="devMode" class="debug">index {{ card.index }}</div>
     <div *ngIf="devMode" class="debug">difficulty {{ card.difficulty }}</div>
@@ -20,6 +20,7 @@
         {{ taboo }}
       </div>
     </div>
+    <div class="flexbox"></div>
     <mat-card-footer class="flexcontainer">
       <div class="flexbox"></div>
       <div class="button-wrapper">

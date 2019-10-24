@@ -1,4 +1,15 @@
-import {AfterViewInit, Component, Inject, isDevMode, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  Inject,
+  isDevMode,
+  OnDestroy,
+  OnInit,
+  QueryList,
+  ViewChild,
+  ViewChildren,
+  ViewEncapsulation
+} from '@angular/core';
 import {Media} from '../../../../core/ui/model/media.enum';
 import {environment} from '../../../../../environments/environment';
 import {MatDialog, MatIconRegistry} from '@angular/material';
@@ -54,7 +65,8 @@ export enum DisplayAspect {
 @Component({
   selector: 'app-cards',
   templateUrl: './cards.component.html',
-  styleUrls: ['./cards.component.scss']
+  styleUrls: ['./cards.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
 
@@ -123,9 +135,11 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
   stackConfig: StackConfig;
 
   /** Factor by which the card is being considered thrown-out, 1=default, 0.5=at half the distance */
-  private throwOutFactor = 0.1;
+  private throwOutFactor = 0.5;
   /** Number of pixels the card needs to be moved before it counts as swiped */
   private throwOutDistance = 800;
+  /** Throwout rotation */
+  private throwOutRotation = -1;
 
   /** Dev mode */
   devMode = false;
@@ -588,15 +602,15 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
     LogService.trace(`CardsComponent#initializeThrowOutFactor`);
     switch (this.media) {
       case Media.LARGE: {
-        this.throwOutFactor = 1;
+        this.throwOutFactor *= 1;
         break;
       }
       case Media.MEDIUM: {
-        this.throwOutFactor = 1;
+        this.throwOutFactor *= 1;
         break;
       }
       case Media.SMALL: {
-        this.throwOutFactor = 1;
+        this.throwOutFactor *= 1;
         break;
       }
     }
@@ -616,6 +630,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
         this.onItemMove(element, x, y, r);
       },
       throwOutDistance: () => {
+        LogService.debug(`throwOutDistance ${this.throwOutDistance * this.throwOutFactor}`);
         return this.throwOutDistance * this.throwOutFactor;
       }
     };
@@ -884,7 +899,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    * @param r degrees
    */
   onItemMove(element, x, y, r) {
-    element.style.transform = `translate3d(0, 0, 0) translate(${x}px, ${y}px) rotate(${r}deg)`;
+    element.style.transform = `translate3d(0, 0, 0) translate(${x}px, ${y}px) rotate(${r * this.throwOutRotation}deg)`;
     element.style.opacity = 1 - (1.2 * (Math.abs(x) / this.throwOutDistance));
   }
 

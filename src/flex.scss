@@ -2,6 +2,11 @@
   display: flex !important;
 }
 
+.flexcontainer-vertical {
+  display: flex !important;
+  flex-direction: column;
+}
+
 .flexbox {
   flex-grow: 1 !important;
 }
