@@ -40,7 +40,7 @@
     (difficultySelectedEmitter)="onDifficultySelected($event)"></app-difficulty-selection-fragment>
   <!-- Cards -->
   <div *ngIf="displayAspect === displayAspectType.DISPLAY_CARDS && stack != null && stack.game != null">
-    <div *ngIf="cardsInStack > 1" class="horizontal-center" style="position: absolute;">
+    <div *ngIf="cardsInStack > 1" class="horizontal-center card-background-wrapper">
       <div class="card-background"></div>
     </div>
     <div swing-stack class="margin" #swingStack
