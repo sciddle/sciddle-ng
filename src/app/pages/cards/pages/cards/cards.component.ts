@@ -184,7 +184,6 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
               @Inject(STACK_PERSISTENCE_POUCHDB) private stacksPersistenceService: StacksPersistenceService,
               private stacksService: StacksService,
               private themeService: ThemeService) {
-    LogService.trace(`CardsComponent#constructor`);
     this.devMode = isDevMode();
   }
 
