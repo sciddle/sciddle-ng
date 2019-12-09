@@ -1,18 +1,18 @@
 <div class="horizontal-center">
   <div class="description-text double-size-text side-margin">
-    Wähle einen Schwierigkeitsgrad aus
+    <span i18n="promtSelectDifficulty|Prompt to select a difficulty@@promptSelectDifficulty">Wähle einen Schwierigkeitsgrad aus</span>
   </div>
   <div>
     <button *ngIf="cardsEasy.length > 0" mat-flat-button class="button difficulty-easy"
             (click)="onDifficultySelected(1)">
       <div class="description-text double-size-text">
-        EINFACH ({{ cardsEasy.length }})
+        <span class="uppercase" i18n="labelEasy|Label easy@@labelEasy">easy</span> ({{ cardsEasy.length }})
       </div>
     </button>
     <button *ngIf="cardsEasy.length < 1" mat-flat-button class="button difficulty-easy-disabled"
             disabled=true>
       <div class="description-text double-size-text">
-        EINFACH ({{ cardsEasy.length }})
+        <span class="uppercase" i18n="labelEasy|Label easy@@labelEasy">easy</span> ({{ cardsEasy.length }})
       </div>
     </button>
   </div>
@@ -20,13 +20,13 @@
     <button *ngIf="cardsMedium.length > 0" mat-flat-button class="button difficulty-medium"
             (click)="onDifficultySelected(2)">
       <div class="description-text double-size-text">
-        MITTEL ({{ cardsMedium.length }})
+        <span class="uppercase" i18n="labelMedium|Label medium@@labelMedium">medium</span> ({{ cardsMedium.length }})
       </div>
     </button>
     <button *ngIf="cardsMedium.length < 1" mat-flat-button class="button difficulty-medium-disabled"
             disabled="true">
       <div class="description-text double-size-text">
-        MITTEL ({{ cardsMedium.length }})
+        <span class="uppercase" i18n="labelMedium|Label medium@@labelMedium">medium</span> ({{ cardsMedium.length }})
       </div>
     </button>
   </div>
@@ -34,13 +34,13 @@
     <button *ngIf="cardsHard.length > 0" mat-flat-button class="button difficulty-hard"
             (click)="onDifficultySelected(3)">
       <div class="description-text double-size-text">
-        SCHWER ({{ cardsHard.length }})
+        <span class="uppercase" i18n="labelHard|Label hard@@labelHard">hard</span> ({{ cardsHard.length }})
       </div>
     </button>
     <button *ngIf="cardsHard.length < 1" mat-flat-button class="button difficulty-hard-disabled"
             disabled=true>
       <div class="description-text double-size-text">
-        SCHWER ({{ cardsHard.length }})
+        <span class="uppercase" i18n="labelHard|Label hard@@labelHard">hard</span> ({{ cardsHard.length }})
       </div>
     </button>
   </div>

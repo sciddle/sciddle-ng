@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, Output, ViewEncapsulation} from '@angular/core';
 import {Stack} from '../../../../../core/entity/model/stack/stack.model';
+import {environment} from '../../../../../../environments/environment';
 
 /**
  * Displays team information fragment
@@ -16,6 +17,9 @@ export class TeamInformationFragmentComponent {
   @Input() stack: Stack;
   /** Event emitter indicating click */
   @Output() teamInformationClickedEmitter = new EventEmitter<any>();
+
+  /** App language */
+  language = environment.LANGUAGE;
 
   //
   // Actions

@@ -144,6 +144,8 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   /** App variant */
   variant = environment.VARIANT;
+  /** App language */
+  language = environment.LANGUAGE;
 
   /**
    * Constructor
@@ -329,8 +331,16 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.stacksPersistenceService.databaseErrorSubject.pipe(
       takeUntil(this.unsubscribeSubject)
     ).subscribe((value) => {
-      // TODO Check error more specifically
-      this.snackbarService.showSnackbar('Achtung: Spiel wird nicht gespeichert.');
+      switch (this.language) {
+        case 'de': {
+          this.snackbarService.showSnackbar('Achtung: Spiel wird nicht gespeichert.');
+          break;
+        }
+        case 'en': {
+          this.snackbarService.showSnackbar('Warning: Game will not be saved.');
+          break;
+        }
+      }
 
       if (value != null) {
         // Build stack template
@@ -442,7 +452,16 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
           case GameState.UNINIZIALIZED:
             // Start game
             this.gamesService.startGame(this.game).then(() => {
-              this.snackbarService.showSnackbar('Spiel gestarted');
+              switch (this.language) {
+                case 'de': {
+                  this.snackbarService.showSnackbar('Spiel gestarted');
+                  break;
+                }
+                case 'en': {
+                  this.snackbarService.showSnackbar('Started game');
+                  break;
+                }
+              }
             });
             break;
           case GameState.ONGOING: {
@@ -455,9 +474,27 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
                     this.game = resolve as Game;
                     this.stack.game = resolve as Game;
                     this.stacksPersistenceService.updateStack(this.stack).then(() => {
-                      this.snackbarService.showSnackbar('Runde gestarted');
+                      switch (this.language) {
+                        case 'de': {
+                          this.snackbarService.showSnackbar('Runde gestarted');
+                          break;
+                        }
+                        case 'en': {
+                          this.snackbarService.showSnackbar('Started round');
+                          break;
+                        }
+                      }
                     }, (stack) => {
-                      this.snackbarService.showSnackbar('Runde gestarted');
+                      switch (this.language) {
+                        case 'de': {
+                          this.snackbarService.showSnackbar('Runde gestarted');
+                          break;
+                        }
+                        case 'en': {
+                          this.snackbarService.showSnackbar('Started round');
+                          break;
+                        }
+                      }
                       this.initializeCards(stack.cards);
                     });
                   }
@@ -724,17 +761,35 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
         this.http.get('assets/manual/manual-de.md').subscribe(
           () => {
           }, err => {
+            let title = '';
+            let checkboxText = '';
+            let action = '';
+            switch (this.language) {
+              case 'de': {
+                title = 'Anleitung';
+                checkboxText = 'Anleitung beim Starten nicht mehr anzeigen';
+                action = 'Alles klar';
+                break;
+              }
+              case 'en': {
+                title = 'Manual';
+                checkboxText = 'Do not show on start';
+                action = 'Got it';
+                break;
+              }
+            }
+
             const dialogRef = this.dialog.open(CheckableInformationDialogComponent, {
               disableClose: false,
               data: {
-                title: 'Anleitung',
+                title,
                 text: JSON.stringify(err.error.text)
                   .replace(/"/g, '')
                   .replace(/\\n/g, '\n')
                   .replace(/\\r/g, '\r'),
                 checkboxValue: this.dontShowManualOnStartup,
-                checkboxText: 'Anleitung beim Starten nicht mehr anzeigen',
-                action: 'Alles klar'
+                checkboxText,
+                action
               }
             });
 
@@ -750,27 +805,59 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
         break;
       }
       case 'open-source': {
-        this.dialog.open(InformationDialogComponent, {
-          disableClose: false,
-          data: {
-            title: 'Open Source Komponenten',
-            text: Object.keys(environment.DEPENDENCIES).map(key => {
-              return `${key} ${environment.DEPENDENCIES[key]}`;
-            }).concat('---').concat(Object.keys(environment.DEV_DEPENDENCIES).map(key => {
-              return `${key} ${environment.DEV_DEPENDENCIES[key]}`;
-            })).join('<br/>'),
-            action: 'Alles klar',
-            value: null
-          }
-        });
+        this.http.get('assets/open-source/open-source.md').subscribe(
+          () => {
+          }, err => {
+            let title = '';
+            let action = '';
+            switch (this.language) {
+              case 'de': {
+                title = 'Open Source Komponenten';
+                action = 'Alles klar';
+                break;
+              }
+              case 'en': {
+                title = 'Open source components';
+                action = 'Got it';
+                break;
+              }
+            }
+
+            this.dialog.open(InformationDialogComponent, {
+              disableClose: false,
+              data: {
+                title,
+                text: Object.keys(environment.DEPENDENCIES).map(key => {
+                  return `${key} ${environment.DEPENDENCIES[key]}`;
+                }).concat('---').concat(Object.keys(environment.DEV_DEPENDENCIES).map(key => {
+                  return `${key} ${environment.DEV_DEPENDENCIES[key]}`;
+                })).join('<br/>'),
+                action,
+                value: null
+              }
+            });
+          });
         break;
       }
+
       case 'about': {
+        let title = '';
+        switch (this.language) {
+          case 'de': {
+            title = 'Über die App';
+            break;
+          }
+          case 'en': {
+            title = 'About the app';
+            break;
+          }
+        }
+
         this.dialog.open(AboutDialogComponent, {
           disableClose: false,
           data: {
             themeClass: this.theme,
-            title: 'Über die App',
+            title,
             name: environment.APP_NAME,
             version: environment.VERSION,
             authorOriginal: environment.AUTHOR_ORIGINAL,
@@ -799,7 +886,17 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
     LogService.trace(`CardsComponent#onTimerOver`);
     // Check if timer is over during cards state
     if (this.game.turn.state === TurnState.DISPLAY_CARDS) {
-      this.snackbarService.showSnackbar('Zeit ist abgelaufen');
+      switch (this.language) {
+        case 'de': {
+          this.snackbarService.showSnackbar('Zeit ist abgelaufen');
+          break;
+        }
+        case 'en': {
+          this.snackbarService.showSnackbar('Timer has run out');
+          break;
+        }
+      }
+
       this.timerOver = true;
 
       if (this.game.useAlarm) {
@@ -909,10 +1006,28 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
       case GameMode.SINGLE_PLAYER: {
         this.cardsService.putCardToEnd(this.stack, this.cards[0]).then((stack) => {
           this.updateCard(this.stack, this.cards[0]).then(() => {
-            this.snackbarService.showSnackbar('Karte ans Ende gelegt');
+            switch (this.language) {
+              case 'de': {
+                this.snackbarService.showSnackbar('Karte ans Ende gelegt');
+                break;
+              }
+              case 'en': {
+                this.snackbarService.showSnackbar('Put card to end');
+                break;
+              }
+            }
           }, () => {
-            this.snackbarService.showSnackbar('Karte ans Ende gelegt');
-            this.initializeStack(stack).then();
+            switch (this.language) {
+              case 'de': {
+                this.snackbarService.showSnackbar('Karte ans Ende gelegt');
+                break;
+              }
+              case 'en': {
+                this.snackbarService.showSnackbar('Put card to end');
+                break;
+              }
+            }
+            this.initializeStack(stack);
           });
         });
         break;
@@ -973,14 +1088,35 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    * Handles back action
    */
   private handleBackActionWithConfirmation() {
+    let title = '';
+    let text = '';
+    let action = '';
+    let negativeAction = '';
+    switch (this.language) {
+      case 'de': {
+        title = 'Spiel beenden';
+        text = 'Willst du das Spiel beenden?';
+        action = 'Ja, beenden';
+        negativeAction = 'Nein, weiterspielen';
+        break;
+      }
+      case 'en': {
+        title = 'Terminate game';
+        text = 'Do you want to terminate the game?';
+        action = 'Yes, terminate';
+        negativeAction = 'No, continue playing';
+        break;
+      }
+    }
+
     LogService.trace(`CardsComponent#handleBackActionWithConfirmation`);
     const confirmationDialogRef = this.dialog.open(ConfirmationDialogComponent, {
       disableClose: false,
       data: {
-        title: 'Spiel beenden',
-        text: 'Willst du das Spiel beenden?',
-        action: 'Ja, beenden',
-        negativeAction: 'Nein, weiterspielen',
+        title,
+        text,
+        action,
+        negativeAction,
         value: {}
       }
     });
@@ -1039,10 +1175,28 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
       if (stack != null) {
         this.cardsService.sortStack(stack).then(((sortedStack) => {
           this.stacksPersistenceService.updateStack(sortedStack).then(() => {
-            this.snackbarService.showSnackbar('Karten sortiert');
+            switch (this.language) {
+              case 'de': {
+                this.snackbarService.showSnackbar('Karten sortiert');
+                break;
+              }
+              case 'en': {
+                this.snackbarService.showSnackbar('Sorted cards');
+                break;
+              }
+            }
           }, (updatedStack) => {
-            this.snackbarService.showSnackbar('Karten sortiert');
-            this.initializeStack(updatedStack).then();
+            switch (this.language) {
+              case 'de': {
+                this.snackbarService.showSnackbar('Karten sortiert');
+                break;
+              }
+              case 'en': {
+                this.snackbarService.showSnackbar('Sorted cards');
+                break;
+              }
+            }
+            this.initializeStack(updatedStack);
             this.initializeGameMode(updatedStack);
           });
         }));
@@ -1060,10 +1214,28 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
       if (stack != null) {
         this.cardsService.shuffleStack(stack).then(((shuffledStack) => {
           this.stacksPersistenceService.updateStack(shuffledStack).then(() => {
-            this.snackbarService.showSnackbar('Karten gemischt');
+            switch (this.language) {
+              case 'de': {
+                this.snackbarService.showSnackbar('Karten gemischt');
+                break;
+              }
+              case 'en': {
+                this.snackbarService.showSnackbar('Shuffled cards');
+                break;
+              }
+            }
           }, (updatedStack) => {
-            this.snackbarService.showSnackbar('Karten gemischt');
-            this.initializeStack(updatedStack).then();
+            switch (this.language) {
+              case 'de': {
+                this.snackbarService.showSnackbar('Karten gemischt');
+                break;
+              }
+              case 'en': {
+                this.snackbarService.showSnackbar('Shuffled cards');
+                break;
+              }
+            }
+            this.initializeStack(updatedStack);
             this.initializeGameMode(updatedStack);
           });
         }));

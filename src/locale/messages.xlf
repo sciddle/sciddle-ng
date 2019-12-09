@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="labelVersion" datatype="html">
+        <source>Version</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/ui/about-dialog/about-dialog/about-dialog.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+        <note priority="1" from="description">Label version</note>
+        <note priority="1" from="meaning">labelVersion</note>
+      </trans-unit>
+      <trans-unit id="labelBasedOn" datatype="html">
+        <source>basierend auf</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/ui/about-dialog/about-dialog/about-dialog.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+        <note priority="1" from="description">Label based on</note>
+        <note priority="1" from="meaning">labelBasedOn</note>
+      </trans-unit>
+      <trans-unit id="labelAUthor" datatype="html">
+        <source>von</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/ui/about-dialog/about-dialog/about-dialog.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <note priority="1" from="description">Label author</note>
+        <note priority="1" from="meaning">labelAuthor</note>
+      </trans-unit>
+      <trans-unit id="labelIdeaAndTextBy" datatype="html">
+        <source>Idee und Texte von</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/ui/about-dialog/about-dialog/about-dialog.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+        <note priority="1" from="description">Label idea and text by</note>
+        <note priority="1" from="meaning">labelIdeaAndTextBy</note>
+      </trans-unit>
+      <trans-unit id="labelLicensedUnder" datatype="html">
+        <source>lizenziert unter</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/ui/about-dialog/about-dialog/about-dialog.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/ui/about-dialog/about-dialog/about-dialog.component.html</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+        <note priority="1" from="description">Label licensed under</note>
+        <note priority="1" from="meaning">labelLicensedUnder</note>
+      </trans-unit>
+      <trans-unit id="labelGraphicsBy" datatype="html">
+        <source>Grafiken von</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/ui/about-dialog/about-dialog/about-dialog.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+        <note priority="1" from="description">Label graphics by</note>
+        <note priority="1" from="meaning">labelGraphicsBy</note>
+      </trans-unit>
+      <trans-unit id="labelImplementedBy" datatype="html">
+        <source>Implementierung durch</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/ui/about-dialog/about-dialog/about-dialog.component.html</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+        <note priority="1" from="description">Label implemented by</note>
+        <note priority="1" from="meaning">labelImplementedBy</note>
+      </trans-unit>
+      <trans-unit id="labelSourceCodeAvailableOn" datatype="html">
+        <source>Quellcode verfügbar auf</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/ui/about-dialog/about-dialog/about-dialog.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+        <note priority="1" from="description">Label source code available on</note>
+        <note priority="1" from="meaning">labelSourceCodeAvailableOn</note>
+      </trans-unit>
+      <trans-unit id="scientificSupervisionBy" datatype="html">
+        <source>Wissenschaftliche Betreuung durch</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/ui/about-dialog/about-dialog/about-dialog.component.html</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+        <note priority="1" from="description">Label scientific supervision by</note>
+        <note priority="1" from="meaning">scientificSupervisionBy</note>
+      </trans-unit>
+      <trans-unit id="actionClose" datatype="html">
+        <source>Schließen</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/ui/about-dialog/about-dialog/about-dialog.component.html</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+        <note priority="1" from="description">Action to close dialog</note>
+        <note priority="1" from="meaning">actionClose</note>
+      </trans-unit>
+      <trans-unit id="actionNextCard" datatype="html">
+        <source>Nächste Karte</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/cards/pages/cards/cards.component.html</context>
+          <context context-type="linenumber">60</context>
+        </context-group>
+        <note priority="1" from="description">Action to to show next card</note>
+        <note priority="1" from="meaning">actionNextCard</note>
+      </trans-unit>
+      <trans-unit id="actionProceedCorrectAnswer" datatype="html">
+        <source>Begriff wurde erraten</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/cards/pages/cards/cards.component.html</context>
+          <context context-type="linenumber">64</context>
+        </context-group>
+        <note priority="1" from="description">Action to proceed after correct answer</note>
+        <note priority="1" from="meaning">actionProceedCorrectAnswer</note>
+      </trans-unit>
+      <trans-unit id="actionProceedTimerOver" datatype="html">
+        <source>Weiter</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/cards/pages/cards/cards.component.html</context>
+          <context context-type="linenumber">65</context>
+        </context-group>
+        <note priority="1" from="description">Action to proceed after timer is over</note>
+        <note priority="1" from="meaning">actionProceedTimerOver</note>
+      </trans-unit>
+      <trans-unit id="promptSwipeCardSuccess" datatype="html">
+        <source>Wisch die Karte zur Seite sobald jemand den Begriff erraten hat</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/cards/pages/cards/cards.component.html</context>
+          <context context-type="linenumber">71</context>
+        </context-group>
+        <note priority="1" from="description">Prompt to swipe a card away after a team has answered</note>
+        <note priority="1" from="meaning">promptSwipeCardSuccess</note>
+      </trans-unit>
+      <trans-unit id="promptSwipeCardFailed" datatype="html">
+        <source>Die Zeit ist abgelaufen. Wisch die Karte zur Seite um weiterzumachen</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/cards/pages/cards/cards.component.html</context>
+          <context context-type="linenumber">72</context>
+        </context-group>
+        <note priority="1" from="description">Prompt to swipe a card away after time is over</note>
+        <note priority="1" from="meaning">promptSwipeCardFailed</note>
+      </trans-unit>
+      <trans-unit id="menuItemManual" datatype="html">
+        <source>Anleitung</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/cards/components/toolbars/cards-toolbar/cards-toolbar.component.html</context>
+          <context context-type="linenumber">52</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/games/components/toolbars/games-toolbar/games-toolbar.component.html</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/stacks/components/toolbars/stacks-toolbar/stacks-toolbar.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+        <note priority="1" from="description">Menu item label for manual</note>
+        <note priority="1" from="meaning">menuItemManual</note>
+      </trans-unit>
+      <trans-unit id="menuItemOpenSource" datatype="html">
+        <source>Open Source</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/cards/components/toolbars/cards-toolbar/cards-toolbar.component.html</context>
+          <context context-type="linenumber">57</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/games/components/toolbars/games-toolbar/games-toolbar.component.html</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/stacks/components/toolbars/stacks-toolbar/stacks-toolbar.component.html</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+        <note priority="1" from="description">Menu item label for open source</note>
+        <note priority="1" from="meaning">menuItemOpenSource</note>
+      </trans-unit>
+      <trans-unit id="menuItemAboutApp" datatype="html">
+        <source>Über die App</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/cards/components/toolbars/cards-toolbar/cards-toolbar.component.html</context>
+          <context context-type="linenumber">61</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/games/components/toolbars/games-toolbar/games-toolbar.component.html</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/stacks/components/toolbars/stacks-toolbar/stacks-toolbar.component.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+        <note priority="1" from="description">Menu item label for about app</note>
+        <note priority="1" from="meaning">menuItemAboutApp</note>
+      </trans-unit>
+      <trans-unit id="promptSelectDifficulty" datatype="html">
+        <source>Wähle einen Schwierigkeitsgrad aus</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/cards/components/fragments/difficulty-selection-fragment/difficulty-selection-fragment.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+        <note priority="1" from="description">Prompt to select a difficulty</note>
+        <note priority="1" from="meaning">promtSelectDifficulty</note>
+      </trans-unit>
+      <trans-unit id="labelEasy" datatype="html">
+        <source>easy</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/cards/components/fragments/difficulty-selection-fragment/difficulty-selection-fragment.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/cards/components/fragments/difficulty-selection-fragment/difficulty-selection-fragment.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/games/components/fragments/difficulty-selection-fragment/difficulty-selection-fragment.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/games/components/fragments/difficulty-selection-fragment/difficulty-selection-fragment.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+        <note priority="1" from="description">Label easy</note>
+        <note priority="1" from="meaning">labelEasy</note>
+      </trans-unit>
+      <trans-unit id="labelMedium" datatype="html">
+        <source>medium</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/cards/components/fragments/difficulty-selection-fragment/difficulty-selection-fragment.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/cards/components/fragments/difficulty-selection-fragment/difficulty-selection-fragment.component.html</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/games/components/fragments/difficulty-selection-fragment/difficulty-selection-fragment.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/games/components/fragments/difficulty-selection-fragment/difficulty-selection-fragment.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+        <note priority="1" from="description">Label medium</note>
+        <note priority="1" from="meaning">labelMedium</note>
+      </trans-unit>
+      <trans-unit id="labelHard" datatype="html">
+        <source>hard</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/cards/components/fragments/difficulty-selection-fragment/difficulty-selection-fragment.component.html</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/cards/components/fragments/difficulty-selection-fragment/difficulty-selection-fragment.component.html</context>
+          <context context-type="linenumber">43</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/games/components/fragments/difficulty-selection-fragment/difficulty-selection-fragment.component.html</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/games/components/fragments/difficulty-selection-fragment/difficulty-selection-fragment.component.html</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+        <note priority="1" from="description">Label hard</note>
+        <note priority="1" from="meaning">labelHard</note>
+      </trans-unit>
+      <trans-unit id="questionWhichTeamAnsweredCorrectly" datatype="html">
+        <source>
+         Welches Team hat richtig geantwortet?
+       </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/cards/components/fragments/team-selection-fragment/team-selection-fragment.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+        <note priority="1" from="description">Question which team has answered correctly</note>
+        <note priority="1" from="meaning">questionWhichTeamAnsweredCorrectly</note>
+      </trans-unit>
+      <trans-unit id="whichTeamAnsweredCorrectlyTeam" datatype="html">
+        <source>
+            Team</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/cards/components/fragments/team-selection-fragment/team-selection-fragment.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+        <note priority="1" from="description">Answer to question which team has answered correctly: team</note>
+        <note priority="1" from="meaning">answerTeam</note>
+      </trans-unit>
+      <trans-unit id="whichTeamAnsweredCorrectlyNoOne" datatype="html">
+        <source>
+            NIEMAND
+          </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/cards/components/fragments/team-selection-fragment/team-selection-fragment.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+        <note priority="1" from="description">Answer to question which team has answered correctly: no one</note>
+        <note priority="1" from="meaning">answerNoOne</note>
+      </trans-unit>
+      <trans-unit id="labelTeam" datatype="html">
+        <source>Team</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/cards/components/fragments/game-evaluation-fragment/game-evaluation-fragment.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/cards/components/fragments/game-evaluation-fragment/game-evaluation-fragment.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/cards/components/fragments/score-overview-fragment/score-overview-fragment.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <note priority="1" from="description">Label team</note>
+        <note priority="1" from="meaning">labelTeam</note>
+      </trans-unit>
+      <trans-unit id="pluralHasWon" datatype="html">
+        <source>{VAR_PLURAL, plural, one {hat gewonnen} few {haben gewonnen} }</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/cards/components/fragments/game-evaluation-fragment/game-evaluation-fragment.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+        <note priority="1" from="description">Plural has won</note>
+        <note priority="1" from="meaning">pluralHasWon</note>
+      </trans-unit>
+      <trans-unit id="pluralScore" datatype="html">
+        <source>{VAR_PLURAL, plural, zero {0 Punkte} one {<x id="INTERPOLATION" equiv-text="{{team.score}}"/> Punkt} other {<x id="INTERPOLATION" equiv-text="{{team.score}}"/> Punkte} }</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/cards/components/fragments/game-evaluation-fragment/game-evaluation-fragment.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/cards/components/fragments/score-overview-fragment/score-overview-fragment.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+        <note priority="1" from="description">Plural score</note>
+        <note priority="1" from="meaning">pluralScore</note>
+      </trans-unit>
+      <trans-unit id="actionBack" datatype="html">
+        <source>zurück</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/cards/components/fragments/game-evaluation-fragment/game-evaluation-fragment.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+        <note priority="1" from="description">Action back</note>
+        <note priority="1" from="meaning">actionBack</note>
+      </trans-unit>
+      <trans-unit id="promptPassDeviceAndTapScreen" datatype="html">
+        <source>
+          Gib das Gerät weiter und tippe auf den Bildschirm um weiterzumachen
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/cards/components/fragments/team-information-fragment/team-information-fragment.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <note priority="1" from="description">Prompt to pass device and tap on screen</note>
+        <note priority="1" from="meaning">promptPassDeviceAndTapScreen</note>
+      </trans-unit>
+      <trans-unit id="promptTapOnScreen" datatype="html">
+        <source>Tippe auf den Bildschirm um weiterzumachen</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/cards/components/fragments/score-overview-fragment/score-overview-fragment.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+        <note priority="1" from="description">Prompt to tap on screen to continue</note>
+        <note priority="1" from="meaning">promptTapOnScreen</note>
+      </trans-unit>
+      <trans-unit id="labelWithoutTimeLimit" datatype="html">
+        <source>ohne Zeitlimit</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/games/components/dialogs/multiplayer-game-dialog/multiplayer-game-dialog.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+        <note priority="1" from="description">Label without time limit</note>
+        <note priority="1" from="meaning">labelWithoutTimeLimit</note>
+      </trans-unit>
+      <trans-unit id="labelWithTimeLimit" datatype="html">
+        <source>mit Zeitlimit</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/games/components/dialogs/multiplayer-game-dialog/multiplayer-game-dialog.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+        <note priority="1" from="description">Label with time limit</note>
+        <note priority="1" from="meaning">labelWithTimeLimit</note>
+      </trans-unit>
+      <trans-unit id="labelNumberOfTeams" datatype="html">
+        <source>Anzahl der Teams</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/games/components/dialogs/multiplayer-game-dialog/multiplayer-game-dialog.component.html</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+        <note priority="1" from="description">Label number of teams</note>
+        <note priority="1" from="meaning">labelNumberOfTeams</note>
+      </trans-unit>
+      <trans-unit id="labelNumberOfCards" datatype="html">
+        <source>Anzahl der Karten</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/games/components/dialogs/multiplayer-game-dialog/multiplayer-game-dialog.component.html</context>
+          <context context-type="linenumber">52</context>
+        </context-group>
+        <note priority="1" from="description">Label number of cards</note>
+        <note priority="1" from="meaning">labelNumberOfCards</note>
+      </trans-unit>
+      <trans-unit id="labelSinglePlayerGame" datatype="html">
+        <source>Freies Spiel</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/games/pages/games/games.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+        <note priority="1" from="description">Single player mode</note>
+        <note priority="1" from="meaning">labelSinglePlayerGame</note>
+      </trans-unit>
+      <trans-unit id="labelMultiplePlayerGame" datatype="html">
+        <source>Spielrunde starten</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/games/pages/games/games.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+        <note priority="1" from="description">Multiple player mode</note>
+        <note priority="1" from="meaning">labelMultiPlayerGame</note>
+      </trans-unit>
+      <trans-unit id="pluralCards" datatype="html">
+        <source>{VAR_PLURAL, plural, zero {keine Karten} one {<x id="INTERPOLATION" equiv-text="{{cardsCount}}"/> Karte} other {<x id="INTERPOLATION" equiv-text="{{cardsCount}}"/> Karten} }</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/stacks/components/fragments/stack-fragment/stack-fragment.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+        <note priority="1" from="description">Plural score</note>
+        <note priority="1" from="meaning">pluralCards</note>
+      </trans-unit>
+      <trans-unit id="labelOngoingGame" datatype="html">
+        <source>
+            laufende Spielrunde
+          </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/stacks/components/fragments/stack-fragment/stack-fragment.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+        <note priority="1" from="description">Label that a game is ongoing</note>
+        <note priority="1" from="meaning">labelOngoingGame</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

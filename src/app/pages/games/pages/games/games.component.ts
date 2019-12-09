@@ -77,11 +77,8 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
 
   /** App variant */
   variant = environment.VARIANT;
-
-  /** Caption for single player mode */
-  gameModeSinglePlayer = environment.GAME_MODE_SINGLE_PLAYER;
-  /** Caption for multi player mode */
-  gameModeMultiPlayer = environment.GAME_MODE_MULTI_PLAYER;
+  /** App language */
+  language = environment.LANGUAGE;
 
   /**
    * Constructor
@@ -252,8 +249,16 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
     this.stacksPersistenceService.databaseErrorSubject.pipe(
       takeUntil(this.unsubscribeSubject)
     ).subscribe((value) => {
-      // TODO Check error more specifically
-      this.snackbarService.showSnackbar('Achtung: Spiel wird nicht gespeichert.');
+      switch (this.language) {
+        case 'de': {
+          this.snackbarService.showSnackbar('Achtung: Spiel wird nicht gespeichert.');
+          break;
+        }
+        case 'en': {
+          this.snackbarService.showSnackbar('Warning: Game will not be saved.');
+          break;
+        }
+      }
 
       if (value != null) {
         // Build stack template
@@ -519,17 +524,35 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
         this.http.get('assets/manual/manual-de.md').subscribe(
           () => {
           }, err => {
+            let title = '';
+            let checkboxText = '';
+            let action = '';
+            switch (this.language) {
+              case 'de': {
+                title = 'Anleitung';
+                checkboxText = 'Anleitung beim Starten nicht mehr anzeigen';
+                action = 'Alles klar';
+                break;
+              }
+              case 'en': {
+                title = 'Manual';
+                checkboxText = 'Do not show on start';
+                action = 'Got it';
+                break;
+              }
+            }
+
             const dialogRef = this.dialog.open(CheckableInformationDialogComponent, {
               disableClose: false,
               data: {
-                title: 'Anleitung',
+                title,
                 text: JSON.stringify(err.error.text)
                   .replace(/"/g, '')
                   .replace(/\\n/g, '\n')
                   .replace(/\\r/g, '\r'),
                 checkboxValue: this.dontShowManualOnStartup,
-                checkboxText: 'Anleitung beim Starten nicht mehr anzeigen',
-                action: 'Alles klar'
+                checkboxText,
+                action
               }
             });
 
@@ -544,48 +567,60 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
           });
         break;
       }
-      case 'opensource': {
+      case 'open-source': {
         this.http.get('assets/open-source/open-source.md').subscribe(
           () => {
           }, err => {
+            let title = '';
+            let action = '';
+            switch (this.language) {
+              case 'de': {
+                title = 'Open Source Komponenten';
+                action = 'Alles klar';
+                break;
+              }
+              case 'en': {
+                title = 'Open source components';
+                action = 'Got it';
+                break;
+              }
+            }
+
             this.dialog.open(InformationDialogComponent, {
               disableClose: false,
               data: {
-                title: 'Open Source Komponenten',
-                text: JSON.stringify(err.error.text)
-                  .replace(/"/g, '')
-                  .replace(/\\n/g, '\n')
-                  .replace(/\\r/g, '\r'),
-                action: 'Alles klar',
+                title,
+                text: Object.keys(environment.DEPENDENCIES).map(key => {
+                  return `${key} ${environment.DEPENDENCIES[key]}`;
+                }).concat('---').concat(Object.keys(environment.DEV_DEPENDENCIES).map(key => {
+                  return `${key} ${environment.DEV_DEPENDENCIES[key]}`;
+                })).join('<br/>'),
+                action,
                 value: null
               }
             });
           });
         break;
       }
-      case 'open-source': {
-        this.dialog.open(InformationDialogComponent, {
-          disableClose: false,
-          data: {
-            themeClass: this.themeService.theme,
-            title: 'Open Source Komponenten',
-            text: Object.keys(environment.DEPENDENCIES).map(key => {
-              return `${key} ${environment.DEPENDENCIES[key]}`;
-            }).concat('---').concat(Object.keys(environment.DEV_DEPENDENCIES).map(key => {
-              return `${key} ${environment.DEV_DEPENDENCIES[key]}`;
-            })).join('<br/>'),
-            action: 'Alles klar',
-            value: null
-          }
-        });
-        break;
-      }
+
       case 'about': {
+        let title = '';
+        switch (this.language) {
+          case 'de': {
+            title = 'Über die App';
+            break;
+          }
+          case 'en': {
+            title = 'About the app';
+            break;
+          }
+        }
+
         this.dialog.open(AboutDialogComponent, {
           disableClose: false,
           data: {
             themeClass: this.theme,
-            title: 'Über die App',
+            title,
             name: environment.APP_NAME,
             version: environment.VERSION,
             authorOriginal: environment.AUTHOR_ORIGINAL,
@@ -629,7 +664,6 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
     const multiplayerGameDialogRef = this.dialog.open(MultiplayerGameDialogComponent, {
       disableClose: false,
       data: {
-        title: this.gameModeMultiPlayer,
         cardCount: this.cardCount,
         minCardCount: this.minCardCount,
         maxCardCount: this.maxCardCount

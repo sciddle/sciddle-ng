@@ -33,6 +33,9 @@ export class WikipediaDialogComponent implements OnInit {
   /** Action */
   action = '';
 
+  /** App language */
+  language = environment.LANGUAGE;
+
   //
   // Static methods
   //
@@ -100,7 +103,18 @@ export class WikipediaDialogComponent implements OnInit {
    */
   private initializeExtract() {
     if (this.alternateURL != null) {
-      this.more = `Mehr auf ${this.alternateURL}`;
+
+      switch (this.language) {
+        case 'de': {
+          this.more = `Mehr auf ${this.alternateURL}`;
+          break;
+        }
+        case 'en': {
+          this.more = `Find more on ${this.alternateURL}`;
+          break;
+        }
+      }
+
       this.moreLink = this.alternateURL;
     } else {
       const article = this.alternateWikipediaArticle == null ? this.term : this.alternateWikipediaArticle;
@@ -110,13 +124,33 @@ export class WikipediaDialogComponent implements OnInit {
           this.explanationText = this.explanationText == null
             ? WikipediaDialogComponent.getFirstSentences(result.extract, 2, 100)
             : this.explanationText;
-          this.more = result.pageURL != null ? ` Mehr auf Wikipedia` : ``;
+
+          switch (this.language) {
+            case 'de': {
+              this.more = result.pageURL != null ? ` Mehr auf Wikipedia` : ``;
+              break;
+            }
+            case 'en': {
+              this.more = result.pageURL != null ? ` Find more on Wikipedia` : ``;
+              break;
+            }
+          }
+
           this.moreLink = result.pageURL.replace(' ', '%20');
         } else {
-          this.explanationText = `Das Extrakt kann nicht abgerufen werden`;
+          switch (this.language) {
+            case 'de': {
+              this.explanationText = `Das Extrakt kann nicht abgerufen werden`;
+              break;
+            }
+            case 'en': {
+              this.explanationText = `Cannot get extract`;
+              break;
+            }
+          }
         }
       });
-      this.wikipediaService.getExtract(article, 'de', environment.API_TIMEOUT, environment.API_DELAY, extractEmitter);
+      this.wikipediaService.getExtract(article, this.language, environment.API_TIMEOUT, environment.API_DELAY, extractEmitter);
     }
   }
 

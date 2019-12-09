@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 import {StacksImports} from './stacks.imports';
 import {StacksDeclarations} from './stacks.declarations';
 import {StacksComponent} from './pages/stacks/stacks.component';
@@ -9,7 +9,9 @@ import {StacksComponent} from './pages/stacks/stacks.component';
   entryComponents: [
     // Pages
     StacksComponent,
-  ], providers: [], exports: [
+  ], providers: [
+    {provide: LOCALE_ID, useValue: 'en'}
+  ], exports: [
     StacksComponent
   ]
 })

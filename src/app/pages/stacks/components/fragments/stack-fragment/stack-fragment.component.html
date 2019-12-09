@@ -6,9 +6,11 @@
       <mat-card-header (click)="onStackClicked()">
         <mat-card-title class="stack-title" [style.color]="titleColor">{{ stack.title }}</mat-card-title>
         <mat-card-subtitle>
-          {{ cardsCount }} Karte<span *ngIf="cardsCount !== 1">n</span>
+          <span i18n="pluralCards|Plural score@@pluralCards">{cardsCount, plural, zero {keine Karten} one {{{cardsCount}} Karte} other {{{cardsCount}} Karten}}</span>
           <span *ngIf="existingGame" class="separator">|</span>
-          <span *ngIf="existingGame">laufende Spielrunde</span>
+          <span *ngIf="existingGame" i18n="labelOngoingGame|Label that a game is ongoing@@labelOngoingGame">
+            laufende Spielrunde
+          </span>
         </mat-card-subtitle>
       </mat-card-header>
       <div class="flexbox"></div>

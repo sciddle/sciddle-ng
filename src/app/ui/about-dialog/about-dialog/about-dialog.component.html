@@ -1,28 +1,41 @@
 <h2 mat-dialog-title>{{ dialogTitle }}</h2>
 <mat-dialog-content [class]="themeClass">
-  <p>{{ name }} (Version {{ version }})
-    <span *ngIf="authorOriginal != null">basierend auf <span
-      class="highlight">Sciddle - The Science Riddle</span> von {{ authorOriginal }}
+  <p>{{ name }} (<span i18n="labelVersion|Label version@@labelVersion">Version</span> {{ version }})
+    <span *ngIf="authorOriginal != null">
+      <span i18n="labelBasedOn|Label based on@@labelBasedOn">basierend auf</span>
+      <span class="highlight">Sciddle - The Science Riddle</span>
+      <span i18n="labelAuthor|Label author@@labelAUthor">von</span>
+      <a class="participant">{{ authorOriginal }}</a>
     </span>.
   </p>
   <p *ngIf="authorContent != null">
-    Idee und Texte von <a>{{ authorContent }}</a>, lizenziert unter {{ licenseContent }}.
+    <span i18n="labelIdeaAndTextBy|Label idea and text by@@labelIdeaAndTextBy">Idee und Texte von</span>
+    <a class="participant">{{ authorContent }}</a>,
+    <span
+      i18n="labelLicensedUnder|Label licensed under@@labelLicensedUnder">lizenziert unter</span> {{ licenseContent }}.
   </p>
   <p *ngIf="variant != null && variant.toString() === variantTypeSciddle && authorGraphics != null">
-    Grafiken von <a [attr.href]="authorGraphicsUrl" target="_blank">{{ authorGraphics }}</a>.
+    <span i18n="labelGraphicsBy|Label graphics by@@labelGraphicsBy">Grafiken von</span>
+    <a [attr.href]="authorGraphicsUrl" class="participant" target="_blank">{{ authorGraphics }}</a>.
   </p>
   <p *ngIf="authorCode != null">
-    Implementierung durch <a [attr.href]="authorCodeUrl" target="_blank">{{ authorCode }}</a>.
-    Quellcode verfügbar auf <a [attr.href]="githubUrl" target="_blank">GitHub</a>
-    <span *ngIf="licenseCode != null">, lizenziert unter {{ licenseCode }}</span>.
+    <span i18n="labelImplementedBy|Label implemented by@@labelImplementedBy">Implementierung durch</span>
+    <a [attr.href]="authorCodeUrl" class="participant" target="_blank">{{ authorCode }}</a>.
+    <span i18n="labelSourceCodeAvailableOn|Label source code available on@@labelSourceCodeAvailableOn">Quellcode verfügbar auf</span>
+    <a [attr.href]="githubUrl" class="participant" target="_blank">GitHub</a>
+    <span *ngIf="licenseCode != null">,
+      <span i18n="labelLicensedUnder|Label licensed under@@labelLicensedUnder">lizenziert unter</span>
+      <span class="participant">{{ licenseCode }}</span>
+    </span>.
   </p>
   <p *ngIf="authorScientificSupervision != null">
-    Wissenschaftliche Betreuung durch <a>{{ authorScientificSupervision }}</a>.
+    <span i18n="scientificSupervisionBy|Label scientific supervision by@@scientificSupervisionBy">Wissenschaftliche Betreuung durch</span>
+    <a class="participant">{{ authorScientificSupervision }}</a>.
   </p>
 </mat-dialog-content>
 <mat-dialog-actions class="flexcontainer">
   <div class="flexbox"></div>
   <button mat-button [mat-dialog-close]=null>
-    Schließen
+    <span class="uppercase" i18n="actionClose|Action to close dialog@@actionClose">Schließen</span>
   </button>
 </mat-dialog-actions>

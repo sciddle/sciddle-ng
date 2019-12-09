@@ -8,14 +8,12 @@
  */
 export const environment = {
   production: false,
+  LANGUAGE: 'DE',
   APP_NAME: 'Cards for Future Dev',
   DATABASE_ENTITIES: 's4f-dev',
   DATABASE_SETTINGS: 's4f_settings-dev',
 
   VARIANT: 'S4F',
-
-  GAME_MODE_SINGLE_PLAYER: 'Freies Spiel',
-  GAME_MODE_MULTI_PLAYER: 'Spielrunde starten',
 
   TIMER_EASY: 10,
   TIMER_MEDIUM: 10,

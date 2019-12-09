@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
 import {AppImports} from './app.imports';
@@ -12,7 +12,9 @@ import {OverlayContainer} from '@angular/cdk/overlay';
     AppComponent,
   ],
   imports: [AppImports],
-  providers: [AppProviders, {provide: HAMMER_GESTURE_CONFIG, useClass: GestureConfig}],
+  providers: [AppProviders,
+    {provide: HAMMER_GESTURE_CONFIG, useClass: GestureConfig},
+    {provide: LOCALE_ID, useValue: 'en'}],
   bootstrap: [AppComponent]
 })
 export class AppModule {
