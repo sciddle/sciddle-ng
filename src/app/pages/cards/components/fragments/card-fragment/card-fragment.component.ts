@@ -1,14 +1,4 @@
-import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  isDevMode,
-  OnChanges,
-  OnInit,
-  SimpleChanges,
-  ViewEncapsulation
-} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, isDevMode, OnChanges, SimpleChanges, ViewEncapsulation} from '@angular/core';
 import {Stack} from '../../../../../core/entity/model/stack/stack.model';
 import {Media} from '../../../../../core/ui/model/media.enum';
 import {Card} from '../../../../../core/entity/model/card/card.model';
@@ -17,6 +7,7 @@ import {WikipediaService} from '../../../../../core/wikipedia/services/wikipedia
 import {MatDialog} from '@angular/material';
 import {WikipediaDialogComponent} from '../../dialogs/wikpedia-dialog/wikipedia-dialog.component';
 import {Theme} from '../../../../../core/ui/model/theme.enum';
+import {environment} from '../../../../../../environments/environment';
 
 /**
  * Displays a card
@@ -60,6 +51,9 @@ export class CardFragmentComponent implements OnChanges {
   /** CSS class applied to card */
   public cardClassName;
 
+  /** App language */
+  language = environment.LANGUAGE;
+
   /**
    * Constructor
    * @param dialog dialog
@@ -98,22 +92,54 @@ export class CardFragmentComponent implements OnChanges {
       case 1: {
         this.difficultyClass = 'difficultyColorEasy';
         this.difficultyText = '1';
-        this.difficultyLongText = 'EINFACH';
-        this.difficultyCombinedText = `${this.difficultyLongText} / ${this.difficultyText} Punkt`;
+        switch (this.language) {
+          case 'de': {
+            this.difficultyLongText = 'EINFACH';
+            this.difficultyCombinedText = `${this.difficultyLongText} / ${this.difficultyText} Punkt`;
+            break;
+          }
+          case 'en': {
+            this.difficultyLongText = 'EASY';
+            this.difficultyCombinedText = `${this.difficultyLongText} / ${this.difficultyText} point`;
+            break;
+          }
+        }
         break;
       }
       case 2: {
         this.difficultyClass = 'difficultyColorMedium';
         this.difficultyText = '2';
-        this.difficultyLongText = 'MITTEL';
-        this.difficultyCombinedText = `${this.difficultyLongText} / ${this.difficultyText} Punkte`;
+        switch (this.language) {
+          case 'de': {
+            this.difficultyLongText = 'MITTEL';
+            this.difficultyCombinedText = `${this.difficultyLongText} / ${this.difficultyText} Punkte`;
+            break;
+          }
+          case 'en': {
+            this.difficultyLongText = 'MEDIUM';
+            this.difficultyCombinedText = `${this.difficultyLongText} / ${this.difficultyText} points`;
+            break;
+          }
+        }
+
         break;
       }
       case 3: {
         this.difficultyClass = 'difficultyColorHard';
         this.difficultyText = '3';
-        this.difficultyLongText = 'SCHWER';
-        this.difficultyCombinedText = `${this.difficultyLongText} / ${this.difficultyText} Punkte`;
+        switch (this.language) {
+          case 'de': {
+            this.difficultyLongText = 'SCHWER';
+            this.difficultyCombinedText = `${this.difficultyLongText} / ${this.difficultyText} Punkte`;
+            break;
+          }
+          case 'en': {
+            this.difficultyLongText = 'HARD';
+            this.difficultyCombinedText = `${this.difficultyLongText} / ${this.difficultyText} points`;
+            break;
+          }
+        }
+
         break;
       }
     }
@@ -134,6 +160,18 @@ export class CardFragmentComponent implements OnChanges {
    * Handles click on help button
    */
   onHelpClicked() {
+    let action = '';
+    switch (this.language) {
+      case 'de': {
+        action = 'Verstanden';
+        break;
+      }
+      case 'en': {
+        action = 'Got it';
+        break;
+      }
+    }
+
     this.dialog.open(WikipediaDialogComponent, {
       disableClose: false,
       data: {
@@ -142,7 +180,7 @@ export class CardFragmentComponent implements OnChanges {
         explanationText: this.card.alternateExplanationText,
         alternateWikipediaArticle: this.card.alternateWikipediaArticle,
         alternateURL: this.card.alternateURL,
-        action: 'Verstanden',
+        action,
       },
       autoFocus: false
     });

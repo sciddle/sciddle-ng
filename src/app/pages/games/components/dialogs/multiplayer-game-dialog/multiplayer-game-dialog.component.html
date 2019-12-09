@@ -6,11 +6,11 @@
       <div class="time-limit-button">
         <button *ngIf="!useTimeLimit" mat-button color="primary" (click)="onTimeLimitToggled()">
           <mat-icon svgIcon="alarm_off" class="button-icon"></mat-icon>
-          ohne Zeitlimit
+          <span i18n="labelWithoutTimeLimit|Label without time limit@@labelWithoutTimeLimit">ohne Zeitlimit</span>
         </button>
         <button *ngIf="useTimeLimit" mat-flat-button color="primary" (click)="onTimeLimitToggled()">
           <mat-icon svgIcon="alarm_on" class="button-icon"></mat-icon>
-          mit Zeitlimit
+          <span i18n="labelWithTimeLimit|Label with time limit@@labelWithTimeLimit">mit Zeitlimit</span>
         </button>
       </div>
       <!--
@@ -27,7 +27,9 @@
       -->
       <div class="flexbox"></div>
     </div>
-    <div class="description-text">Anzahl der Teams</div>
+    <div class="description-text">
+      <span i18n="labelNumberOfTeams|Label number of teams@@labelNumberOfTeams">Anzahl der Teams</span>
+    </div>
     <span *ngFor="let item of arrayOne(3); let i = index;">
         <button *ngIf="teamCount !== i + 3" mat-button color="primary" class="team-button"
                 (click)="onTeamCountSelected(i+3)">
@@ -46,7 +48,9 @@
       (difficultySelectionChangedEmitter)="onDifficultySelected($event)">
     </app-difficulty-selection-fragment>
 
-    <div class="description-text">Anzahl der Karten</div>
+    <div class="description-text">
+      <span i18n="labelNumberOfCards|Label number of cards@@labelNumberOfCards">Anzahl der Karten</span>
+    </div>
     <div class="flexcontainer">
       <div class="flexcontainer" style="margin: 0 auto">
         <div class="full-width">

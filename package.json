@@ -22,6 +22,7 @@
     "lint-junit": "./node_modules/.bin/tslint -c ./tslint.json \"src/**/*.ts\" --format junit --out reports/lint-results.xml",
     "compodoc": "compodoc src/app -p tsconfig.json --output reports/documentation/",
     "e2e": "ng e2e",
+    "int:extract": "ng xi18n --output-path ./locale",
     "electron-build": "npm run build -- --base-href ./ && cd ./src/electron && copyfiles ./* ./../../dist/",
     "electron-build-prod": "npm run build-prod -- --base-href ./ && cd ./src/electron && copyfiles ./* ./../../dist/",
     "electron-start": "npm run electron-build && electron ./dist/.",

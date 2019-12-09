@@ -1,12 +1,11 @@
 <div class="horizontal-center">
   <button *ngIf="stack != null" mat-button class="full-width" (click)="onDisplayScoreOverviewClicked()">
     <div *ngFor="let team of stack.game.teams" class="description-text double-size-text">
-      <span> TEAM {{ team.index + 1}} - {{ team.score }}</span>
-      <span *ngIf="team.score !== 1">Punkte</span>
-      <span *ngIf="team.score === 1">Punkt</span>
+      <span><span class="uppercase" i18n="labelTeam|Label team@@labelTeam"> Team</span> {{ team.index + 1}} - {{ team.score }}</span>
+      <span i18n="pluralScore|Plural score@@pluralScore">{team.score, plural, zero {0 Punkte} one {{{team.score}} Punkt} other {{{team.score}} Punkte}}</span>
     </div>
     <div class="description-text double-size-text">
-      Tippe auf den Bildschirm um weiterzumachen
+      <span i18n="promptTapOnScreen|Prompt to tap on screen to continue@@promptTapOnScreen">Tippe auf den Bildschirm um weiterzumachen</span>
     </div>
   </button>
 </div>

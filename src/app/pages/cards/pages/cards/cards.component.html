@@ -56,19 +56,20 @@
     <!-- Non-mobile version -->
     <div *ngIf="stack != null && stack.game != null && media !== mediaType.SMALL">
       <button *ngIf="gameMode === gameModeType.SINGLE_PLAYER" mat-button class="background"
-              (click)="onCardThrownOut(null)">NÄCHSTE KARTE
+              (click)="onCardThrownOut(null)">
+        <span class="uppercase" i18n="actionNextCard|Action to to show next card@@actionNextCard">Nächste Karte</span>
       </button>
       <button *ngIf="gameMode === gameModeType.MULTI_PLAYER" mat-button class="background"
               (click)="onCardThrownOut(null)">
-        <span *ngIf="!timerOver">BEGRIFF WURDE ERRATEN</span>
-        <span *ngIf="timerOver">WEITER</span>
+        <span *ngIf="!timerOver" class="uppercase" i18n="actionProceedCorrectAnswer|Action to proceed after correct answer@@actionProceedCorrectAnswer">Begriff wurde erraten</span>
+        <span *ngIf="timerOver" class="uppercase" i18n="actionProceedTimerOver|Action to proceed after timer is over@@actionProceedTimerOver">Weiter</span>
       </button>
     </div>
     <!-- Mobile version -->
     <div *ngIf="stack != null && stack.game != null && media === mediaType.SMALL">
       <div class="description-text horizontal-center background card-width">
-        <span *ngIf="!timerOver">Wisch die Karte zur Seite sobald jemand den Begriff erraten hat</span>
-        <span *ngIf="timerOver">Die Zeit ist abgelaufen. Wisch die Karte zur Seite um weiterzumachen</span>
+        <span *ngIf="!timerOver" i18n="promptSwipeCardSuccess|Prompt to swipe a card away after a team has answered@@promptSwipeCardSuccess">Wisch die Karte zur Seite sobald jemand den Begriff erraten hat</span>
+        <span *ngIf="timerOver" i18n="promptSwipeCardFailed|Prompt to swipe a card away after time is over@@promptSwipeCardFailed">Die Zeit ist abgelaufen. Wisch die Karte zur Seite um weiterzumachen</span>
       </div>
     </div>
   </div>

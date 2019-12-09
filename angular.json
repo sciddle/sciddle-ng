@@ -31,6 +31,30 @@
             "es5BrowserSupport": true
           },
           "configurations": {
+            "en": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment-en.ts"
+                }
+              ],
+              "i18nFile": "src/locale/messages.en.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "en",
+              "outputPath": "dist-en",
+              "aot": true,
+              "serviceWorker": false,
+              "ngswConfigPath": "src/ngsw-config.json"
+            },
+            "de": {
+              "i18nFile": "src/locale/messages.de.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "de",
+              "outputPath": "dist-de",
+              "aot": true,
+              "serviceWorker": false,
+              "ngswConfigPath": "src/ngsw-config.json"
+            },
             "production": {
               "fileReplacements": [
                 {
@@ -157,6 +181,12 @@
             "browserTarget": "sciddle-ng:build"
           },
           "configurations": {
+            "en": {
+              "browserTarget": "sciddle-ng:build:en"
+            },
+            "de": {
+              "browserTarget": "sciddle-ng:build:de"
+            },
             "production": {
               "browserTarget": "sciddle-ng:build:production"
             },

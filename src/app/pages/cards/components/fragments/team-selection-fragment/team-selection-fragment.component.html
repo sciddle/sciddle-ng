@@ -1,13 +1,16 @@
 <div class="horizontal-center">
   <div class="description-text double-size-text">
-    Welches Team hat richtig geantwortet?
+       <span i18n="questionWhichTeamAnsweredCorrectly|Question which team has answered correctly@@questionWhichTeamAnsweredCorrectly">
+         Welches Team hat richtig geantwortet?
+       </span>
   </div>
   <div *ngIf="stack != null">
     <div *ngFor="let team of stack.game.teams" class="team-button-wrapper">
       <button mat-flat-button color="primary" class="button"
               (click)="onSuccessfulTeamSelected(team.index)">
         <div class="description-text double-size-text">
-          TEAM {{ team.index + 1}}
+          <span class="uppercase" i18n="answerTeam|Answer to question which team has answered correctly: team@@whichTeamAnsweredCorrectlyTeam">
+            Team</span> {{ team.index + 1}}
         </div>
       </button>
     </div>
@@ -15,7 +18,9 @@
       <button mat-button color="primary" class="button"
               (click)="onSuccessfulTeamSelected(null)">
         <div class="description-text double-size-text">
-          NIEMAND
+          <span class="uppercase" i18n="answerNoOne|Answer to question which team has answered correctly: no one@@whichTeamAnsweredCorrectlyNoOne">
+            NIEMAND
+          </span>
         </div>
       </button>
     </div>

@@ -1,23 +1,22 @@
 <div class="horizontal-center">
-  <div *ngIf="winningTeams.length > 1" class="main-text">
+  <div class="main-text">
       <span *ngFor="let team of winningTeams" class="team-name">
-        Team {{ team.index + 1 }}
+        <span i18n="labelTeam|Label team@@labelTeam">Team</span>
+        {{ team.index + 1 }}
       </span>
-    haben gewonnen
-  </div>
-  <div *ngIf="winningTeams.length === 1" class="main-text">
-    <span class="team-name">Team {{ winningTeams[0].index + 1 }}</span> hat gewonnen
+    <span
+      i18n="pluralHasWon|Plural has won@@pluralHasWon">{winningTeams.length, plural, one {hat gewonnen} few {haben gewonnen}}</span>
   </div>
   <div *ngIf="stack != null">
     <div *ngFor="let team of stack.game.teams" class="description-text double-size-text">
-      TEAM {{ team.index + 1}} - {{ team.score }}
-      <span *ngIf="team.score !== 1">Punkte</span>
-      <span *ngIf="team.score === 1">Punkt</span>
+      <span class="uppercase" i18n="labelTeam|Label team@@labelTeam"> Team</span> {{ team.index + 1}} -
+      <span
+        i18n="pluralScore|Plural score@@pluralScore">{team.score, plural, zero {0 Punkte} one {{{team.score}} Punkt} other {{{team.score}} Punkte}}</span>
     </div>
   </div>
   <button mat-flat-button color="primary" class="button" (click)="onMenuItemClicked('back')">
     <div class="description-text double-size-text">
-      ZURÜCK
+      <span class="uppercase" i18n="actionBack|Action back@@actionBack">zurück</span>
     </div>
   </button>
 </div>
