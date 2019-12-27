@@ -35,7 +35,7 @@ export class GamesService {
    * @param stack stack
    */
   static existsGame(stack: Stack) {
-    LogService.trace(`GamesService#existsGame ${stack != null && stack.game != null}`);
+    LogService.trace(`GamesService#existsGame ${stack != null ? stack.title : null} ${stack != null && stack.game != null}`);
     return stack != null && stack.game != null;
   }
 

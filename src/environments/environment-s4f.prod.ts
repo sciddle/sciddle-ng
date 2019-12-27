@@ -4,8 +4,8 @@
 export const environment = {
   production: true,
   APP_NAME: 'Cards for Future',
-  DATABASE_ENTITIES: 'sciddle',
-  DATABASE_SETTINGS: 'sciddle_settings',
+  DATABASE_ENTITIES: 's4f',
+  DATABASE_SETTINGS: 's4f_settings',
 
   VARIANT: 'S4F',
 

@@ -6,6 +6,8 @@ import {environment} from '../environments/environment';
 import {ThemeService} from './core/ui/services/theme.service';
 import {OverlayContainer} from '@angular/cdk/overlay';
 import {PouchDBSettingsService} from './core/persistence/services/pouchdb-settings.service';
+import {Variant} from './core/util/model/variant.enum';
+import {LogService} from './core/log/services/log.service';
 
 /**
  * Displays application
@@ -49,6 +51,7 @@ export class AppComponent implements OnInit, AfterViewInit {
    * Handles on-init lifecycle phase
    */
   ngOnInit() {
+    this.initializeTheme();
     this.initializeThemeSubscription();
     this.initializeSnackbar();
   }
@@ -65,9 +68,27 @@ export class AppComponent implements OnInit, AfterViewInit {
   //
 
   /**
+   * Initializes theme
+   */
+  private initializeTheme() {
+    LogService.trace(`AppComponent#initializeTheme`);
+    switch (environment.VARIANT) {
+      case Variant.SCIDDLE: {
+        this.themeClass = 'blue-theme';
+        break;
+      }
+      case Variant.S4F: {
+        this.themeClass = 'future-theme';
+        break;
+      }
+    }
+  }
+
+  /**
    * Initializes theme subscription
    */
   private initializeThemeSubscription() {
+    LogService.trace(`AppComponent#initializeThemeSubscription`);
     this.themeService.themeSubject.subscribe(value => {
       this.themeClass = value;
 

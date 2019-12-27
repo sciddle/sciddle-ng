@@ -28,6 +28,7 @@ import {SettingType} from '../../../../core/settings/model/setting-type.enum';
 import {CheckableInformationDialogComponent} from '../../../../ui/information-dialog/checkable-information-dialog/checkable-information-dialog.component';
 import {ROUTE_GAMES} from '../../../../app.routes';
 import {GamesService} from '../../../../core/entity/services/game/games.service';
+import {LogService} from '../../../../core/log/services/log.service';
 
 /**
  * Displays stacks
@@ -175,6 +176,7 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
     this.stacksPersistenceService.databaseErrorSubject.pipe(
       takeUntil(this.unsubscribeSubject)
     ).subscribe((value) => {
+      LogService.warn(`${JSON.stringify(value)}`);
       // TODO Check error more specifically
       if (value != null) {
         this.stacks = [];

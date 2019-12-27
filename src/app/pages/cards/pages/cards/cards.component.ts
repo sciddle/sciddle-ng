@@ -111,8 +111,6 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
   /** Setting dont-show-manual-on-startup */
   public dontShowManualOnStartup = false;
 
-  /** Title color */
-  public titleColor = 'black';
   /** Enum of media types */
   public mediaType = Media;
   /** Current media */
@@ -261,7 +259,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.stacksPersistenceService.stackSubject.pipe(
       takeUntil(this.unsubscribeSubject)
     ).subscribe((value) => {
-      LogService.debug(`>>> STACK`);
+      LogService.debug(`CardsComponent > STACK`);
       if (value != null) {
         const stack = value as Stack;
         this.initializeStack(stack).then((initializedStack) => {
@@ -282,7 +280,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.cardsService.cardsSubject.pipe(
       takeUntil(this.unsubscribeSubject)
     ).subscribe((value) => {
-      LogService.debug(`>>> CARDS`);
+      LogService.debug(`CardsComponent > CARDS`);
       if (value != null) {
         this.initializeCards(value as Card[]);
       }
@@ -297,7 +295,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.gamesService.gameSubject.pipe(
       takeUntil(this.unsubscribeSubject)
     ).subscribe((value) => {
-      LogService.debug(`>>> GAME`);
+      LogService.debug(`CardsComponent > GAME`);
       if (value != null) {
         this.initializeGame(value as Game);
       }
@@ -313,7 +311,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
       takeUntil(this.unsubscribeSubject),
       filter(value => value != null)
     ).subscribe(value => {
-      LogService.debug(`>>> SETTINGS`);
+      LogService.debug(`CardsComponent > SETTINGS`);
       if (value != null) {
         const settings = value as Map<string, Setting>;
         this.initializeSettings(settings);
@@ -914,7 +912,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
             this.snackbarService.showSnackbar('Karte ans Ende gelegt');
           }, () => {
             this.snackbarService.showSnackbar('Karte ans Ende gelegt');
-            this.initializeStack(stack);
+            this.initializeStack(stack).then();
           });
         });
         break;
@@ -1044,7 +1042,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
             this.snackbarService.showSnackbar('Karten sortiert');
           }, (updatedStack) => {
             this.snackbarService.showSnackbar('Karten sortiert');
-            this.initializeStack(updatedStack);
+            this.initializeStack(updatedStack).then();
             this.initializeGameMode(updatedStack);
           });
         }));
@@ -1065,7 +1063,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
             this.snackbarService.showSnackbar('Karten gemischt');
           }, (updatedStack) => {
             this.snackbarService.showSnackbar('Karten gemischt');
-            this.initializeStack(updatedStack);
+            this.initializeStack(updatedStack).then();
             this.initializeGameMode(updatedStack);
           });
         }));
@@ -1087,6 +1085,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
         break;
       }
       case Variant.S4F: {
+        LogService.trace(`CardsComponent > /${ROUTE_GAMES}`);
         this.router.navigate([`/${ROUTE_GAMES}`]).then();
         break;
       }

@@ -185,9 +185,10 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
     this.stacksPersistenceService.stackSubject.pipe(
       takeUntil(this.unsubscribeSubject)
     ).subscribe((value) => {
-      LogService.debug(`>>> STACK`);
+      LogService.debug(`GamesComponent > STACK`);
 
       if (value != null) {
+        LogService.debug(`GamesComponent value != null`);
         const stack = value as Stack;
         this.mergeStacksFromAssets(stack).then((mergedStack) => {
           this.initializeStack(mergedStack).then((initializedStack) => {
@@ -205,7 +206,24 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
           }
         }
       } else {
-        this.navigateToStacksPage();
+        LogService.debug(`GamesComponent value == null`);
+
+        switch (VariantService.getVariant()) {
+          case Variant.SCIDDLE: {
+            this.navigateToStacksPage();
+            break;
+          }
+          case Variant.S4F: {
+            const stack = new Stack();
+            stack.id = environment.DEFAULT_STACK.toString();
+            this.mergeStacksFromAssets(stack).then((mergedStack) => {
+              this.initializeStack(mergedStack).then((initializedStack) => {
+                this.stack = initializedStack;
+              });
+            });
+            break;
+          }
+        }
       }
     });
   }
