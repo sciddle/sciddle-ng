@@ -9,6 +9,8 @@ import {Stack} from '../core/entity/model/stack/stack.model';
 import {GamesService} from '../core/entity/services/game/games.service';
 import {environment} from '../../environments/environment';
 import {LogService} from '../core/log/services/log.service';
+import {takeUntil} from 'rxjs/operators';
+import {Subject} from 'rxjs';
 
 /**
  * Checks if it is necessary to show game page
@@ -17,6 +19,9 @@ import {LogService} from '../core/log/services/log.service';
   providedIn: 'root',
 })
 export class GameGuard implements CanActivate {
+
+  /** Helper subject used to finish other subscriptions */
+  private unsubscribeSubject = new Subject();
 
   /**
    * Constructor
@@ -35,20 +40,23 @@ export class GameGuard implements CanActivate {
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
     LogService.trace(`GameGuard#canActivate`);
     return new Promise((resolve) => {
-      this.stacksPersistenceService.stackSubject.subscribe((value) => {
-        let stack = null;
+      this.stacksPersistenceService.stackSubject.pipe(
+        takeUntil(this.unsubscribeSubject)).subscribe((value) => {
+        LogService.trace(`GameGuard stackSubject > `);
 
         if (value != null) {
-          stack = value as Stack;
+          const stack = value as Stack;
           if (GamesService.existsGame(stack)) {
             switch (VariantService.getVariant()) {
               case Variant.SCIDDLE: {
                 this.router.navigate([`/${ROUTE_CARDS}/${stack.id}`]).then();
+                this.unsubscribe();
                 resolve(false);
                 break;
               }
               case Variant.S4F: {
                 this.router.navigate([`/${ROUTE_CARDS}`]).then();
+                this.unsubscribe();
                 resolve(false);
                 break;
               }
@@ -56,16 +64,23 @@ export class GameGuard implements CanActivate {
           } else {
             // No game exists on this stack
             LogService.debug('No game exists on this stack');
+
+            this.unsubscribe();
             resolve(true);
           }
         } else {
           // No stack initialized yet
           LogService.debug('No stack initialized yet');
+          this.unsubscribe();
           resolve(true);
         }
       });
 
-      this.stacksPersistenceService.databaseErrorSubject.subscribe(() => {
+      this.stacksPersistenceService.databaseErrorSubject.pipe(
+        takeUntil(this.unsubscribeSubject)).subscribe(() => {
+        LogService.trace(`GameGuard databaseErrorSubject > `);
+
+        this.unsubscribe();
         resolve(true);
       });
 
@@ -78,6 +93,7 @@ export class GameGuard implements CanActivate {
             this.stacksPersistenceService.findStackByID(id);
           } else {
             // No id has been passed
+            this.unsubscribe();
             resolve(true);
           }
           break;
@@ -88,5 +104,13 @@ export class GameGuard implements CanActivate {
         }
       }
     });
+  }
+
+  /**
+   * Unsubscribes from subjects
+   */
+  private unsubscribe() {
+    this.unsubscribeSubject.next();
+    this.unsubscribeSubject.complete();
   }
 }

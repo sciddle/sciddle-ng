@@ -15,7 +15,17 @@ export class LogService {
    * @param message message
    */
   static log(threshold: Threshold, message: string) {
-    console.log(`${threshold} ${message}`);
+    console.log(`++ ${threshold} ${message}`);
+  }
+
+  /**
+   * Logs message
+   * @param threshold threshold
+   * @param message message
+   * @param color color
+   */
+  static logWithColor(threshold: Threshold, message: string, color: string) {
+    console.log(`%c++ ${threshold} ${message}`, `color: ${color}`);
   }
 
   /**
@@ -23,7 +33,7 @@ export class LogService {
    * @param message message
    */
   static trace(message: string) {
-    console.log(`%c++ ${message}`, 'color: grey');
+    LogService.logWithColor(Threshold.TRACE, message, 'grey');
   }
 
   /**
@@ -55,7 +65,7 @@ export class LogService {
    * @param message message
    */
   static warn(message: string) {
-    LogService.log(Threshold.WARN, message);
+    LogService.logWithColor(Threshold.WARN, message, 'orange');
   }
 
   /**
@@ -63,6 +73,6 @@ export class LogService {
    * @param message message
    */
   static fatal(message: string) {
-    console.error(`${Threshold.FATAL} ${message}`);
+    LogService.logWithColor(Threshold.WARN, message, 'red');
   }
 }
