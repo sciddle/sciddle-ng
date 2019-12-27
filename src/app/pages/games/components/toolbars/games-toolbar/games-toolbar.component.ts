@@ -1,6 +1,5 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation} from '@angular/core';
 import {Media} from '../../../../../core/ui/model/media.enum';
-import {environment} from '../../../../../../environments/environment';
 import {Variant} from '../../../../../core/util/model/variant.enum';
 import {VariantService} from '../../../../../core/util/services/variant.service';
 
