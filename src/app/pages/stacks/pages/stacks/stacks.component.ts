@@ -317,7 +317,7 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
 
     switch (event.action) {
       case Action.GO_INTO: {
-        this.router.navigate([`/${ROUTE_GAMES}/${stack.id}`]).then();
+        this.navigate(`/${ROUTE_GAMES}/${stack.id}`);
         break;
       }
       default: {
@@ -421,5 +421,17 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
         break;
       }
     }
+  }
+
+  /**
+   * Navigates to a given path
+   *
+   * @param path path to navigate to
+   */
+  private navigate(path: string) {
+    LogService.trace(`StacksComponent#navigate ${path}`);
+    this.unsubscribeSubject.next();
+    this.unsubscribeSubject.complete();
+    this.router.navigate([path]).then();
   }
 }

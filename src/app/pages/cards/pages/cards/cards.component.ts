@@ -1075,20 +1075,31 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    * Navigates back to parent view
    */
   private navigateToGamesPage() {
-    LogService.trace(`CardsComponent#navigateBack`);
+    LogService.trace(`CardsComponent#navigateToGamesPage`);
 
     this.cardsService.stack = null;
 
     switch (VariantService.getVariant()) {
       case Variant.SCIDDLE: {
-        this.router.navigate([`/${ROUTE_GAMES}/${this.stack.id}`]).then();
+        this.navigate(`/${ROUTE_GAMES}/${this.stack.id}`);
         break;
       }
       case Variant.S4F: {
-        LogService.trace(`CardsComponent > /${ROUTE_GAMES}`);
-        this.router.navigate([`/${ROUTE_GAMES}`]).then();
+        this.navigate(`/${ROUTE_GAMES}`);
         break;
       }
     }
+  }
+
+  /**
+   * Navigates to a given path
+   *
+   * @param path path to navigate to
+   */
+  private navigate(path: string) {
+    LogService.trace(`CardsComponent#navigate ${path}`);
+    this.unsubscribeSubject.next();
+    this.unsubscribeSubject.complete();
+    this.router.navigate([path]).then();
   }
 }
