@@ -151,7 +151,7 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
           if (this.id != null) {
             this.findEntities(this.id);
           } else {
-            this.navigateToStacksPage();
+            this.navigate(`/${ROUTE_STACKS}`);
           }
         });
         break;
@@ -210,7 +210,7 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
 
         switch (VariantService.getVariant()) {
           case Variant.SCIDDLE: {
-            this.navigateToStacksPage();
+            this.navigate(`/${ROUTE_STACKS}`);
             break;
           }
           case Variant.S4F: {
@@ -282,7 +282,7 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
           LogService.debug(`Load cards from assets`);
 
           if (stack.id == null) {
-            this.navigateToStacksPage();
+            this.navigate(`/${ROUTE_STACKS}`);
           }
 
           const fileName = StacksService.stacks.get(stack.id);
@@ -512,7 +512,7 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
   onMenuItemClicked(menuItem: string) {
     switch (menuItem) {
       case 'back': {
-        this.navigateToStacksPage();
+        this.navigate(`/${ROUTE_STACKS}`);
         break;
       }
       case 'manual': {
@@ -670,20 +670,25 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
   private navigateToCardsPage(stack: Stack) {
     switch (VariantService.getVariant()) {
       case Variant.SCIDDLE: {
-        this.router.navigate([`/${ROUTE_CARDS}/${stack.id}`]).then();
+        this.navigate(`/${ROUTE_CARDS}/${stack.id}`);
         break;
       }
       case Variant.S4F: {
-        this.router.navigate([`/${ROUTE_CARDS}`]).then();
+        this.navigate(`/${ROUTE_CARDS}`);
         break;
       }
     }
   }
 
   /**
-   * Navigates back to parent view
+   * Navigates to a given path
+   *
+   * @param path path to navigate to
    */
-  private navigateToStacksPage() {
-    this.router.navigate([`/${ROUTE_STACKS}`]).then();
+  private navigate(path: string) {
+    LogService.trace(`GamesComponent#navigate ${path}`);
+    this.unsubscribeSubject.next();
+    this.unsubscribeSubject.complete();
+    this.router.navigate([path]).then();
   }
 }
