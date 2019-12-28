@@ -1,5 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {MediaService} from '../../../core/ui/services/media.service';
 
 /**
  * Displays checkable information dialog
@@ -27,9 +28,11 @@ export class CheckableInformationDialogComponent implements OnInit {
    * Constructor
    * @param dialogRef dialog reference
    * @param data dialog data
+   * @param mediaService media service
    */
   constructor(public dialogRef: MatDialogRef<CheckableInformationDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any) {
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              private mediaService: MediaService) {
   }
 
   //
