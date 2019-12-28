@@ -2,16 +2,20 @@
 <mat-dialog-content>
   <app-markdown-preview [markdownText]="text"></app-markdown-preview>
 </mat-dialog-content>
-<mat-dialog-actions class="flexcontainer">
-  <mat-checkbox
-    class="checkbox"
-    labelPosition="after"
-    [checked]="checkboxValue"
-    (change)="onCheckboxChanged($event)">
-    <span class="checkbox-label">{{ checkboxText }}</span>
-  </mat-checkbox>
-  <div class="flexbox"></div>
-  <button mat-flat-button color="accent" (click)="confirm()">
-    {{ action }}
-  </button>
+<mat-dialog-actions>
+  <div>
+    <mat-checkbox
+      class="checkbox"
+      labelPosition="after"
+      [checked]="checkboxValue"
+      (change)="onCheckboxChanged($event)">
+      <span class="checkbox-label">{{ checkboxText }}</span>
+    </mat-checkbox>
+  </div>
+  <div class="full-width flexcontainer">
+    <div class="flexbox"></div>
+    <button mat-flat-button color="accent" (click)="confirm()">
+      {{ action }}
+    </button>
+  </div>
 </mat-dialog-actions>
