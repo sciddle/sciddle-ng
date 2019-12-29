@@ -7,7 +7,7 @@
  * Environment settings for development environment
  */
 export const environment = {
-  production: false,
+  production: true,
   LANGUAGE: 'EN',
   APP_NAME: 'Sciddle Dev',
   DATABASE_ENTITIES: 'sciddle_en-dev',

@@ -769,50 +769,64 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
         break;
       }
       case 'manual': {
-        this.http.get('assets/manual/manual-de.md').subscribe(
-          () => {
-          }, err => {
-            let title = '';
-            let checkboxText = '';
-            let action = '';
-            switch (this.language) {
-              case Language.GERMAN: {
-                title = 'Anleitung';
-                checkboxText = 'Anleitung beim Starten nicht mehr anzeigen';
-                action = 'Alles klar';
-                break;
-              }
-              case Language.ENGLISH: {
-                title = 'Manual';
-                checkboxText = 'Do not show on start';
-                action = 'Got it';
-                break;
-              }
-            }
+        let file;
+        switch (environment.LANGUAGE) {
+          case Language.GERMAN: {
+            file = 'assets/manual/manual-de.md';
+            break;
+          }
+          case Language.ENGLISH: {
+            file = 'assets/manual/manual-en.md';
+            break;
+          }
+        }
 
-            const dialogRef = this.dialog.open(CheckableInformationDialogComponent, {
-              disableClose: false,
-              data: {
-                title,
-                text: JSON.stringify(err.error.text)
-                  .replace(/"/g, '')
-                  .replace(/\\n/g, '\n')
-                  .replace(/\\r/g, '\r'),
-                checkboxValue: this.dontShowManualOnStartup,
-                checkboxText,
-                action
+        if (file != null) {
+          this.http.get(file).subscribe(
+            () => {
+            }, err => {
+              let title = '';
+              let checkboxText = '';
+              let action = '';
+              switch (this.language) {
+                case Language.GERMAN: {
+                  title = 'Anleitung';
+                  checkboxText = 'Anleitung beim Starten nicht mehr anzeigen';
+                  action = 'Alles klar';
+                  break;
+                }
+                case Language.ENGLISH: {
+                  title = 'Manual';
+                  checkboxText = 'Do not show on start';
+                  action = 'Got it';
+                  break;
+                }
               }
-            });
 
-            dialogRef.afterClosed().subscribe(result => {
-              if (result != null) {
-                this.dontShowManualOnStartup = result.checkboxValue as boolean;
-                this.settingsService.updateSetting(
-                  new Setting(SettingType.DONT_SHOW_MANUAL_ON_STARTUP, this.dontShowManualOnStartup),
-                  false);
-              }
+              const dialogRef = this.dialog.open(CheckableInformationDialogComponent, {
+                disableClose: false,
+                data: {
+                  title,
+                  text: JSON.stringify(err.error.text)
+                    .replace(/"/g, '')
+                    .replace(/\\n/g, '\n')
+                    .replace(/\\r/g, '\r'),
+                  checkboxValue: this.dontShowManualOnStartup,
+                  checkboxText,
+                  action
+                }
+              });
+
+              dialogRef.afterClosed().subscribe(result => {
+                if (result != null) {
+                  this.dontShowManualOnStartup = result.checkboxValue as boolean;
+                  this.settingsService.updateSetting(
+                    new Setting(SettingType.DONT_SHOW_MANUAL_ON_STARTUP, this.dontShowManualOnStartup),
+                    false);
+                }
+              });
             });
-          });
+        }
         break;
       }
       case 'open-source': {
