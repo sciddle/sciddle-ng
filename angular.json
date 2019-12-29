@@ -31,7 +31,7 @@
             "es5BrowserSupport": true
           },
           "configurations": {
-            "en": {
+            "en-regular": {
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -46,7 +46,7 @@
               "serviceWorker": false,
               "ngswConfigPath": "src/ngsw-config.json"
             },
-            "de": {
+            "de-regular": {
               "i18nFile": "src/locale/messages.de.xlf",
               "i18nFormat": "xlf",
               "i18nLocale": "de",
@@ -55,7 +55,11 @@
               "serviceWorker": false,
               "ngswConfigPath": "src/ngsw-config.json"
             },
-            "production": {
+            "de-regular-production": {
+              "i18nFile": "src/locale/messages.de.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "de",
+              "outputPath": "dist-de",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -81,7 +85,40 @@
               "serviceWorker": true,
               "ngswConfigPath": "src/ngsw-config.json"
             },
-            "s4f": {
+            "en-regular-production": {
+              "i18nFile": "src/locale/messages.en.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "en",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment-en.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "src/ngsw-config.json"
+            },
+            "de-s4f": {
+              "i18nFile": "src/locale/messages.de.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "de",
+              "outputPath": "dist-de",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -127,7 +164,11 @@
               "serviceWorker": false,
               "ngswConfigPath": "src/ngsw-config.json"
             },
-            "production-s4f": {
+            "de-s4f-production": {
+              "i18nFile": "src/locale/messages.de.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "de",
+              "outputPath": "dist-de",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -181,19 +222,19 @@
             "browserTarget": "sciddle-ng:build"
           },
           "configurations": {
-            "en": {
-              "browserTarget": "sciddle-ng:build:en"
+            "en-regular": {
+              "browserTarget": "sciddle-ng:build:en-regular"
             },
-            "de": {
-              "browserTarget": "sciddle-ng:build:de"
+            "de-regular": {
+              "browserTarget": "sciddle-ng:build:de-regular"
             },
-            "production": {
-              "browserTarget": "sciddle-ng:build:production"
+            "de-regular-production": {
+              "browserTarget": "sciddle-ng:build:de-regular-production"
             },
-            "s4f": {
+            "de-s4f": {
               "browserTarget": "sciddle-ng:build:s4f"
             },
-            "production-s4f": {
+            "de-s4f-production": {
               "browserTarget": "sciddle-ng:build:production-s4f"
             }
           }
