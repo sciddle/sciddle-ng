@@ -1,15 +1,17 @@
 <div class="horizontal-center">
-  <div class="description-text">Schwierigkeit</div>
+  <div class="description-text">
+    <span i18n="labelDifficulty|Label difficulty@@labelDifficulty">difficulty</span>
+  </div>
   <button *ngIf="difficultyEasy" mat-flat-button class="button difficulty-easy"
           (click)="onDifficultToggled(1)">
     <div class="description-text">
-      <span class="uppercase" i18n="labelEasy|Label easy@@labelEasy">einfach</span>
+      <span class="uppercase" i18n="labelEasy|Label easy@@labelEasy">easy</span>
     </div>
   </button>
   <button *ngIf="!difficultyEasy" mat-button class="button"
           (click)="onDifficultToggled(1)">
     <div class="description-text">
-      <span class="uppercase" i18n="labelEasy|Label easy@@labelEasy">einfach</span>
+      <span class="uppercase" i18n="labelEasy|Label easy@@labelEasy">easy</span>
     </div>
   </button>
   <button *ngIf="difficultyMedium" mat-flat-button class="button difficulty-medium"

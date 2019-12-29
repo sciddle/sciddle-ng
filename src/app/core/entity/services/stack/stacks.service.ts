@@ -5,6 +5,7 @@ import {Card} from '../../model/card/card.model';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../../../environments/environment';
 import {LogService} from '../../../log/services/log.service';
+import {Language} from '../../../language/model/language.enum';
 
 /**
  * Handles stacks
@@ -14,8 +15,10 @@ import {LogService} from '../../../log/services/log.service';
 })
 export class StacksService {
 
-  /** Stack index */
-  static stacks = new Map<string, string>();
+  /** German stacks */
+  static stacksDe = new Map<string, string>();
+  /** English stacks */
+  static stacksEn = new Map<string, string>();
 
   /** Dev mode */
   devMode = false;
@@ -39,11 +42,25 @@ export class StacksService {
    */
   static getUninitializedStackIDs(stacks: Stack[]): string[] {
 
-    return Array.from(this.stacks.keys()).filter(id => {
-      return (!stacks.some(existingStack => {
-        return existingStack != null && existingStack.id === id;
-      }));
-    });
+    switch (environment.LANGUAGE) {
+      case Language.GERMAN: {
+        return Array.from(this.stacksDe.keys()).filter(id => {
+          return (!stacks.some(existingStack => {
+            return existingStack != null && existingStack.id === id;
+          }));
+        });
+      }
+      case Language.ENGLISH: {
+        return Array.from(this.stacksEn.keys()).filter(id => {
+          return (!stacks.some(existingStack => {
+            return existingStack != null && existingStack.id === id;
+          }));
+        });
+      }
+      default: {
+        return [];
+      }
+    }
   }
 
   /**
@@ -65,10 +82,11 @@ export class StacksService {
    */
   constructor(private http: HttpClient) {
     this.devMode = isDevMode();
-    StacksService.stacks.set('0', 'climate.json');
-    StacksService.stacks.set('1', 'astronomy.json');
-    StacksService.stacks.set('2', 'future.json');
-    StacksService.stacks.set('3', 'physics.json');
+    StacksService.stacksDe.set('0', 'climate-de.json');
+    StacksService.stacksDe.set('2', 'future-de.json');
+    StacksService.stacksDe.set('3', 'physics-de.json');
+
+    StacksService.stacksEn.set('3', 'physics-en.json');
   }
 
   /**
@@ -76,8 +94,20 @@ export class StacksService {
    * @param stack stack
    */
   public mergeStackFromAssets(stack: Stack): Promise<Stack> {
+    LogService.trace(`StacksService#mergeStackFromAssets`);
+
     return new Promise<Stack>((resolve, reject) => {
-      const fileName = StacksService.stacks.get(stack.id);
+      let fileName;
+      switch (environment.LANGUAGE) {
+        case Language.GERMAN: {
+          fileName = StacksService.stacksDe.get(stack.id);
+          break;
+        }
+        case Language.ENGLISH: {
+          fileName = StacksService.stacksEn.get(stack.id);
+          break;
+        }
+      }
 
       if (fileName != null) {
         this.getStackFromAssets(fileName).then(stackFromAsset => {
@@ -122,6 +152,7 @@ export class StacksService {
    * @param cardsFromAssets stacks loaded from assets
    */
   public mergeCardsFromAssets(stack: Stack, cardsFromAssets: Card[]): Promise<Card[]> {
+    LogService.trace(`StacksService#mergeCardsFromAssets ${cardsFromAssets.length}`);
 
     // Extract existing cards into map
     const cards = new Map<string, Card>();

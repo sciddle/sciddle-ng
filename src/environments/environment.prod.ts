@@ -3,9 +3,10 @@
  */
 export const environment = {
   production: true,
+  LANGUAGE: 'DE',
   APP_NAME: 'Sciddle',
-  DATABASE_ENTITIES: 'sciddle',
-  DATABASE_SETTINGS: 'sciddle_settings',
+  DATABASE_ENTITIES: 'sciddle_de',
+  DATABASE_SETTINGS: 'sciddle_de_settings',
 
   VARIANT: 'Sciddle',
 

@@ -49,6 +49,7 @@ import {Setting} from '../../../../core/settings/model/setting.model';
 import {SettingType} from '../../../../core/settings/model/setting-type.enum';
 import {SettingsService} from '../../../../core/settings/services/settings.service';
 import {StacksService} from '../../../../core/entity/services/stack/stacks.service';
+import {Language} from '../../../../core/language/model/language.enum';
 
 export enum DisplayAspect {
   DISPLAY_CARDS,
@@ -332,11 +333,11 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
       takeUntil(this.unsubscribeSubject)
     ).subscribe((value) => {
       switch (this.language) {
-        case 'de': {
+        case Language.GERMAN: {
           this.snackbarService.showSnackbar('Achtung: Spiel wird nicht gespeichert.');
           break;
         }
-        case 'en': {
+        case Language.ENGLISH: {
           this.snackbarService.showSnackbar('Warning: Game will not be saved.');
           break;
         }
@@ -374,7 +375,17 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
             this.navigateToGamesPage();
           }
 
-          const fileName = StacksService.stacks.get(stack.id);
+          let fileName;
+          switch (this.language) {
+            case Language.GERMAN: {
+              fileName = StacksService.stacksDe.get(stack.id);
+              break;
+            }
+            case Language.ENGLISH: {
+              fileName = StacksService.stacksEn.get(stack.id);
+              break;
+            }
+          }
 
           this.stacksService.getStackFromAssets(fileName).then(stackFromAssets => {
             if (stackFromAssets != null) {
@@ -453,11 +464,11 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
             // Start game
             this.gamesService.startGame(this.game).then(() => {
               switch (this.language) {
-                case 'de': {
+                case Language.GERMAN: {
                   this.snackbarService.showSnackbar('Spiel gestarted');
                   break;
                 }
-                case 'en': {
+                case Language.ENGLISH: {
                   this.snackbarService.showSnackbar('Started game');
                   break;
                 }
@@ -475,22 +486,22 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
                     this.stack.game = resolve as Game;
                     this.stacksPersistenceService.updateStack(this.stack).then(() => {
                       switch (this.language) {
-                        case 'de': {
+                        case Language.GERMAN: {
                           this.snackbarService.showSnackbar('Runde gestarted');
                           break;
                         }
-                        case 'en': {
+                        case Language.ENGLISH: {
                           this.snackbarService.showSnackbar('Started round');
                           break;
                         }
                       }
                     }, (stack) => {
                       switch (this.language) {
-                        case 'de': {
+                        case Language.GERMAN: {
                           this.snackbarService.showSnackbar('Runde gestarted');
                           break;
                         }
-                        case 'en': {
+                        case Language.ENGLISH: {
                           this.snackbarService.showSnackbar('Started round');
                           break;
                         }
@@ -765,13 +776,13 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
             let checkboxText = '';
             let action = '';
             switch (this.language) {
-              case 'de': {
+              case Language.GERMAN: {
                 title = 'Anleitung';
                 checkboxText = 'Anleitung beim Starten nicht mehr anzeigen';
                 action = 'Alles klar';
                 break;
               }
-              case 'en': {
+              case Language.ENGLISH: {
                 title = 'Manual';
                 checkboxText = 'Do not show on start';
                 action = 'Got it';
@@ -811,12 +822,12 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
             let title = '';
             let action = '';
             switch (this.language) {
-              case 'de': {
+              case Language.GERMAN: {
                 title = 'Open Source Komponenten';
                 action = 'Alles klar';
                 break;
               }
-              case 'en': {
+              case Language.ENGLISH: {
                 title = 'Open source components';
                 action = 'Got it';
                 break;
@@ -843,11 +854,11 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
       case 'about': {
         let title = '';
         switch (this.language) {
-          case 'de': {
+          case Language.GERMAN: {
             title = 'Über die App';
             break;
           }
-          case 'en': {
+          case Language.ENGLISH: {
             title = 'About the app';
             break;
           }
@@ -887,11 +898,11 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
     // Check if timer is over during cards state
     if (this.game.turn.state === TurnState.DISPLAY_CARDS) {
       switch (this.language) {
-        case 'de': {
+        case Language.GERMAN: {
           this.snackbarService.showSnackbar('Zeit ist abgelaufen');
           break;
         }
-        case 'en': {
+        case Language.ENGLISH: {
           this.snackbarService.showSnackbar('Timer has run out');
           break;
         }
@@ -1007,22 +1018,22 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
         this.cardsService.putCardToEnd(this.stack, this.cards[0]).then((stack) => {
           this.updateCard(this.stack, this.cards[0]).then(() => {
             switch (this.language) {
-              case 'de': {
+              case Language.GERMAN: {
                 this.snackbarService.showSnackbar('Karte ans Ende gelegt');
                 break;
               }
-              case 'en': {
+              case Language.ENGLISH: {
                 this.snackbarService.showSnackbar('Put card to end');
                 break;
               }
             }
           }, () => {
             switch (this.language) {
-              case 'de': {
+              case Language.GERMAN: {
                 this.snackbarService.showSnackbar('Karte ans Ende gelegt');
                 break;
               }
-              case 'en': {
+              case Language.ENGLISH: {
                 this.snackbarService.showSnackbar('Put card to end');
                 break;
               }
@@ -1093,14 +1104,14 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
     let action = '';
     let negativeAction = '';
     switch (this.language) {
-      case 'de': {
+      case Language.GERMAN: {
         title = 'Spiel beenden';
         text = 'Willst du das Spiel beenden?';
         action = 'Ja, beenden';
         negativeAction = 'Nein, weiterspielen';
         break;
       }
-      case 'en': {
+      case Language.ENGLISH: {
         title = 'Terminate game';
         text = 'Do you want to terminate the game?';
         action = 'Yes, terminate';
@@ -1176,22 +1187,22 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
         this.cardsService.sortStack(stack).then(((sortedStack) => {
           this.stacksPersistenceService.updateStack(sortedStack).then(() => {
             switch (this.language) {
-              case 'de': {
+              case Language.GERMAN: {
                 this.snackbarService.showSnackbar('Karten sortiert');
                 break;
               }
-              case 'en': {
+              case Language.ENGLISH: {
                 this.snackbarService.showSnackbar('Sorted cards');
                 break;
               }
             }
           }, (updatedStack) => {
             switch (this.language) {
-              case 'de': {
+              case Language.GERMAN: {
                 this.snackbarService.showSnackbar('Karten sortiert');
                 break;
               }
-              case 'en': {
+              case Language.ENGLISH: {
                 this.snackbarService.showSnackbar('Sorted cards');
                 break;
               }
@@ -1215,22 +1226,22 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
         this.cardsService.shuffleStack(stack).then(((shuffledStack) => {
           this.stacksPersistenceService.updateStack(shuffledStack).then(() => {
             switch (this.language) {
-              case 'de': {
+              case Language.GERMAN: {
                 this.snackbarService.showSnackbar('Karten gemischt');
                 break;
               }
-              case 'en': {
+              case Language.ENGLISH: {
                 this.snackbarService.showSnackbar('Shuffled cards');
                 break;
               }
             }
           }, (updatedStack) => {
             switch (this.language) {
-              case 'de': {
+              case Language.GERMAN: {
                 this.snackbarService.showSnackbar('Karten gemischt');
                 break;
               }
-              case 'en': {
+              case Language.ENGLISH: {
                 this.snackbarService.showSnackbar('Shuffled cards');
                 break;
               }

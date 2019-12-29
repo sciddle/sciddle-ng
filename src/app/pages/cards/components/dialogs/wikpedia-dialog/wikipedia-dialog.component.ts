@@ -2,6 +2,7 @@ import {Component, EventEmitter, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {WikipediaService} from '../../../../../core/wikipedia/services/wikipedia.service';
 import {environment} from '../../../../../../environments/environment';
+import {Language} from '../../../../../core/language/model/language.enum';
 
 /**
  * Displays wikipedia dialog
@@ -105,11 +106,11 @@ export class WikipediaDialogComponent implements OnInit {
     if (this.alternateURL != null) {
 
       switch (this.language) {
-        case 'de': {
+        case Language.GERMAN: {
           this.more = `Mehr auf ${this.alternateURL}`;
           break;
         }
-        case 'en': {
+        case Language.ENGLISH: {
           this.more = `Find more on ${this.alternateURL}`;
           break;
         }
@@ -126,11 +127,11 @@ export class WikipediaDialogComponent implements OnInit {
             : this.explanationText;
 
           switch (this.language) {
-            case 'de': {
+            case Language.GERMAN: {
               this.more = result.pageURL != null ? ` Mehr auf Wikipedia` : ``;
               break;
             }
-            case 'en': {
+            case Language.ENGLISH: {
               this.more = result.pageURL != null ? ` Find more on Wikipedia` : ``;
               break;
             }
@@ -139,11 +140,11 @@ export class WikipediaDialogComponent implements OnInit {
           this.moreLink = result.pageURL.replace(' ', '%20');
         } else {
           switch (this.language) {
-            case 'de': {
+            case Language.GERMAN: {
               this.explanationText = `Das Extrakt kann nicht abgerufen werden`;
               break;
             }
-            case 'en': {
+            case Language.ENGLISH: {
               this.explanationText = `Cannot get extract`;
               break;
             }

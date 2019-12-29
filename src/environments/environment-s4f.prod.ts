@@ -5,8 +5,8 @@ export const environment = {
   production: true,
   LANGUAGE: 'DE',
   APP_NAME: 'Cards for Future',
-  DATABASE_ENTITIES: 's4f',
-  DATABASE_SETTINGS: 's4f_settings',
+  DATABASE_ENTITIES: 's4f_de',
+  DATABASE_SETTINGS: 's4f_de_settings',
 
   VARIANT: 'S4F',
 

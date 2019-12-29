@@ -8,6 +8,7 @@ import {MatDialog} from '@angular/material';
 import {WikipediaDialogComponent} from '../../dialogs/wikpedia-dialog/wikipedia-dialog.component';
 import {Theme} from '../../../../../core/ui/model/theme.enum';
 import {environment} from '../../../../../../environments/environment';
+import {Language} from '../../../../../core/language/model/language.enum';
 
 /**
  * Displays a card
@@ -93,12 +94,12 @@ export class CardFragmentComponent implements OnChanges {
         this.difficultyClass = 'difficultyColorEasy';
         this.difficultyText = '1';
         switch (this.language) {
-          case 'de': {
+          case Language.GERMAN: {
             this.difficultyLongText = 'EINFACH';
             this.difficultyCombinedText = `${this.difficultyLongText} / ${this.difficultyText} Punkt`;
             break;
           }
-          case 'en': {
+          case Language.ENGLISH: {
             this.difficultyLongText = 'EASY';
             this.difficultyCombinedText = `${this.difficultyLongText} / ${this.difficultyText} point`;
             break;
@@ -110,12 +111,12 @@ export class CardFragmentComponent implements OnChanges {
         this.difficultyClass = 'difficultyColorMedium';
         this.difficultyText = '2';
         switch (this.language) {
-          case 'de': {
+          case Language.GERMAN: {
             this.difficultyLongText = 'MITTEL';
             this.difficultyCombinedText = `${this.difficultyLongText} / ${this.difficultyText} Punkte`;
             break;
           }
-          case 'en': {
+          case Language.ENGLISH: {
             this.difficultyLongText = 'MEDIUM';
             this.difficultyCombinedText = `${this.difficultyLongText} / ${this.difficultyText} points`;
             break;
@@ -128,12 +129,12 @@ export class CardFragmentComponent implements OnChanges {
         this.difficultyClass = 'difficultyColorHard';
         this.difficultyText = '3';
         switch (this.language) {
-          case 'de': {
+          case Language.GERMAN: {
             this.difficultyLongText = 'SCHWER';
             this.difficultyCombinedText = `${this.difficultyLongText} / ${this.difficultyText} Punkte`;
             break;
           }
-          case 'en': {
+          case Language.ENGLISH: {
             this.difficultyLongText = 'HARD';
             this.difficultyCombinedText = `${this.difficultyLongText} / ${this.difficultyText} points`;
             break;
@@ -162,11 +163,11 @@ export class CardFragmentComponent implements OnChanges {
   onHelpClicked() {
     let action = '';
     switch (this.language) {
-      case 'de': {
+      case Language.GERMAN: {
         action = 'Verstanden';
         break;
       }
-      case 'en': {
+      case Language.ENGLISH: {
         action = 'Got it';
         break;
       }
