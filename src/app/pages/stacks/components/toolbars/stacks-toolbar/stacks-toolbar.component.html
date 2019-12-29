@@ -7,7 +7,11 @@
   </div>
   <div class="flexbox"></div>
   <div class="toolbar-block end">
-    <button mat-button matTooltip="Menü öffnen" class="toolbar-menu-item right" aria-label="Menu"
+    <span class="cdk-visually-hidden" #translatedTooltipOpenMenu i18n="tooltipOpenMenu|Tooltip on menu open@@tooltipOpenMenu">Open menu</span>
+    <button mat-button
+            class="toolbar-menu-item right"
+            aria-label="Menu"
+            [matTooltip]="translatedTooltipOpenMenu.innerHTML"
             [matMenuTriggerFor]="menu">
       <mat-icon svgIcon="more_vert"></mat-icon>
     </button>

@@ -24,6 +24,8 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   /** Dev mode */
   devMode = false;
+  /** Language */
+  language = environment.LANGUAGE;
 
   /**
    * Constructor

@@ -1,6 +1,8 @@
 <mat-toolbar class="toolbar flexcontainer">
   <div *ngIf="variant === variantType.SCIDDLE" class="toolbar-block start">
-    <button mat-button matTooltip="Kartenstapel verlassen" class="toolbar-menu-item" aria-label="Back"
+    <span class="cdk-visually-hidden" #translatedTooltipLeaveGame
+          i18n="tooltipLeaveGame|Tooltip leave game@@tooltipLeaveGame">Leave game</span>
+    <button mat-button [matTooltip]="translatedTooltipLeaveGame.innerHTML" class="toolbar-menu-item" aria-label="Back"
             (click)="onMenuItemClicked('back')">
       <mat-icon class="icon" svgIcon="arrow_back"></mat-icon>
     </button>
@@ -20,23 +22,28 @@
   </div>
   <div class="flexbox"></div>
   <div class="toolbar-block end">
-    <button mat-button matTooltip="Menü öffnen" class="toolbar-menu-item right" aria-label="Menü"
+    <span class="cdk-visually-hidden" #translatedTooltipOpenMenu
+          i18n="tooltipOpenMenu|Tooltip on menu open@@tooltipOpenMenu">Open menu</span>
+    <button mat-button
+            class="toolbar-menu-item right"
+            aria-label="Menu"
+            [matTooltip]="translatedTooltipOpenMenu.innerHTML"
             [matMenuTriggerFor]="menu">
       <mat-icon class="icon" svgIcon="more_vert"></mat-icon>
     </button>
     <mat-menu #menu="matMenu">
       <button mat-menu-item (click)="onMenuItemClicked('manual')">
         <mat-icon class="icon" svgIcon="format_align_left"></mat-icon>
-        <span i18n="menuItemManual|Menu item label for manual@@menuItemManual">Anleitung</span>
+        <span i18n="menuItemManual|Menu item label for manual@@menuItemManual">Manual</span>
       </button>
       <mat-divider></mat-divider>
       <button mat-menu-item (click)="onMenuItemClicked('open-source')">
         <mat-icon class="icon" svgIcon="open_source_initiative"></mat-icon>
-        <span i18n="menuItemOpenSource|Menu item label for open source@@menuItemOpenSource">Open Source</span>
+        <span i18n="menuItemOpenSource|Menu item label for open source@@menuItemOpenSource">Open source</span>
       </button>
       <button mat-menu-item (click)="onMenuItemClicked('about')">
         <mat-icon class="icon" svgIcon="blank"></mat-icon>
-        <span i18n="menuItemAboutApp|Menu item label for about app@@menuItemAboutApp">Über die App</span>
+        <span i18n="menuItemAboutApp|Menu item label for about app@@menuItemAboutApp">About the app</span>
       </button>
     </mat-menu>
   </div>

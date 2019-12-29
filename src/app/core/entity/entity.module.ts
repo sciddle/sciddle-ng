@@ -1,5 +1,4 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
 import {EntityProviders} from './entity.providers';
 import {_STACK_PERSISTENCE_POUCHDB} from './entity.tokens';
 import {EntityImports} from './entity.imports';

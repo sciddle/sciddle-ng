@@ -7,12 +7,14 @@ import {PersistenceModule} from './persistence/persistence.module';
 import {UtilModule} from './util/util.module';
 import {WikipediaModule} from './wikipedia/wikipedia.module';
 import {LogModule} from './log/log.module';
+import {LanguageModule} from './language/language.module';
 
 @NgModule({
   imports: [
     CommonModule,
 
     EntityModule,
+    LanguageModule,
     LogModule,
     NotificationModule,
     PersistenceModule,

@@ -4,7 +4,7 @@
     <body>
       <trans-unit id="labelVersion" datatype="html">
         <source>version</source>
-        <target>version</target>
+        <target>Version</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/ui/about-dialog/about-dialog/about-dialog.component.html</context>
           <context context-type="linenumber">3</context>
@@ -14,7 +14,7 @@
       </trans-unit>
       <trans-unit id="labelBasedOn" datatype="html">
         <source>based on</source>
-        <target>based on</target>
+        <target>basierend auf</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/ui/about-dialog/about-dialog/about-dialog.component.html</context>
           <context context-type="linenumber">5</context>
@@ -24,7 +24,7 @@
       </trans-unit>
       <trans-unit id="labelAuthor" datatype="html">
         <source>by</source>
-        <target>by</target>
+        <target>von</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/ui/about-dialog/about-dialog/about-dialog.component.html</context>
           <context context-type="linenumber">7</context>
@@ -34,7 +34,7 @@
       </trans-unit>
       <trans-unit id="labelIdeaAndTextBy" datatype="html">
         <source>Ideas and texts by</source>
-        <target>Ideas and texts by</target>
+        <target>Ideen und Texte von</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/ui/about-dialog/about-dialog/about-dialog.component.html</context>
           <context context-type="linenumber">12</context>
@@ -44,7 +44,7 @@
       </trans-unit>
       <trans-unit id="labelLicensedUnder" datatype="html">
         <source>licensed under</source>
-        <target>licensed under</target>
+        <target>lizensiert unter</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/ui/about-dialog/about-dialog/about-dialog.component.html</context>
           <context context-type="linenumber">15</context>
@@ -58,7 +58,7 @@
       </trans-unit>
       <trans-unit id="labelGraphicsBy" datatype="html">
         <source>Graphics by</source>
-        <target>Graphics by</target>
+        <target>Grafiken von</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/ui/about-dialog/about-dialog/about-dialog.component.html</context>
           <context context-type="linenumber">18</context>
@@ -68,7 +68,7 @@
       </trans-unit>
       <trans-unit id="labelImplementedBy" datatype="html">
         <source>Implemented by</source>
-        <target>Implemented by</target>
+        <target>Implementiert durch</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/ui/about-dialog/about-dialog/about-dialog.component.html</context>
           <context context-type="linenumber">22</context>
@@ -78,7 +78,7 @@
       </trans-unit>
       <trans-unit id="labelSourceCodeAvailableOn" datatype="html">
         <source>Source code available on</source>
-        <target>Source code avaialble on</target>
+        <target>Quellcode verfügbar auf</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/ui/about-dialog/about-dialog/about-dialog.component.html</context>
           <context context-type="linenumber">24</context>
@@ -88,7 +88,7 @@
       </trans-unit>
       <trans-unit id="scientificSupervisionBy" datatype="html">
         <source>Scientific supervision by</source>
-        <target>Scientific supervision by</target>
+        <target>Wissenschaftliche Betreuung durch</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/ui/about-dialog/about-dialog/about-dialog.component.html</context>
           <context context-type="linenumber">32</context>
@@ -98,7 +98,7 @@
       </trans-unit>
       <trans-unit id="actionClose" datatype="html">
         <source>Close</source>
-        <target>Close</target>
+        <target>Schließen</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/ui/about-dialog/about-dialog/about-dialog.component.html</context>
           <context context-type="linenumber">39</context>
@@ -108,7 +108,7 @@
       </trans-unit>
       <trans-unit id="actionNextCard" datatype="html">
         <source>Next card</source>
-        <target>Next card</target>
+        <target>Nächste Karte</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/cards/pages/cards/cards.component.html</context>
           <context context-type="linenumber">60</context>
@@ -118,7 +118,7 @@
       </trans-unit>
       <trans-unit id="actionProceedCorrectAnswer" datatype="html">
         <source>Term has been guessed</source>
-        <target>Term has been guessed</target>
+        <target>Begriff wurde erraten</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/cards/pages/cards/cards.component.html</context>
           <context context-type="linenumber">65</context>
@@ -128,7 +128,7 @@
       </trans-unit>
       <trans-unit id="actionProceedTimerOver" datatype="html">
         <source>Proceed</source>
-        <target>Proceed</target>
+        <target>Weiter</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/cards/pages/cards/cards.component.html</context>
           <context context-type="linenumber">67</context>
@@ -138,7 +138,7 @@
       </trans-unit>
       <trans-unit id="promptSwipeCardSuccess" datatype="html">
         <source>Swipe card aside when someone has guessed the term</source>
-        <target>Swipe card aside when someone has guessed the term</target>
+        <target>Wische die Karte zur Seite wenn jemand den Begriff erraten hat</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/cards/pages/cards/cards.component.html</context>
           <context context-type="linenumber">74</context>
@@ -148,7 +148,7 @@
       </trans-unit>
       <trans-unit id="promptSwipeCardFailed" datatype="html">
         <source>Time is over. Swipe card aside to proceed</source>
-        <target>Time is over. Swipe card aside to proceed</target>
+        <target>Zeit ist abgelaufen. Wisch die Karte zur Seite um fortzufahren</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/cards/pages/cards/cards.component.html</context>
           <context context-type="linenumber">76</context>
@@ -158,7 +158,7 @@
       </trans-unit>
       <trans-unit id="tooltipTerminateGame" datatype="html">
         <source>Terminate game</source>
-        <target>Terminate game</target>
+        <target>Spiel beenden</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/cards/components/toolbars/cards-toolbar/cards-toolbar.component.html</context>
           <context context-type="linenumber">4</context>
@@ -168,7 +168,7 @@
       </trans-unit>
       <trans-unit id="tooltipSortCards" datatype="html">
         <source>Sort cards</source>
-        <target>Sort cards</target>
+        <target>Karten sortieren</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/cards/components/toolbars/cards-toolbar/cards-toolbar.component.html</context>
           <context context-type="linenumber">28</context>
@@ -178,7 +178,7 @@
       </trans-unit>
       <trans-unit id="tooltipShuffleCards" datatype="html">
         <source>Shuffle cards</source>
-        <target>Shuffle cards</target>
+        <target>Karten mischen</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/cards/components/toolbars/cards-toolbar/cards-toolbar.component.html</context>
           <context context-type="linenumber">36</context>
@@ -188,7 +188,7 @@
       </trans-unit>
       <trans-unit id="tooltipOpenMenu" datatype="html">
         <source>Open menu</source>
-        <target>Open menu</target>
+        <target>Menü öffnen</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/cards/components/toolbars/cards-toolbar/cards-toolbar.component.html</context>
           <context context-type="linenumber">55</context>
@@ -206,7 +206,7 @@
       </trans-unit>
       <trans-unit id="menuItemManual" datatype="html">
         <source>Manual</source>
-        <target>Manual</target>
+        <target>Anleitung</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/cards/components/toolbars/cards-toolbar/cards-toolbar.component.html</context>
           <context context-type="linenumber">66</context>
@@ -224,7 +224,7 @@
       </trans-unit>
       <trans-unit id="menuItemOpenSource" datatype="html">
         <source>Open source</source>
-        <target>Open source</target>
+        <target>Open Source</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/cards/components/toolbars/cards-toolbar/cards-toolbar.component.html</context>
           <context context-type="linenumber">71</context>
@@ -242,7 +242,7 @@
       </trans-unit>
       <trans-unit id="menuItemAboutApp" datatype="html">
         <source>About the app</source>
-        <target>About the app</target>
+        <target>Über die App</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/cards/components/toolbars/cards-toolbar/cards-toolbar.component.html</context>
           <context context-type="linenumber">75</context>
@@ -260,7 +260,7 @@
       </trans-unit>
       <trans-unit id="tooltipExplainTheTerm" datatype="html">
         <source>Explain the term</source>
-        <target>Explain the term</target>
+        <target>Erkläre den Begriff</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/cards/components/fragments/card-fragment/card-fragment.component.html</context>
           <context context-type="linenumber">9</context>
@@ -270,7 +270,7 @@
       </trans-unit>
       <trans-unit id="tooltipShowHint" datatype="html">
         <source>Show hint</source>
-        <target>Show hint</target>
+        <target>Zeige Hinweis an</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/cards/components/fragments/card-fragment/card-fragment.component.html</context>
           <context context-type="linenumber">14</context>
@@ -280,7 +280,7 @@
       </trans-unit>
       <trans-unit id="tooltipDontUseTheseWords" datatype="html">
         <source>Don&apos;t use these words</source>
-        <target>Don't use these words</target>
+        <target>Benutze die Wörter nicht</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/cards/components/fragments/card-fragment/card-fragment.component.html</context>
           <context context-type="linenumber">21</context>
@@ -290,7 +290,7 @@
       </trans-unit>
       <trans-unit id="promptSelectDifficulty" datatype="html">
         <source>Select a difficulty</source>
-        <target>Select a difficulty</target>
+        <target>Wähle einen Schwierigkeitsgrad</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/cards/components/fragments/difficulty-selection-fragment/difficulty-selection-fragment.component.html</context>
           <context context-type="linenumber">3</context>
@@ -300,7 +300,7 @@
       </trans-unit>
       <trans-unit id="labelEasy" datatype="html">
         <source>easy</source>
-        <target>easy</target>
+        <target>einfach</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/cards/components/fragments/difficulty-selection-fragment/difficulty-selection-fragment.component.html</context>
           <context context-type="linenumber">9</context>
@@ -322,7 +322,7 @@
       </trans-unit>
       <trans-unit id="labelMedium" datatype="html">
         <source>medium</source>
-        <target>medium</target>
+        <target>mittel</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/cards/components/fragments/difficulty-selection-fragment/difficulty-selection-fragment.component.html</context>
           <context context-type="linenumber">23</context>
@@ -344,7 +344,7 @@
       </trans-unit>
       <trans-unit id="labelHard" datatype="html">
         <source>hard</source>
-        <target>hard</target>
+        <target>schwer</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/cards/components/fragments/difficulty-selection-fragment/difficulty-selection-fragment.component.html</context>
           <context context-type="linenumber">37</context>
@@ -366,7 +366,7 @@
       </trans-unit>
       <trans-unit id="questionWhichTeamAnsweredCorrectly" datatype="html">
         <source>Which team guessed correctly?</source>
-        <target>Which team guessed correctly?</target>
+        <target>Welches Team hat richtig geantwortet?</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/cards/components/fragments/team-selection-fragment/team-selection-fragment.component.html</context>
           <context context-type="linenumber">3</context>
@@ -376,7 +376,7 @@
       </trans-unit>
       <trans-unit id="whichTeamAnsweredCorrectlyTeam" datatype="html">
         <source>team</source>
-        <target>team</target>
+        <target>Team</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/cards/components/fragments/team-selection-fragment/team-selection-fragment.component.html</context>
           <context context-type="linenumber">12</context>
@@ -386,7 +386,7 @@
       </trans-unit>
       <trans-unit id="whichTeamAnsweredCorrectlyNoOne" datatype="html">
         <source>no one</source>
-        <target>no one</target>
+        <target>niemand</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/cards/components/fragments/team-selection-fragment/team-selection-fragment.component.html</context>
           <context context-type="linenumber">21</context>
@@ -396,7 +396,7 @@
       </trans-unit>
       <trans-unit id="labelTeam" datatype="html">
         <source>team</source>
-        <target>team</target>
+        <target>Team</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/cards/components/fragments/game-evaluation-fragment/game-evaluation-fragment.component.html</context>
           <context context-type="linenumber">4</context>
@@ -414,7 +414,7 @@
       </trans-unit>
       <trans-unit id="pluralHasWon" datatype="html">
         <source>{VAR_PLURAL, plural, one {has won} few {have won} }</source>
-        <target>{VAR_PLURAL, plural, one {has won} few {have won} }</target>
+        <target>{VAR_PLURAL, plural, one {hat gewonnen} few {haben gewonnen} }</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/cards/components/fragments/game-evaluation-fragment/game-evaluation-fragment.component.html</context>
           <context context-type="linenumber">8</context>
@@ -424,7 +424,7 @@
       </trans-unit>
       <trans-unit id="pluralScore" datatype="html">
         <source>{VAR_PLURAL, plural, zero {0 points} one {<x id="INTERPOLATION" equiv-text="{{team.score}}"/> point} other {<x id="INTERPOLATION" equiv-text="{{team.score}}"/> points} }</source>
-        <target>{VAR_PLURAL, plural, zero {0 points} one {<x id="INTERPOLATION" equiv-text="{{team.score}}"/> point} other {<x id="INTERPOLATION" equiv-text="{{team.score}}"/> points} }</target>
+        <target>{VAR_PLURAL, plural, zero {0 Punkte} one {<x id="INTERPOLATION" equiv-text="{{team.score}}"/> Punkt} other {<x id="INTERPOLATION" equiv-text="{{team.score}}"/> Punkte} }</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/cards/components/fragments/game-evaluation-fragment/game-evaluation-fragment.component.html</context>
           <context context-type="linenumber">14</context>
@@ -438,7 +438,7 @@
       </trans-unit>
       <trans-unit id="actionBack" datatype="html">
         <source>back</source>
-        <target>back</target>
+        <target>zurück</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/cards/components/fragments/game-evaluation-fragment/game-evaluation-fragment.component.html</context>
           <context context-type="linenumber">19</context>
@@ -448,7 +448,7 @@
       </trans-unit>
       <trans-unit id="promptPassDeviceAndTapScreen" datatype="html">
         <source>Pass the device and tap on the screen to proceed</source>
-        <target>Pass the device and tap on the screen to proceed</target>
+        <target>Gib das Gerät weiter und tippe auf den Bildschirm um weiterzumachen</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/cards/components/fragments/team-information-fragment/team-information-fragment.component.html</context>
           <context context-type="linenumber">7</context>
@@ -458,7 +458,7 @@
       </trans-unit>
       <trans-unit id="promptTapOnScreen" datatype="html">
         <source>Tap on screen to proceed</source>
-        <target>Tap on screen to proceed</target>
+        <target>Tipp auf den Bildschirm um fortzufahren</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/cards/components/fragments/score-overview-fragment/score-overview-fragment.component.html</context>
           <context context-type="linenumber">8</context>
@@ -468,7 +468,7 @@
       </trans-unit>
       <trans-unit id="labelWithoutTimeLimit" datatype="html">
         <source>without time limit</source>
-        <target>without time limit</target>
+        <target>ohne Zeitlimit</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/games/components/dialogs/multiplayer-game-dialog/multiplayer-game-dialog.component.html</context>
           <context context-type="linenumber">9</context>
@@ -478,7 +478,7 @@
       </trans-unit>
       <trans-unit id="labelWithTimeLimit" datatype="html">
         <source>with time limit</source>
-        <target>with time limit</target>
+        <target>mit Zeitlimit</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/games/components/dialogs/multiplayer-game-dialog/multiplayer-game-dialog.component.html</context>
           <context context-type="linenumber">13</context>
@@ -488,7 +488,7 @@
       </trans-unit>
       <trans-unit id="labelNumberOfTeams" datatype="html">
         <source>number of teams</source>
-        <target>number of teams</target>
+        <target>Anzahl der Teams</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/games/components/dialogs/multiplayer-game-dialog/multiplayer-game-dialog.component.html</context>
           <context context-type="linenumber">31</context>
@@ -498,7 +498,7 @@
       </trans-unit>
       <trans-unit id="labelNumberOfCards" datatype="html">
         <source>number of cards</source>
-        <target>number of cards</target>
+        <target>Anzahl der Karten</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/games/components/dialogs/multiplayer-game-dialog/multiplayer-game-dialog.component.html</context>
           <context context-type="linenumber">52</context>
@@ -508,7 +508,7 @@
       </trans-unit>
       <trans-unit id="actionStartGame" datatype="html">
         <source>start</source>
-        <target>start</target>
+        <source>starten</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/games/components/dialogs/multiplayer-game-dialog/multiplayer-game-dialog.component.html</context>
           <context context-type="linenumber">71</context>
@@ -518,7 +518,7 @@
       </trans-unit>
       <trans-unit id="labelSinglePlayerGame" datatype="html">
         <source>Training mode</source>
-        <target>Training mode</target>
+        <target>Freies Spiel</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/games/pages/games/games.component.html</context>
           <context context-type="linenumber">15</context>
@@ -528,7 +528,7 @@
       </trans-unit>
       <trans-unit id="labelMultiplePlayerGame" datatype="html">
         <source>Start game</source>
-        <target>Start game</target>
+        <target>Spielrunde starten</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/games/pages/games/games.component.html</context>
           <context context-type="linenumber">21</context>
@@ -538,7 +538,7 @@
       </trans-unit>
       <trans-unit id="tooltipLeaveGame" datatype="html">
         <source>Leave game</source>
-        <target>Leave game</target>
+        <target>Spiel verlassen</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/games/components/toolbars/games-toolbar/games-toolbar.component.html</context>
           <context context-type="linenumber">4</context>
@@ -548,7 +548,7 @@
       </trans-unit>
       <trans-unit id="labelDifficulty" datatype="html">
         <source>difficulty</source>
-        <target>difficulty</target>
+        <source>Schwierigkeit</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/games/components/fragments/difficulty-selection-fragment/difficulty-selection-fragment.component.html</context>
           <context context-type="linenumber">3</context>
@@ -558,7 +558,7 @@
       </trans-unit>
       <trans-unit id="pluralCards" datatype="html">
         <source>{VAR_PLURAL, plural, zero {no cards} one {<x id="INTERPOLATION" equiv-text="{{cardsCount}}"/> card} other {<x id="INTERPOLATION" equiv-text="{{cardsCount}}"/> cards} }</source>
-        <target>{VAR_PLURAL, plural, zero {no cards} one {<x id="INTERPOLATION" equiv-text="{{cardsCount}}"/> card} other {<x id="INTERPOLATION" equiv-text="{{cardsCount}}"/> cards} }</target>
+        <target>{VAR_PLURAL, plural, zero {keine Karten} one {<x id="INTERPOLATION" equiv-text="{{cardsCount}}"/> Karte} other {<x id="INTERPOLATION" equiv-text="{{cardsCount}}"/> Karten} }</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/stacks/components/fragments/stack-fragment/stack-fragment.component.html</context>
           <context context-type="linenumber">9</context>
@@ -568,7 +568,7 @@
       </trans-unit>
       <trans-unit id="labelOngoingGame" datatype="html">
         <source>ongoing game</source>
-        <target>ongoing game</target>
+        <target>laufende Spielrunde</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/stacks/components/fragments/stack-fragment/stack-fragment.component.html</context>
           <context context-type="linenumber">11</context>

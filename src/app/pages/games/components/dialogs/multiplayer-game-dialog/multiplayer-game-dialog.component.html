@@ -6,29 +6,29 @@
       <div class="time-limit-button">
         <button *ngIf="!useTimeLimit" mat-button color="primary" (click)="onTimeLimitToggled()">
           <mat-icon svgIcon="alarm_off" class="button-icon"></mat-icon>
-          <span i18n="labelWithoutTimeLimit|Label without time limit@@labelWithoutTimeLimit">ohne Zeitlimit</span>
+          <span i18n="labelWithoutTimeLimit|Label without time limit@@labelWithoutTimeLimit">without time limit</span>
         </button>
         <button *ngIf="useTimeLimit" mat-flat-button color="primary" (click)="onTimeLimitToggled()">
           <mat-icon svgIcon="alarm_on" class="button-icon"></mat-icon>
-          <span i18n="labelWithTimeLimit|Label with time limit@@labelWithTimeLimit">mit Zeitlimit</span>
+          <span i18n="labelWithTimeLimit|Label with time limit@@labelWithTimeLimit">with time limit</span>
         </button>
       </div>
       <!--
       <div class="alarm-button">
         <button *ngIf="!useAlarm" mat-button color="accent" [disabled]="!useTimeLimit" (click)="onAlarmToggled()">
           <mat-icon svgIcon="bell_outline_off" class="button-icon"></mat-icon>
-          ohne Ton
+          without sound
         </button>
         <button *ngIf="useAlarm" mat-flat-button color="accent" [disabled]="!useTimeLimit" (click)="onAlarmToggled()">
           <mat-icon svgIcon="bell_outline" class="button-icon"></mat-icon>
-          mit Ton
+          with sound
         </button>
       </div>
       -->
       <div class="flexbox"></div>
     </div>
     <div class="description-text">
-      <span i18n="labelNumberOfTeams|Label number of teams@@labelNumberOfTeams">Anzahl der Teams</span>
+      <span i18n="labelNumberOfTeams|Label number of teams@@labelNumberOfTeams">number of teams</span>
     </div>
     <span *ngFor="let item of arrayOne(3); let i = index;">
         <button *ngIf="teamCount !== i + 3" mat-button color="primary" class="team-button"
@@ -49,7 +49,7 @@
     </app-difficulty-selection-fragment>
 
     <div class="description-text">
-      <span i18n="labelNumberOfCards|Label number of cards@@labelNumberOfCards">Anzahl der Karten</span>
+      <span i18n="labelNumberOfCards|Label number of cards@@labelNumberOfCards">number of cards</span>
     </div>
     <div class="flexcontainer">
       <div class="flexcontainer" style="margin: 0 auto">
@@ -68,6 +68,6 @@
   <button mat-button color="primary"
           [disabled]="teamCount === -1 || (!difficultyEasy && !difficultyMedium && !difficultyHard)"
           (click)="startGame()">
-    STARTEN
+    <span class="uppercase" i18n="actionStartGame|Action start game@@actionStartGame">start</span>
   </button>
 </mat-dialog-actions>

@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, Output, ViewEncapsulation} from '@angular/core';
 import {Stack} from '../../../../../core/entity/model/stack/stack.model';
 import {environment} from '../../../../../../environments/environment';
+import {Language} from '../../../../../core/language/model/language.enum';
 
 /**
  * Displays team information fragment
@@ -20,6 +21,9 @@ export class TeamInformationFragmentComponent {
 
   /** App language */
   language = environment.LANGUAGE;
+
+  /** Enum of languages */
+  public languageType = Language;
 
   //
   // Actions

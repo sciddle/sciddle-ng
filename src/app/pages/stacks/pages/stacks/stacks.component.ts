@@ -29,6 +29,7 @@ import {CheckableInformationDialogComponent} from '../../../../ui/information-di
 import {ROUTE_GAMES} from '../../../../app.routes';
 import {GamesService} from '../../../../core/entity/services/game/games.service';
 import {LogService} from '../../../../core/log/services/log.service';
+import {Language} from '../../../../core/language/model/language.enum';
 
 /**
  * Displays stacks
@@ -175,6 +176,7 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
    * Initializes database error subscription
    */
   private initializeDatabaseErrorSubscription() {
+    LogService.trace(`StacksComponent#initializeDatabaseErrorSubscription`);
     this.stacksPersistenceService.databaseErrorSubject.pipe(
       takeUntil(this.unsubscribeSubject)
     ).subscribe((value) => {
@@ -183,23 +185,34 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
       if (value != null) {
         this.stacks = [];
 
-        Array.from(StacksService.stacks.values()).forEach(fileName =>
-          this.stacksService.getStackFromAssets(fileName).then(stackFromAssets => {
-            if (stackFromAssets != null) {
-              this.initializeStacks(this.stacks.concat([stackFromAssets]));
-              switch (this.language) {
-                case 'de': {
+        switch (this.language) {
+          case Language.GERMAN: {
+            Array.from(StacksService.stacksDe.values()).forEach(fileName =>
+              this.stacksService.getStackFromAssets(fileName).then(stackFromAssets => {
+                LogService.trace(`StacksComponent > STACK FROM ASSETS`);
+                if (stackFromAssets != null) {
+                  this.initializeStacks(this.stacks.concat([stackFromAssets]));
                   this.snackbarService.showSnackbar('Achtung: Spiel wird nicht gespeichert.');
-                  break;
+
                 }
-                case 'en': {
+              })
+            );
+            break;
+          }
+          case Language.ENGLISH: {
+            console.log(`++ FOO B`);
+            Array.from(StacksService.stacksEn.values()).forEach(fileName =>
+              this.stacksService.getStackFromAssets(fileName).then(stackFromAssets => {
+                LogService.trace(`StacksComponent > STACK FROM ASSETS`);
+                if (stackFromAssets != null) {
+                  this.initializeStacks(this.stacks.concat([stackFromAssets]));
                   this.snackbarService.showSnackbar('Warning: Game will not be saved.');
-                  break;
                 }
-              }
-            }
-          })
-        );
+              })
+            );
+            break;
+          }
+        }
       }
     });
   }
@@ -216,6 +229,8 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
    * Initializes stacks
    */
   private mergeStacksFromAssets() {
+    LogService.trace(`StacksComponent#mergeStacksFromAssets`);
+
     this.stacks.forEach(stack => {
       // Merge cards from assets for stacks without ongoing game
       if (!GamesService.existsGame(stack)) {
@@ -224,11 +239,11 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
           this.stacksPersistenceService.updateStack(mergedStack).then(() => {
           });
           switch (this.language) {
-            case 'de': {
+            case Language.GERMAN: {
               this.snackbarService.showSnackbar('Neue Karten geladen');
               break;
             }
-            case 'en': {
+            case Language.ENGLISH: {
               this.snackbarService.showSnackbar('Loaded new cards');
               break;
             }
@@ -360,13 +375,13 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
             let checkboxText = '';
             let action = '';
             switch (this.language) {
-              case 'de': {
+              case Language.GERMAN: {
                 title = 'Anleitung';
                 checkboxText = 'Anleitung beim Starten nicht mehr anzeigen';
                 action = 'Alles klar';
                 break;
               }
-              case 'en': {
+              case Language.ENGLISH: {
                 title = 'Manual';
                 checkboxText = 'Do not show on start';
                 action = 'Got it';
@@ -406,12 +421,12 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
             let title = '';
             let action = '';
             switch (this.language) {
-              case 'de': {
+              case Language.GERMAN: {
                 title = 'Open Source Komponenten';
                 action = 'Alles klar';
                 break;
               }
-              case 'en': {
+              case Language.ENGLISH: {
                 title = 'Open source components';
                 action = 'Got it';
                 break;
@@ -438,11 +453,11 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
       case 'about': {
         let title = '';
         switch (this.language) {
-          case 'de': {
+          case Language.GERMAN: {
             title = 'Über die App';
             break;
           }
-          case 'en': {
+          case Language.ENGLISH: {
             title = 'About the app';
             break;
           }

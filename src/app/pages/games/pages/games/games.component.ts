@@ -33,6 +33,7 @@ import {SettingType} from '../../../../core/settings/model/setting-type.enum';
 import {CheckableInformationDialogComponent} from '../../../../ui/information-dialog/checkable-information-dialog/checkable-information-dialog.component';
 import {LogService} from '../../../../core/log/services/log.service';
 import {Game} from '../../../../core/entity/model/game/game.model';
+import {Language} from '../../../../core/language/model/language.enum';
 
 /**
  * Displays games page
@@ -250,11 +251,11 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
       takeUntil(this.unsubscribeSubject)
     ).subscribe((value) => {
       switch (this.language) {
-        case 'de': {
+        case Language.GERMAN: {
           this.snackbarService.showSnackbar('Achtung: Spiel wird nicht gespeichert.');
           break;
         }
-        case 'en': {
+        case Language.ENGLISH: {
           this.snackbarService.showSnackbar('Warning: Game will not be saved.');
           break;
         }
@@ -290,7 +291,17 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
             this.navigate(`/${ROUTE_STACKS}`);
           }
 
-          const fileName = StacksService.stacks.get(stack.id);
+          let fileName;
+          switch (this.language) {
+            case Language.GERMAN: {
+              fileName = StacksService.stacksDe.get(stack.id);
+              break;
+            }
+            case Language.ENGLISH: {
+              fileName = StacksService.stacksEn.get(stack.id);
+              break;
+            }
+          }
 
           this.stacksService.getStackFromAssets(fileName).then(stackFromAssets => {
             if (stackFromAssets != null) {
@@ -528,13 +539,13 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
             let checkboxText = '';
             let action = '';
             switch (this.language) {
-              case 'de': {
+              case Language.GERMAN: {
                 title = 'Anleitung';
                 checkboxText = 'Anleitung beim Starten nicht mehr anzeigen';
                 action = 'Alles klar';
                 break;
               }
-              case 'en': {
+              case Language.ENGLISH: {
                 title = 'Manual';
                 checkboxText = 'Do not show on start';
                 action = 'Got it';
@@ -574,12 +585,12 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
             let title = '';
             let action = '';
             switch (this.language) {
-              case 'de': {
+              case Language.GERMAN: {
                 title = 'Open Source Komponenten';
                 action = 'Alles klar';
                 break;
               }
-              case 'en': {
+              case Language.ENGLISH: {
                 title = 'Open source components';
                 action = 'Got it';
                 break;
@@ -606,11 +617,11 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
       case 'about': {
         let title = '';
         switch (this.language) {
-          case 'de': {
+          case Language.GERMAN: {
             title = 'Über die App';
             break;
           }
-          case 'en': {
+          case Language.ENGLISH: {
             title = 'About the app';
             break;
           }

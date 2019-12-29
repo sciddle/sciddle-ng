@@ -1,10 +1,14 @@
 <button *ngIf="stack !=null" mat-button class="button full-width" (click)="onDisplayTeamClicked()">
   <span class="block main-text">
-    <span *ngIf="language==='de'"><span class="team-name">Team {{ stack.game.turn.teamID + 1 }} </span>ist am Zug</span>
-    <span *ngIf="language==='en'"><span class="team-name">It's team {{ stack.game.turn.teamID + 1 }}</span>'s turn</span>
+    <span *ngIf="language == languageType.GERMAN">
+      <span class="team-name">Team {{ stack.game.turn.teamID + 1 }} </span>ist am Zug
+    </span>
+    <span *ngIf="language == languageType.ENGLISH">
+      It's <span class="team-name">team {{ stack.game.turn.teamID + 1 }}</span>'s turn
+    </span>
   </span>
   <span class="block description-text double-size-text"
         i18n="promptPassDeviceAndTapScreen|Prompt to pass device and tap on screen@@promptPassDeviceAndTapScreen">
-          Gib das Gerät weiter und tippe auf den Bildschirm um weiterzumachen
+          Pass the device and tap on the screen to proceed
         </span>
 </button>

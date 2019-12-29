@@ -1,6 +1,9 @@
 <mat-toolbar class="toolbar flexcontainer">
   <div *ngIf="variant === variantType.SCIDDLE" class="toolbar-block start">
-    <button mat-button matTooltip="Spiel beenden"
+    <span class="cdk-visually-hidden" #translatedTooltipFinishGame
+          i18n="tooltipTerminateGame|Tooltip terminate game@@tooltipTerminateGame">Terminate game</span>
+    <button mat-button
+            [matTooltip]="translatedTooltipFinishGame.innerHTML"
             class="toolbar-menu-item" aria-label="Spiel beenden"
             (click)="onMenuItemClicked('back')">
       <mat-icon svgIcon="arrow_back"></mat-icon>
@@ -21,12 +24,18 @@
   </div>
   <div class="flexbox"></div>
   <div class="toolbar-block end">
-    <button *ngIf="gameMode === gameModeType.SINGLE_PLAYER && devMode" mat-button matTooltip="Karten sortieren"
+    <span class="cdk-visually-hidden" #translatedTooltipSortCards
+          i18n="tooltipSortCards|Tooltip sort cards@@tooltipSortCards">Sort cards</span>
+    <button *ngIf="gameMode === gameModeType.SINGLE_PLAYER && devMode" mat-button
+            [matTooltip]="translatedTooltipSortCards.innerHTML"
             class="toolbar-menu-item right" aria-label="Sort cards"
             (click)="onMenuItemClicked('sort-cards')">
       <mat-icon class="icon" svgIcon="sort_by_alpha"></mat-icon>
     </button>
-    <button *ngIf="gameMode === gameModeType.SINGLE_PLAYER" mat-button matTooltip="Karten mischen"
+    <span class="cdk-visually-hidden" #translatedTooltipShuffleCards
+          i18n="tooltipShuffleCards|Tooltip shuffle cards@@tooltipShuffleCards">Shuffle cards</span>
+    <button *ngIf="gameMode === gameModeType.SINGLE_PLAYER" mat-button
+            [matTooltip]="translatedTooltipShuffleCards.innerHTML"
             class="toolbar-menu-item right" aria-label="Shuffle cards"
             (click)="onMenuItemClicked('shuffle-cards')">
       <mat-icon class="icon" svgIcon="shuffle"></mat-icon>
@@ -42,23 +51,28 @@
             aria-label="Card count">
       <span class="card-count">{{ cardCount }}</span>
     </button>
-    <button mat-button matTooltip="Menü öffnen" class="toolbar-menu-item right" aria-label="Menu"
+    <span class="cdk-visually-hidden" #translatedTooltipMenu
+          i18n="tooltipOpenMenu|Tooltip on menu open@@tooltipOpenMenu">Open menu</span>
+    <button mat-button
+            class="toolbar-menu-item right"
+            aria-label="Menu"
+            [matTooltip]="translatedTooltipMenu.innerHTML"
             [matMenuTriggerFor]="menu">
       <mat-icon class="icon" svgIcon="more_vert"></mat-icon>
     </button>
     <mat-menu #menu="matMenu">
       <button mat-menu-item (click)="onMenuItemClicked('manual')">
         <mat-icon class="icon" svgIcon="format_align_left"></mat-icon>
-        <span i18n="menuItemManual|Menu item label for manual@@menuItemManual">Anleitung</span>
+        <span i18n="menuItemManual|Menu item label for manual@@menuItemManual">Manual</span>
       </button>
       <mat-divider></mat-divider>
       <button mat-menu-item (click)="onMenuItemClicked('open-source')">
         <mat-icon class="icon" svgIcon="open_source_initiative"></mat-icon>
-        <span i18n="menuItemOpenSource|Menu item label for open source@@menuItemOpenSource">Open Source</span>
+        <span i18n="menuItemOpenSource|Menu item label for open source@@menuItemOpenSource">Open source</span>
       </button>
       <button mat-menu-item (click)="onMenuItemClicked('about')">
         <mat-icon class="icon" svgIcon="blank"></mat-icon>
-        <span i18n="menuItemAboutApp|Menu item label for about app@@menuItemAboutApp">Über die App</span>
+        <span i18n="menuItemAboutApp|Menu item label for about app@@menuItemAboutApp">About the app</span>
       </button>
     </mat-menu>
   </div>

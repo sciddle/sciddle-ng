@@ -8,10 +8,10 @@
  */
 export const environment = {
   production: false,
-  LANGUAGE: 'DE',
+  LANGUAGE: 'EN',
   APP_NAME: 'Sciddle Dev',
-  DATABASE_ENTITIES: 'sciddle-dev',
-  DATABASE_SETTINGS: 'sciddle_settings-dev',
+  DATABASE_ENTITIES: 'sciddle_en-dev',
+  DATABASE_SETTINGS: 'sciddle_en_settings-dev',
 
   VARIANT: 'Sciddle',
 
