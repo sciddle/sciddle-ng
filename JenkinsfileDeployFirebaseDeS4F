@@ -29,7 +29,7 @@ pipeline {
                 sh "cp ${WORKSPACE}/src/favicon-s4f.ico ${WORKSPACE}/src/favicon.ico"
                 sh "cp ${WORKSPACE}/src/assets/manual/manual-de-s4f.md ${WORKSPACE}/src/assets/manual/manual-de.md"
                 sh "npm install"
-                sh "npm run build-prod-s4f"
+                sh "npm run build-de-s4f-prod"
             }
         }
         stage('Lint') {
