@@ -10,20 +10,20 @@ export const environment = {
   production: true,
   LANGUAGE: 'EN',
   APP_NAME: 'Sciddle Dev',
-  DATABASE_ENTITIES: 'sciddle_en-dev',
-  DATABASE_SETTINGS: 'sciddle_en_settings-dev',
+  DATABASE_ENTITIES: 'sciddle_en',
+  DATABASE_SETTINGS: 'sciddle_en_settings',
 
   VARIANT: 'Sciddle',
 
-  TIMER_EASY: 10,
-  TIMER_MEDIUM: 10,
-  TIMER_HARD: 10,
+  TIMER_EASY: 30,
+  TIMER_MEDIUM: 45,
+  TIMER_HARD: 60,
   DEFAULT_STACK: 0,
 
-  MIN_CARDS: 2,
+  MIN_CARDS: 20,
   API_DELAY: 500,
-  API_TIMEOUT: 2500,
-  MAX_CARD_COUNT: 10,
+  API_TIMEOUT: 7500,
+  MAX_CARD_COUNT: 1000,
 
   NAME: require('../../package.json').name,
   VERSION: require('../../package.json').version,
