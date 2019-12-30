@@ -4,6 +4,7 @@ import {StackFragmentComponent} from './stack-fragment.component';
 import {StacksImports} from '../../../stacks.imports';
 import {StacksDeclarations} from '../../../stacks.declarations';
 
+/*
 describe('StackFragmentComponent', () => {
   let component: StackFragmentComponent;
   let fixture: ComponentFixture<StackFragmentComponent>;
@@ -26,3 +27,4 @@ describe('StackFragmentComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+*/

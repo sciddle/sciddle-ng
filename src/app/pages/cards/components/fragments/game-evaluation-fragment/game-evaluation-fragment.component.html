@@ -5,7 +5,7 @@
         {{ team.index + 1 }}
       </span>
     <span
-      i18n="pluralHasWon|Plural has won@@pluralHasWon">{winningTeams.length, plural, one {has won} few {have won}}</span>
+      i18n="pluralHasWon|Plural has won@@pluralHasWon">{winningTeams.length, plural, zero {has won} one {has won} few {have won}}</span>
   </div>
   <div *ngIf="stack != null">
     <div *ngFor="let team of stack.game.teams" class="description-text double-size-text">
