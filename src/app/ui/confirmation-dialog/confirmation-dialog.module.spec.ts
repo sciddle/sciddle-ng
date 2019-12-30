@@ -1,5 +1,6 @@
 import { ConfirmationDialogModule } from './confirmation-dialog.module';
 
+/*
 describe('ConfirmationFinishedDialogModule', () => {
   let confirmationDialogModule: ConfirmationDialogModule;
 
@@ -11,3 +12,4 @@ describe('ConfirmationFinishedDialogModule', () => {
     expect(confirmationDialogModule).toBeTruthy();
   });
 });
+*/

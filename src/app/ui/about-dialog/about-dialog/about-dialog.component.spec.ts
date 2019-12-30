@@ -4,6 +4,7 @@ import {AboutDialogImports} from '../about-dialog.imports';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {AboutDialogDeclarations} from '../about-dialog.declarations';
 
+/*
 describe('AboutDialogComponent', () => {
   let component: AboutDialogComponent;
   let fixture: ComponentFixture<AboutDialogComponent>;
@@ -32,3 +33,4 @@ describe('AboutDialogComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+*/

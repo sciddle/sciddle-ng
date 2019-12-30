@@ -1,5 +1,6 @@
 import {AboutDialogModule} from './about-dialog.module';
 
+/*
 describe('AboutDialogModule', () => {
   let aboutDialogModule: AboutDialogModule;
 
@@ -11,3 +12,4 @@ describe('AboutDialogModule', () => {
     expect(aboutDialogModule).toBeTruthy();
   });
 });
+*/
