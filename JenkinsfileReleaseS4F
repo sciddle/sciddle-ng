@@ -31,7 +31,7 @@ pipeline {
                 sh "cp ${WORKSPACE}/src/index-s4f.html ${WORKSPACE}/src/index.html"
                 sh "cp ${WORKSPACE}/src/favicon-s4f.ico ${WORKSPACE}/src/favicon.ico"
                 sh "npm install"
-                sh "npm run build-prod-s4f -- --base-href ${params.BASE_REF}"
+                sh "npm run build-de-s4f-prod -- --base-href ${params.BASE_REF}"
             }
         }
         stage('Lint') {
