@@ -28,7 +28,7 @@ pipeline {
         stage('Build Angular') {
             steps {
                 sh "npm install"
-                sh "npm run build-prod -- --verbose --base-href ${params.BASE_REF}"
+                sh "npm run build-de-regular-prod -- --verbose --base-href ${params.BASE_REF}"
             }
         }
         stage('Lint') {
