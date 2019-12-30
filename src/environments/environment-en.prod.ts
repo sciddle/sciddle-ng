@@ -9,7 +9,7 @@
 export const environment = {
   production: true,
   LANGUAGE: 'EN',
-  APP_NAME: 'Sciddle Dev',
+  APP_NAME: 'Sciddle',
   DATABASE_ENTITIES: 'sciddle_en',
   DATABASE_SETTINGS: 'sciddle_en_settings',
 
