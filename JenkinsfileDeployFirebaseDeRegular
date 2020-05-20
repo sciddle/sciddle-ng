@@ -60,7 +60,7 @@ pipeline {
         }
         stage('Release') {
             steps {
-                sh "npm run release-only-web"
+                sh "npm run release-only-web-de"
             }
         }
         stage('Results') {
