@@ -13,10 +13,12 @@
   "licenseContent": "CC BY 4.0",
   "scripts": {
     "ng": "ng",
+    "clean": "rimraf ./dist",
     "start": "ng serve --configuration=de-regular",
     "start-de": "ng serve --configuration=de-regular",
     "start-en": "ng serve --configuration=en-regular",
     "build": "ng build",
+    "build:ci": "npm run clean && npm run build",
     "build-de-regular-prod": "ng build --prod --deleteOutputPath=true --configuration=de-regular-production --outputPath=dist/sciddle-riddle-de",
     "build-en-regular-prod": "ng build --prod --deleteOutputPath=true --configuration=en-regular-production --outputPath=dist/sciddle-riddle-en",
     "build-de-s4f-prod": "ng build --prod --deleteOutputPath=true --configuration=de-s4f-production --outputPath=dist/sciddle-s4f-de",
