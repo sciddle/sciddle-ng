@@ -1,5 +1,7 @@
 # Sciddle
 
+[![Actions Status](https://github.com/sciddle/sciddle-ng/workflows/Build/badge.svg)](https://github.com/sciddle/sciddle-ng/actions)
+
 [![Sciddle logo](https://github.com/sciddle/sciddle-ng/blob/master/src/assets/logos/logo-144x144.png)](https://github.com/sciddle/sciddle-ng/blob/master/src/assets/logos/logo-144x144.png)
 
 ## Demo
