@@ -1,4 +1,4 @@
-name: Build and Deploy to Firebase DE Regular
+name: Build and Deploy German S4F variant to Firebase
 on: [pull_request, push]
 jobs:
   build:
@@ -23,11 +23,14 @@ jobs:
         uses: snickerbockers/submodules-init@v4
       - name: Build Angular
         run: |
+          cp ./src/index-s4f.html ${WORKSPACE}/src/index.html
+          cp ./src/favicon-s4f.ico ${WORKSPACE}/src/favicon.ico
+          cp ./src/assets/manual/manual-de-s4f.md ${WORKSPACE}/src/assets/manual/manual-de.md
           npm install
-          npm run build-de-regular-prod
+          npm run build-de-s4f-prod
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
-          args: deploy --project sciddle-riddle --only hosting:sciddle-riddle-de
+          args: deploy --project sciddle-riddle --only hosting:sciddle-riddle-s4f
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
