@@ -23,9 +23,7 @@ jobs:
           rm -rf ./coverage/*
           mkdir -p ./reports
       - name: Init submodules
-        run: |
-          git submodule init
-          git submodule update
+        uses: snickerbockers/submodules-init@v4
       - name: Build Angular
         run: |
           cp ./src/index-s4f-matomo.html ./src/index.html
