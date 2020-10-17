@@ -1,0 +1,33 @@
+name: Build and Deploy to Firebase DE Regular
+on: [pull_request, push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x]
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v2
+      - name: Set up Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - name: Clean
+        run: |
+          rm -rf ./dist/*
+          rm -rf ./reports/*
+          rm -rf ./coverage/*
+          mkdir -p ./reports
+      - name: Init submodules
+        uses: snickerbockers/submodules-init@v4
+      - name: Build Angular
+        run: |
+          npm install
+          npm run build-de-regular-prod
+      - name: Deploy to Firebase
+        uses: w9jds/firebase-action@master
+        with:
+          args: deploy --project sciddle-riddle --only hosting:sciddle-riddle-de
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
