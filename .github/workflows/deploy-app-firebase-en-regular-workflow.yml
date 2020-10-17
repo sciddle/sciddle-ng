@@ -1,4 +1,4 @@
-name: Build and Deploy to Firebase DE Regular
+name: Build and Deploy English regular variant to Firebase
 on: [pull_request, push]
 jobs:
   build:
@@ -24,10 +24,10 @@ jobs:
       - name: Build Angular
         run: |
           npm install
-          npm run build-de-regular-prod
+          npm run build-en-regular-prod
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
-          args: deploy --project sciddle-riddle --only hosting:sciddle-riddle-de
+          args: deploy --project sciddle-riddle --only hosting:sciddle-riddle-en
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
