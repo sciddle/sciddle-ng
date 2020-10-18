@@ -23,9 +23,9 @@ jobs:
         uses: snickerbockers/submodules-init@v4
       - name: Build Angular
         run: |
-          cp ./src/index-s4f.html ${WORKSPACE}/src/index.html
-          cp ./src/favicon-s4f.ico ${WORKSPACE}/src/favicon.ico
-          cp ./src/assets/manual/manual-de-s4f.md ${WORKSPACE}/src/assets/manual/manual-de.md
+          cp ./src/index-s4f.html ./src/index.html
+          cp ./src/favicon-s4f.ico ./src/favicon.ico
+          cp ./src/assets/manual/manual-de-s4f.md ./src/assets/manual/manual-de.md
           npm install
           npm run build-de-s4f-prod
       - name: Deploy to Firebase
