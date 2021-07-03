@@ -19,8 +19,8 @@
       "rewrites": [ { "source": "**", "destination": "/index.html" } ]
     },
     {
-      "target": "sciddle-s4f",
-      "public": "dist/sciddle-s4f/de",
+      "target": "sciddle-s4f-de",
+      "public": "dist/sciddle-s4f-de/de",
       "ignore": [ "firebase.json", "**/.*", "**/node_modules/**" ],
       "rewrites": [ { "source": "**", "destination": "/index.html" } ]
     }
