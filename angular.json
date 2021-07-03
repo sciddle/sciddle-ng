@@ -202,22 +202,6 @@
                 {
                   "replace": "src/app/app-routing.module.ts",
                   "with": "src/app/app-routing-s4f.module.ts"
-                },
-                {
-                  "replace": "src/manifest.json",
-                  "with": "src/manifest-s4f.json"
-                },
-                {
-                  "replace": "src/index.html",
-                  "with": "src/index-s4f.html"
-                },
-                {
-                  "replace": "src/favicon.ico",
-                  "with": "src/favicon-s4f.ico"
-                },
-                {
-                  "replace": "src/assets/manual/manual-de.md",
-                  "with": "src/assets/manual/manual-de-s4f.md"
                 }
               ],
               "optimization": {

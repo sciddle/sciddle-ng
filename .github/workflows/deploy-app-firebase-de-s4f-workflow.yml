@@ -26,6 +26,8 @@ jobs:
           cp ./src/index-s4f.html ./src/index.html
           cp ./src/favicon-s4f.ico ./src/favicon.ico
           cp ./src/assets/manual/manual-de-s4f.md ./src/assets/manual/manual-de.md
+          cp ./src/manifest.json ./src/manifest-s4f.json
+          cp ./src/index.html ./src/index-s4f.html
           npm install
           npm run build-de-s4f-prod
       - name: Deploy to Firebase
