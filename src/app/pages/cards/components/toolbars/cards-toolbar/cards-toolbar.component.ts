@@ -3,13 +3,14 @@ import {
   Component,
   EventEmitter,
   Input,
-  isDevMode, OnChanges, OnInit,
-  Output, SimpleChanges,
+  isDevMode,
+  OnChanges,
+  Output,
+  SimpleChanges,
   ViewEncapsulation
 } from '@angular/core';
 import {Media} from '../../../../../core/ui/model/media.enum';
 import {GameMode} from '../../../../../core/entity/model/game-mode.enum';
-import {environment} from '../../../../../../environments/environment';
 import {Variant} from '../../../../../core/util/model/variant.enum';
 import {VariantService} from '../../../../../core/util/services/variant.service';
 import {LogService} from '../../../../../core/log/services/log.service';

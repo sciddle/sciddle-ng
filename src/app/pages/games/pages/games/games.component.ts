@@ -11,7 +11,6 @@ import {environment} from '../../../../../environments/environment';
 import {CardsService} from '../../../../core/entity/services/card/cards.service';
 import {Media} from '../../../../core/ui/model/media.enum';
 import {MaterialColorService} from '../../../../core/ui/services/material-color.service';
-import {MatDialog, MatIconRegistry} from '@angular/material';
 import {MediaService} from '../../../../core/ui/services/media.service';
 import {MaterialIconService} from '../../../../core/ui/services/material-icon.service';
 import {DomSanitizer} from '@angular/platform-browser';
@@ -34,6 +33,8 @@ import {CheckableInformationDialogComponent} from '../../../../ui/information-di
 import {LogService} from '../../../../core/log/services/log.service';
 import {Game} from '../../../../core/entity/model/game/game.model';
 import {Language} from '../../../../core/language/model/language.enum';
+import {MatDialog} from '@angular/material/dialog';
+import {MatIconRegistry} from '@angular/material/icon';
 
 /**
  * Displays games page

@@ -12,7 +12,6 @@ import {
 } from '@angular/core';
 import {Media} from '../../../../core/ui/model/media.enum';
 import {environment} from '../../../../../environments/environment';
-import {MatDialog, MatIconRegistry} from '@angular/material';
 import {MaterialColorService} from '../../../../core/ui/services/material-color.service';
 import {MediaService} from '../../../../core/ui/services/media.service';
 import {filter, takeUntil} from 'rxjs/operators';
@@ -50,6 +49,8 @@ import {SettingType} from '../../../../core/settings/model/setting-type.enum';
 import {SettingsService} from '../../../../core/settings/services/settings.service';
 import {StacksService} from '../../../../core/entity/services/stack/stacks.service';
 import {Language} from '../../../../core/language/model/language.enum';
+import {MatDialog} from '@angular/material/dialog';
+import {MatIconRegistry} from '@angular/material/icon';
 
 export enum DisplayAspect {
   DISPLAY_CARDS,
@@ -1180,7 +1181,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
       this.cardsService.updateCard(stack, card).then(() => {
         this.stacksPersistenceService.clearStacks();
         this.stacksPersistenceService.updateStack(stack).then(() => {
-          resolve();
+          resolve(null);
         }).catch(() => {
           reject();
         });

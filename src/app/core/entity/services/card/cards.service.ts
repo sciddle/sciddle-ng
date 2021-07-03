@@ -298,7 +298,7 @@ export class CardsService {
     return new Promise((resolve) => {
       card.index = CardsService.CARD_INDEX_OUT_OF_STACK;
       this.updateCard(stack, card).then(() => {
-        resolve();
+        resolve(null);
       });
     });
   }
@@ -333,7 +333,7 @@ export class CardsService {
       }
 
       this.updateCardOfStack(stack, card);
-      resolve();
+      resolve(null);
     });
   }
 

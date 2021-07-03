@@ -3,8 +3,6 @@ import {LOCALE_ID, NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {AppImports} from './app.imports';
 import {AppProviders} from './app.providers';
-import {HAMMER_GESTURE_CONFIG} from '@angular/platform-browser';
-import {GestureConfig} from '@angular/material';
 import {OverlayContainer} from '@angular/cdk/overlay';
 
 @NgModule({
@@ -13,7 +11,6 @@ import {OverlayContainer} from '@angular/cdk/overlay';
   ],
   imports: [AppImports],
   providers: [AppProviders,
-    {provide: HAMMER_GESTURE_CONFIG, useClass: GestureConfig},
     {provide: LOCALE_ID, useValue: 'en'}],
   bootstrap: [AppComponent]
 })

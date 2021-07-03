@@ -1,4 +1,4 @@
-@import '~@angular/material/theming';
+@use '~@angular/material' as mat;
 
 $color-sciddle: #a9c235;
 $color-sciddle: hsl(71, 57%, 48%);
@@ -19,25 +19,25 @@ $mat-sciddle: (
   A400: $color-sciddle,
   A700: $color-sciddle,
   contrast: (
-    50: $dark-primary-text,
-    100: $dark-primary-text,
-    200: $dark-primary-text,
-    300: $dark-primary-text,
-    400: $dark-primary-text,
-    500: $light-primary-text,
-    600: $light-primary-text,
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: rgba(black, 0.87),
+    500: white,
+    600: white,
     700: white,
     800: white,
     900: white,
-    A100: $dark-primary-text,
-    A200: $light-primary-text,
-    A400: $light-primary-text,
-    A700: $light-primary-text,
+    A100: rgba(black, 0.87),
+    A200: white,
+    A400: white,
+    A700: white,
   )
 );
 
-$green-primary: mat-palette($mat-sciddle, 500, 400, 600);
-$green-accent: mat-palette($mat-sciddle, 700, 600, 800);
-$green-warn: mat-palette($mat-red);
+$green-primary: mat.define-palette($mat-sciddle, 500, 400, 600);
+$green-accent: mat.define-palette($mat-sciddle, 700, 600, 800);
+$green-warn: mat.define-palette(mat.$red-palette);
 
-$green-theme: mat-light-theme($green-primary, $green-accent, $green-warn);
+$green-theme: mat.define-light-theme($green-primary, $green-accent, $green-warn);

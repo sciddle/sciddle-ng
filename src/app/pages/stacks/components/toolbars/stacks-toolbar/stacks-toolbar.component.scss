@@ -1,3 +1,4 @@
+@use '~@angular/material' as mat;
 @import '../../../../../../styles';
 
 //
@@ -24,7 +25,7 @@
 
 .toolbar-title {
   font-family: 'Black Han Sans', sans-serif;
-  color: mat-color($blue-primary, 500);
+  color: mat.get-color-from-palette($blue-primary, 500);
   font-size: 1.5em;
   text-transform: uppercase;
   vertical-align: bottom;
@@ -51,7 +52,7 @@
 .searchbox {
   height: 40px;
 
-  background: mat-color($mat-grey, 500);
+  background: mat.get-color-from-palette(mat.$grey-palette, 500);
   opacity: 0.4;
   border-radius: 20px;
 
@@ -88,16 +89,16 @@
   }
 
   ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-    color: mat-color($mat-grey, 300);
+    color: mat.get-color-from-palette(mat.$grey-palette, 300);
     opacity: 1; /* Firefox */
   }
 
   :-ms-input-placeholder { /* Internet Explorer 10-11 */
-    color: mat-color($mat-grey, 300);
+    color: mat.get-color-from-palette(mat.$grey-palette, 300);
   }
 
   :-ms-input-placeholder { /* Microsoft Edge */
-    color: mat-color($mat-grey, 300);
+    color: mat.get-color-from-palette(mat.$grey-palette, 300);
   }
 }
 

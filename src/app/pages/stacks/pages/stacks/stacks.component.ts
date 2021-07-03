@@ -1,5 +1,4 @@
 import {AfterViewInit, Component, Inject, isDevMode, OnDestroy, OnInit} from '@angular/core';
-import {MatDialog, MatIconRegistry} from '@angular/material';
 import {InformationDialogComponent} from '../../../../ui/information-dialog/information-dialog/information-dialog.component';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../../../environments/environment';
@@ -30,6 +29,8 @@ import {ROUTE_GAMES} from '../../../../app.routes';
 import {GamesService} from '../../../../core/entity/services/game/games.service';
 import {LogService} from '../../../../core/log/services/log.service';
 import {Language} from '../../../../core/language/model/language.enum';
+import {MatDialog} from '@angular/material/dialog';
+import {MatIconRegistry} from '@angular/material/icon';
 
 /**
  * Displays stacks

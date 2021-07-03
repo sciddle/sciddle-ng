@@ -219,7 +219,7 @@ export class GamesService {
       this.game.state = GameState.ONGOING;
       this.notify();
 
-      resolve();
+      resolve(null);
     });
   }
 
@@ -250,7 +250,7 @@ export class GamesService {
       this.game.turn.state = TurnState.DISPLAY_DIFFICULTY_SELECTION;
       this.notify();
 
-      resolve();
+      resolve(null);
     });
   }
 
@@ -266,7 +266,7 @@ export class GamesService {
       this.game.turn.state = TurnState.DISPLAY_CARDS;
       this.notify();
 
-      resolve();
+      resolve(null);
     });
   }
 
@@ -281,7 +281,7 @@ export class GamesService {
       this.game.turn.state = TurnState.DISPLAY_TURN_EVALUATION;
       this.notify();
 
-      resolve();
+      resolve(null);
     });
   }
 
@@ -311,7 +311,7 @@ export class GamesService {
 
       this.notify();
 
-      resolve();
+      resolve(null);
     });
   }
 
@@ -333,7 +333,7 @@ export class GamesService {
 
       this.notify();
 
-      resolve();
+      resolve(null);
     });
   }
 

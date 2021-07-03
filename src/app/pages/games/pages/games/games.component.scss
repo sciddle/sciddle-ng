@@ -1,3 +1,4 @@
+@use '~@angular/material' as mat;
 @import '../../../../../styles';
 @import '../../../../../theme';
 
@@ -49,36 +50,36 @@
 .blue-theme {
   .single-player {
     color: white !important;
-    background-color: mat-color($blue-primary, 400) !important;
+    background-color: mat.get-color-from-palette($blue-primary, 400) !important;
   }
 
   .multi-player {
     color: white !important;
-    background-color: mat-color($blue-primary, 600) !important;
+    background-color: mat.get-color-from-palette($blue-primary, 600) !important;
   }
 }
 
 .green-theme {
   .single-player {
     color: white !important;
-    background-color: mat-color($green-primary, 400) !important;
+    background-color: mat.get-color-from-palette($green-primary, 400) !important;
   }
 
   .multi-player {
     color: white !important;
-    background-color: mat-color($green-primary, 600) !important;
+    background-color: mat.get-color-from-palette($green-primary, 600) !important;
   }
 }
 
 .future-theme {
   .single-player {
     color: white !important;
-    background-color: mat-color($future-primary, 400) !important;
+    background-color: mat.get-color-from-palette($future-primary, 400) !important;
   }
 
   .multi-player {
     color: white !important;
-    background-color: mat-color($future-primary, 600) !important;
+    background-color: mat.get-color-from-palette($future-primary, 600) !important;
   }
 }
 

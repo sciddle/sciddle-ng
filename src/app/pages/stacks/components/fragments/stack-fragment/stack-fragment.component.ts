@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, isDevMode, OnInit, Output} from '@angular/core';
-import {MatDialog} from '@angular/material';
+import {MatDialog} from '@angular/material/dialog';
 import {SnackbarService} from '../../../../../core/ui/services/snackbar.service';
 import {Stack} from '../../../../../core/entity/model/stack/stack.model';
 import {StacksService} from '../../../../../core/entity/services/stack/stacks.service';

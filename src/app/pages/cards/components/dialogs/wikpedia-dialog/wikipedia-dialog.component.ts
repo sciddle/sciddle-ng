@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {WikipediaService} from '../../../../../core/wikipedia/services/wikipedia.service';
 import {environment} from '../../../../../../environments/environment';
 import {Language} from '../../../../../core/language/model/language.enum';

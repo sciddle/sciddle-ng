@@ -1,3 +1,4 @@
+@use '~@angular/material' as mat;
 @import '../../../../../../styles';
 
 //
@@ -27,21 +28,21 @@
 
 .blue-theme {
   .team-name {
-    color: mat-color($blue-accent, 500) !important;
+    color: mat.get-color-from-palette($blue-accent, 500) !important;
     font-weight: 700;
   }
 }
 
 .green-theme {
   .team-name {
-    color: mat-color($green-accent, 500) !important;
+    color: mat.get-color-from-palette($green-accent, 500) !important;
     font-weight: 700;
   }
 }
 
 .future-theme {
   .team-name {
-    color: mat-color($future-accent, 500) !important;
+    color: mat.get-color-from-palette($future-accent, 500) !important;
     font-weight: 700;
   }
 }

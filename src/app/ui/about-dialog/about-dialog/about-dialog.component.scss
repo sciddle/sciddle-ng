@@ -1,22 +1,23 @@
+@use '~@angular/material' as mat;
 @import '../../../../theme';
 
 .blue-theme {
   a, a:visited {
-    color: mat-color($blue-primary, 500) !important;
+    color: mat.get-color-from-palette($blue-primary, 500) !important;
     text-decoration: none !important;
   }
 }
 
 .green-theme {
   a, a:visited {
-    color: mat-color($green-primary, 500) !important;
+    color: mat.get-color-from-palette($green-primary, 500) !important;
     text-decoration: none !important;
   }
 }
 
 .future-theme {
   a, a:visited {
-    color: mat-color($future-primary, 500) !important;
+    color: mat.get-color-from-palette($future-primary, 500) !important;
     text-decoration: none !important;
   }
 }

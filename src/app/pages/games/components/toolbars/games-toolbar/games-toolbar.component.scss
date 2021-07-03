@@ -1,3 +1,4 @@
+@use '~@angular/material' as mat;
 @import '../../../../../../styles';
 
 //
@@ -42,7 +43,7 @@
 
 .blue-theme {
   .toolbar-title {
-    color: mat-color($blue-primary, 500);
+    color: mat.get-color-from-palette($blue-primary, 500);
     font-family: 'Black Han Sans', sans-serif;
     font-size: 1.5em;
     text-transform: uppercase;
@@ -52,7 +53,7 @@
 
 .green-theme {
   .toolbar-title {
-    color: mat-color($green-primary, 500);
+    color: mat.get-color-from-palette($green-primary, 500);
     font-family: 'Black Han Sans', sans-serif;
     font-size: 1.5em;
     text-transform: uppercase;
@@ -100,7 +101,7 @@
   }
 
   .icon {
-    fill: mat-color($future-primary, 800) !important;
+    fill: mat.get-color-from-palette($future-primary, 800) !important;
   }
 }
 
@@ -111,7 +112,7 @@
 .searchbox {
   height: 40px;
 
-  background: mat-color($mat-grey, 500);
+  background: mat.get-color-from-palette(mat.$grey-palette, 500);
   opacity: 0.4;
   border-radius: 20px;
 
@@ -148,16 +149,16 @@
   }
 
   ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-    color: mat-color($mat-grey, 300);
+    color: mat.get-color-from-palette(mat.$grey-palette, 300);
     opacity: 1; /* Firefox */
   }
 
   :-ms-input-placeholder { /* Internet Explorer 10-11 */
-    color: mat-color($mat-grey, 300);
+    color: mat.get-color-from-palette(mat.$grey-palette, 300);
   }
 
   :-ms-input-placeholder { /* Microsoft Edge */
-    color: mat-color($mat-grey, 300);
+    color: mat.get-color-from-palette(mat.$grey-palette, 300);
   }
 }
 

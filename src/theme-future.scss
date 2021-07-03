@@ -1,4 +1,4 @@
-@import '~@angular/material/theming';
+@use '~@angular/material' as mat;
 
 // $color-future-primary: #4292c6;
 // $color-future-primary: hsl(204, 54%, 52%);
@@ -28,20 +28,20 @@ $mat-primary: (
   A400: hsl(204, 84%, 52%),
   A700: hsl(204, 94%, 52%),
   contrast: (
-    50: $dark-primary-text,
-    100: $dark-primary-text,
-    200: $dark-primary-text,
-    300: $light-primary-text,
-    400: $light-primary-text,
-    500: $light-primary-text,
-    600: $light-primary-text,
-    700: $light-primary-text,
-    800: $light-primary-text,
-    900: $light-primary-text,
-    A100: $light-primary-text,
-    A200: $light-primary-text,
-    A400: $light-primary-text,
-    A700: $light-primary-text,
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: white,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: white,
+    A200: white,
+    A400: white,
+    A700: white,
   )
 );
 
@@ -61,20 +61,20 @@ $mat-semi-accent: (
   A400: hsl(14, 99%, 72%),
   A700: hsl(14, 100%, 72%),
   contrast: (
-    50: $dark-primary-text,
-    100: $dark-primary-text,
-    200: $dark-primary-text,
-    300: $dark-primary-text,
-    400: $light-primary-text,
-    500: $light-primary-text,
-    600: $light-primary-text,
-    700: $light-primary-text,
-    800: $light-primary-text,
-    900: $light-primary-text,
-    A100: $light-primary-text,
-    A200: $light-primary-text,
-    A400: $light-primary-text,
-    A700: $light-primary-text,
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: white,
+    A200: white,
+    A400: white,
+    A700: white,
   )
 );
 
@@ -94,20 +94,20 @@ $mat-accent: (
   A400: hsl(11, 99%, 64%),
   A700: hsl(11, 100%, 64%),
   contrast: (
-    50: $dark-primary-text,
-    100: $dark-primary-text,
-    200: $dark-primary-text,
-    300: $dark-primary-text,
-    400: $light-primary-text,
-    500: $light-primary-text,
-    600: $light-primary-text,
-    700: $light-primary-text,
-    800: $light-primary-text,
-    900: $light-primary-text,
-    A100: $light-primary-text,
-    A200: $light-primary-text,
-    A400: $light-primary-text,
-    A700: $light-primary-text,
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: white,
+    A200: white,
+    A400: white,
+    A700: white,
   )
 );
 
@@ -127,26 +127,26 @@ $mat-warn: (
   A400: hsl(5, 95%, 55%),
   A700: hsl(5, 98%, 55%),
   contrast: (
-    50: $dark-primary-text,
-    100: $dark-primary-text,
-    200: $dark-primary-text,
-    300: $dark-primary-text,
-    400: $dark-primary-text,
-    500: $light-primary-text,
-    600: $light-primary-text,
-    700: $light-primary-text,
-    800: $light-primary-text,
-    900: $light-primary-text,
-    A100: $light-primary-text,
-    A200: $light-primary-text,
-    A400: $light-primary-text,
-    A700: $light-primary-text,
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: rgba(black, 0.87),
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: white,
+    A200: white,
+    A400: white,
+    A700: white,
   )
 );
 
-$future-primary: mat-palette($mat-primary, 500, 400, 600);
-$future-accent: mat-palette($mat-accent, 500, 400, 600);
-$future-semi-accent: mat-palette($mat-semi-accent, 500, 400, 600);
-$future-warn: mat-palette($mat-warn);
+$future-primary: mat.define-palette($mat-primary, 500, 400, 600);
+$future-accent: mat.define-palette($mat-accent, 500, 400, 600);
+$future-semi-accent: mat.define-palette($mat-semi-accent, 500, 400, 600);
+$future-warn: mat.define-palette($mat-warn);
 
-$future-theme: mat-light-theme($future-primary, $future-accent, $future-warn);
+$future-theme: mat.define-light-theme($future-primary, $future-accent, $future-warn);

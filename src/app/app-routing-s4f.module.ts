@@ -5,8 +5,12 @@ import {GameGuard} from './guards/game.guard';
 
 const routes: Routes = [
   {path: `${ROUTE_STACKS}`, redirectTo: `${ROUTE_GAMES}`, pathMatch: 'full'},
-  {path: `${ROUTE_GAMES}`, loadChildren: './pages/games/games.module#GamesModule', canActivate: [GameGuard]},
-  {path: `${ROUTE_CARDS}`, loadChildren: './pages/cards/cards.module#CardsModule'},
+  {
+    path: `${ROUTE_GAMES}/:id`,
+    loadChildren: () => import('./pages/games/games.module').then(m => m.GamesModule),
+    canActivate: [GameGuard]
+  },
+  {path: `${ROUTE_CARDS}`, loadChildren: () => import('./pages/cards/cards.module').then(m => m.CardsModule)},
   {path: '', redirectTo: `${ROUTE_GAMES}`, pathMatch: 'full'},
   {path: '**', redirectTo: `${ROUTE_GAMES}`},
 ];

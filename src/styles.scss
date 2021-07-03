@@ -1,21 +1,21 @@
+@use '~@angular/material' as mat;
 // Theme
-@import '~@angular/material/theming';
 
-@include mat-core();
+@include mat.core();
 @import 'theme.scss';
 @import 'sizes.scss';
 @import 'flex.scss';
 
 .blue-theme {
-  @include angular-material-theme($blue-theme);
+  @include mat.all-component-themes($blue-theme);
 }
 
 .green-theme {
-  @include angular-material-theme($green-theme);
+  @include mat.all-component-themes($green-theme);
 }
 
 .future-theme {
-  @include angular-material-theme($future-theme);
+  @include mat.all-component-themes($future-theme);
 }
 
 // Rest
@@ -36,7 +36,7 @@ $background: #fafafa;
 body {
   height: 100%;
   background: $background;
-  color: mat-color($mat-grey, 600);
+  color: mat.get-color-from-palette(mat.$grey-palette, 600);
   font-family: Roboto, "Helvetica Neue", sans-serif;
   margin: 0;
 
@@ -50,13 +50,13 @@ body {
 
 .blue-theme {
   .icon-accent-contrast svg {
-    fill: mat-color($mat-grey, A100);
+    fill: mat.get-color-from-palette(mat.$grey-palette, A100);
   }
 }
 
 .green-theme {
   .icon-accent-contrast svg {
-    fill: mat-color($mat-grey, A100);
+    fill: mat.get-color-from-palette(mat.$grey-palette, A100);
   }
 }
 
@@ -68,7 +68,7 @@ app-root {
 }
 
 .debug {
-  color: mat-color($mat-grey, 400);
+  color: mat.get-color-from-palette(mat.$grey-palette, 400);
 }
 
 .horizontal-center {

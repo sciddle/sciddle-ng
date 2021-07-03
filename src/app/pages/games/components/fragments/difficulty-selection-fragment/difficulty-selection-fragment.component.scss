@@ -1,3 +1,4 @@
+@use '~@angular/material' as mat;
 @import '../../../../../../styles';
 
 //
@@ -30,51 +31,51 @@
 
 .blue-theme {
   .difficulty-easy {
-    color: mat-contrast($blue-primary, 400) !important;
-    background-color: mat-color($blue-primary, 400) !important;
+    color: mat.get-contrast-color-from-palette($blue-primary, 400) !important;
+    background-color: mat.get-color-from-palette($blue-primary, 400) !important;
   }
 
   .difficulty-medium {
-    color: mat-contrast($blue-primary, 500) !important;
-    background-color: mat-color($blue-primary, 500) !important;
+    color: mat.get-contrast-color-from-palette($blue-primary, 500) !important;
+    background-color: mat.get-color-from-palette($blue-primary, 500) !important;
   }
 
   .difficulty-hard {
-    color: mat-contrast($blue-primary, 600) !important;
-    background-color: mat-color($blue-primary, 600) !important;
+    color: mat.get-contrast-color-from-palette($blue-primary, 600) !important;
+    background-color: mat.get-color-from-palette($blue-primary, 600) !important;
   }
 }
 
 .green-theme {
   .difficulty-easy {
-    color: mat-contrast($green-primary, 400) !important;
-    background-color: mat-color($green-primary, 400) !important;
+    color: mat.get-contrast-color-from-palette($green-primary, 400) !important;
+    background-color: mat.get-color-from-palette($green-primary, 400) !important;
   }
 
   .difficulty-medium {
-    color: mat-contrast($green-primary, 500) !important;
-    background-color: mat-color($green-primary, 500) !important;
+    color: mat.get-contrast-color-from-palette($green-primary, 500) !important;
+    background-color: mat.get-color-from-palette($green-primary, 500) !important;
   }
 
   .difficulty-hard {
-    color: mat-contrast($green-primary, 600) !important;
-    background-color: mat-color($green-primary, 600) !important;
+    color: mat.get-contrast-color-from-palette($green-primary, 600) !important;
+    background-color: mat.get-color-from-palette($green-primary, 600) !important;
   }
 }
 
 .future-theme {
   .difficulty-easy {
-    color: mat-contrast($future-primary, 400) !important;
-    background-color: mat-color($future-primary, 400) !important;
+    color: mat.get-contrast-color-from-palette($future-primary, 400) !important;
+    background-color: mat.get-color-from-palette($future-primary, 400) !important;
   }
 
   .difficulty-medium {
-    color: mat-contrast($future-primary, 500) !important;
-    background-color: mat-color($future-semi-accent, 500) !important;
+    color: mat.get-contrast-color-from-palette($future-primary, 500) !important;
+    background-color: mat.get-color-from-palette($future-semi-accent, 500) !important;
   }
 
   .difficulty-hard {
-    color: mat-contrast($future-primary, 600) !important;
-    background-color: mat-color($future-accent, 500) !important;
+    color: mat.get-contrast-color-from-palette($future-primary, 600) !important;
+    background-color: mat.get-color-from-palette($future-accent, 500) !important;
   }
 }

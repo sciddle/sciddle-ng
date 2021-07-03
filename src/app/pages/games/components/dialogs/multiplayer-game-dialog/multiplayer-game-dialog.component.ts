@@ -1,6 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef, MatSliderChange} from '@angular/material';
 import {environment} from '../../../../../../environments/environment';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {MatSliderChange} from '@angular/material/slider';
 
 /**
  * Displays multiplayer dialog

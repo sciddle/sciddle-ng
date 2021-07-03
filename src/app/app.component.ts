@@ -1,6 +1,5 @@
 import {AfterViewInit, Component, isDevMode, OnInit} from '@angular/core';
 import {SnackbarService} from './core/ui/services/snackbar.service';
-import {MatSnackBar} from '@angular/material';
 import {PouchDBService} from './core/persistence/services/pouchdb.service';
 import {environment} from '../environments/environment';
 import {ThemeService} from './core/ui/services/theme.service';
@@ -8,6 +7,7 @@ import {OverlayContainer} from '@angular/cdk/overlay';
 import {PouchDBSettingsService} from './core/persistence/services/pouchdb-settings.service';
 import {Variant} from './core/util/model/variant.enum';
 import {LogService} from './core/log/services/log.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 /**
  * Displays application

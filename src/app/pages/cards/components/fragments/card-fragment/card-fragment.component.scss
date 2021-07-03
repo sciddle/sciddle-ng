@@ -1,3 +1,4 @@
+@use '~@angular/material' as mat;
 @import '../../../../../../styles';
 
 //
@@ -56,17 +57,17 @@
 
   .difficultyColorEasy {
     color: white !important;
-    background-color: mat-color($mat-green, 500) !important;
+    background-color: mat.get-color-from-palette(mat.$green-palette, 500) !important;
   }
 
   .difficultyColorMedium {
     color: white !important;
-    background-color: mat-color($mat-amber, 400) !important;
+    background-color: mat.get-color-from-palette(mat.$amber-palette, 400) !important;
   }
 
   .difficultyColorHard {
     color: white !important;
-    background-color: mat-color($mat-red, 500) !important;
+    background-color: mat.get-color-from-palette(mat.$red-palette, 500) !important;
   }
 }
 
@@ -81,17 +82,17 @@
 
   .difficultyColorEasy {
     color: white !important;
-    background-color: mat-color($mat-green, 500) !important;
+    background-color: mat.get-color-from-palette(mat.$green-palette, 500) !important;
   }
 
   .difficultyColorMedium {
     color: white !important;
-    background-color: mat-color($mat-amber, 400) !important;
+    background-color: mat.get-color-from-palette(mat.$amber-palette, 400) !important;
   }
 
   .difficultyColorHard {
     color: white !important;
-    background-color: mat-color($mat-red, 500) !important;
+    background-color: mat.get-color-from-palette(mat.$red-palette, 500) !important;
   }
 }
 
@@ -114,18 +115,18 @@
   }
 
   .difficultyColorEasy {
-    color: mat-contrast($future-primary, 500) !important;
-    background-color: mat-color($future-primary, 500) !important;
+    color: mat.get-contrast-color-from-palette($future-primary, 500) !important;
+    background-color: mat.get-color-from-palette($future-primary, 500) !important;
   }
 
   .difficultyColorMedium {
-    color: mat-contrast($future-semi-accent, 500) !important;
-    background-color: mat-color($future-semi-accent, 500) !important;
+    color: mat.get-contrast-color-from-palette($future-semi-accent, 500) !important;
+    background-color: mat.get-color-from-palette($future-semi-accent, 500) !important;
   }
 
   .difficultyColorHard {
-    color: mat-contrast($future-accent, 700) !important;
-    background-color: mat-color($future-accent, 700) !important;
+    color: mat.get-contrast-color-from-palette($future-accent, 700) !important;
+    background-color: mat.get-color-from-palette($future-accent, 700) !important;
   }
 }
 

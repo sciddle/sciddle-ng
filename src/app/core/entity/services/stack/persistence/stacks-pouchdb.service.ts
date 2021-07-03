@@ -123,7 +123,7 @@ export class StacksPouchdbService implements StacksPersistenceService {
         this.stack = stack;
         this.notifyMultipleStacks();
         this.notifySingleStack();
-        resolve();
+        resolve(null);
       });
     });
   }
@@ -203,7 +203,7 @@ export class StacksPouchdbService implements StacksPersistenceService {
         this.stacks.delete(stack.id);
         this.notifyMultipleStacks();
         this.notifySingleStack();
-        resolve();
+        resolve(null);
       });
     });
   }

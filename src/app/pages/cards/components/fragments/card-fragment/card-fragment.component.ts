@@ -4,7 +4,7 @@ import {Media} from '../../../../../core/ui/model/media.enum';
 import {Card} from '../../../../../core/entity/model/card/card.model';
 import {MaterialColorService} from '../../../../../core/ui/services/material-color.service';
 import {WikipediaService} from '../../../../../core/wikipedia/services/wikipedia.service';
-import {MatDialog} from '@angular/material';
+import {MatDialog} from '@angular/material/dialog';
 import {WikipediaDialogComponent} from '../../dialogs/wikpedia-dialog/wikipedia-dialog.component';
 import {Theme} from '../../../../../core/ui/model/theme.enum';
 import {environment} from '../../../../../../environments/environment';

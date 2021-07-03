@@ -1,7 +1,7 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {AboutDialogComponent} from './about-dialog.component';
 import {AboutDialogImports} from '../about-dialog.imports';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {AboutDialogDeclarations} from '../about-dialog.declarations';
 
 /*

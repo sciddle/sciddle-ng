@@ -1,4 +1,4 @@
-@import '~@angular/material/theming';
+@use '~@angular/material' as mat;
 
 $color-sciddle : #049af8;
 $color-sciddle : hsl(203, 97%, 49%);
@@ -19,25 +19,25 @@ $mat-sciddle: (
   A400: $color-sciddle,
   A700: $color-sciddle,
   contrast: (
-    50: $dark-primary-text,
-    100: $dark-primary-text,
-    200: $dark-primary-text,
-    300: $dark-primary-text,
-    400: $dark-primary-text,
-    500: $light-primary-text,
-    600: $light-primary-text,
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: rgba(black, 0.87),
+    500: white,
+    600: white,
     700: white,
     800: white,
     900: white,
-    A100: $dark-primary-text,
-    A200: $light-primary-text,
-    A400: $light-primary-text,
-    A700: $light-primary-text,
+    A100: rgba(black, 0.87),
+    A200: white,
+    A400: white,
+    A700: white,
   )
 );
 
-$blue-primary: mat-palette($mat-sciddle, 500, 400, 600);
-$blue-accent: mat-palette($mat-sciddle, 700, 600, 800);
-$blue-warn: mat-palette($mat-red);
+$blue-primary: mat.define-palette($mat-sciddle, 500, 400, 600);
+$blue-accent: mat.define-palette($mat-sciddle, 700, 600, 800);
+$blue-warn: mat.define-palette(mat.$red-palette);
 
-$blue-theme: mat-light-theme($blue-primary, $blue-accent, $blue-warn);
+$blue-theme: mat.define-light-theme($blue-primary, $blue-accent, $blue-warn);

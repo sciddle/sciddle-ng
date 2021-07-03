@@ -1,3 +1,4 @@
+@use '~@angular/material' as mat;
 @import '../../../../../../styles';
 
 //
@@ -42,7 +43,7 @@
 
 .blue-theme {
   .toolbar-title {
-    color: mat-color($blue-primary, 500) !important;
+    color: mat.get-color-from-palette($blue-primary, 500) !important;
     font-family: 'Black Han Sans', sans-serif;
     font-size: 1.5em;
     text-transform: uppercase;
@@ -50,14 +51,14 @@
   }
 
   .card-count {
-    color: mat-color($blue-accent, 500) !important;
+    color: mat.get-color-from-palette($blue-accent, 500) !important;
     font-weight: 700;
   }
 }
 
 .green-theme {
   .toolbar-title {
-    color: mat-color($green-primary, 500) !important;
+    color: mat.get-color-from-palette($green-primary, 500) !important;
     font-family: 'Black Han Sans', sans-serif;
     font-size: 1.5em;
     text-transform: uppercase;
@@ -65,7 +66,7 @@
   }
 
   .card-count {
-    color: mat-color($green-accent, 500) !important;
+    color: mat.get-color-from-palette($green-accent, 500) !important;
     font-weight: 700;
   }
 }
@@ -110,12 +111,12 @@
   }
 
   .card-count {
-    color: mat-color($future-accent, 500) !important;
+    color: mat.get-color-from-palette($future-accent, 500) !important;
     font-weight: 700;
   }
 
   .icon {
-    fill: mat-color($future-primary, 800) !important;
+    fill: mat.get-color-from-palette($future-primary, 800) !important;
   }
 }
 
