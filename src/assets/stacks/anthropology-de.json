@@ -1,0 +1,5 @@
+{
+  "id":"0","entityType":0,"title":"Anthropologie","game":null,"theme":"blue","cards": [
+  { "entityType": 0, "word": "Anthropologie", "taboos": ["Mensch", "Abstammung", "Biologie", "Kultur", "Naturwissenschaft"], "difficulty": 2 }
+]
+}
