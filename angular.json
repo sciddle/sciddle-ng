@@ -39,7 +39,7 @@
                   "with": "src/environments/environment-en.ts"
                 }
               ],
-              "outputPath": "dist-en",
+              "outputPath": "dist",
               "aot": true,
               "serviceWorker": false,
               "ngswConfigPath": "src/ngsw-config.json",
@@ -54,7 +54,7 @@
             },
             "de-regular": {
               "localize": ["de"],
-              "outputPath": "dist-de",
+              "outputPath": "dist",
               "aot": true,
               "serviceWorker": false,
               "ngswConfigPath": "src/ngsw-config.json",
@@ -69,7 +69,7 @@
             },
             "de-regular-production": {
               "localize": ["de"],
-              "outputPath": "dist-de",
+              "outputPath": "dist",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -138,7 +138,7 @@
             },
             "de-s4f": {
               "localize": ["de"],
-              "outputPath": "dist-de",
+              "outputPath": "dist",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -193,7 +193,7 @@
             },
             "de-s4f-production": {
               "localize": ["de"],
-              "outputPath": "dist-de",
+              "outputPath": "dist",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",

@@ -8,19 +8,19 @@
     },
     {
       "target": "sciddle-riddle-de",
-      "public": "dist/sciddle-riddle-de",
+      "public": "dist/sciddle-riddle-de/de",
       "ignore": [ "firebase.json", "**/.*", "**/node_modules/**" ],
       "rewrites": [ { "source": "**", "destination": "/index.html" } ]
     },
     {
       "target": "sciddle-riddle-en",
-      "public": "dist/sciddle-riddle-en",
+      "public": "dist/sciddle-riddle-en/en",
       "ignore": [ "firebase.json", "**/.*", "**/node_modules/**" ],
       "rewrites": [ { "source": "**", "destination": "/index.html" } ]
     },
     {
       "target": "sciddle-s4f",
-      "public": "dist/sciddle-s4f",
+      "public": "dist/sciddle-s4f/de",
       "ignore": [ "firebase.json", "**/.*", "**/node_modules/**" ],
       "rewrites": [ { "source": "**", "destination": "/index.html" } ]
     }
