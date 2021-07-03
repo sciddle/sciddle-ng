@@ -2,8 +2,8 @@
   "targets": {
     "sciddle-riddle": {
       "hosting": {
-        "sciddle-s4f": [
-          "sciddle-s4f"
+        "sciddle-s4f-de": [
+          "sciddle-s4f-de"
         ],
         "sciddle-riddle": [
           "sciddle-riddle"
