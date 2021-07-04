@@ -1,4 +1,4 @@
-name: Build and Deploy German S4F variant to Firebase
+name: Deploy German S4F version to Firebase
 on: [pull_request, push]
 jobs:
   build:

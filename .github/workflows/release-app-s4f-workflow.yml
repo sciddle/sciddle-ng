@@ -1,4 +1,4 @@
-name: Build and Release S4F
+name: Release S4F
 on:
   push:
     tags:
