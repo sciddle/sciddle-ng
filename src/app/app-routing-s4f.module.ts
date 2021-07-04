@@ -6,9 +6,9 @@ import {GameGuard} from './guards/game.guard';
 const routes: Routes = [
   {path: `${ROUTE_STACKS}`, redirectTo: `${ROUTE_GAMES}`, pathMatch: 'full'},
   {
-    path: `${ROUTE_GAMES}/:id`,
+    canActivate: [GameGuard],
     loadChildren: () => import('./pages/games/games.module').then(m => m.GamesModule),
-    canActivate: [GameGuard]
+    path: `${ROUTE_GAMES}/:id`,
   },
   {path: `${ROUTE_CARDS}`, loadChildren: () => import('./pages/cards/cards.module').then(m => m.CardsModule)},
   {path: '', redirectTo: `${ROUTE_GAMES}`, pathMatch: 'full'},
@@ -16,8 +16,8 @@ const routes: Routes = [
 ];
 
 @NgModule({
+  exports: [RouterModule],
   imports: [RouterModule.forRoot(routes, {enableTracing: false})],
-  exports: [RouterModule]
 })
 export class AppRoutingModule {
 }

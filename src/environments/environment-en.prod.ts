@@ -38,7 +38,6 @@ export const environment = {
   LICENSE_CODE: require('../../package.json').licenseCode,
   LICENSE_CONTENT: require('../../package.json').licenseContent,
   HOMEPAGE: require('../../package.json').homepage,
-  TAGS: require('../../tags.json').tags,
   DEPENDENCIES: require('../../package.json').dependencies,
   DEV_DEPENDENCIES: require('../../package.json').devDependencies,
 };
