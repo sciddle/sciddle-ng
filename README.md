@@ -23,9 +23,9 @@ Sciddle is a **sci**ence ri**ddle** game that lets you learn science terms in a 
 The rules are simple: Try to explain the term written on top of each card to others __without__ using the five words printed below. Swipe the card to the left or to the right to show the next one.
 
 The latest version of this web app is available on
- * https://sciddle-riddle-de.web.app (German)
- * https://sciddle-riddle-en.web.app (English)
-A version re-branded for [Scientists 4 Future](https://www.scientists4future.org/) can be found on https://sciddle-s4f.web.app.
+ * https://sciddle-riddle-deu.web.app (German version)
+ * https://sciddle-riddle-eng.web.app (English version)
+ * https://sciddle-s4f-deu.web.app (German version re-branded for [Scientists 4 Future](https://www.scientists4future.org/))
 
 ### Built With
 

@@ -7,19 +7,19 @@
       "rewrites": [ { "source": "**", "destination": "/index.html" } ]
     },
     {
-      "target": "sciddle-riddle-de",
+      "target": "sciddle-riddle-deu",
       "public": "dist/sciddle-riddle-de/de",
       "ignore": [ "firebase.json", "**/.*", "**/node_modules/**" ],
       "rewrites": [ { "source": "**", "destination": "/index.html" } ]
     },
     {
-      "target": "sciddle-riddle-en",
+      "target": "sciddle-riddle-eng",
       "public": "dist/sciddle-riddle-en/en",
       "ignore": [ "firebase.json", "**/.*", "**/node_modules/**" ],
       "rewrites": [ { "source": "**", "destination": "/index.html" } ]
     },
     {
-      "target": "sciddle-s4f-de",
+      "target": "sciddle-s4f-deu",
       "public": "dist/sciddle-s4f-de/de",
       "ignore": [ "firebase.json", "**/.*", "**/node_modules/**" ],
       "rewrites": [ { "source": "**", "destination": "/index.html" } ]

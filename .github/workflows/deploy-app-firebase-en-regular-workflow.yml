@@ -28,6 +28,6 @@ jobs:
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
-          args: deploy --project sciddle-riddle --only hosting:sciddle-riddle-en
+          args: deploy --project sciddle-riddle --only hosting:sciddle-riddle-eng
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}

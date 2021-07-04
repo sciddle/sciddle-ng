@@ -2,17 +2,17 @@
   "targets": {
     "sciddle-riddle": {
       "hosting": {
-        "sciddle-s4f-de": [
-          "sciddle-s4f-de"
-        ],
         "sciddle-riddle": [
           "sciddle-riddle"
         ],
-        "sciddle-riddle-de": [
-          "sciddle-riddle-de"
+        "sciddle-s4f-deu": [
+          "sciddle-s4f-deu"
         ],
-        "sciddle-riddle-en": [
-          "sciddle-riddle-en"
+        "sciddle-riddle-deu": [
+          "sciddle-riddle-deu"
+        ],
+        "sciddle-riddle-eng": [
+          "sciddle-riddle-eng"
         ]
       }
     }
