@@ -12,7 +12,8 @@
             matTooltipShowDelay="250">{{ card.word }}</span>
       <span class="cdk-visually-hidden" #translatedTooltipShowHint
             i18n="tooltipShowHint|Tooltip show hint@@tooltipShowHint">Show hint</span>
-      <mat-icon svgIcon="help_outline"
+      <mat-icon *ngIf="card.alternateExplanationText != ''"
+                svgIcon="help_outline"
                 [matTooltip]="translatedTooltipShowHint.innerHTML"
                 matTooltipPosition="above"
                 matTooltipShowDelay="250" class="help-icon" (click)="onHelpClicked()"></mat-icon>
