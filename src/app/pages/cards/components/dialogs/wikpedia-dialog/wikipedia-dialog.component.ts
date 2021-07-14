@@ -122,9 +122,9 @@ export class WikipediaDialogComponent implements OnInit {
       const extractEmitter = new EventEmitter<{ pageURL: string, extract: string }>();
       extractEmitter.subscribe(result => {
         if (result != null && result.extract != null) {
-          this.explanationText = this.explanationText == null
+          this.explanationText = (this.explanationText == null
             ? WikipediaDialogComponent.getFirstSentences(result.extract, 2, 100)
-            : this.explanationText;
+            : this.explanationText).replace(/\.\./g, '.').replace(/\.\s\./g, '.');
 
           switch (this.language) {
             case Language.GERMAN: {
