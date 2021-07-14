@@ -1,5 +1,30 @@
 {
-  "id":"0","entityType":0,"title":"Anthropologie","game":null,"theme":"blue","cards": [
-  { "entityType": 0, "word": "Anthropologie", "taboos": ["Mensch", "Abstammung", "Biologie", "Kultur", "Naturwissenschaft"], "difficulty": 2 }
+  "id":"4","entityType":0,"title":"Anthropologie","game":null,"theme":"blue","cards": [
+  { "entityType": 0, "word": "Affekt", "taboos": ["Emotion", "Berührung", "Körper", "Logos", "Resonanz"], "difficulty": 2, "alternateExplanationText": "Der Affekt ist eine vorübergehende Gemütserregung oder Gefühlswallung, die durch äußere Anlässe oder innere psychische Vorgänge ausgelöst wird. Anders als bei einer Stimmung ändert sich die Gefühlstönung dabei meist jedoch nur für kurze Zeit." },
+  { "entityType": 0, "word": "Agency", "taboos": ["Handlung", "Akteurin", "Diskurs", "Macht", "Selbstwirksamkeit"], "difficulty": 3, "alternateWikipediaArticle": "Akteur" },
+  { "entityType": 0, "word": "Bricolage", "taboos": ["Basteln", "Methodenmix", "Kombinieren", "Claude Levi-Strauss", "DIY"], "difficulty": 3 },
+  { "entityType": 0, "word": "Akteur-Netzwerk-\nTheorie", "taboos": ["Bruno Latour", "Materialität", "Handlungsträgerschaft", "Aktant", "Akteurin"], "difficulty": 2 },
+  { "entityType": 0, "word": "Assemblage", "taboos": ["Verflechtung", "Rhizom", "Dispositiv", "zusammengesetzt", "Guattari/Deleuz"], "difficulty": 3 },
+  { "entityType": 0, "word": "Das gute Leben", "taboos": ["Muße", "Moral Anthropology", "Dark Anthropology", "Werte", "Wohlbefinden"], "difficulty": 3, "alternateWikipediaArticle": "Sozialethik" },
+  { "entityType": 0, "word": "Dichte Beschreibung", "taboos": ["Cliffort Geertz", "Balinesischer Hahnenkampf", "Interpretation", "Das komplexe Ganze", "Semiotik"], "difficulty": 2 },
+  { "entityType": 0, "word": "Ding", "taboos": ["Objekt", "Materialität", "Aktantin", "Affordanz", "Gegenstand"], "difficulty": 1, "alternateWikipediaArticle": "Gegenstand" },
+  { "entityType": 0, "word": "Empirie", "taboos": ["Forschung", "Theorie", "Erkenntnis", "Quellen", "Hermeneutik"], "difficulty": 1 },
+  { "entityType": 0, "word": "Enzyklopädie des Märchens", "taboos": ["Erzählforschung", "Sage", "Aarne-Thompson-Index", "Jacob & Wilhelm Grimm", "Mündlichkeit"], "difficulty": 1, "alternateWikipediaArticle": "Enzyklopädie_des_Märchens" },
+  { "entityType": 0, "word": "Erzählforschung", "taboos": ["Verschwörung", "Gerücht", "Sage", "Witz", "Folkloristik"], "difficulty": 2 },
+  { "entityType": 0, "word": "Fankultur", "taboos": ["Hingabe", "Fußball", "Hooligans", "Popkultur", "Vergemeinschaftung"], "difficulty": 1, "alternateWikipediaArticle": "Fan" },
+  { "entityType": 0, "word": "Feld", "taboos": ["Angst", "Forschung", "Beobachtung", "Konstruktion", "Gewährsperson"], "difficulty": 3, "alternateExplanationText": "Der Begriff Feld wird in der allgemeinen Feldtheorie des französischen Soziologen Pierre Bourdieu verwendet und beschreibt ein gesellschaftliches System. In einer Gesellschaft existieren mehrere autonome Felder, wobei jedes Feld eine abgrenzbare Funktion in der Gesellschaft einnimmt (Justiz, Gesundheit, Wirtschaft, Religion, Kunst, Literatur, u. v. m. sind eigenständige Felder)." },
+  { "entityType": 0, "word": "Feldnotizen", "taboos": ["Ethnographie", "Schreiben", "Erfahrung", "Tagebuch", "Material"], "difficulty": 2, "alternateExplanationText": "" },
+  { "entityType": 0, "word": "Gabe", "taboos": ["Schenken", "Marcel Mauss", "Gift", "Reziprozität", "Dingbeseelung"], "difficulty": 3, "alternateWikipediaArticle": "Gabe", "alternateExplanationText": "Ein Geschenk (von (ein)schenken, also dem Bewirten eines Gastes) ist die freiwillige Eigentumsübertragung einer Sache oder eines Rechts an den Beschenkten ohne Gegenleistung – also unmittelbar zunächst kostenlos für den Empfänger. Im übertragenen Sinne kann man auch jemandem seine Aufmerksamkeit, sein Vertrauen oder seine Liebe schenken." },
+  { "entityType": 0, "word": "Grounded Theory", "taboos": ["Auswerten", "Kodieren", "Forschung", "Memo", "Datenanalyse"], "difficulty": 2, "alternateWikipediaArticle": "Grounded_Theory" },
+  { "entityType": 0, "word": "Heimat", "taboos": ["Zuhause", "Wurzeln", "Herkunft", "das Eigene", "Abgrenzung"], "difficulty": 3, "alternateExplanationText": "Der Begriff Heimat verweist zumeist auf eine Beziehung zwischen Mensch und Raum (Territorium). Im allgemeinen Sprachgebrauch wird er auf den Ort angewendet, in den ein Mensch hineingeboren wird und in dem die frühesten Sozialisationserlebnisse stattfinden, die zunächst Identität, Charakter, Mentalität, Einstellungen und Weltauffassungen prägen." },
+  { "entityType": 0, "word": "Identität", "taboos": ["Selbst", "Verortung", "Subjektivität", "Individuum", "Rollenerwartung"], "difficulty": 3 },
+  { "entityType": 0, "word": "Intersektionalität", "taboos": ["class", "race", "gender", "body", "ethnicity"], "difficulty": 1 },
+  { "entityType": 0, "word": "Intra-aktion", "taboos": ["Handlung", "Phänomen", "Beobachterinnenperspektive", "Materialität", "Bruch"], "difficulty": 3, "alternateWikipediaArticle": "Intra-Aktion" },
+  { "entityType": 0, "word": "Klatsch", "taboos": ["Lästern", "Gerücht", "Zusammenhalt", "soziale Regulierung", "Tabu"], "difficulty": 2 },
+  { "entityType": 0, "word": "Ko-laboration", "taboos": ["Zusammenarbeit", "Feind", "Ko-konstruktion", "Labor", "partizipativ"], "difficulty": 3, "alternateWikipediaArticle": "Kollaboration" },
+  { "entityType": 0, "word": "Kult", "taboos": ["Ritual", "Körper", "Verehrung", "Sakralität", "Zeremonie"], "difficulty": 1 },
+  { "entityType": 0, "word": "Magie", "taboos": ["Zauberei/Hexerei", "Aberglaube", "Erklärungssystem", "Wissenschaft", "Religion"], "difficulty": 3, "alternateExplanationText": "Magie oder Zauberei bzw. Zauber, früher auch Zauberkunst, ist eine (geheime) Kunst, die sich übersinnliche Kräfte dienstbar zu machen sucht, oder eine faszinierende, geheimnisvoll wirkende Kraft; auch Tricks des Zauberkünstlers (im Varieté) werden als Magie bezeichnet. Das Wort ist altpersischer Herkunft und bezeichnete ursprünglich die Tätigkeit eines persischen Priester und Traumdeuters (vgl. Mager). Derjenige, der Magie ausübt, wird als Magier (Zauberer) bezeichnet." },
+  { "entityType": 0, "word": "Medium", "taboos": ["McLuhan", "Message", "Séance", "Information", "Vermittlung"], "difficulty": 1, "alternateWikipediaArticle": "Medium_(Person)" },
+  { "entityType": 0, "word": "Klo", "taboos": ["stilles Örtchen", "Toilette", "WC", "sich Frisch machen", "anale Kultur"], "difficulty": 2, "alternateWikipediaArticle": "Toilette" }
 ]
 }
