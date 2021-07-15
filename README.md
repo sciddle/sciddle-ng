@@ -25,7 +25,7 @@ The rules are simple: Try to explain the term written on top of each card to oth
 The latest version of this web app is available on
  * https://sciddle-riddle-deu.web.app (German version)
  * https://sciddle-riddle-eng.web.app (English version)
- * https://sciddle-s4f-deu.web.app (German version re-branded for [Scientists 4 Future](https://www.scientists4future.org/))
+ * https://apps.scientists4future.org/cards-for-future (German version re-branded for [Scientists 4 Future](https://www.scientists4future.org/))
 
 ### Built With
 
