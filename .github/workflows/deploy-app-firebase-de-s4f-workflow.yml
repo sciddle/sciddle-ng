@@ -9,6 +9,8 @@ jobs:
     steps:
       - name: Checkout the code
         uses: actions/checkout@v2
+        with:
+          submodules: recursive
       - name: Set up Node
         uses: actions/setup-node@v1
         with:
@@ -19,8 +21,6 @@ jobs:
           rm -rf ./reports/*
           rm -rf ./coverage/*
           mkdir -p ./reports
-      - name: Init submodules
-        uses: snickerbockers/submodules-init@v4
       - name: Build Angular
         run: |
           cp ./src/index-s4f.html ./src/index.html
