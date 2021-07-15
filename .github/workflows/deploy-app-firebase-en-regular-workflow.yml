@@ -24,7 +24,7 @@ jobs:
       - name: Build Angular
         run: |
           npm install
-          npm run build-en-regular-prod
+          npm run build-en-regular-prod -- --base-href 'https://sciddle-riddle-eng.web.app/'
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
