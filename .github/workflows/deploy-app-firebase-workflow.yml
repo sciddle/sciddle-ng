@@ -1,0 +1,34 @@
+name: Deploy to Firebase (will be published to https://sciddle.de)
+on:
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x]
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - name: Set up Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - name: Clean
+        run: |
+          rm -rf ./dist/*
+          rm -rf ./reports/*
+          rm -rf ./coverage/*
+          mkdir -p ./reports
+      - name: Build Angular
+        run: |
+          npm install
+          npm run build-de-regular-prod -- --base-href 'https://sciddle.de/'
+      - name: Deploy to Firebase
+        uses: w9jds/firebase-action@master
+        with:
+          args: deploy --project sciddle-riddle --only hosting:sciddle-riddle
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}

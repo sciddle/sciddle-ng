@@ -2,11 +2,9 @@
   "hosting": [
     {
       "target": "sciddle-riddle",
-      "redirects": [ {
-        "source": "*",
-        "destination": "https://sciddle-riddle-deu.web.app/",
-        "type": 301
-      } ]
+      "public": "dist/sciddle-riddle-de/de",
+      "ignore": [ "firebase.json", "**/.*", "**/node_modules/**" ],
+      "rewrites": [ { "source": "**", "destination": "/index.html" } ]
     },
     {
       "target": "sciddle-riddle-deu",
