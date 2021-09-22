@@ -1,5 +1,5 @@
 {
-  "id":"4","entityType":0,"title":"Anthropologie","game":null,"theme":"blue","cards": [
+  "id":"5","entityType":0,"title":"Anthropologie","game":null,"theme":"blue","cards": [
   { "entityType": 0, "word": "Affekt", "taboos": ["Emotion", "Berührung", "Körper", "Logos", "Resonanz"], "difficulty": 2, "alternateExplanationText": "Der Affekt ist eine vorübergehende Gemütserregung oder Gefühlswallung, die durch äußere Anlässe oder innere psychische Vorgänge ausgelöst wird. Anders als bei einer Stimmung ändert sich die Gefühlstönung dabei meist jedoch nur für kurze Zeit." },
   { "entityType": 0, "word": "Agency", "taboos": ["Handlung", "Akteurin", "Diskurs", "Macht", "Selbstwirksamkeit"], "difficulty": 3, "alternateWikipediaArticle": "Akteur" },
   { "entityType": 0, "word": "Bricolage", "taboos": ["Basteln", "Methodenmix", "Kombinieren", "Claude Levi-Strauss", "DIY"], "difficulty": 3 },
