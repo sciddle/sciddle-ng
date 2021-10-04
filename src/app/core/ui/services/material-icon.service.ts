@@ -82,7 +82,7 @@ export class MaterialIconService {
 
     this.icons.forEach(icon => {
       iconRegistry.addSvgIcon(icon.name,
-        sanitizer.bypassSecurityTrustResourceUrl(this.ICON_ROOT_DIR + '/' + icon.topic + '/svg/' + this.VARIANT + '/' + icon.file));
+        sanitizer.bypassSecurityTrustResourceUrl('./' + this.ICON_ROOT_DIR + '/' + icon.topic + '/svg/' + this.VARIANT + '/' + icon.file));
     });
 
     iconRegistry.addSvgIcon('blank', sanitizer.bypassSecurityTrustResourceUrl('./assets/icons/ic_blank_24px.svg'));
