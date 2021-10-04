@@ -19,5 +19,5 @@ export enum PaletteType {
   ORANGE,
   DEEP_ORANGE,
   BROWN,
-  GREY
+  GREY,
 }

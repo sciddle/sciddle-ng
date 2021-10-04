@@ -1,40 +1,40 @@
-import {AfterViewInit, Component, Inject, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {SnackbarService} from '../../../../core/ui/services/snackbar.service';
-import {GamesService} from '../../../../core/entity/services/game/games.service';
-import {Stack} from '../../../../core/entity/model/stack/stack.model';
-import {STACK_PERSISTENCE_POUCHDB} from '../../../../core/entity/entity.module';
-import {StacksPersistenceService} from '../../../../core/entity/services/stack/persistence/stacks-persistence.interface';
-import {filter, takeUntil} from 'rxjs/operators';
-import {Subject} from 'rxjs';
-import {environment} from '../../../../../environments/environment';
-import {CardsService} from '../../../../core/entity/services/card/cards.service';
-import {Media} from '../../../../core/ui/model/media.enum';
-import {MaterialColorService} from '../../../../core/ui/services/material-color.service';
-import {MediaService} from '../../../../core/ui/services/media.service';
-import {MaterialIconService} from '../../../../core/ui/services/material-icon.service';
-import {DomSanitizer} from '@angular/platform-browser';
-import {AboutDialogComponent} from '../../../../ui/about-dialog/about-dialog/about-dialog.component';
-import {HttpClient} from '@angular/common/http';
-import {InformationDialogComponent} from '../../../../ui/information-dialog/information-dialog/information-dialog.component';
-import {ROUTE_CARDS, ROUTE_STACKS} from '../../../../app.routes';
-import {ThemeService} from '../../../../core/ui/services/theme.service';
-import {Theme} from '../../../../core/ui/model/theme.enum';
 import {OverlayContainer} from '@angular/cdk/overlay';
-import {MultiplayerGameDialogComponent} from '../../components/dialogs/multiplayer-game-dialog/multiplayer-game-dialog.component';
-import {VariantService} from '../../../../core/util/services/variant.service';
-import {Variant} from '../../../../core/util/model/variant.enum';
-import {StacksService} from '../../../../core/entity/services/stack/stacks.service';
-import {Setting} from '../../../../core/settings/model/setting.model';
-import {SettingsService} from '../../../../core/settings/services/settings.service';
-import {SettingType} from '../../../../core/settings/model/setting-type.enum';
-// tslint:disable-next-line:max-line-length
-import {CheckableInformationDialogComponent} from '../../../../ui/information-dialog/checkable-information-dialog/checkable-information-dialog.component';
-import {LogService} from '../../../../core/log/services/log.service';
-import {Game} from '../../../../core/entity/model/game/game.model';
-import {Language} from '../../../../core/language/model/language.enum';
+import {HttpClient} from '@angular/common/http';
+import {AfterViewInit, Component, Inject, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {MatIconRegistry} from '@angular/material/icon';
+import {DomSanitizer} from '@angular/platform-browser';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Subject} from 'rxjs';
+import {filter, takeUntil} from 'rxjs/operators';
+import {environment} from '../../../../../environments/environment';
+import {ROUTE_CARDS, ROUTE_STACKS} from '../../../../app.routes';
+import {STACK_PERSISTENCE_POUCHDB} from '../../../../core/entity/entity.module';
+import {Game} from '../../../../core/entity/model/game/game.model';
+import {Stack} from '../../../../core/entity/model/stack/stack.model';
+import {CardsService} from '../../../../core/entity/services/card/cards.service';
+import {GamesService} from '../../../../core/entity/services/game/games.service';
+import {StacksPersistenceService} from '../../../../core/entity/services/stack/persistence/stacks-persistence.interface';
+import {StacksService} from '../../../../core/entity/services/stack/stacks.service';
+import {Language} from '../../../../core/language/model/language.enum';
+import {LogService} from '../../../../core/log/services/log.service';
+import {SettingType} from '../../../../core/settings/model/setting-type.enum';
+import {Setting} from '../../../../core/settings/model/setting.model';
+import {SettingsService} from '../../../../core/settings/services/settings.service';
+import {Media} from '../../../../core/ui/model/media.enum';
+import {Theme} from '../../../../core/ui/model/theme.enum';
+import {MaterialColorService} from '../../../../core/ui/services/material-color.service';
+import {MaterialIconService} from '../../../../core/ui/services/material-icon.service';
+import {MediaService} from '../../../../core/ui/services/media.service';
+import {SnackbarService} from '../../../../core/ui/services/snackbar.service';
+import {ThemeService} from '../../../../core/ui/services/theme.service';
+import {Variant} from '../../../../core/util/model/variant.enum';
+import {VariantService} from '../../../../core/util/services/variant.service';
+import {AboutDialogComponent} from '../../../../ui/about-dialog/about-dialog/about-dialog.component';
+// tslint:disable-next-line:max-line-length
+import {CheckableInformationDialogComponent} from '../../../../ui/information-dialog/checkable-information-dialog/checkable-information-dialog.component';
+import {InformationDialogComponent} from '../../../../ui/information-dialog/information-dialog/information-dialog.component';
+import {MultiplayerGameDialogComponent} from '../../components/dialogs/multiplayer-game-dialog/multiplayer-game-dialog.component';
 
 /**
  * Displays games page
@@ -43,7 +43,7 @@ import {MatIconRegistry} from '@angular/material/icon';
   selector: 'app-games',
   templateUrl: './games.component.html',
   styleUrls: ['./games.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
 
@@ -78,9 +78,9 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
   private unsubscribeSubject = new Subject();
 
   /** App variant */
-  variant = environment.VARIANT;
+  public variant = environment.VARIANT;
   /** App language */
-  language = environment.LANGUAGE;
+  public language = environment.LANGUAGE;
 
   /**
    * Constructor
@@ -128,7 +128,7 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
   /**
    * Handles on-init lifecycle phase
    */
-  ngOnInit() {
+  public ngOnInit() {
     this.initializeStackSubscription();
     this.initializeSettingsSubscription();
     this.initializeDatabaseErrorSubscription();
@@ -141,7 +141,7 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
   /**
    * Handles after-view-init lifecycle phase
    */
-  ngAfterViewInit() {
+  public ngAfterViewInit() {
     // Try to load existing stack
     switch (VariantService.getVariant()) {
       case Variant.SCIDDLE: {
@@ -167,7 +167,7 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
   /**
    * Handles on-destroy lifecycle phase
    */
-  ngOnDestroy() {
+  public ngOnDestroy() {
     this.unsubscribeSubject.next();
     this.unsubscribeSubject.complete();
   }
@@ -182,7 +182,7 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
   private initializeStackSubscription() {
     LogService.trace(`GamesComponent#initializeStackSubscription`);
     this.stacksPersistenceService.stackSubject.pipe(
-      takeUntil(this.unsubscribeSubject)
+      takeUntil(this.unsubscribeSubject),
     ).subscribe((value) => {
       LogService.debug(`GamesComponent > STACK`);
 
@@ -233,8 +233,8 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
   private initializeSettingsSubscription() {
     this.settingsService.settingsSubject.pipe(
       takeUntil(this.unsubscribeSubject),
-      filter(value => value != null)
-    ).subscribe(value => {
+      filter((value) => value != null),
+    ).subscribe((value) => {
       if (value != null) {
         const settings = value as Map<string, Setting>;
         this.initializeSettings(settings);
@@ -249,7 +249,7 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
    */
   private initializeDatabaseErrorSubscription() {
     this.stacksPersistenceService.databaseErrorSubject.pipe(
-      takeUntil(this.unsubscribeSubject)
+      takeUntil(this.unsubscribeSubject),
     ).subscribe((value) => {
       switch (this.language) {
         case Language.GERMAN: {
@@ -304,7 +304,7 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
             }
           }
 
-          this.stacksService.getStackFromAssets(fileName).then(stackFromAssets => {
+          this.stacksService.getStackFromAssets(fileName).then((stackFromAssets) => {
             if (stackFromAssets != null) {
               stack = stackFromAssets;
               stack.game = new Game();
@@ -425,7 +425,7 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
     LogService.trace(`GamesComponent#mergeStacksFromAssets`);
 
     return new Promise((resolve) => {
-      this.stacksService.mergeStackFromAssets(stack).then(result => {
+      this.stacksService.mergeStackFromAssets(stack).then((result) => {
         const mergedStack = result as Stack;
         this.stacksPersistenceService.updateStackWithoutNotification(mergedStack).then((updatedStack) => {
           this.snackbarService.showSnackbar('Neue Karten geladen');
@@ -444,7 +444,7 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
    * @param stack existing stack
    */
   private initializeUninitializedStack(stack: Stack) {
-    StacksService.getUninitializedDefaultStackIDs([stack]).forEach(stackID => {
+    StacksService.getUninitializedDefaultStackIDs([stack]).forEach((stackID) => {
       const s = new Stack();
       s.id = stackID;
       this.stacksPersistenceService.createStack(s).then();
@@ -481,7 +481,7 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
   private initializeMediaSubscription() {
     this.media = this.mediaService.media;
     this.mediaService.mediaSubject.pipe(
-      takeUntil(this.unsubscribeSubject)
+      takeUntil(this.unsubscribeSubject),
     ).subscribe((value) => {
       this.media = value as Media;
     });
@@ -493,7 +493,7 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
   private initializeThemeSubscription() {
     this.theme = this.themeService.theme;
     this.themeService.themeSubject.pipe(
-      takeUntil(this.unsubscribeSubject)
+      takeUntil(this.unsubscribeSubject),
     ).subscribe((value) => {
       this.theme = value as Theme;
     });
@@ -526,7 +526,7 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
    * Handles click on menu items
    * @param menuItem menu item that has been clicked
    */
-  onMenuItemClicked(menuItem: string) {
+  public onMenuItemClicked(menuItem: string) {
     switch (menuItem) {
       case 'back': {
         this.navigate(`/${ROUTE_STACKS}`);
@@ -548,7 +548,7 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
         if (file != null) {
           this.http.get(file).subscribe(
             () => {
-            }, err => {
+            }, (err) => {
               let title = '';
               let checkboxText = '';
               let action = '';
@@ -577,11 +577,11 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
                     .replace(/\\r/g, '\r'),
                   checkboxValue: this.dontShowManualOnStartup,
                   checkboxText,
-                  action
-                }
+                  action,
+                },
               });
 
-              dialogRef.afterClosed().subscribe(result => {
+              dialogRef.afterClosed().subscribe((result) => {
                 if (result != null) {
                   this.dontShowManualOnStartup = result.checkboxValue as boolean;
                   this.settingsService.updateSetting(
@@ -596,7 +596,7 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
       case 'open-source': {
         this.http.get('assets/open-source/open-source.md').subscribe(
           () => {
-          }, err => {
+          }, (_) => {
             let title = '';
             let action = '';
             switch (this.language) {
@@ -616,14 +616,14 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
               disableClose: false,
               data: {
                 title,
-                text: Object.keys(environment.DEPENDENCIES).map(key => {
+                text: Object.keys(environment.DEPENDENCIES).map((key) => {
                   return `${key} ${environment.DEPENDENCIES[key]}`;
-                }).concat('---').concat(Object.keys(environment.DEV_DEPENDENCIES).map(key => {
+                }).concat('---').concat(Object.keys(environment.DEV_DEPENDENCIES).map((key) => {
                   return `${key} ${environment.DEV_DEPENDENCIES[key]}`;
                 })).join('<br/>'),
                 action,
-                value: null
-              }
+                value: null,
+              },
             });
           });
         break;
@@ -660,8 +660,8 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
             licenseCode: environment.LICENSE_CODE,
             licenseContent: environment.LICENSE_CONTENT,
             homepage: environment.HOMEPAGE,
-            variant: this.variant
-          }
+            variant: this.variant,
+          },
         });
         break;
       }
@@ -671,9 +671,9 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
   /**
    * Handles click on single-player button
    */
-  onSinglePlayerClicked() {
+  public onSinglePlayerClicked() {
     this.gameService.initializeSinglePlayerGame(this.stack).then((initializedStack) => {
-      this.cardsService.shuffleStack(initializedStack).then(shuffledStack => {
+      this.cardsService.shuffleStack(initializedStack).then((shuffledStack) => {
         this.stacksPersistenceService.updateStack(shuffledStack).then((updatedStack) => {
           this.navigateToCardsPage(updatedStack);
         }, (updatedStack) => {
@@ -686,18 +686,18 @@ export class GamesComponent implements OnInit, AfterViewInit, OnDestroy {
   /**
    * Handles click on multi-player button
    */
-  onMultiPlayerClicked() {
+  public onMultiPlayerClicked() {
     const multiplayerGameDialogRef = this.dialog.open(MultiplayerGameDialogComponent, {
       disableClose: false,
       data: {
         cardCount: this.cardCount,
         minCardCount: this.minCardCount,
-        maxCardCount: this.maxCardCount
+        maxCardCount: this.maxCardCount,
       },
-      autoFocus: false
+      autoFocus: false,
     });
 
-    multiplayerGameDialogRef.afterClosed().subscribe(result => {
+    multiplayerGameDialogRef.afterClosed().subscribe((result) => {
       if (result != null) {
         this.gameService.initializeMultiPlayerGame(
           this.stack,

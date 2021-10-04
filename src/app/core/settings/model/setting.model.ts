@@ -4,9 +4,9 @@
 export class Setting {
 
   /** Key */
-  id = '';
+  public id = '';
   /** Value */
-  value: any;
+  public value: any;
 
   /**
    * Constructor

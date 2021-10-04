@@ -1,27 +1,27 @@
+import {HttpClient} from '@angular/common/http';
 import {Injectable, isDevMode} from '@angular/core';
+import {environment} from '../../../../../environments/environment';
+import {Language} from '../../../language/model/language.enum';
+import {LogService} from '../../../log/services/log.service';
+import {Card} from '../../model/card/card.model';
 import {Stack} from '../../model/stack/stack.model';
 import {CloneService} from '../clone.service';
-import {Card} from '../../model/card/card.model';
-import {HttpClient} from '@angular/common/http';
-import {environment} from '../../../../../environments/environment';
-import {LogService} from '../../../log/services/log.service';
-import {Language} from '../../../language/model/language.enum';
 
 /**
  * Handles stacks
  */
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class StacksService {
 
   /** German stacks */
-  static stacksDe = new Map<string, string>();
+  public static stacksDe = new Map<string, string>();
   /** English stacks */
-  static stacksEn = new Map<string, string>();
+  public static stacksEn = new Map<string, string>();
 
   /** Dev mode */
-  devMode = false;
+  public devMode = false;
 
   //
   // Sort
@@ -32,7 +32,7 @@ export class StacksService {
    * @param stackA first stack
    * @param stackB seconds stack
    */
-  static sortStacks(stackA: Stack, stackB: Stack) {
+  public static sortStacks(stackA: Stack, stackB: Stack) {
     return stackA.id > stackB.id ? 1 : -1;
   }
 
@@ -40,19 +40,19 @@ export class StacksService {
    * Returns IDs of uninitialized stacks
    * @param stacks already existing stacks
    */
-  static getUninitializedStackIDs(stacks: Stack[]): string[] {
+  public static getUninitializedStackIDs(stacks: Stack[]): string[] {
 
     switch (environment.LANGUAGE) {
       case Language.GERMAN: {
-        return Array.from(this.stacksDe.keys()).filter(id => {
-          return (!stacks.some(existingStack => {
+        return Array.from(this.stacksDe.keys()).filter((id) => {
+          return (!stacks.some((existingStack) => {
             return existingStack != null && existingStack.id === id;
           }));
         });
       }
       case Language.ENGLISH: {
-        return Array.from(this.stacksEn.keys()).filter(id => {
-          return (!stacks.some(existingStack => {
+        return Array.from(this.stacksEn.keys()).filter((id) => {
+          return (!stacks.some((existingStack) => {
             return existingStack != null && existingStack.id === id;
           }));
         });
@@ -67,10 +67,10 @@ export class StacksService {
    * Returns IDs of uninitialized stacks
    * @param stacks already existing stacks
    */
-  static getUninitializedDefaultStackIDs(stacks: Stack[]): string[] {
+  public static getUninitializedDefaultStackIDs(stacks: Stack[]): string[] {
 
-    return [environment.DEFAULT_STACK.toString()].filter(id => {
-      return (!stacks.some(existingStack => {
+    return [environment.DEFAULT_STACK.toString()].filter((id) => {
+      return (!stacks.some((existingStack) => {
         return existingStack != null && existingStack.id === id;
       }));
     });
@@ -112,11 +112,11 @@ export class StacksService {
       }
 
       if (fileName != null) {
-        this.getStackFromAssets(fileName).then(stackFromAsset => {
+        this.getStackFromAssets(fileName).then((stackFromAsset) => {
           stack.title = stackFromAsset.title;
           stack.theme = stackFromAsset.theme;
 
-          this.mergeCardsFromAssets(stack, stackFromAsset.cards).then(mergedCards => {
+          this.mergeCardsFromAssets(stack, stackFromAsset.cards).then((mergedCards) => {
             if (mergedCards != null) {
               stack.cards = mergedCards as Card[];
             }
@@ -140,7 +140,7 @@ export class StacksService {
 
     return new Promise((resolve) => {
       this.http.get(`assets/stacks/${fileName}`).subscribe(
-        data => {
+        (data) => {
           const stackFromAsset = data as Stack;
           resolve(stackFromAsset);
         });
@@ -158,7 +158,7 @@ export class StacksService {
 
     // Extract existing cards into map
     const cards = new Map<string, Card>();
-    stack.cards.forEach(card => {
+    stack.cards.forEach((card) => {
       cards.set(card.id, card);
     });
 

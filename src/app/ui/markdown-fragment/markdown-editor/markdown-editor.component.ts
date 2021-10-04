@@ -7,18 +7,18 @@ import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@
   selector: 'app-markdown-editor',
   templateUrl: './markdown-editor.component.html',
   styleUrls: ['./markdown-editor.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MarkdownEditorComponent {
 
   /** Text to be displayed */
-  @Input() text = '';
+  @Input() public text = '';
   /** Placeholder to be used */
-  @Input() placeholder = '';
+  @Input() public placeholder = '';
   /** Whether component is readonly or not */
-  @Input() readonly = false;
+  @Input() public readonly = false;
   /** Event emitter indicating changes in description */
-  @Output() textChangedEmitter = new EventEmitter<string>();
+  @Output() public textChangedEmitter = new EventEmitter<string>();
 
   //
   // Actions
@@ -27,14 +27,14 @@ export class MarkdownEditorComponent {
   /**
    * Handles click on clear button
    */
-  onClearButtonClicked() {
+  public onClearButtonClicked() {
     this.text = '';
   }
 
   /**
    * Handles changes in description markdownText
    */
-  onTextChanged(text: string) {
+  public onTextChanged(text: string) {
     this.text = text;
     this.textChangedEmitter.emit(text);
   }

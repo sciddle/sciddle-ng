@@ -6,21 +6,21 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 @Component({
   selector: 'app-stop-watch',
   templateUrl: './stop-watch.component.html',
-  styleUrls: ['./stop-watch.component.scss']
+  styleUrls: ['./stop-watch.component.scss'],
 })
 export class StopWatchComponent implements OnInit {
 
   /** Duration in minutes */
-  @Input() duration = 0;
+  @Input() public duration = 0;
   /** Start time */
-  @Input() startTime: Date;
+  @Input() public startTime: Date;
   /** Event emitter indicating time left in seconds */
-  @Output() timeLeftEmitter = new EventEmitter<number>();
+  @Output() public timeLeftEmitter = new EventEmitter<number>();
 
   /** Seconds left */
-  secondsLeft: number;
+  public secondsLeft: number;
   /** String representing left-over time */
-  timeLeft = StopWatchComponent.getMinutesString(0);
+  public timeLeft = StopWatchComponent.getMinutesString(0);
 
   //
   //  Helpers
@@ -31,7 +31,7 @@ export class StopWatchComponent implements OnInit {
    * @param one first date
    * @param two second date
    */
-  static diffInSeconds(one: Date, two: Date): number {
+  public static diffInSeconds(one: Date, two: Date): number {
     return Math.floor(StopWatchComponent.getDiffInMilliseconds(one, two) / 1000);
   }
 
@@ -40,7 +40,7 @@ export class StopWatchComponent implements OnInit {
    * @param one first date
    * @param two second date
    */
-  static getDiffInMilliseconds(one: Date, two: Date) {
+  public static getDiffInMilliseconds(one: Date, two: Date) {
     return new Date(one).getTime() - new Date(two).getTime();
   }
 
@@ -48,7 +48,7 @@ export class StopWatchComponent implements OnInit {
    * Returns a string representing minutes (might be negative)
    * @param seconds seconds
    */
-  static getMinutesString(seconds: number): string {
+  public static getMinutesString(seconds: number): string {
     const negative = seconds < 0;
     const diffMin = Math.abs(Math.floor(seconds / 60));
     const diffSec = Math.abs(Math.floor(seconds % 60));
@@ -62,7 +62,7 @@ export class StopWatchComponent implements OnInit {
    * @param value numeric value
    * @return two-character string
    */
-  static getTwoCharacterString(value: number): string {
+  public static getTwoCharacterString(value: number): string {
     return (value < 10) ?
       `0${value}`
       : value.toString();
@@ -75,7 +75,7 @@ export class StopWatchComponent implements OnInit {
   /**
    * Handles on-init lifecycle phase
    */
-  ngOnInit() {
+  public ngOnInit() {
     // Initially calculate time left
     this.calculateTimeLeft();
 

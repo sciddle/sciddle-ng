@@ -7,19 +7,19 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 @Component({
   selector: 'app-information-dialog',
   templateUrl: './information-dialog.component.html',
-  styleUrls: ['./information-dialog.component.scss']
+  styleUrls: ['./information-dialog.component.scss'],
 })
 export class InformationDialogComponent implements OnInit {
 
   /** Dialog title */
-  dialogTitle = '';
+  public dialogTitle = '';
 
   /** Text to be displayed */
-  text = '';
+  public text = '';
   /** Action */
-  action = '';
+  public action = '';
   /** Value to be returned */
-  value: any;
+  public value: any;
 
   /**
    * Constructor
@@ -37,7 +37,7 @@ export class InformationDialogComponent implements OnInit {
   /**
    * Handles on-init lifecycle phase
    */
-  ngOnInit() {
+  public ngOnInit() {
     this.initializeData();
   }
 
@@ -62,7 +62,7 @@ export class InformationDialogComponent implements OnInit {
   /**
    * Handles click on confirm button
    */
-  confirm() {
+  public confirm() {
     this.dialogRef.close(this.value);
   }
 }

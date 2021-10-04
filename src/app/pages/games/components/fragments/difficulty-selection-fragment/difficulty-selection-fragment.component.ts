@@ -7,18 +7,18 @@ import {Component, EventEmitter, Input, Output, ViewEncapsulation} from '@angula
   selector: 'app-difficulty-selection-fragment',
   templateUrl: './difficulty-selection-fragment.component.html',
   styleUrls: ['./difficulty-selection-fragment.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class DifficultySelectionFragmentComponent {
 
   /** Selected difficulty easy */
-  @Input() difficultyEasy;
+  @Input() public difficultyEasy;
   /** Selected difficulty medium */
-  @Input() difficultyMedium;
+  @Input() public difficultyMedium;
   /** Selected difficulty hard */
-  @Input() difficultyHard;
+  @Input() public difficultyHard;
   /** Event emitter indicating changes in difficulty selection */
-  @Output() difficultySelectionChangedEmitter = new EventEmitter<{ difficulty: number, selected: boolean }>();
+  @Output() public difficultySelectionChangedEmitter = new EventEmitter<{ difficulty: number, selected: boolean }>();
 
   //
   // Actions
@@ -28,7 +28,7 @@ export class DifficultySelectionFragmentComponent {
    * Toggles usage difficulty
    * @param toggledDifficulty toggled difficulty
    */
-  onDifficultToggled(toggledDifficulty: number) {
+  public onDifficultToggled(toggledDifficulty: number) {
     switch (toggledDifficulty) {
       case 1: {
         this.difficultyEasy = !this.difficultyEasy;

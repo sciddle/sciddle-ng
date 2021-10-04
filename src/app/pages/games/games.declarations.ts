@@ -1,8 +1,8 @@
-import {GamesComponent} from './pages/games/games.component';
-import {GamesToolbarComponent} from './components/toolbars/games-toolbar/games-toolbar.component';
+import {MultiplayerGameDialogComponent} from './components/dialogs/multiplayer-game-dialog/multiplayer-game-dialog.component';
 // tslint:disable-next-line:max-line-length
 import {DifficultySelectionFragmentComponent} from './components/fragments/difficulty-selection-fragment/difficulty-selection-fragment.component';
-import {MultiplayerGameDialogComponent} from './components/dialogs/multiplayer-game-dialog/multiplayer-game-dialog.component';
+import {GamesToolbarComponent} from './components/toolbars/games-toolbar/games-toolbar.component';
+import {GamesComponent} from './pages/games/games.component';
 
 /**
  * Declarations of games module
@@ -15,5 +15,5 @@ export const GamesDeclarations = [
   // Dialogs
   MultiplayerGameDialogComponent,
   // Fragments
-  DifficultySelectionFragmentComponent
+  DifficultySelectionFragmentComponent,
 ];

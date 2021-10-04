@@ -1,9 +1,3 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-
-import {StackFragmentComponent} from './stack-fragment.component';
-import {StacksImports} from '../../../stacks.imports';
-import {StacksDeclarations} from '../../../stacks.declarations';
-
 /*
 describe('StackFragmentComponent', () => {
   let component: StackFragmentComponent;

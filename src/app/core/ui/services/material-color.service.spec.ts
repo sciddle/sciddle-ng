@@ -1,14 +1,14 @@
 import {TestBed} from '@angular/core/testing';
 
-import {MaterialColorService} from './material-color.service';
 import {UiImports} from '../ui.imports';
 import {UiProviders} from '../ui.providers';
+import {MaterialColorService} from './material-color.service';
 
 describe('MaterialColorService', () => {
   beforeEach(() => TestBed.configureTestingModule({
     declarations: [],
     imports: [UiImports],
-    providers: [UiProviders]
+    providers: [UiProviders],
   }));
 
   it('should be created', () => {

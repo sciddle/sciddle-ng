@@ -1,8 +1,8 @@
 import {NgModule} from '@angular/core';
-import {GamesComponent} from './pages/games/games.component';
+import { MultiplayerGameDialogComponent } from './components/dialogs/multiplayer-game-dialog/multiplayer-game-dialog.component';
 import {GamesDeclarations} from './games.declarations';
 import {GamesImports} from './games.imports';
-import { MultiplayerGameDialogComponent } from './components/dialogs/multiplayer-game-dialog/multiplayer-game-dialog.component';
+import {GamesComponent} from './pages/games/games.component';
 
 @NgModule({
   imports: [GamesImports],
@@ -11,10 +11,10 @@ import { MultiplayerGameDialogComponent } from './components/dialogs/multiplayer
     // Pages
     GamesComponent,
     // Dialogs
-    MultiplayerGameDialogComponent
+    MultiplayerGameDialogComponent,
   ], providers: [], exports: [
-    GamesComponent
-  ]
+    GamesComponent,
+  ],
 })
 export class GamesModule {
 }

@@ -1,9 +1,3 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-
-import {StacksComponent} from './stacks.component';
-import {StacksDeclarations} from '../../stacks.declarations';
-import {StacksImports} from '../../stacks.imports';
-
 /*
 describe('StacksComponent', () => {
   let component: StacksComponent;

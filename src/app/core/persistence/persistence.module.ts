@@ -5,7 +5,7 @@ import {PersistenceProviders} from './persistence.providers';
 @NgModule({
   imports: [PersistenceImports],
   declarations: [],
-  providers: [PersistenceProviders]
+  providers: [PersistenceProviders],
 })
 /**
  * Contains services related to persistence

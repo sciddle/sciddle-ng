@@ -1,11 +1,11 @@
 import {Component, EventEmitter, Input, isDevMode, OnInit, Output} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
-import {SnackbarService} from '../../../../../core/ui/services/snackbar.service';
-import {Stack} from '../../../../../core/entity/model/stack/stack.model';
-import {StacksService} from '../../../../../core/entity/services/stack/stacks.service';
 import {Action} from '../../../../../core/entity/model/action.enum';
+import {Stack} from '../../../../../core/entity/model/stack/stack.model';
 import {CardsService} from '../../../../../core/entity/services/card/cards.service';
 import {GamesService} from '../../../../../core/entity/services/game/games.service';
+import {StacksService} from '../../../../../core/entity/services/stack/stacks.service';
+import {SnackbarService} from '../../../../../core/ui/services/snackbar.service';
 
 /**
  * Displays a stack
@@ -13,28 +13,27 @@ import {GamesService} from '../../../../../core/entity/services/game/games.servi
 @Component({
   selector: 'app-stack-fragment',
   templateUrl: './stack-fragment.component.html',
-  styleUrls: ['./stack-fragment.component.scss']
+  styleUrls: ['./stack-fragment.component.scss'],
 })
 export class StackFragmentComponent implements OnInit {
 
   /** Stack to be displayed */
-  @Input() stack: Stack;
+  @Input() public stack: Stack;
   /** Default theme to be used */
-  @Input() themeClass = 'blue-theme';
+  @Input() public themeClass = 'blue-theme';
 
   /** Event emitter indicating click on stack */
-  @Output() stackEventEmitter = new EventEmitter<{ action: Action, stack: Stack }>();
+  @Output() public stackEventEmitter = new EventEmitter<{ action: Action, stack: Stack }>();
 
   /** Title color */
-  titleColor = 'black';
+  public titleColor = 'black';
   /** Cards count */
-  cardsCount = 0;
+  public cardsCount = 0;
   /** Whether there exists an ongoing game with this stack */
-  existingGame = false;
+  public existingGame = false;
 
   /** Dev mode */
-  devMode = false;
-
+  public devMode = false;
 
   /**
    * Constructor
@@ -55,7 +54,7 @@ export class StackFragmentComponent implements OnInit {
   /**
    * Handles on-init lifecycle phase
    */
-  ngOnInit() {
+  public ngOnInit() {
     this.cardsCount = this.stack.cards.filter(CardsService.isCardPartOfStack).length;
     this.existingGame = GamesService.existsGame(this.stack);
   }
@@ -67,7 +66,7 @@ export class StackFragmentComponent implements OnInit {
   /**
    * Handles click on stack
    */
-  onStackClicked() {
+  public onStackClicked() {
     this.stackEventEmitter.emit({action: Action.GO_INTO, stack: this.stack});
   }
 }

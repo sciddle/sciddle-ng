@@ -7,7 +7,7 @@ import {LogService} from '../../log/services/log.service';
  * Handles pouchdb operations for settings database
  */
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PouchDBSettingsService {
 
@@ -59,10 +59,10 @@ export class PouchDBSettingsService {
    */
   public put(id: string, document: any) {
     document._id = id;
-    return this.get(id).then(result => {
+    return this.get(id).then((result) => {
       document._rev = result._rev;
       return this.database.put(document);
-    }, error => {
+    }, (error) => {
       if (error.status === 404) {
         return this.database.put(document);
       } else {
@@ -85,11 +85,11 @@ export class PouchDBSettingsService {
    * Deletes all documents from the DATABASE_ENTITIES
    */
   public clear() {
-    this.fetch().then(result => {
-      result.rows.forEach(r => {
+    this.fetch().then((result) => {
+      result.rows.forEach((r) => {
         this.database.remove(r.doc);
       });
-    }, error => {
+    }, (error) => {
       if (isDevMode()) {
         LogService.fatal(error);
       }
@@ -103,10 +103,10 @@ export class PouchDBSettingsService {
   public sync(remote: string) {
     const remoteDatabase = new PouchDB(remote);
     this.database.sync(remoteDatabase, {
-      live: true
-    }).on('change', change => {
+      live: true,
+    }).on('change', (change) => {
       this.listener.emit(change);
-    }).on('error', error => {
+    }).on('error', (error) => {
       LogService.fatal(JSON.stringify(error));
     });
   }
@@ -123,11 +123,11 @@ export class PouchDBSettingsService {
       live: true,
       auth: {
         username,
-        password
+        password,
       },
-    }).on('change', change => {
+    }).on('change', (change) => {
       this.listener.emit(change);
-    }).on('error', error => {
+    }).on('error', (error) => {
       LogService.fatal(JSON.stringify(error));
     });
   }

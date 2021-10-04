@@ -8,5 +8,5 @@ export const UiProviders = [
   MaterialColorService,
   MaterialIconService,
   MediaService,
-  SnackbarService
+  SnackbarService,
 ];

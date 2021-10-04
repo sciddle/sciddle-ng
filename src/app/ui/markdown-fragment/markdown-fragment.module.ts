@@ -1,20 +1,20 @@
 import {NgModule} from '@angular/core';
 import {MarkdownEditorComponent} from './markdown-editor/markdown-editor.component';
-import {MarkdownPreviewComponent} from './markdown-preview/markdown-preview.component';
-import {MarkdownFragmentImports} from './markdown-fragment.imports';
 import {MarkdownFragmentDeclarations} from './markdown-fragment.declarations';
+import {MarkdownFragmentImports} from './markdown-fragment.imports';
+import {MarkdownPreviewComponent} from './markdown-preview/markdown-preview.component';
 
 @NgModule({
   imports: [MarkdownFragmentImports],
   declarations: [MarkdownFragmentDeclarations],
   entryComponents: [
     MarkdownEditorComponent,
-    MarkdownPreviewComponent
+    MarkdownPreviewComponent,
   ],
   exports: [
     MarkdownEditorComponent,
-    MarkdownPreviewComponent
-  ]
+    MarkdownPreviewComponent,
+  ],
 })
 export class MarkdownFragmentModule {
 }

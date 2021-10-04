@@ -8,7 +8,7 @@ describe('StacksToolbarComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [CardsToolbarComponent]
+      declarations: [CardsToolbarComponent],
     })
       .compileComponents();
   }));

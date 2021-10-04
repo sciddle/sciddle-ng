@@ -1,5 +1,5 @@
-import {Entity} from '../entity.model';
 import {EntityType} from '../entity-type.enum';
+import {Entity} from '../entity.model';
 
 /**
  * Represents a team
@@ -7,13 +7,13 @@ import {EntityType} from '../entity-type.enum';
 export class Team extends Entity {
 
   /** Index */
-  index: number;
+  public index: number;
   /** Score of the team */
-  score: number;
+  public score: number;
   /** Team icon */
-  icon: string;
+  public icon: string;
   /** Team color */
-  color: string;
+  public color: string;
 
   /**
    * Constructor

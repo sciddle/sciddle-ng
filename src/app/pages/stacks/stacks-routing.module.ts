@@ -3,12 +3,12 @@ import {RouterModule, Routes} from '@angular/router';
 import {StacksComponent} from './pages/stacks/stacks.component';
 
 const routes: Routes = [
-  {path: '', component: StacksComponent}
+  {path: '', component: StacksComponent},
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class StacksRoutingModule {
 }

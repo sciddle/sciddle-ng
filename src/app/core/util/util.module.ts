@@ -1,15 +1,15 @@
+import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {ConnectionService} from './services/connection.service';
-import {CommonModule} from '@angular/common';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
   ],
   declarations: [],
   providers: [
-    ConnectionService
-  ]
+    ConnectionService,
+  ],
 })
 export class UtilModule {
 }

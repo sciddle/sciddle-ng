@@ -1,9 +1,3 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-
-import {DifficultySelectionFragmentComponent} from './difficulty-selection-fragment.component';
-import {GamesImports} from '../../../games.imports';
-import {GamesDeclarations} from '../../../games.declarations';
-
 // FIXME
 /*
 describe('DifficultySelectionFragmentComponent', () => {

@@ -1,10 +1,7 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-
-import {MarkdownPreviewComponent} from './markdown-preview.component';
-import {InformationDialogDeclarations} from '../../information-dialog/information-dialog.declarations';
-import {InformationDialogImports} from '../../information-dialog/information-dialog.imports';
 import {MarkdownFragmentDeclarations} from '../markdown-fragment.declarations';
 import {MarkdownFragmentImports} from '../markdown-fragment.imports';
+import {MarkdownPreviewComponent} from './markdown-preview.component';
 
 describe('MarkdownPreviewComponent', () => {
   let component: MarkdownPreviewComponent;

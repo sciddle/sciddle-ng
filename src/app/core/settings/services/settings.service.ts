@@ -1,21 +1,21 @@
 import {Injectable, isDevMode} from '@angular/core';
-import {Setting} from '../model/setting.model';
-import {PouchDBSettingsService} from '../../persistence/services/pouchdb-settings.service';
 import {Subject} from 'rxjs';
+import {PouchDBSettingsService} from '../../persistence/services/pouchdb-settings.service';
 import {SettingType} from '../model/setting-type.enum';
+import {Setting} from '../model/setting.model';
 
 /**
  * Handles settings
  */
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SettingsService {
 
   /** Map of current settings */
-  settingsMap = new Map<string, Setting>();
+  public settingsMap = new Map<string, Setting>();
   /** Subject that publishes changes in settings */
-  settingsSubject = new Subject<Map<string, Setting>>();
+  public settingsSubject = new Subject<Map<string, Setting>>();
 
   //
   // Static methods
@@ -26,7 +26,7 @@ export class SettingsService {
    * @param settingType setting type
    * @param settingsMap setting map
    */
-  static isSettingActive(settingType: SettingType, settingsMap: Map<string, Setting>): boolean {
+  public static isSettingActive(settingType: SettingType, settingsMap: Map<string, Setting>): boolean {
     const setting = settingsMap.get(settingType);
 
     return setting != null && setting.value != null && JSON.parse(setting.value) === true;
@@ -38,8 +38,8 @@ export class SettingsService {
    */
   constructor(private pouchDBSettingsService: PouchDBSettingsService) {
     this.pouchDBSettingsService.getChangeListener().subscribe(
-      item => {
-        (item['change']['docs']).forEach(d => {
+      (item) => {
+        (item.change.docs).forEach((d) => {
           const setting = d as Setting;
           this.settingsMap.set(setting.id, setting);
         });
@@ -66,20 +66,20 @@ export class SettingsService {
    */
   public fetch() {
     this.settingsMap.clear();
-    this.pouchDBSettingsService.fetch().then(result => {
+    this.pouchDBSettingsService.fetch().then((result) => {
         if (result != null) {
-          result.rows.forEach(r => {
+          result.rows.forEach((r) => {
             const setting = r.doc as Setting;
             this.settingsMap.set(setting.id, setting);
           });
 
           this.notify();
         }
-      }, error => {
+      }, (error) => {
         if (isDevMode()) {
           console.error(error);
         }
-      }
+      },
     );
   }
 

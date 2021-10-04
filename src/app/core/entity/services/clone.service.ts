@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
-import {Stack} from '../model/stack/stack.model';
 import {Card} from '../model/card/card.model';
+import {Stack} from '../model/stack/stack.model';
 
 /**
  * Creates deep copies of objects
  */
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CloneService {
 
@@ -15,7 +15,7 @@ export class CloneService {
    * @param original original
    * @returns cloned object
    */
-  static cloneStack(original: Stack): Stack {
+  public static cloneStack(original: Stack): Stack {
     return original != null ? JSON.parse(JSON.stringify(original)) : null;
   }
 
@@ -24,7 +24,7 @@ export class CloneService {
    * @param original original
    * @returns cloned object
    */
-  static cloneStacks(original: Stack[]): Stack[] {
+  public static cloneStacks(original: Stack[]): Stack[] {
     return original != null ? JSON.parse(JSON.stringify(original)) : null;
   }
 
@@ -33,7 +33,7 @@ export class CloneService {
    * @param original original
    * @returns cloned object
    */
-  static cloneCard(original: Card): Card {
+  public static cloneCard(original: Card): Card {
     return original != null ? JSON.parse(JSON.stringify(original)) : null;
   }
 
@@ -42,7 +42,7 @@ export class CloneService {
    * @param original original
    * @returns cloned object
    */
-  static cloneCards(original: Card[]): Card[] {
+  public static cloneCards(original: Card[]): Card[] {
     return original != null ? JSON.parse(JSON.stringify(original)) : null;
   }
 }

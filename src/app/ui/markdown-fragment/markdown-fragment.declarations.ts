@@ -4,5 +4,5 @@ import {MarkdownPreviewComponent} from './markdown-preview/markdown-preview.comp
 /** Declarations for markdown fragment module */
 export const MarkdownFragmentDeclarations = [
   MarkdownEditorComponent,
-  MarkdownPreviewComponent
+  MarkdownPreviewComponent,
 ];

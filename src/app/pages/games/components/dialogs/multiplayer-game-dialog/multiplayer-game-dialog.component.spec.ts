@@ -1,10 +1,3 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-
-import {MultiplayerGameDialogComponent} from './multiplayer-game-dialog.component';
-import {GamesImports} from '../../../games.imports';
-import {GamesDeclarations} from '../../../games.declarations';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-
 // FIXME
 /*
 describe('MultiplayerGameDialogComponent', () => {

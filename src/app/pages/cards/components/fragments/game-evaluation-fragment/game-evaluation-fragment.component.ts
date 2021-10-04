@@ -8,16 +8,16 @@ import {Stack} from '../../../../../core/entity/model/stack/stack.model';
   selector: 'app-game-evaluation-fragment',
   templateUrl: './game-evaluation-fragment.component.html',
   styleUrls: ['./game-evaluation-fragment.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class GameEvaluationFragmentComponent {
 
   /** Stack */
-  @Input() stack: Stack;
+  @Input() public stack: Stack;
   /** Array of winning teams */
-  @Input() winningTeams = [];
+  @Input() public winningTeams = [];
   /** Event emitter indicating menu items being clicked */
-  @Output() menuItemEventEmitter = new EventEmitter<string>();
+  @Output() public menuItemEventEmitter = new EventEmitter<string>();
 
   //
   // Actions
@@ -27,7 +27,7 @@ export class GameEvaluationFragmentComponent {
    * Handles click on menu items
    * @param menuItem menu item that has been clicked
    */
-  onMenuItemClicked(menuItem: string) {
+  public onMenuItemClicked(menuItem: string) {
     this.menuItemEventEmitter.emit(menuItem);
   }
 }

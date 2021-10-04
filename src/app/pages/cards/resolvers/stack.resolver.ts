@@ -1,9 +1,9 @@
 import {Inject, Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot} from '@angular/router';
 import {Observable} from 'rxjs';
+import {STACK_PERSISTENCE_POUCHDB} from '../../../core/entity/entity.module';
 import {Stack} from '../../../core/entity/model/stack/stack.model';
 import {StacksPersistenceService} from '../../../core/entity/services/stack/persistence/stacks-persistence.interface';
-import {STACK_PERSISTENCE_POUCHDB} from '../../../core/entity/entity.module';
 
 /**
  * Resolves stack by ID
@@ -25,8 +25,8 @@ export class StackResolver implements Resolve<Stack> {
    * @param route route
    * @param state state
    */
-  resolve(route: ActivatedRouteSnapshot,
-          state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
+  public resolve(route: ActivatedRouteSnapshot,
+                 state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
     return this.stacksPersistenceService.stacks.get(route.params.id);
   }
 }

@@ -1,14 +1,13 @@
-import {EventEmitter, Injectable} from '@angular/core';
-import {ConnectionService} from '../../util/services/connection.service';
 import {HttpClient} from '@angular/common/http';
+import {EventEmitter, Injectable} from '@angular/core';
 import {delay, timeout} from 'rxjs/operators';
-import {environment} from '../../../../environments/environment';
+import {ConnectionService} from '../../util/services/connection.service';
 
 /**
  * Handles requests against wikipedia API
  */
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class WikipediaService {
 
@@ -27,7 +26,8 @@ export class WikipediaService {
    * @param d delay
    * @param abstractEmitter abstract emitter
    */
-  getExtract(word: string, language: string, t: number, d: number, abstractEmitter: EventEmitter<{ pageURL?: string, extract: string }>) {
+  public getExtract(word: string, language: string, t: number, d: number,
+                    abstractEmitter: EventEmitter<{ pageURL?: string, extract: string }>) {
 
     if (abstractEmitter != null) {
 
@@ -58,13 +58,13 @@ export class WikipediaService {
       // Call post
       this.http.post(queryURL, [], options)
         .pipe(timeout(t), delay(d))
-        .subscribe(data => {
-          const query = data['query'];
-          const pages = query != null ? query['pages'] : null;
+        .subscribe((data) => {
+          const query = data.query;
+          const pages = query != null ? query.pages : null;
           const pageKeys = pages != null ? Object.keys(pages) : pages;
           const firstPageKey = pageKeys != null ? pageKeys[0] : null;
           const firstPage = firstPageKey != null ? pages[firstPageKey] : null;
-          const extract = firstPage != null ? firstPage['extract'] : null;
+          const extract = firstPage != null ? firstPage.extract : null;
 
           abstractEmitter.emit({pageURL, extract});
         }, () => {

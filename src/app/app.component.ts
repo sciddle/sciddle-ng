@@ -1,13 +1,13 @@
-import {AfterViewInit, Component, isDevMode, OnInit} from '@angular/core';
-import {SnackbarService} from './core/ui/services/snackbar.service';
-import {PouchDBService} from './core/persistence/services/pouchdb.service';
-import {environment} from '../environments/environment';
-import {ThemeService} from './core/ui/services/theme.service';
 import {OverlayContainer} from '@angular/cdk/overlay';
-import {PouchDBSettingsService} from './core/persistence/services/pouchdb-settings.service';
-import {Variant} from './core/util/model/variant.enum';
-import {LogService} from './core/log/services/log.service';
+import {AfterViewInit, Component, isDevMode, OnInit} from '@angular/core';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {environment} from '../environments/environment';
+import {LogService} from './core/log/services/log.service';
+import {PouchDBSettingsService} from './core/persistence/services/pouchdb-settings.service';
+import {PouchDBService} from './core/persistence/services/pouchdb.service';
+import {SnackbarService} from './core/ui/services/snackbar.service';
+import {ThemeService} from './core/ui/services/theme.service';
+import {Variant} from './core/util/model/variant.enum';
 
 /**
  * Displays application
@@ -15,17 +15,17 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit, AfterViewInit {
 
   /** Default app theme */
-  themeClass = 'blue-theme';
+  public themeClass = 'blue-theme';
 
   /** Dev mode */
-  devMode = false;
+  public devMode = false;
   /** Language */
-  language = environment.LANGUAGE;
+  public language = environment.LANGUAGE;
 
   /**
    * Constructor
@@ -52,7 +52,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   /**
    * Handles on-init lifecycle phase
    */
-  ngOnInit() {
+  public ngOnInit() {
     this.initializeTheme();
     this.initializeThemeSubscription();
     this.initializeSnackbar();
@@ -61,7 +61,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   /**
    * Handles after-view-init lifecycle phase
    */
-  ngAfterViewInit() {
+  public ngAfterViewInit() {
     this.initializeDatabaseSync();
   }
 
@@ -91,7 +91,7 @@ export class AppComponent implements OnInit, AfterViewInit {
    */
   private initializeThemeSubscription() {
     LogService.trace(`AppComponent#initializeThemeSubscription`);
-    this.themeService.themeSubject.subscribe(value => {
+    this.themeService.themeSubject.subscribe((value) => {
       this.themeClass = value;
 
       // Theme menus and dialogs
@@ -112,9 +112,9 @@ export class AppComponent implements OnInit, AfterViewInit {
    * Initializes snack bar
    */
   private initializeSnackbar() {
-    this.snackbarService.messageSubject.subscribe(snack => {
+    this.snackbarService.messageSubject.subscribe((snack) => {
         this.openSnackBar(snack[0], snack[1], snack[2]);
-      }
+      },
     );
   }
 

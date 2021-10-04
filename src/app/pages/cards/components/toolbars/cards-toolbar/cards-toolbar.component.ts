@@ -7,13 +7,13 @@ import {
   OnChanges,
   Output,
   SimpleChanges,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
-import {Media} from '../../../../../core/ui/model/media.enum';
 import {GameMode} from '../../../../../core/entity/model/game-mode.enum';
+import {LogService} from '../../../../../core/log/services/log.service';
+import {Media} from '../../../../../core/ui/model/media.enum';
 import {Variant} from '../../../../../core/util/model/variant.enum';
 import {VariantService} from '../../../../../core/util/services/variant.service';
-import {LogService} from '../../../../../core/log/services/log.service';
 
 /**
  * Displays stacks toolbar
@@ -23,46 +23,46 @@ import {LogService} from '../../../../../core/log/services/log.service';
   templateUrl: './cards-toolbar.component.html',
   styleUrls: ['./cards-toolbar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class CardsToolbarComponent implements OnChanges {
 
   /** Title displayed in the toolbar */
-  @Input() title;
+  @Input() public title;
   /** Current media */
-  @Input() media: Media;
+  @Input() public media: Media;
   /** Game mode */
-  @Input() gameMode: GameMode;
+  @Input() public gameMode: GameMode;
   /** Selected time limit mode */
-  @Input() useTimeLimit = false;
+  @Input() public useTimeLimit = false;
   /** Timer start time */
-  @Input() timerStartTime;
+  @Input() public timerStartTime;
   /** Timer duration */
-  @Input() timerDuration;
+  @Input() public timerDuration;
   /** Indicator that timer is over */
-  @Input() timerOver = false;
+  @Input() public timerOver = false;
   /** Card count */
-  @Input() cardCount: number;
+  @Input() public cardCount: number;
   /** Event emitter indicating menu items being clicked */
-  @Output() menuItemEventEmitter = new EventEmitter<string>();
+  @Output() public menuItemEventEmitter = new EventEmitter<string>();
   /** Event emitter indicating timer to be over */
-  @Output() timerOverEmitter = new EventEmitter<any>();
+  @Output() public timerOverEmitter = new EventEmitter<any>();
 
   /** Timer color */
-  timerColor = 'primary';
+  public timerColor = 'primary';
 
   /** Enum for media types */
-  mediaType = Media;
+  public mediaType = Media;
   /** Enum of game mode types */
-  gameModeType = GameMode;
+  public gameModeType = GameMode;
   /** Enum of variants */
-  variantType = Variant;
+  public variantType = Variant;
 
   /** Dev mode */
-  devMode = false;
+  public devMode = false;
 
   /** App variant */
-  variant = VariantService.getVariant();
+  public variant = VariantService.getVariant();
 
   /**
    * Constructor
@@ -75,7 +75,7 @@ export class CardsToolbarComponent implements OnChanges {
    * Handles on-change lifecycle phase
    * @param changes simple changes
    */
-  ngOnChanges(changes: SimpleChanges) {
+  public ngOnChanges(changes: SimpleChanges) {
     this.initializeTimerColor();
   }
 
@@ -97,7 +97,7 @@ export class CardsToolbarComponent implements OnChanges {
   /** Handles click on menu item
    * @param menuItem menu item
    */
-  onMenuItemClicked(menuItem: string): void {
+  public onMenuItemClicked(menuItem: string): void {
     this.menuItemEventEmitter.emit(menuItem);
   }
 
@@ -105,7 +105,7 @@ export class CardsToolbarComponent implements OnChanges {
    * Handles time-left event
    * @param timeLeft time left in seconds
    */
-  onTimeLeft(timeLeft: number) {
+  public onTimeLeft(timeLeft: number) {
     if (timeLeft <= 0) {
       LogService.debug(`time left <= 0`);
       this.timerOverEmitter.emit();

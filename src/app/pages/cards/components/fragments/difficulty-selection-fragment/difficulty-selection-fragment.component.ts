@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {Card} from '../../../../../core/entity/model/card/card.model';
-import {CardsService} from '../../../../../core/entity/services/card/cards.service';
 import {Stack} from '../../../../../core/entity/model/stack/stack.model';
+import {CardsService} from '../../../../../core/entity/services/card/cards.service';
 
 /**
  * Displays difficulty selection fragment
@@ -10,14 +10,14 @@ import {Stack} from '../../../../../core/entity/model/stack/stack.model';
   selector: 'app-difficulty-selection-fragment',
   templateUrl: './difficulty-selection-fragment.component.html',
   styleUrls: ['./difficulty-selection-fragment.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class DifficultySelectionFragmentComponent implements OnInit {
 
   /** Stack */
-  @Input() stack: Stack;
+  @Input() public stack: Stack;
   /** Event emitter indicating difficulty selection */
-  @Output() difficultySelectedEmitter = new EventEmitter<number>();
+  @Output() public difficultySelectedEmitter = new EventEmitter<number>();
 
   /** Array of easy cards */
   public cardsEasy: Card[] = [];
@@ -33,7 +33,7 @@ export class DifficultySelectionFragmentComponent implements OnInit {
   /**
    * Handles on-init lifecycle phase
    */
-  ngOnInit() {
+  public ngOnInit() {
     this.initializeCards();
   }
 
@@ -44,7 +44,7 @@ export class DifficultySelectionFragmentComponent implements OnInit {
   /**
    * Initializes cards
    */
-  initializeCards() {
+  public initializeCards() {
     if (this.stack != null) {
       this.cardsEasy = this.stack.cards.filter(CardsService.isEasy);
       this.cardsMedium = this.stack.cards.filter(CardsService.isMedium);
@@ -60,7 +60,7 @@ export class DifficultySelectionFragmentComponent implements OnInit {
    * Handles difficulty selection
    * @param difficulty difficulty
    */
-  onDifficultySelected(difficulty: number) {
+  public onDifficultySelected(difficulty: number) {
     this.difficultySelectedEmitter.emit(difficulty);
   }
 }

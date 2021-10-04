@@ -1,6 +1,6 @@
-import {StacksComponent} from './pages/stacks/stacks.component';
-import {StacksToolbarComponent} from './components/toolbars/stacks-toolbar/stacks-toolbar.component';
 import {StackFragmentComponent} from './components/fragments/stack-fragment/stack-fragment.component';
+import {StacksToolbarComponent} from './components/toolbars/stacks-toolbar/stacks-toolbar.component';
+import {StacksComponent} from './pages/stacks/stacks.component';
 
 /**
  * Declarations of stacks module
@@ -11,5 +11,5 @@ export const StacksDeclarations = [
   // Fragments
   StackFragmentComponent,
   // Toolbars
-  StacksToolbarComponent
+  StacksToolbarComponent,
 ];

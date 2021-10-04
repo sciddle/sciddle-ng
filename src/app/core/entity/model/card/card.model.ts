@@ -1,5 +1,5 @@
-import {Entity} from '../entity.model';
 import {EntityType} from '../entity-type.enum';
+import {Entity} from '../entity.model';
 
 /**
  * Represents a card
@@ -7,20 +7,20 @@ import {EntityType} from '../entity-type.enum';
 export class Card extends Entity {
 
   /** Index of this card */
-  index?: number;
+  public index?: number;
   /** Word to be explained */
-  word: string;
+  public word: string;
   /** Words that must not be used during description */
-  taboos: string[];
+  public taboos: string[];
   /** Difficulty of the term to be explained */
-  difficulty: number;
+  public difficulty: number;
 
   /** Alternate explanation text */
-  alternateExplanationText: string;
+  public alternateExplanationText: string;
   /** Alternate Wikipedia article */
-  alternateWikipediaArticle: string;
+  public alternateWikipediaArticle: string;
   /** Alternate URL */
-  alternateURL: string;
+  public alternateURL: string;
 
   /**
    * Constructor

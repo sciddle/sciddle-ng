@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {environment} from '../../../../../../environments/environment';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {MatSliderChange} from '@angular/material/slider';
+import {environment} from '../../../../../../environments/environment';
 
 /**
  * Displays multiplayer dialog
@@ -9,12 +9,12 @@ import {MatSliderChange} from '@angular/material/slider';
 @Component({
   selector: 'app-multiplayer-game-dialog',
   templateUrl: './multiplayer-game-dialog.component.html',
-  styleUrls: ['./multiplayer-game-dialog.component.scss']
+  styleUrls: ['./multiplayer-game-dialog.component.scss'],
 })
 export class MultiplayerGameDialogComponent implements OnInit {
 
   /** Dialog title */
-  dialogTitle = '';
+  public dialogTitle = '';
 
   /** Selected time limit mode */
   public useTimeLimit = false;
@@ -52,7 +52,7 @@ export class MultiplayerGameDialogComponent implements OnInit {
   /**
    * Handles on-init lifecycle phase
    */
-  ngOnInit() {
+  public ngOnInit() {
     this.initializeData();
   }
 
@@ -77,14 +77,14 @@ export class MultiplayerGameDialogComponent implements OnInit {
   /**
    * Toggles usage of time limit
    */
-  onTimeLimitToggled() {
+  public onTimeLimitToggled() {
     this.useTimeLimit = !this.useTimeLimit;
   }
 
   /**
    * Toggles usage of acoustic alarm
    */
-  onAlarmToggled() {
+  public onAlarmToggled() {
     this.useAlarm = !this.useAlarm;
   }
 
@@ -92,7 +92,7 @@ export class MultiplayerGameDialogComponent implements OnInit {
    * Handles selection of team count
    * @param teamCount number of teams
    */
-  onTeamCountSelected(teamCount: number) {
+  public onTeamCountSelected(teamCount: number) {
     this.teamCount = teamCount;
   }
 
@@ -100,7 +100,7 @@ export class MultiplayerGameDialogComponent implements OnInit {
    * Handles difficulty selection
    * @param event event
    */
-  onDifficultySelected(event: { difficulty: number, selected: boolean }) {
+  public onDifficultySelected(event: { difficulty: number, selected: boolean }) {
     switch (event.difficulty) {
       case 1: {
         this.difficultyEasy = event.selected;
@@ -121,7 +121,7 @@ export class MultiplayerGameDialogComponent implements OnInit {
    * Handles card count change
    * @param event event
    */
-  onCardCountChanged(event: MatSliderChange) {
+  public onCardCountChanged(event: MatSliderChange) {
     this.cardCount = event.value;
   }
 
@@ -132,7 +132,7 @@ export class MultiplayerGameDialogComponent implements OnInit {
   /**
    * Handles click on confirm button
    */
-  startGame() {
+  public startGame() {
     this.dialogRef.close(
       {
         teamCount: this.teamCount,
@@ -141,8 +141,8 @@ export class MultiplayerGameDialogComponent implements OnInit {
         difficultyEasy: this.difficultyEasy,
         difficultyMedium: this.difficultyMedium,
         difficultyHard: this.difficultyHard,
-        cardCount: this.cardCount
-      }
+        cardCount: this.cardCount,
+      },
     );
   }
 
@@ -154,7 +154,7 @@ export class MultiplayerGameDialogComponent implements OnInit {
    * Generates an array of a given number of elements
    * @param n number of elements
    */
-  arrayOne(n: number): any[] {
+  public arrayOne(n: number): any[] {
     return Array(n);
   }
 }

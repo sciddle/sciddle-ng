@@ -6,14 +6,14 @@ import {Variant} from '../model/variant.enum';
  * Service handling variants
  */
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class VariantService {
 
   /**
    * Determines variant
    */
-  static getVariant(): Variant {
+  public static getVariant(): Variant {
     switch (environment.VARIANT) {
       case 'Sciddle': {
         return Variant.SCIDDLE;

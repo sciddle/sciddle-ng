@@ -6,11 +6,11 @@ import {HueType} from './hue-type.enum';
 export class Hue {
 
   /** Hue type */
-  type: HueType;
+  public type: HueType;
   /** Color value */
-  color: string;
+  public color: string;
   /** Contrast value */
-  contrast: string;
+  public contrast: string;
 
   /**
    * Constructor

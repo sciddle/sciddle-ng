@@ -1,9 +1,10 @@
-import {Stack} from '../../../model/stack/stack.model';
 import {Subject} from 'rxjs';
+import {Stack} from '../../../model/stack/stack.model';
 
 /**
  * Interface containing stacks persistence methods
  */
+// tslint:disable-next-line:interface-name
 export interface StacksPersistenceService {
 
   /** Map of all stacks */

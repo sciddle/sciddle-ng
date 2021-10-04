@@ -1,6 +1,6 @@
-import {Entity} from '../entity.model';
-import {EntityType} from '../entity-type.enum';
 import {Card} from '../card/card.model';
+import {EntityType} from '../entity-type.enum';
+import {Entity} from '../entity.model';
 import {Game} from '../game/game.model';
 
 /**
@@ -9,13 +9,13 @@ import {Game} from '../game/game.model';
 export class Stack extends Entity {
 
   /** Title */
-  title: string;
+  public title: string;
   /** Cards */
-  cards: Card[];
+  public cards: Card[];
   /** Game the stack is used for */
-  game: Game;
+  public game: Game;
   /** Theme */
-  theme: string;
+  public theme: string;
 
   /**
    * Constructor

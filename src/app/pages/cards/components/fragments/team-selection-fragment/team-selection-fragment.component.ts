@@ -7,14 +7,14 @@ import {Stack} from '../../../../../core/entity/model/stack/stack.model';
 @Component({
   selector: 'app-team-selection-fragment',
   templateUrl: './team-selection-fragment.component.html',
-  styleUrls: ['./team-selection-fragment.component.scss']
+  styleUrls: ['./team-selection-fragment.component.scss'],
 })
 export class TeamSelectionFragmentComponent {
 
   /** Stack */
-  @Input() stack: Stack;
+  @Input() public stack: Stack;
   /** Event emitter indicating team selection */
-  @Output() teamSelectedEmitter = new EventEmitter<number>();
+  @Output() public teamSelectedEmitter = new EventEmitter<number>();
 
   //
   // Actions
@@ -24,7 +24,7 @@ export class TeamSelectionFragmentComponent {
    * Handles selection of successful team
    * @param teamID team ID
    */
-  onSuccessfulTeamSelected(teamID: number) {
+  public onSuccessfulTeamSelected(teamID: number) {
     this.teamSelectedEmitter.emit(teamID);
   }
 

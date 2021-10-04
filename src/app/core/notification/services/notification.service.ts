@@ -7,7 +7,7 @@ export declare type Permission = 'denied' | 'granted' | 'default';
  * Handles notifications
  */
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class NotificationService {
 
@@ -17,7 +17,7 @@ export class NotificationService {
   /**
    * Determines whether notifications are supported
    */
-  static isSupported(): boolean {
+  public static isSupported(): boolean {
     return 'Notification' in window;
   }
 
@@ -54,8 +54,8 @@ export class NotificationService {
           vibrate: [100, 50, 100],
           data: {
             dateOfArrival: Date.now(),
-            primaryKey: 1
-          }
+            primaryKey: 1,
+          },
         };
 
         if (reg) {

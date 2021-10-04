@@ -1,14 +1,14 @@
 import {ChangeDetectionStrategy, Component, Input, isDevMode, OnChanges, SimpleChanges, ViewEncapsulation} from '@angular/core';
-import {Stack} from '../../../../../core/entity/model/stack/stack.model';
-import {Media} from '../../../../../core/ui/model/media.enum';
+import {MatDialog} from '@angular/material/dialog';
+import {environment} from '../../../../../../environments/environment';
 import {Card} from '../../../../../core/entity/model/card/card.model';
+import {Stack} from '../../../../../core/entity/model/stack/stack.model';
+import {Language} from '../../../../../core/language/model/language.enum';
+import {Media} from '../../../../../core/ui/model/media.enum';
+import {Theme} from '../../../../../core/ui/model/theme.enum';
 import {MaterialColorService} from '../../../../../core/ui/services/material-color.service';
 import {WikipediaService} from '../../../../../core/wikipedia/services/wikipedia.service';
-import {MatDialog} from '@angular/material/dialog';
 import {WikipediaDialogComponent} from '../../dialogs/wikpedia-dialog/wikipedia-dialog.component';
-import {Theme} from '../../../../../core/ui/model/theme.enum';
-import {environment} from '../../../../../../environments/environment';
-import {Language} from '../../../../../core/language/model/language.enum';
 
 /**
  * Displays a card
@@ -18,42 +18,42 @@ import {Language} from '../../../../../core/language/model/language.enum';
   templateUrl: './card-fragment.component.html',
   styleUrls: ['./card-fragment.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class CardFragmentComponent implements OnChanges {
 
   /** Stack the card is contained in */
-  @Input() stack = new Stack();
+  @Input() public stack = new Stack();
   /** Card to be displayed */
-  @Input() card = new Card();
+  @Input() public card = new Card();
   /** Indicator that timer is over */
-  @Input() isTimerOver = false;
+  @Input() public isTimerOver = false;
   /** Current media */
-  @Input() media: Media;
+  @Input() public media: Media;
   /** Current theme */
-  @Input() theme: Theme = Theme.BLUE;
+  @Input() public theme: Theme = Theme.BLUE;
 
   /** Enum for media types */
-  mediaType = Media;
+  public mediaType = Media;
 
   /** Dev mode */
-  devMode = false;
+  public devMode = false;
 
   /** Difficulty display long text */
-  difficultyDisplayLongText = false;
+  public difficultyDisplayLongText = false;
   /** Difficulty class */
-  difficultyClass = '';
+  public difficultyClass = '';
   /** Difficulty text */
-  difficultyText = '';
+  public difficultyText = '';
   /** Difficulty long text */
-  difficultyLongText = '';
+  public difficultyLongText = '';
   /** Difficulty combined text */
-  difficultyCombinedText = '';
+  public difficultyCombinedText = '';
   /** CSS class applied to card */
   public cardClassName;
 
   /** App language */
-  language = environment.LANGUAGE;
+  public language = environment.LANGUAGE;
 
   /**
    * Constructor
@@ -74,7 +74,7 @@ export class CardFragmentComponent implements OnChanges {
   /**
    * Handles on-changes lifecycle phase
    */
-  ngOnChanges(changes: SimpleChanges) {
+  public ngOnChanges(changes: SimpleChanges) {
     this.initializeDifficultyDisplaySettings();
     this.initializeCssClass();
   }
@@ -160,7 +160,7 @@ export class CardFragmentComponent implements OnChanges {
   /**
    * Handles click on help button
    */
-  onHelpClicked() {
+  public onHelpClicked() {
     let action = '';
     switch (this.language) {
       case Language.GERMAN: {
@@ -183,14 +183,14 @@ export class CardFragmentComponent implements OnChanges {
         alternateURL: this.card.alternateURL,
         action,
       },
-      autoFocus: false
+      autoFocus: false,
     });
   }
 
   /**
    * Handles click on difficulty indicator
    */
-  onDifficultyClicked() {
+  public onDifficultyClicked() {
     this.difficultyDisplayLongText = !this.difficultyDisplayLongText;
   }
 

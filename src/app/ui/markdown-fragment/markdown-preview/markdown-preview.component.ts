@@ -17,7 +17,7 @@ const md = require('markdown-it')({
     }
 
     return ''; // use external default escaping
-  }
+  },
 });
 
 /**
@@ -58,17 +58,17 @@ md.renderer.rules.link_open = function(tokens, idx, options, env, self) {
   selector: 'app-markdown-preview',
   templateUrl: './markdown-preview.component.html',
   styleUrls: ['./markdown-preview.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MarkdownPreviewComponent implements OnChanges {
 
   /** Text to be formatted */
-  @Input() markdownText = '';
+  @Input() public markdownText = '';
   /** Prevents paragraph margin if true */
-  @Input() preventParagraphMargins = false;
+  @Input() public preventParagraphMargins = false;
 
   /** Text transformed into html */
-  htmlText = '';
+  public htmlText = '';
 
   //
   // Lifecycle hooks
@@ -78,7 +78,7 @@ export class MarkdownPreviewComponent implements OnChanges {
    * Handles on-change lifecycle phase
    * @param changes simple changes
    */
-  ngOnChanges(changes: SimpleChanges) {
+  public ngOnChanges(changes: SimpleChanges) {
     this.updateMarkdown();
   }
 
@@ -89,7 +89,7 @@ export class MarkdownPreviewComponent implements OnChanges {
   /**
    * Updates markdown
    */
-  updateMarkdown() {
+  public updateMarkdown() {
     if (this.markdownText != null) {
       this.htmlText = md.render(this.markdownText);
     }

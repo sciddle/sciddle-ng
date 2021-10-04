@@ -1,20 +1,20 @@
-import {Injectable} from '@angular/core';
 import {BreakpointObserver, Breakpoints, BreakpointState} from '@angular/cdk/layout';
-import {Media} from '../model/media.enum';
+import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs';
+import {Media} from '../model/media.enum';
 
 /**
  * Handles screen size and breakpoints
  */
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class MediaService {
 
   /** Current medium */
-  media: Media;
+  public media: Media;
   /** Subject publishing medium */
-  mediaSubject = new Subject<Media>();
+  public mediaSubject = new Subject<Media>();
 
   /**
    * Constructor

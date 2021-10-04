@@ -1,15 +1,15 @@
 import {EventEmitter, Injectable, isDevMode} from '@angular/core';
-import {environment} from '../../../../environments/environment';
 import PouchDB from 'pouchdb';
 import PouchdbFind from 'pouchdb-find';
 import PouchdbUpsert from 'pouchdb-upsert';
+import {environment} from '../../../../environments/environment';
 import {LogService} from '../../log/services/log.service';
 
 /**
  * Handles pouchdb operations for entity database
  */
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PouchDBService {
 
@@ -41,7 +41,7 @@ export class PouchDBService {
    */
   public find(index: any, options) {
     return this.database.createIndex({
-      index
+      index,
     }).then(() => {
       return this.database.find(options);
     });
@@ -99,7 +99,7 @@ export class PouchDBService {
    * @param documents documents
    */
   public bulk(documents: any[]) {
-    documents.forEach(d => {
+    documents.forEach((d) => {
       d._id = d.id;
     });
 
@@ -119,11 +119,11 @@ export class PouchDBService {
    * Deletes all documents from the DATABASE_ENTITIES
    */
   public clear() {
-    this.fetch().then(result => {
-      result.rows.forEach(r => {
+    this.fetch().then((result) => {
+      result.rows.forEach((r) => {
         this.database.remove(r.doc);
       });
-    }, error => {
+    }, (error) => {
       if (isDevMode()) {
         LogService.fatal(error);
       }
@@ -137,10 +137,10 @@ export class PouchDBService {
   public sync(remote: string) {
     const remoteDatabase = new PouchDB(remote);
     this.database.sync(remoteDatabase, {
-      live: true
-    }).on('change', change => {
+      live: true,
+    }).on('change', (change) => {
       this.listener.emit(change);
-    }).on('error', error => {
+    }).on('error', (error) => {
       LogService.fatal(JSON.stringify(error));
     });
   }
@@ -157,11 +157,11 @@ export class PouchDBService {
       live: true,
       auth: {
         username,
-        password
+        password,
       },
-    }).on('change', change => {
+    }).on('change', (change) => {
       this.listener.emit(change);
-    }).on('error', error => {
+    }).on('error', (error) => {
       LogService.fatal(JSON.stringify(error));
     });
   }

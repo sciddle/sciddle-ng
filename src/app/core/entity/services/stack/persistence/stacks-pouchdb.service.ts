@@ -1,31 +1,31 @@
 import {Injectable, isDevMode} from '@angular/core';
 import {Subject} from 'rxjs';
-import {StacksPersistenceService} from './stacks-persistence.interface';
-import {Stack} from '../../../model/stack/stack.model';
+import {LogService} from '../../../../log/services/log.service';
 import {PouchDBService} from '../../../../persistence/services/pouchdb.service';
 import {EntityType} from '../../../model/entity-type.enum';
-import {LogService} from '../../../../log/services/log.service';
+import {Stack} from '../../../model/stack/stack.model';
+import {StacksPersistenceService} from './stacks-persistence.interface';
 
 /**
  * Handles stack persistence via PouchDB
  */
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class StacksPouchdbService implements StacksPersistenceService {
 
   /** Map of all stacks */
-  stacks = new Map<string, Stack>();
+  public stacks = new Map<string, Stack>();
   /** Subject that publishes stacks */
-  stacksSubject = new Subject<Stack[]>();
+  public stacksSubject = new Subject<Stack[]>();
 
   /** Stack in focus */
-  stack: Stack;
+  public stack: Stack;
   /** Subject that publishes stack */
-  stackSubject = new Subject<Stack>();
+  public stackSubject = new Subject<Stack>();
 
   /** Subject that publishes database errors */
-  databaseErrorSubject = new Subject<string>();
+  public databaseErrorSubject = new Subject<string>();
 
   /**
    * Constructor
@@ -44,9 +44,9 @@ export class StacksPouchdbService implements StacksPersistenceService {
    */
   private initializeStackSubscription() {
     this.stacksSubject.subscribe((value) => {
-      (value as Stack[]).forEach(stack => {
+      (value as Stack[]).forEach((stack) => {
           this.stacks.set(stack.id, stack);
-        }
+        },
       );
     });
   }
@@ -73,8 +73,8 @@ export class StacksPouchdbService implements StacksPersistenceService {
     const options = {
       selector: {
         $and: [
-          {entityType: {$eq: EntityType.STACK}}
-        ]
+          {entityType: {$eq: EntityType.STACK}},
+        ],
       },
     };
 
@@ -94,8 +94,8 @@ export class StacksPouchdbService implements StacksPersistenceService {
       selector: {
         $and: [
           {entityType: {$eq: EntityType.STACK}},
-          {id: {$eq: id}}
-        ]
+          {id: {$eq: id}},
+        ],
       },
     };
 
@@ -212,7 +212,7 @@ export class StacksPouchdbService implements StacksPersistenceService {
    * Deletes an array of stacks
    * @param stacks stacks
    */
-  deleteStacks(stacks: Stack[]): Promise<any> {
+  public deleteStacks(stacks: Stack[]): Promise<any> {
     return undefined;
   }
 
@@ -225,8 +225,8 @@ export class StacksPouchdbService implements StacksPersistenceService {
    * @param stack stack
    */
   public uploadStack(stack: Stack) {
-    stack['_rev'] = null;
-    stack['_id'] = null;
+    stack._rev = null;
+    stack._id = null;
 
     this.pouchDBService.upsert(stack.id, stack);
   }
@@ -272,19 +272,19 @@ export class StacksPouchdbService implements StacksPersistenceService {
    * @param options query options
    */
   private findStacksInternal(index: any, options: any) {
-    this.pouchDBService.find(index, options).then(result => {
-        result['docs'].forEach(element => {
+    this.pouchDBService.find(index, options).then((result) => {
+        result.docs.forEach((element) => {
           const stack = element as Stack;
           this.stacks.set(stack.id, stack);
         });
         this.notifyMultipleStacks();
-      }, error => {
+      }, (error) => {
         if (isDevMode()) {
           console.error(error);
         }
 
         this.notifyDatabaseError(error);
-      }
+      },
     );
   }
 
@@ -294,18 +294,18 @@ export class StacksPouchdbService implements StacksPersistenceService {
    * @param options query options
    */
   private findStackInternal(index: any, options: any) {
-    this.pouchDBService.find(index, options).then(result => {
-        result['docs'].forEach(element => {
+    this.pouchDBService.find(index, options).then((result) => {
+        result.docs.forEach((element) => {
           this.stack = element as Stack;
         });
         this.notifySingleStack();
-      }, error => {
+      }, (error) => {
         if (isDevMode()) {
           console.error(error);
         }
 
         this.notifyDatabaseError(error);
-      }
+      },
     );
   }
 }

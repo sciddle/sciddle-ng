@@ -1,7 +1,7 @@
 import {LOCALE_ID, NgModule} from '@angular/core';
-import {StacksImports} from './stacks.imports';
-import {StacksDeclarations} from './stacks.declarations';
 import {StacksComponent} from './pages/stacks/stacks.component';
+import {StacksDeclarations} from './stacks.declarations';
+import {StacksImports} from './stacks.imports';
 
 @NgModule({
   declarations: [StacksDeclarations],
@@ -10,10 +10,10 @@ import {StacksComponent} from './pages/stacks/stacks.component';
     // Pages
     StacksComponent,
   ], providers: [
-    {provide: LOCALE_ID, useValue: 'en'}
+    {provide: LOCALE_ID, useValue: 'en'},
   ], exports: [
-    StacksComponent
-  ]
+    StacksComponent,
+  ],
 })
 export class StacksModule {
 }

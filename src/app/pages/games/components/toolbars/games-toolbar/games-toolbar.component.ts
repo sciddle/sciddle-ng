@@ -11,24 +11,24 @@ import {VariantService} from '../../../../../core/util/services/variant.service'
   templateUrl: './games-toolbar.component.html',
   styleUrls: ['./games-toolbar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class GamesToolbarComponent {
 
   /** Title displayed in the toolbar */
-  @Input() title;
+  @Input() public title;
   /** Current media */
-  @Input() media: Media;
+  @Input() public media: Media;
   /** Event emitter indicating menu items being clicked */
-  @Output() menuItemEventEmitter = new EventEmitter<string>();
+  @Output() public menuItemEventEmitter = new EventEmitter<string>();
 
   /** Enum for media types */
-  mediaType = Media;
+  public mediaType = Media;
   /** Enum of variants */
-  variantType = Variant;
+  public variantType = Variant;
 
   /** App variant */
-  variant = VariantService.getVariant();
+  public variant = VariantService.getVariant();
 
   //
   // Actions
@@ -37,7 +37,7 @@ export class GamesToolbarComponent {
   /** Handles click on menu item
    * @param menuItem menu item
    */
-  onMenuItemClicked(menuItem: string): void {
+  public onMenuItemClicked(menuItem: string): void {
     this.menuItemEventEmitter.emit(menuItem);
   }
 }

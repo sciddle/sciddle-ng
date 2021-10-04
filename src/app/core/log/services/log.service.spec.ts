@@ -1,14 +1,14 @@
 import {TestBed} from '@angular/core/testing';
 
-import {LogService} from './log.service';
-import {LogProviders} from '../log.providers';
 import {LogImports} from '../log.imports';
+import {LogProviders} from '../log.providers';
+import {LogService} from './log.service';
 
 describe('LogService', () => {
   beforeEach(() => TestBed.configureTestingModule({
     declarations: [],
     imports: [LogImports],
-    providers: [LogProviders]
+    providers: [LogProviders],
   }));
 
   it('should be created', () => {

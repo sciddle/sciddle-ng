@@ -5,7 +5,7 @@ import {ColorService} from './color.service';
 describe('ColorService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [ColorService]
+      providers: [ColorService],
     });
   });
 

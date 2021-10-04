@@ -1,8 +1,8 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {MarkdownEditorComponent} from './markdown-editor.component';
 import {MarkdownFragmentDeclarations} from '../markdown-fragment.declarations';
 import {MarkdownFragmentImports} from '../markdown-fragment.imports';
+import {MarkdownEditorComponent} from './markdown-editor.component';
 
 describe('MarkdownEditorComponent', () => {
   let component: MarkdownEditorComponent;

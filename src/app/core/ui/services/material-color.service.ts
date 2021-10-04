@@ -1,33 +1,33 @@
 import {Injectable} from '@angular/core';
-import {PaletteType} from '../model/palette-type.enum';
 import {HueType} from '../model/hue-type.enum';
-import {MaterialPalette} from '../model/palette.model';
 import {Hue} from '../model/hue.model';
+import {PaletteType} from '../model/palette-type.enum';
+import {MaterialPalette} from '../model/palette.model';
 
 /**
  * Handles Material colors
  */
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class MaterialColorService {
 
   /** Primary palette */
-  static PRIMARY_PALETTE = PaletteType.LIGHT_BLUE;
+  public static PRIMARY_PALETTE = PaletteType.LIGHT_BLUE;
   /** Primary hue */
-  static PRIMARY_HUE = HueType._600;
+  public static PRIMARY_HUE = HueType._600;
   /** Accent palette */
-  static ACCENT_PALETTE = PaletteType.RED;
+  public static ACCENT_PALETTE = PaletteType.RED;
   /** Accent hue */
-  static ACCENT_HUE = HueType._600;
+  public static ACCENT_HUE = HueType._600;
 
   /** Primary */
-  primary: any;
+  public primary: any;
   /** Accent */
-  accent: any;
+  public accent: any;
 
   /** List of palettes */
-  palettes: MaterialPalette[] = [];
+  public palettes: MaterialPalette[] = [];
 
   /**
    * Constructor
@@ -279,7 +279,6 @@ export class MaterialColorService {
     yellow.hues.push(new Hue(HueType.A700, '#ffd600', '#000000'));
     this.palettes.push(yellow);
 
-
     // Amber
     const amber = new MaterialPalette(PaletteType.AMBER);
     amber.hues.push(new Hue(HueType._50, '#fff8e1', '#000000'));
@@ -415,7 +414,7 @@ export class MaterialColorService {
    * @param hueType hue type
    */
   public hue(paletteType: PaletteType, hueType: HueType): Hue {
-    const pal = this.palettes.find(p => {
+    const pal = this.palettes.find((p) => {
       return p.type === paletteType;
     });
 
@@ -423,9 +422,8 @@ export class MaterialColorService {
       return null;
     }
 
-    return pal.hues.find(h => {
+    return pal.hues.find((h) => {
       return h.type === hueType;
     });
   }
 }
-

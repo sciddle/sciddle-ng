@@ -8,21 +8,21 @@ import {MediaService} from '../../../core/ui/services/media.service';
 @Component({
   selector: 'app-checkable-information-dialog',
   templateUrl: './checkable-information-dialog.component.html',
-  styleUrls: ['./checkable-information-dialog.component.scss']
+  styleUrls: ['./checkable-information-dialog.component.scss'],
 })
 export class CheckableInformationDialogComponent implements OnInit {
 
   /** Dialog title */
-  dialogTitle = '';
+  public dialogTitle = '';
 
   /** Text to be displayed */
-  text = '';
+  public text = '';
   /** Checkbox value */
-  checkboxValue: false;
+  public checkboxValue: false;
   /** Checkbox text */
-  checkboxText = '';
+  public checkboxText = '';
   /** Action */
-  action = '';
+  public action = '';
 
   /**
    * Constructor
@@ -42,7 +42,7 @@ export class CheckableInformationDialogComponent implements OnInit {
   /**
    * Handles on-init lifecycle phase
    */
-  ngOnInit() {
+  public ngOnInit() {
     this.initializeData();
   }
 
@@ -69,7 +69,7 @@ export class CheckableInformationDialogComponent implements OnInit {
    * Handles change of checkbox value
    * @param event selection state
    */
-  onCheckboxChanged(event: any) {
+  public onCheckboxChanged(event: any) {
     this.checkboxValue = event.checked;
   }
 
@@ -80,7 +80,7 @@ export class CheckableInformationDialogComponent implements OnInit {
   /**
    * Handles click on confirm button
    */
-  confirm() {
+  public confirm() {
     this.dialogRef.close({checkboxValue: this.checkboxValue});
   }
 }

@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {WikipediaService} from '../../../../../core/wikipedia/services/wikipedia.service';
 import {environment} from '../../../../../../environments/environment';
 import {Language} from '../../../../../core/language/model/language.enum';
+import {WikipediaService} from '../../../../../core/wikipedia/services/wikipedia.service';
 
 /**
  * Displays wikipedia dialog
@@ -10,32 +10,32 @@ import {Language} from '../../../../../core/language/model/language.enum';
 @Component({
   selector: 'app-wikipedia-dialog',
   templateUrl: './wikipedia-dialog.component.html',
-  styleUrls: ['./wikipedia-dialog.component.scss']
+  styleUrls: ['./wikipedia-dialog.component.scss'],
 })
 export class WikipediaDialogComponent implements OnInit {
 
   /** Default theme to be used */
-  themeClass = 'blue-theme';
+  public themeClass = 'blue-theme';
   /** Dialog title */
-  dialogTitle = '';
+  public dialogTitle = '';
 
   /** Term to be displayed */
-  term = '';
+  public term = '';
   /** Explanation text */
-  explanationText;
+  public explanationText;
   /** Text to more information */
-  more;
+  public more;
   /** Link to more information */
-  moreLink;
+  public moreLink;
   /** Alternate Wikipedia article */
-  alternateWikipediaArticle;
+  public alternateWikipediaArticle;
   /** Alternate URL */
-  alternateURL;
+  public alternateURL;
   /** Action */
-  action = '';
+  public action = '';
 
   /** App language */
-  language = environment.LANGUAGE;
+  public language = environment.LANGUAGE;
 
   //
   // Static methods
@@ -47,7 +47,7 @@ export class WikipediaDialogComponent implements OnInit {
    * @param n number of sentences
    * @param m minimum characters
    */
-  static getFirstSentences(text: string, n: number, m: number): string {
+  public static getFirstSentences(text: string, n: number, m: number): string {
     const separator = '. ';
 
     return text.slice(0, m) // Take first m characters
@@ -77,7 +77,7 @@ export class WikipediaDialogComponent implements OnInit {
   /**
    * Handles on-init lifecycle phase
    */
-  ngOnInit() {
+  public ngOnInit() {
     this.initializeData();
     this.initializeExtract();
   }
@@ -120,7 +120,7 @@ export class WikipediaDialogComponent implements OnInit {
     } else {
       const article = this.alternateWikipediaArticle == null ? this.term : this.alternateWikipediaArticle;
       const extractEmitter = new EventEmitter<{ pageURL: string, extract: string }>();
-      extractEmitter.subscribe(result => {
+      extractEmitter.subscribe((result) => {
         if (result != null && result.extract != null) {
           this.explanationText = (this.explanationText == null
             ? WikipediaDialogComponent.getFirstSentences(result.extract, 2, 100)
@@ -162,7 +162,7 @@ export class WikipediaDialogComponent implements OnInit {
   /**
    * Handles click on confirm button
    */
-  confirm() {
+  public confirm() {
     this.dialogRef.close();
   }
 }

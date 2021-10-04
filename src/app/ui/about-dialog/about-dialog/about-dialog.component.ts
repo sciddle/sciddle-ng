@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {Variant} from '../../../core/util/model/variant.enum';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {Variant} from '../../../core/util/model/variant.enum';
 
 /**
  * Displays about dialog
@@ -8,46 +8,46 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 @Component({
   selector: 'app-about-dialog',
   templateUrl: './about-dialog.component.html',
-  styleUrls: ['./about-dialog.component.scss']
+  styleUrls: ['./about-dialog.component.scss'],
 })
 export class AboutDialogComponent implements OnInit {
 
   /** Default theme to be used */
-  themeClass = 'blue-theme';
+  public themeClass = 'blue-theme';
   /** Dialog title */
-  dialogTitle = '';
+  public dialogTitle = '';
 
   /** App name */
-  name = '';
+  public name = '';
   /** App version */
-  version = '';
+  public version = '';
   /** Author of code */
-  authorCode;
+  public authorCode;
   /** Author of code's URL */
-  authorCodeUrl;
+  public authorCodeUrl;
   /** Author of original idea */
-  authorOriginal;
+  public authorOriginal;
   /** Author of content */
-  authorContent;
+  public authorContent;
   /** Author of graphics */
-  authorGraphics;
+  public authorGraphics;
   /** Author of graphics' URL */
-  authorGraphicsUrl;
+  public authorGraphicsUrl;
   /** Scientific supervision */
-  authorScientificSupervision;
+  public authorScientificSupervision;
   /** Github URL */
-  githubUrl;
+  public githubUrl;
   /** License of code */
-  licenseCode;
+  public licenseCode;
   /** License of content */
-  licenseContent;
+  public licenseContent;
   /** App homepage */
-  homepage;
+  public homepage;
   /** Variant */
-  variant: Variant;
+  public variant: Variant;
 
   /** Variant type sciddle */
-  variantTypeSciddle = Variant.SCIDDLE;
+  public variantTypeSciddle = Variant.SCIDDLE;
 
   /**
    * Constructor
@@ -65,7 +65,7 @@ export class AboutDialogComponent implements OnInit {
   /**
    * Handles on-init lifecycle phase
    */
-  ngOnInit() {
+  public ngOnInit() {
     this.initializeData();
   }
 

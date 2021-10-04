@@ -15,5 +15,5 @@ export enum HueType {
   A100,
   A200,
   A400,
-  A700
+  A700,
 }

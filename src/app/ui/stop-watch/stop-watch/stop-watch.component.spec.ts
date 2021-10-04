@@ -8,7 +8,7 @@ describe('StopWatchComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [StopWatchComponent]
+      declarations: [StopWatchComponent],
     })
       .compileComponents();
   }));

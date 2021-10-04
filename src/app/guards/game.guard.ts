@@ -1,16 +1,16 @@
 import {Inject, Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
-import {STACK_PERSISTENCE_POUCHDB} from '../core/entity/entity.module';
-import {StacksPersistenceService} from '../core/entity/services/stack/persistence/stacks-persistence.interface';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
+import {environment} from '../../environments/environment';
 import {ROUTE_CARDS} from '../app.routes';
-import {VariantService} from '../core/util/services/variant.service';
-import {Variant} from '../core/util/model/variant.enum';
+import {STACK_PERSISTENCE_POUCHDB} from '../core/entity/entity.module';
 import {Stack} from '../core/entity/model/stack/stack.model';
 import {GamesService} from '../core/entity/services/game/games.service';
-import {environment} from '../../environments/environment';
+import {StacksPersistenceService} from '../core/entity/services/stack/persistence/stacks-persistence.interface';
 import {LogService} from '../core/log/services/log.service';
-import {takeUntil} from 'rxjs/operators';
-import {Subject} from 'rxjs';
+import {Variant} from '../core/util/model/variant.enum';
+import {VariantService} from '../core/util/services/variant.service';
 
 /**
  * Checks if it is necessary to show game page
@@ -37,7 +37,7 @@ export class GameGuard implements CanActivate {
    * @param next activated toute
    * @param state router state
    */
-  canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
+  public canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
     LogService.trace(`GameGuard#canActivate`);
     return new Promise((resolve) => {
       this.stacksPersistenceService.stackSubject.pipe(

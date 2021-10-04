@@ -5,7 +5,7 @@ import {SnackbarService} from './snackbar.service';
 describe('SnackbarService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [SnackbarService]
+      providers: [SnackbarService],
     });
   });
 

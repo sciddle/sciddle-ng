@@ -1,7 +1,7 @@
-import {Entity} from '../entity.model';
-import {Team} from './team.model';
 import {EntityType} from '../entity-type.enum';
+import {Entity} from '../entity.model';
 import {GameState} from '../game-state.enum';
+import {Team} from './team.model';
 import {Turn} from './turn.model';
 
 /**
@@ -10,15 +10,15 @@ import {Turn} from './turn.model';
 export class Game extends Entity {
 
   /** State of the game */
-  state: GameState;
+  public state: GameState;
   /** Current turn */
-  turn: Turn;
+  public turn: Turn;
   /** Teams that play the game */
-  teams: Team[];
+  public teams: Team[];
   /** Use time limit */
-  useTimeLimit: boolean;
+  public useTimeLimit: boolean;
   /** Use acoustic alarm */
-  useAlarm: boolean;
+  public useAlarm: boolean;
 
   /**
    * Constructor

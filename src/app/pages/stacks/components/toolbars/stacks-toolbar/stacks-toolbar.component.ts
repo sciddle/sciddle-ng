@@ -8,19 +8,19 @@ import {Media} from '../../../../../core/ui/model/media.enum';
   selector: 'app-stacks-toolbar',
   templateUrl: './stacks-toolbar.component.html',
   styleUrls: ['./stacks-toolbar.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StacksToolbarComponent {
 
   /** Title displayed in the toolbar */
-  @Input() title;
+  @Input() public title;
   /** Current media */
-  @Input() media: Media;
+  @Input() public media: Media;
   /** Event emitter indicating menu items being clicked */
-  @Output() menuItemEventEmitter = new EventEmitter<string>();
+  @Output() public menuItemEventEmitter = new EventEmitter<string>();
 
   /** Enum for media types */
-  mediaType = Media;
+  public mediaType = Media;
 
   //
   // Actions
@@ -29,7 +29,7 @@ export class StacksToolbarComponent {
   /** Handles click on menu item
    * @param menuItem menu item
    */
-  onMenuItemClicked(menuItem: string): void {
+  public onMenuItemClicked(menuItem: string): void {
     this.menuItemEventEmitter.emit(menuItem);
   }
 }

@@ -1,32 +1,31 @@
 import {Injectable, isDevMode} from '@angular/core';
-import {Stack} from '../../model/stack/stack.model';
-import {Card} from '../../model/card/card.model';
 import {Subject} from 'rxjs';
 import {LogService} from '../../../log/services/log.service';
-import {UUID} from '../../model/uuid';
+import {Card} from '../../model/card/card.model';
+import {Stack} from '../../model/stack/stack.model';
 
 /**
  * Handles cards management
  */
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CardsService {
 
   /** Default index of cards */
-  static CARD_INDEX_DEFAULT = 0;
+  public static CARD_INDEX_DEFAULT = 0;
   /** Index of cards being put away */
-  static CARD_INDEX_OUT_OF_STACK = null;
+  public static CARD_INDEX_OUT_OF_STACK = null;
 
   /** Currently displayed stack */
-  stack: Stack;
+  public stack: Stack;
   /** Map of all cards */
-  cards = new Map<string, Card>();
+  public cards = new Map<string, Card>();
   /** Subject that publishes cards */
-  cardsSubject = new Subject<Card[]>();
+  public cardsSubject = new Subject<Card[]>();
 
   /** Dev mode */
-  devMode = false;
+  public devMode = false;
 
   //
   // Sort
@@ -37,7 +36,7 @@ export class CardsService {
    * @param cardA first card
    * @param cardB seconds card
    */
-  static sortCards(cardA: Card, cardB: Card) {
+  public static sortCards(cardA: Card, cardB: Card) {
     if (!isNaN(cardA.index) && !isNaN(cardB.index)) {
       return (cardA.index > cardB.index) ? -1 : 1;
     } else {
@@ -50,7 +49,7 @@ export class CardsService {
    * @param cardA first card
    * @param cardB seconds card
    */
-  static sortCardsByWord(cardA: Card, cardB: Card) {
+  public static sortCardsByWord(cardA: Card, cardB: Card) {
     if (cardA.word != null && cardB.word != null) {
       return (cardA.word > cardB.word) ? -1 : 1;
     } else {
@@ -62,7 +61,7 @@ export class CardsService {
    * Shuffles cards
    * @param cards cards
    */
-  static shuffleCards(cards: Card[]): Card[] {
+  public static shuffleCards(cards: Card[]): Card[] {
     LogService.trace(`CardsService#shuffleCards ${cards.length}`);
     let currentIndex = cards.length;
     let temporaryValue;
@@ -88,7 +87,7 @@ export class CardsService {
    * Determines whether a card is part of the current stack
    * @param card card
    */
-  static isCardPartOfStack(card: Card): boolean {
+  public static isCardPartOfStack(card: Card): boolean {
     return card.index !== CardsService.CARD_INDEX_OUT_OF_STACK;
   }
 
@@ -96,7 +95,7 @@ export class CardsService {
    * Determines whether a card's difficulty is easy
    * @param card card
    */
-  static isEasy(card: Card): boolean {
+  public static isEasy(card: Card): boolean {
     return CardsService.isCardPartOfStack(card) && card.difficulty === 1;
   }
 
@@ -104,7 +103,7 @@ export class CardsService {
    * Determines whether a card's difficulty is medium
    * @param card card
    */
-  static isMedium(card: Card): boolean {
+  public static isMedium(card: Card): boolean {
     return CardsService.isCardPartOfStack(card) && card.difficulty === 2;
   }
 
@@ -112,7 +111,7 @@ export class CardsService {
    * Determines whether a card's difficulty is hard
    * @param card card
    */
-  static isHard(card: Card): boolean {
+  public static isHard(card: Card): boolean {
     return CardsService.isCardPartOfStack(card) && card.difficulty === 3;
   }
 
@@ -124,10 +123,10 @@ export class CardsService {
    * Get minimum index of a given list of cards
    * @param cards cards
    */
-  static getMinIndex(cards: Card[]): number {
-    const min = Math.min(...cards.map(card => {
+  public static getMinIndex(cards: Card[]): number {
+    const min = Math.min(...cards.map((card) => {
       return card.index;
-    }).filter(index => {
+    }).filter((index) => {
       return !isNaN(index);
     }));
 
@@ -138,10 +137,10 @@ export class CardsService {
    * Get maximum index of a given list of cards
    * @param cards cards
    */
-  static getMaxIndex(cards: Card[]): number {
-    const max = Math.max(...cards.map(card => {
+  public static getMaxIndex(cards: Card[]): number {
+    const max = Math.max(...cards.map((card) => {
       return card.index;
-    }).filter(index => {
+    }).filter((index) => {
       return !isNaN(index);
     }));
 
@@ -170,7 +169,7 @@ export class CardsService {
       this.stack = stack;
       this.cards.clear();
       let index = 10_000;
-      stack.cards.forEach(card => {
+      stack.cards.forEach((card) => {
         if (card.id == null) {
           card.id = index.toString();
           card.index = index;
@@ -198,7 +197,7 @@ export class CardsService {
       stack.cards
         .filter(CardsService.isCardPartOfStack)
         .sort(CardsService.sortCardsByWord)
-        .forEach(card => {
+        .forEach((card) => {
           card.index = index++;
         });
 
@@ -217,7 +216,7 @@ export class CardsService {
       // Assign new indices to shuffled cards
       CardsService
         .shuffleCards(stack.cards.filter(CardsService.isCardPartOfStack))
-        .forEach(card => {
+        .forEach((card) => {
           card.index = index++;
         });
 
@@ -230,13 +229,13 @@ export class CardsService {
    * @param stack stack
    * @param difficulty difficulty
    */
-  moveCardWithSpecificDifficultyToTop(stack: Stack, difficulty: number): Promise<Stack> {
+  public moveCardWithSpecificDifficultyToTop(stack: Stack, difficulty: number): Promise<Stack> {
 
     return new Promise((resolve) => {
       // Find card in stack with desired difficulty
       const card = CardsService.shuffleCards(stack.cards)
         .filter(CardsService.isCardPartOfStack)
-        .filter(c => {
+        .filter((c) => {
           return c.difficulty === difficulty;
         })[0];
 
@@ -309,7 +308,7 @@ export class CardsService {
    */
   public putCardsBackToStack(stack: Stack): Promise<Stack> {
     return new Promise((resolve) => {
-      stack.cards.forEach(card => {
+      stack.cards.forEach((card) => {
         if (card.index === CardsService.CARD_INDEX_OUT_OF_STACK) {
           card.index = CardsService.CARD_INDEX_DEFAULT;
         }
@@ -344,7 +343,7 @@ export class CardsService {
    */
   private updateCardOfStack(stack: Stack, card: Card) {
     // Get index of the card to be updated
-    const index = stack.cards.findIndex(c => {
+    const index = stack.cards.findIndex((c) => {
       return c.id === card.id;
     });
 

@@ -6,18 +6,18 @@ import {LogService} from '../../log/services/log.service';
  * Handles snack bars
  */
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SnackbarService {
 
   /** Subject that publishes messages to be shown in a snack bar */
-  messageSubject = new Subject<string[]>();
+  public messageSubject = new Subject<string[]>();
 
   /**
    * Shows snackbar with a given message
    * @param message message
    */
-  showSnackbar(message: string) {
+  public showSnackbar(message: string) {
     LogService.traceSnack(`${message}`);
     this.messageSubject.next([message, '', null]);
   }
@@ -28,7 +28,7 @@ export class SnackbarService {
    * @param actionName action name
    * @param action action
    */
-  showSnackbarWithAction(message: string, actionName: string, action: any) {
+  public showSnackbarWithAction(message: string, actionName: string, action: any) {
     this.messageSubject.next([message, actionName, action]);
   }
 }

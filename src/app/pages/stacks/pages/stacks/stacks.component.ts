@@ -1,36 +1,36 @@
-import {AfterViewInit, Component, Inject, isDevMode, OnDestroy, OnInit} from '@angular/core';
-import {InformationDialogComponent} from '../../../../ui/information-dialog/information-dialog/information-dialog.component';
 import {HttpClient} from '@angular/common/http';
-import {environment} from '../../../../../environments/environment';
-import {AboutDialogComponent} from '../../../../ui/about-dialog/about-dialog/about-dialog.component';
-import {Media} from '../../../../core/ui/model/media.enum';
-import {filter, takeUntil} from 'rxjs/operators';
-import {Stack} from '../../../../core/entity/model/stack/stack.model';
-import {Subject} from 'rxjs';
-import {MediaService} from '../../../../core/ui/services/media.service';
-import {MaterialColorService} from '../../../../core/ui/services/material-color.service';
-import {MaterialIconService} from '../../../../core/ui/services/material-icon.service';
-import {STACK_PERSISTENCE_POUCHDB} from '../../../../core/entity/entity.module';
-import {StacksPersistenceService} from '../../../../core/entity/services/stack/persistence/stacks-persistence.interface';
-import {Router} from '@angular/router';
-import {DomSanitizer} from '@angular/platform-browser';
-import {SnackbarService} from '../../../../core/ui/services/snackbar.service';
-import {Action} from '../../../../core/entity/model/action.enum';
-import {CloneService} from '../../../../core/entity/services/clone.service';
-import {StacksService} from '../../../../core/entity/services/stack/stacks.service';
-import {ThemeService} from '../../../../core/ui/services/theme.service';
-import {Theme} from '../../../../core/ui/model/theme.enum';
-import {SettingsService} from '../../../../core/settings/services/settings.service';
-import {Setting} from '../../../../core/settings/model/setting.model';
-import {SettingType} from '../../../../core/settings/model/setting-type.enum';
-// tslint:disable-next-line:max-line-length
-import {CheckableInformationDialogComponent} from '../../../../ui/information-dialog/checkable-information-dialog/checkable-information-dialog.component';
-import {ROUTE_GAMES} from '../../../../app.routes';
-import {GamesService} from '../../../../core/entity/services/game/games.service';
-import {LogService} from '../../../../core/log/services/log.service';
-import {Language} from '../../../../core/language/model/language.enum';
+import {AfterViewInit, Component, Inject, isDevMode, OnDestroy, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {MatIconRegistry} from '@angular/material/icon';
+import {DomSanitizer} from '@angular/platform-browser';
+import {Router} from '@angular/router';
+import {Subject} from 'rxjs';
+import {filter, takeUntil} from 'rxjs/operators';
+import {environment} from '../../../../../environments/environment';
+import {ROUTE_GAMES} from '../../../../app.routes';
+import {STACK_PERSISTENCE_POUCHDB} from '../../../../core/entity/entity.module';
+import {Action} from '../../../../core/entity/model/action.enum';
+import {Stack} from '../../../../core/entity/model/stack/stack.model';
+import {CloneService} from '../../../../core/entity/services/clone.service';
+import {GamesService} from '../../../../core/entity/services/game/games.service';
+import {StacksPersistenceService} from '../../../../core/entity/services/stack/persistence/stacks-persistence.interface';
+import {StacksService} from '../../../../core/entity/services/stack/stacks.service';
+import {Language} from '../../../../core/language/model/language.enum';
+import {LogService} from '../../../../core/log/services/log.service';
+import {SettingType} from '../../../../core/settings/model/setting-type.enum';
+import {Setting} from '../../../../core/settings/model/setting.model';
+import {SettingsService} from '../../../../core/settings/services/settings.service';
+import {Media} from '../../../../core/ui/model/media.enum';
+import {Theme} from '../../../../core/ui/model/theme.enum';
+import {MaterialColorService} from '../../../../core/ui/services/material-color.service';
+import {MaterialIconService} from '../../../../core/ui/services/material-icon.service';
+import {MediaService} from '../../../../core/ui/services/media.service';
+import {SnackbarService} from '../../../../core/ui/services/snackbar.service';
+import {ThemeService} from '../../../../core/ui/services/theme.service';
+import {AboutDialogComponent} from '../../../../ui/about-dialog/about-dialog/about-dialog.component';
+// tslint:disable-next-line:max-line-length
+import {CheckableInformationDialogComponent} from '../../../../ui/information-dialog/checkable-information-dialog/checkable-information-dialog.component';
+import {InformationDialogComponent} from '../../../../ui/information-dialog/information-dialog/information-dialog.component';
 
 /**
  * Displays stacks
@@ -38,7 +38,7 @@ import {MatIconRegistry} from '@angular/material/icon';
 @Component({
   selector: 'app-stacks',
   templateUrl: './stacks.component.html',
-  styleUrls: ['./stacks.component.scss']
+  styleUrls: ['./stacks.component.scss'],
 })
 export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
 
@@ -66,12 +66,12 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
   /** JSON class for debugging */
   public json = JSON;
   /** Dev mode */
-  devMode = false;
+  public devMode = false;
 
   /** App variant */
-  variant = environment.VARIANT;
+  public variant = environment.VARIANT;
   /** App language */
-  language = environment.LANGUAGE;
+  public language = environment.LANGUAGE;
 
   /**
    * Constructor
@@ -108,7 +108,7 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
   /**
    * Handles on-init lifecycle phase
    */
-  ngOnInit() {
+  public ngOnInit() {
     this.initializeStacksSubscription();
     this.initializeSettingsSubscription();
     this.initializeDatabaseErrorSubscription();
@@ -122,7 +122,7 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
   /**
    * Handles after-view-init lifecycle phase
    */
-  ngAfterViewInit() {
+  public ngAfterViewInit() {
     this.findEntities();
     this.findSettings();
   }
@@ -130,7 +130,7 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
   /**
    * Handles on-destroy lifecycle phase
    */
-  ngOnDestroy() {
+  public ngOnDestroy() {
     this.unsubscribeSubject.next();
     this.unsubscribeSubject.complete();
   }
@@ -144,7 +144,7 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
    */
   private initializeStacksSubscription() {
     this.stacksPersistenceService.stacksSubject.pipe(
-      takeUntil(this.unsubscribeSubject)
+      takeUntil(this.unsubscribeSubject),
     ).subscribe((value) => {
       let stacks = [];
 
@@ -164,8 +164,8 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
   private initializeSettingsSubscription() {
     this.settingsService.settingsSubject.pipe(
       takeUntil(this.unsubscribeSubject),
-      filter(value => value != null)
-    ).subscribe(value => {
+      filter((value) => value != null),
+    ).subscribe((value) => {
       if (value != null) {
         const settings = value as Map<string, Setting>;
         this.initializeSettings(settings);
@@ -179,7 +179,7 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
   private initializeDatabaseErrorSubscription() {
     LogService.trace(`StacksComponent#initializeDatabaseErrorSubscription`);
     this.stacksPersistenceService.databaseErrorSubject.pipe(
-      takeUntil(this.unsubscribeSubject)
+      takeUntil(this.unsubscribeSubject),
     ).subscribe((value) => {
       LogService.warn(`${JSON.stringify(value)}`);
       // TODO Check error more specifically
@@ -188,28 +188,28 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
 
         switch (this.language) {
           case Language.GERMAN: {
-            Array.from(StacksService.stacksDe.values()).forEach(fileName =>
-              this.stacksService.getStackFromAssets(fileName).then(stackFromAssets => {
+            Array.from(StacksService.stacksDe.values()).forEach((fileName) =>
+              this.stacksService.getStackFromAssets(fileName).then((stackFromAssets) => {
                 LogService.trace(`StacksComponent > STACK FROM ASSETS`);
                 if (stackFromAssets != null) {
                   this.initializeStacks(this.stacks.concat([stackFromAssets]));
                   this.snackbarService.showSnackbar('Achtung: Spiel wird nicht gespeichert.');
 
                 }
-              })
+              }),
             );
             break;
           }
           case Language.ENGLISH: {
             console.log(`++ FOO B`);
-            Array.from(StacksService.stacksEn.values()).forEach(fileName =>
-              this.stacksService.getStackFromAssets(fileName).then(stackFromAssets => {
+            Array.from(StacksService.stacksEn.values()).forEach((fileName) =>
+              this.stacksService.getStackFromAssets(fileName).then((stackFromAssets) => {
                 LogService.trace(`StacksComponent > STACK FROM ASSETS`);
                 if (stackFromAssets != null) {
                   this.initializeStacks(this.stacks.concat([stackFromAssets]));
                   this.snackbarService.showSnackbar('Warning: Game will not be saved.');
                 }
-              })
+              }),
             );
             break;
           }
@@ -232,10 +232,10 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
   private mergeStacksFromAssets() {
     LogService.trace(`StacksComponent#mergeStacksFromAssets`);
 
-    this.stacks.forEach(stack => {
+    this.stacks.forEach((stack) => {
       // Merge cards from assets for stacks without ongoing game
       if (!GamesService.existsGame(stack)) {
-        this.stacksService.mergeStackFromAssets(stack).then(resolve => {
+        this.stacksService.mergeStackFromAssets(stack).then((resolve) => {
           const mergedStack = resolve as Stack;
           this.stacksPersistenceService.updateStack(mergedStack).then(() => {
           });
@@ -260,7 +260,7 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
    * @param stacks existing stacks
    */
   private initializeUninitializedStacks(stacks: Stack[]) {
-    StacksService.getUninitializedStackIDs(stacks).forEach(stackID => {
+    StacksService.getUninitializedStackIDs(stacks).forEach((stackID) => {
       const stack = new Stack();
       stack.id = stackID;
       this.stacksPersistenceService.createStack(stack).then();
@@ -304,7 +304,7 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
   private initializeMediaSubscription() {
     this.media = this.mediaService.media;
     this.mediaService.mediaSubject.pipe(
-      takeUntil(this.unsubscribeSubject)
+      takeUntil(this.unsubscribeSubject),
     ).subscribe((value) => {
       this.media = value as Media;
     });
@@ -316,7 +316,7 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
   private initializeThemeSubscription() {
     this.theme = this.themeService.theme;
     this.themeService.themeSubject.pipe(
-      takeUntil(this.unsubscribeSubject)
+      takeUntil(this.unsubscribeSubject),
     ).subscribe((value) => {
       this.theme = value as Theme;
     });
@@ -348,7 +348,7 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
    * Handles events targeting a stack
    * @param event event parameters
    */
-  onStackEvent(event: { action: Action, stack: Stack }) {
+  public onStackEvent(event: { action: Action, stack: Stack }) {
     const stack = CloneService.cloneStack(event.stack as Stack);
 
     switch (event.action) {
@@ -366,7 +366,7 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
    * Handles click on menu items
    * @param menuItem menu item that has been clicked
    */
-  onMenuItemClicked(menuItem: string) {
+  public onMenuItemClicked(menuItem: string) {
     switch (menuItem) {
       case 'manual': {
         let file;
@@ -384,7 +384,7 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
         if (file != null) {
           this.http.get(file).subscribe(
             () => {
-            }, err => {
+            }, (err) => {
               let title = '';
               let checkboxText = '';
               let action = '';
@@ -413,11 +413,11 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
                     .replace(/\\r/g, '\r'),
                   checkboxValue: this.dontShowManualOnStartup,
                   checkboxText,
-                  action
-                }
+                  action,
+                },
               });
 
-              dialogRef.afterClosed().subscribe(result => {
+              dialogRef.afterClosed().subscribe((result) => {
                 if (result != null) {
                   this.dontShowManualOnStartup = result.checkboxValue as boolean;
                   this.settingsService.updateSetting(
@@ -432,7 +432,7 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
       case 'open-source': {
         this.http.get('assets/open-source/open-source.md').subscribe(
           () => {
-          }, err => {
+          }, (_) => {
             let title = '';
             let action = '';
             switch (this.language) {
@@ -452,14 +452,14 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
               disableClose: false,
               data: {
                 title,
-                text: Object.keys(environment.DEPENDENCIES).map(key => {
+                text: Object.keys(environment.DEPENDENCIES).map((key) => {
                   return `${key} ${environment.DEPENDENCIES[key]}`;
-                }).concat('---').concat(Object.keys(environment.DEV_DEPENDENCIES).map(key => {
+                }).concat('---').concat(Object.keys(environment.DEV_DEPENDENCIES).map((key) => {
                   return `${key} ${environment.DEV_DEPENDENCIES[key]}`;
                 })).join('<br/>'),
                 action,
-                value: null
-              }
+                value: null,
+              },
             });
           });
         break;
@@ -496,8 +496,8 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
             licenseCode: environment.LICENSE_CODE,
             licenseContent: environment.LICENSE_CONTENT,
             homepage: environment.HOMEPAGE,
-            variant: this.variant
-          }
+            variant: this.variant,
+          },
         });
         break;
       }

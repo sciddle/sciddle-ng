@@ -7,14 +7,14 @@ import {Stack} from '../../../../../core/entity/model/stack/stack.model';
 @Component({
   selector: 'app-score-overview-fragment',
   templateUrl: './score-overview-fragment.component.html',
-  styleUrls: ['./score-overview-fragment.component.scss']
+  styleUrls: ['./score-overview-fragment.component.scss'],
 })
 export class ScoreOverviewFragmentComponent {
 
   /** Stack */
-  @Input() stack: Stack;
+  @Input() public stack: Stack;
   /** Event emitter score overview click */
-  @Output() scoreOverviewClickedEmitter = new EventEmitter<any>();
+  @Output() public scoreOverviewClickedEmitter = new EventEmitter<any>();
 
   //
   // Actions
@@ -23,7 +23,7 @@ export class ScoreOverviewFragmentComponent {
   /**
    * Handles click on score overview
    */
-  onDisplayScoreOverviewClicked() {
+  public onDisplayScoreOverviewClicked() {
     this.scoreOverviewClickedEmitter.emit();
   }
 }

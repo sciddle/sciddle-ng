@@ -5,7 +5,7 @@ import {MediaService} from './media.service';
 describe('MediaService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [MediaService]
+      providers: [MediaService],
     });
   });
 

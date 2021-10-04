@@ -1,8 +1,8 @@
 import {NgModule} from '@angular/core';
-import {CardsComponent} from './pages/cards/cards.component';
 import {CardsDeclarations} from './cards.declarations';
 import {CardsImports} from './cards.imports';
 import {WikipediaDialogComponent} from './components/dialogs/wikpedia-dialog/wikipedia-dialog.component';
+import {CardsComponent} from './pages/cards/cards.component';
 
 @NgModule({
   imports: [CardsImports],
@@ -11,10 +11,10 @@ import {WikipediaDialogComponent} from './components/dialogs/wikpedia-dialog/wik
     // Pages
     CardsComponent,
     // Dialogs
-    WikipediaDialogComponent
+    WikipediaDialogComponent,
   ], providers: [], exports: [
-    CardsComponent
-  ]
+    CardsComponent,
+  ],
 })
 export class CardsModule {
 }

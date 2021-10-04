@@ -7,9 +7,9 @@ import {UUID} from './uuid';
 export abstract class Entity {
 
   /** Entity type */
-  entityType: EntityType;
+  public entityType: EntityType;
   /** Unique identifier */
-  id?: string;
+  public id?: string;
 
   /**
    * Constructor

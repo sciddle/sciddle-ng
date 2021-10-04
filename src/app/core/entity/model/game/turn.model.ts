@@ -1,6 +1,6 @@
-import {TurnState} from '../turn-state.enum';
-import {Entity} from '../entity.model';
 import {EntityType} from '../entity-type.enum';
+import {Entity} from '../entity.model';
+import {TurnState} from '../turn-state.enum';
 
 /**
  * Represents a turn
@@ -8,9 +8,9 @@ import {EntityType} from '../entity-type.enum';
 export class Turn extends Entity {
 
   /** State of the turn */
-  state: TurnState;
+  public state: TurnState;
   /** ID of team taking turn */
-  teamID: number;
+  public teamID: number;
 
   /**
    * Constructor

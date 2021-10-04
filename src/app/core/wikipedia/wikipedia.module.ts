@@ -1,13 +1,13 @@
-import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
+import {NgModule} from '@angular/core';
 import {WikipediaProviders} from './wikipedia.providers';
 
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule
+    CommonModule,
   ],
-  providers: [WikipediaProviders]
+  providers: [WikipediaProviders],
 })
 export class WikipediaModule {
 }

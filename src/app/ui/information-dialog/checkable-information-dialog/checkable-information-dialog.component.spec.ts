@@ -1,9 +1,9 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {CheckableInformationDialogComponent} from './checkable-information-dialog.component';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {InformationDialogDeclarations} from '../information-dialog.declarations';
 import {InformationDialogImports} from '../information-dialog.imports';
+import {CheckableInformationDialogComponent} from './checkable-information-dialog.component';
 
 describe('WikipediaDialogComponent', () => {
   let component: CheckableInformationDialogComponent;
@@ -16,9 +16,9 @@ describe('WikipediaDialogComponent', () => {
       providers: [
         {provide: MAT_DIALOG_DATA, useValue: {}}, {
           provide: MatDialogRef, useValue: {
-            close: jasmine.createSpy('close')
-          }
-        }
+            close: jasmine.createSpy('close'),
+          },
+        },
       ],
     }).compileComponents();
   }));

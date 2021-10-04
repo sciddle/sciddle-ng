@@ -5,7 +5,7 @@ import {Threshold} from '../model/threshold.enum';
  * Handles logging
  */
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LogService {
 
@@ -14,7 +14,7 @@ export class LogService {
    * @param threshold threshold
    * @param message message
    */
-  static log(threshold: Threshold, message: string) {
+  public static log(threshold: Threshold, message: string) {
     console.log(`++ ${threshold} ${message}`);
   }
 
@@ -24,7 +24,7 @@ export class LogService {
    * @param message message
    * @param color color
    */
-  static logWithColor(threshold: Threshold, message: string, color: string) {
+  public static logWithColor(threshold: Threshold, message: string, color: string) {
     console.log(`%c++ ${threshold} ${message}`, `color: ${color}`);
   }
 
@@ -32,7 +32,7 @@ export class LogService {
    * Logs message with threshold TRACE
    * @param message message
    */
-  static trace(message: string) {
+  public static trace(message: string) {
     LogService.logWithColor(Threshold.TRACE, message, 'grey');
   }
 
@@ -40,7 +40,7 @@ export class LogService {
    * Logs message with threshold TRACE
    * @param message message
    */
-  static traceSnack(message: string) {
+  public static traceSnack(message: string) {
     console.log(`%c++ ${message}`, 'color: blue');
   }
 
@@ -48,7 +48,7 @@ export class LogService {
    * Logs message with threshold DEBUG
    * @param message message
    */
-  static debug(message: string) {
+  public static debug(message: string) {
     LogService.log(Threshold.DEBUG, message);
   }
 
@@ -56,7 +56,7 @@ export class LogService {
    * Logs message with threshold INFO
    * @param message message
    */
-  static info(message: string) {
+  public static info(message: string) {
     LogService.log(Threshold.INFO, message);
   }
 
@@ -64,7 +64,7 @@ export class LogService {
    * Logs message with threshold WARN
    * @param message message
    */
-  static warn(message: string) {
+  public static warn(message: string) {
     LogService.logWithColor(Threshold.WARN, message, 'orange');
   }
 
@@ -72,7 +72,7 @@ export class LogService {
    * Logs message with threshold FATAL
    * @param message message
    */
-  static fatal(message: string) {
+  public static fatal(message: string) {
     LogService.logWithColor(Threshold.WARN, message, 'red');
   }
 }

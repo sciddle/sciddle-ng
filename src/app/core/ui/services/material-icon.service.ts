@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {DomSanitizer} from '@angular/platform-browser';
 import {MatIconRegistry} from '@angular/material/icon';
+import {DomSanitizer} from '@angular/platform-browser';
 
 /**
  * Represents icon topic subdirectory
@@ -18,7 +18,7 @@ enum IconTopic {
   IMAGE = 'image',
   MAPS = 'maps',
   NAVIGATION = 'navigation',
-  SOCIAL = 'social'
+  SOCIAL = 'social',
 }
 
 /**
@@ -26,11 +26,11 @@ enum IconTopic {
  */
 class Icon {
   /** Topic */
-  topic: IconTopic;
+  public topic: IconTopic;
   /** Name */
-  name: string;
+  public name: string;
   /** File */
-  file: string;
+  public file: string;
 
   /**
    * Constructor
@@ -49,7 +49,7 @@ class Icon {
  * Handles Material icons
  */
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class MaterialIconService {
 
@@ -78,9 +78,9 @@ export class MaterialIconService {
    * @param iconRegistry icon registry
    * @param sanitizer sanitizer
    */
-  public initializeIcons(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
+  public initializeIcons(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer): void {
 
-    this.icons.forEach(icon => {
+    this.icons.forEach((icon) => {
       iconRegistry.addSvgIcon(icon.name,
         sanitizer.bypassSecurityTrustResourceUrl('./' + this.ICON_ROOT_DIR + '/' + icon.topic + '/svg/' + this.VARIANT + '/' + icon.file));
     });

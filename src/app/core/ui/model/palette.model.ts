@@ -7,9 +7,9 @@ import {PaletteType} from './palette-type.enum';
 export class MaterialPalette {
 
   /** MaterialPalette type */
-  type: PaletteType;
+  public type: PaletteType;
   /** List of hues */
-  hues: Hue[] = [];
+  public hues: Hue[] = [];
 
   /**
    * Constructor

@@ -12,16 +12,16 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 export class ConfirmationDialogComponent implements OnInit {
 
   /** Dialog title */
-  dialogTitle = '';
+  public dialogTitle = '';
 
   /** Text to be displayed */
-  text = '';
+  public text = '';
   /** Action */
-  action = '';
+  public action = '';
   /** Negative action */
-  negativeAction = '';
+  public negativeAction = '';
   /** Value to be returned */
-  value: any;
+  public value: any;
 
   /**
    * Constructor
@@ -39,7 +39,7 @@ export class ConfirmationDialogComponent implements OnInit {
   /**
    * Handles on-init lifecycle phase
    */
-  ngOnInit() {
+  public ngOnInit() {
     this.initializeData();
   }
 
@@ -65,7 +65,7 @@ export class ConfirmationDialogComponent implements OnInit {
   /**
    * Handles click on confirm button
    */
-  confirm() {
+  public confirm() {
     this.dialogRef.close(this.value);
   }
 }

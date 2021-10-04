@@ -5,7 +5,7 @@ import {PouchDBService} from './pouchdb.service';
 describe('PouchdbService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [PouchDBService]
+      providers: [PouchDBService],
     });
   });
 

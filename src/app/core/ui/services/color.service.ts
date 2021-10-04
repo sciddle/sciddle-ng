@@ -1,19 +1,19 @@
 import {Injectable} from '@angular/core';
-import {MaterialColorService} from './material-color.service';
 import {HueType} from '../model/hue-type.enum';
-import {PaletteType} from '../model/palette-type.enum';
 import {Hue} from '../model/hue.model';
+import {PaletteType} from '../model/palette-type.enum';
+import {MaterialColorService} from './material-color.service';
 
 /**
  * Handles derived colors
  */
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ColorService {
 
   /** Array of available team colors */
-  teamHues = [
+  public teamHues = [
     this.materialColorService.hue(PaletteType.LIGHT_BLUE, HueType._500),
     this.materialColorService.hue(PaletteType.BLUE, HueType._600),
     this.materialColorService.hue(PaletteType.LIGHT_GREEN, HueType._700),
@@ -33,7 +33,7 @@ export class ColorService {
    * @param index index of the team
    * @returns color string derived from team's index
    */
-  getTeamColor(index: number) {
+  public getTeamColor(index: number) {
     const hue = this.getTeamHue(index);
 
     return (hue != null) ? hue.color : this.materialColorService.color(PaletteType.GREY, HueType._500);
@@ -44,7 +44,7 @@ export class ColorService {
    * @param index index of the team
    * @returns contrast color string derived from team name
    */
-  getTeamContrast(index: number) {
+  public getTeamContrast(index: number) {
     const hue = this.getTeamHue(index);
 
     return (hue != null) ? hue.contrast : this.materialColorService.contrast(PaletteType.GREY, HueType._500);

@@ -5,7 +5,7 @@ import {UiProviders} from './ui.providers';
 @NgModule({
   declarations: [],
   imports: [UiImports],
-  providers: [UiProviders]
+  providers: [UiProviders],
 })
 export class UiModule {
 }

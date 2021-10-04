@@ -1,10 +1,3 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-
-import {WikipediaDialogComponent} from './wikipedia-dialog.component';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {CardsDeclarations} from '../../../cards.declarations';
-import {CardsImports} from '../../../cards.imports';
-
 /*
 describe('WikipediaDialogComponent', () => {
   let component: WikipediaDialogComponent;

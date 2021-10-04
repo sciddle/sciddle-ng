@@ -2,5 +2,5 @@ import {ConfirmationDialogComponent} from './confirmation-dialog/confirmation-di
 
 /** Declarations for confirmation dialog module */
 export const ConfirmationDialogDeclarations = [
-  ConfirmationDialogComponent
+  ConfirmationDialogComponent,
 ];
