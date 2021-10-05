@@ -1,4 +1,4 @@
-name: Release S4F
+name: Release app for S4F
 on:
   push:
     tags:

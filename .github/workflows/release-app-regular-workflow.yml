@@ -1,4 +1,4 @@
-name: Deploy to Firebase (will be published to https://sciddle.de)
+name: Release app for https://sciddle.de
 on:
   workflow_dispatch:
 jobs:

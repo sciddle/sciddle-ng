@@ -1,5 +1,5 @@
 [![Build](https://github.com/sciddle/sciddle-ng/actions/workflows/build-app-workflow.yml/badge.svg?branch=main)](https://github.com/sciddle/sciddle-ng/actions/workflows/build-app-workflow.yml)
-[![Deploy German version to Firebase](https://github.com/sciddle/sciddle-ng/actions/workflows/deploy-app-firebase-de-regular-workflow.yml/badge.svg)](https://github.com/sciddle/sciddle-ng/actions/workflows/deploy-app-firebase-de-regular-workflow.yml)
+![Deploy German version to Firebase](https://github.com/sciddle/sciddle-ng/actions/workflows/deploy-app-firebase-de-regular-workflow.yml/badge.svg)](https://github.com/sciddle/sciddle-ng/actions/workflows/deploy-app-firebase-de-regular-workflow.yml)
 [![Deploy English version to Firebase](https://github.com/sciddle/sciddle-ng/actions/workflows/deploy-app-firebase-en-regular-workflow.yml/badge.svg)](https://github.com/sciddle/sciddle-ng/actions/workflows/deploy-app-firebase-en-regular-workflow.yml)
 [![Deploy German S4F version to Firebase](https://github.com/sciddle/sciddle-ng/actions/workflows/deploy-app-firebase-de-s4f-workflow.yml/badge.svg)](https://github.com/sciddle/sciddle-ng/actions/workflows/deploy-app-firebase-de-s4f-workflow.yml)
 [![Issues](https://img.shields.io/github/issues/sciddle/sciddle-ng)](https://github.com/sciddle/sciddle-ng/issues)
@@ -23,9 +23,13 @@ Sciddle is a **sci**ence ri**ddle** game that lets you learn science terms in a 
 The rules are simple: Try to explain the term written on top of each card to others __without__ using the five words printed below. Swipe the card to the left or to the right to show the next one.
 
 The latest version of this web app is available on
- * https://sciddle-riddle-deu.web.app (German version)
- * https://sciddle-riddle-eng.web.app (English version)
- * https://apps.scientists4future.org/cards-for-future (German version re-branded for [Scientists 4 Future](https://www.scientists4future.org/))
+* https://sciddle.de (German version that is mentioned on physical game boxes)
+* https://apps.scientists4future.org/cards-for-future (German version re-branded for [Scientists 4 Future](https://www.scientists4future.org/))
+
+Intermediate states of the app can be seen on
+* https://sciddle-riddle-deu.web.app (German version)
+* https://sciddle-riddle-eng.web.app (English version)
+* https://sciddle-s4f-deu.web.app (German version, re-branded for Scientists 4 Future)
 
 ### Built With
 
@@ -47,7 +51,7 @@ npm run start
 
 ## Usage
 
-tbd
+It's a game. Follow the ruleset described in [the manual](./src/app/assets/manual/manual-en.md) (or come up with you own rules).
 
 ## Roadmap
 
