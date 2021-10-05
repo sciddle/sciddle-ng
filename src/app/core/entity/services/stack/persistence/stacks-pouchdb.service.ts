@@ -224,7 +224,7 @@ export class StacksPouchdbService implements StacksPersistenceService {
    * Uploads a stack
    * @param stack stack
    */
-  public uploadStack(stack: Stack) {
+  public uploadStack(stack: any) {
     stack._rev = null;
     stack._id = null;
 
