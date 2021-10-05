@@ -58,7 +58,7 @@ export class WikipediaService {
       // Call post
       this.http.post(queryURL, [], options)
         .pipe(timeout(t), delay(d))
-        .subscribe((data) => {
+        .subscribe((data: any) => {
           const query = data.query;
           const pages = query != null ? query.pages : null;
           const pageKeys = pages != null ? Object.keys(pages) : pages;
