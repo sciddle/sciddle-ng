@@ -1,7 +1,12 @@
 [![Build](https://github.com/sciddle/sciddle-ng/actions/workflows/build-app-workflow.yml/badge.svg?branch=main)](https://github.com/sciddle/sciddle-ng/actions/workflows/build-app-workflow.yml)
-![Deploy German version to Firebase](https://github.com/sciddle/sciddle-ng/actions/workflows/deploy-app-firebase-de-regular-workflow.yml/badge.svg)](https://github.com/sciddle/sciddle-ng/actions/workflows/deploy-app-firebase-de-regular-workflow.yml)
+
+[![Deploy German version to Firebase](https://github.com/sciddle/sciddle-ng/actions/workflows/deploy-app-firebase-de-regular-workflow.yml/badge.svg)](https://github.com/sciddle/sciddle-ng/actions/workflows/deploy-app-firebase-de-regular-workflow.yml)
 [![Deploy English version to Firebase](https://github.com/sciddle/sciddle-ng/actions/workflows/deploy-app-firebase-en-regular-workflow.yml/badge.svg)](https://github.com/sciddle/sciddle-ng/actions/workflows/deploy-app-firebase-en-regular-workflow.yml)
 [![Deploy German S4F version to Firebase](https://github.com/sciddle/sciddle-ng/actions/workflows/deploy-app-firebase-de-s4f-workflow.yml/badge.svg)](https://github.com/sciddle/sciddle-ng/actions/workflows/deploy-app-firebase-de-s4f-workflow.yml)
+
+[![Release app for S4F](https://github.com/sciddle/sciddle-ng/actions/workflows/release-app-s4f-workflow.yml/badge.svg)](https://github.com/sciddle/sciddle-ng/actions/workflows/release-app-s4f-workflow.yml)
+[![Release app for https://sciddle.de](https://github.com/sciddle/sciddle-ng/actions/workflows/release-app-regular-workflow.yml/badge.svg)](https://github.com/sciddle/sciddle-ng/actions/workflows/release-app-regular-workflow.yml)
+
 [![Issues](https://img.shields.io/github/issues/sciddle/sciddle-ng)](https://github.com/sciddle/sciddle-ng/issues)
 
 <br />
