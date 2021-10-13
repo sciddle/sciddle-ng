@@ -6,32 +6,17 @@
 
 .main-content {
   @media #{$breakpoint-small} {
-    padding-top: 56px;
-    // margin-left: 10px;
-    // margin-right: 10px;
-  }
-  @media #{$breakpoint-medium} {
-    padding-top: 88px;
-    margin-left: 20px;
-    margin-right: 20px;
-  }
-  @media #{$breakpoint-large} {
-    padding-top: 88px;
-    margin-left: 40px;
-    margin-right: 40px;
-  }
-}
-
-.margin {
-  @media #{$breakpoint-small} {
+    margin-top: 56px;
     margin-left: 10px;
     margin-right: 10px;
   }
   @media #{$breakpoint-medium} {
+    padding-top: 88px;
     margin-left: 20px;
     margin-right: 20px;
   }
   @media #{$breakpoint-large} {
+    padding-top: 88px;
     margin-left: 40px;
     margin-right: 40px;
   }
@@ -42,4 +27,31 @@
   position: fixed;
   top: 0;
   z-index: 999;
+}
+
+.scroll-viewport {
+  @media #{$breakpoint-small} {
+    height: calc(100vh - 56px);
+    width: calc(100vw - 20px);
+  }
+  @media #{$breakpoint-medium} {
+    height: calc(100vh - 88px);
+    width: calc(100vw - 40px);
+  }
+  @media #{$breakpoint-large} {
+    height: calc(100vh - 88px);
+    width: calc(100vw - 80px);
+  }
+}
+
+.scroll-item {
+  @media #{$breakpoint-small} {
+    min-height: 130px;
+  }
+  @media #{$breakpoint-medium} {
+    min-height: 130px;
+  }
+  @media #{$breakpoint-large} {
+    min-height: 130px;
+  }
 }

@@ -5,9 +5,11 @@
   (menuItemEventEmitter)="onMenuItemClicked($event)"></app-stacks-toolbar>
 
 <div class="main-content horizontal-center">
-  <div class="margin">
-    <app-stack-fragment *ngFor="let s of stacks" [stack]="s"
-                        (stackEventEmitter)="onStackEvent($event)">
-    </app-stack-fragment>
-  </div>
+  <cdk-virtual-scroll-viewport itemSize="50" class="scroll-viewport">
+    <div *cdkVirtualFor="let s of stacks" class="scroll-item">
+      <app-stack-fragment [stack]="s"
+                          (stackEventEmitter)="onStackEvent($event)">
+      </app-stack-fragment>
+    </div>
+  </cdk-virtual-scroll-viewport>
 </div>
