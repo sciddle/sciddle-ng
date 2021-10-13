@@ -29,7 +29,7 @@
   { "entityType": 0, "word": "Methode", "taboos": ["Material", "Interview", "teilnehmende Beobachtung", "Erkenntnisweg", "Datenerhebung"], "difficulty": 3, "alternateWikipediaArticle": "Erkenntnistheorie" },
   { "entityType": 0, "word": "Migration", "taboos": ["Grenzregime", "Mobilität", "Heimat", "Arbeit", "Klima"], "difficulty": 1},
   { "entityType": 0, "word": "Milieu", "taboos": ["Schicht", "Klasse", "Herkunft", "Stallgerucht", "Kapital"], "difficulty": 2, "alternateWikipediaArticle": "Soziales_Milieu" },
-  { "entityType": 0, "word": "Mobilität", "taboos": ["Fort-Bewegung", "Digital Natives", "Felxibilität", "Behinderung", "Migration"], "difficulty": 2, "alternateWikipediaArticle": "Soziale_Mobilität" },
+  { "entityType": 0, "word": "Mobilität", "taboos": ["Fort-Bewegung", "Digital Natives", "Flexibilität", "Behinderung", "Migration"], "difficulty": 2, "alternateWikipediaArticle": "Soziale_Mobilität" },
   { "entityType": 0, "word": "Müll", "taboos": ["Dinge", "Weggeworfenes", "Moderne", "Klima", "Gemeinschaftsorganisation"], "difficulty": 1, "alternateWikipediaArticle": "Abfall" },
   { "entityType": 0, "word": "Museum", "taboos": ["Sammlung", "Provenienz", "Dekolonialisierung", "Objekt", "Ausstellung"], "difficulty": 1 },
   { "entityType": 0, "word": "Mythen", "taboos": ["Märchen", "Gründungserzählung", "Sage", "Heldin", "Göttinnen"], "difficulty": 1 },
