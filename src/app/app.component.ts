@@ -8,6 +8,9 @@ import {PouchDBService} from './core/persistence/services/pouchdb.service';
 import {SnackbarService} from './core/ui/services/snackbar.service';
 import {ThemeService} from './core/ui/services/theme.service';
 import {Variant} from './core/util/model/variant.enum';
+import {MaterialIconService} from "./core/ui/services/material-icon.service";
+import {MatIconRegistry} from "@angular/material/icon";
+import {DomSanitizer} from "@angular/platform-browser";
 
 /**
  * Displays application
@@ -36,9 +39,12 @@ export class AppComponent implements OnInit, AfterViewInit {
    * @param snackBar snack bar
    * @param themeService theme service
    */
-  constructor(private overlayContainer: OverlayContainer,
+  constructor(private iconRegistry: MatIconRegistry,
+              private materialIconService: MaterialIconService,
+              private overlayContainer: OverlayContainer,
               private pouchDBService: PouchDBService,
               private pouchDBSettingsService: PouchDBSettingsService,
+              private sanitizer: DomSanitizer,
               private snackbarService: SnackbarService,
               public snackBar: MatSnackBar,
               private themeService: ThemeService) {
@@ -56,6 +62,8 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.initializeTheme();
     this.initializeThemeSubscription();
     this.initializeSnackbar();
+
+    this.initializeMaterial();
   }
 
   /**
@@ -116,6 +124,13 @@ export class AppComponent implements OnInit, AfterViewInit {
         this.openSnackBar(snack[0], snack[1], snack[2]);
       },
     );
+  }
+
+  /**
+   * Initializes material colors and icons
+   */
+  private initializeMaterial() {
+    this.materialIconService.initializeIcons(this.iconRegistry, this.sanitizer);
   }
 
   /**
