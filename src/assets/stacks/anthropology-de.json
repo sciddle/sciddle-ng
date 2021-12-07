@@ -86,7 +86,7 @@
   { "entityType": 0, "word": "Going Native", "taboos": ["Feldforschung", "emisch", "point of view", "Nähe-Distanz-Verhältnis", "Reflexion"], "difficulty": 2, "alternateWikipediaArticle": null },
   { "entityType": 0, "word": "Gruppe", "taboos": ["Gemeinschaft", "Zugehörigkeit", "Person", "Wir-Gefühl", "Exklusion"], "difficulty": 1, "alternateWikipediaArticle": "Soziale_Gruppe" },
   { "entityType": 0, "word": "Habitus", "taboos": ["Körper", "Pierre Bourdieu", "Klasse", "Kapital", "Internalisierung"], "difficulty": 2, "alternateWikipediaArticle": "Habitus_(Soziologie)" },
-  { "entityType": 0, "word": "Handbuch des deutschen Aberglaubens", "taboos": ["Nachschlagewerk", "Volkskunde", "Magie", "Sammlung", "Spiritualität"], "difficulty": 2, "alternateWikipediaArticle": "Handwörterbuch_des_deutschen_Aberglaubens" },
+  { "entityType": 0, "word": "Handwörterbuch des deutschen Aberglaubens", "taboos": ["Nachschlagewerk", "Volkskunde", "Magie", "Sammlung", "Spiritualität"], "difficulty": 2, "alternateWikipediaArticle": "Handwörterbuch_des_deutschen_Aberglaubens" },
   { "entityType": 0, "word": "Hausforschung", "taboos": ["Fachwerk", "Bauweise", "Denkmal", "Wohnen", "Einrichtung"], "difficulty": 1, "alternateWikipediaArticle": null },
   { "entityType": 0, "word": "Hegemonilität", "taboos": ["Führungsrolle", "Deutungshoheit", "Kolonialismus", "Dominanz", "Institution"], "difficulty": 3, "alternateWikipediaArticle": "Hegemonie" },
   { "entityType": 0, "word": "Heugabel", "taboos": ["Mist", "Sachkulturforschung", "Ländlichkeit", "Bauern", "Vieh"], "difficulty": 1 },
