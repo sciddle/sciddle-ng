@@ -1,5 +1,5 @@
 {
-  "id":"0","entityType":0,"title":"KULT“,“anthrogame":null,"theme“:“orange“,“cards": [
+  "id":"0","entityType":0,"title":"KULT","game":null,"theme“:“orange“,“cards": [
   { "entityType": 0, "word": "Alltage", "taboos": ["Routinen", "unhinterfragt", "Lebenswelt", "Struktur", "Wiederholung"], "difficulty": 1, "category": "FF" },
 { "entityType": 0, "word": "Arbeit", "taboos": ["Freizeit", "Muße", "Frohn", "Lohn", "Proletariat"], "difficulty": 1, "category": "FF" },
 { "entityType": 0, "word": "Arbeitskultur", "taboos": ["Frankfurter Schule", "Ökonomische Anthropologie", "Wirtschaften", "Geschlechtsspezifik", "Erwerb"], "difficulty": 2, "category": "FF" },
