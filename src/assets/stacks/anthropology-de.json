@@ -157,7 +157,7 @@
 { "entityType": 0, "word": "Struktur", "taboos": ["Ordnung", "Handlungsmuster", "Semiotik", "Reduktion", "Modellbildung"], "difficulty": 2, "category": "T" },
 { "entityType": 0, "word": "Subjektivierung", "taboos": ["Objektivierung", "Unterwerfung", "Prozess", "Selbstwerdung", "Internalisierung"], "difficulty": 3, "category": "T" },
 { "entityType": 0, "word": "ubiquitär", "taboos": ["allgegenwärtig", "Digitalität", "Medien", "Globalisierung", "Durchdringung"], "difficulty": 3, "category": "T" },
-{ "entityType": 0, "word": "Kultur", "taboos": ["Bedeutungsgewebe", "Text", "Praxis", "whole way of life", "Alltag"], "difficulty": 1, "category": "T" },
+{ "entityType": 0, "word": "Kultur", "taboos": ["Bedeutungsgewebe", "Text", "Praxis", "whole way of life", "Alltag"], "difficulty": 1, "category": "T" }
 
 ]
 }
