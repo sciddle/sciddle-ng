@@ -23,6 +23,13 @@
   }
 }
 
+.kult-theme {
+  a, a:visited {
+    color: mat.get-color-from-palette($future-primary, 500) !important;
+    text-decoration: none !important;
+  }
+}
+
 //
 // Custom
 //

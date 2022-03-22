@@ -130,6 +130,76 @@
   }
 }
 
+
+.kult-theme {
+  .container {
+    border-radius: 40px !important;
+    min-height: 600px;
+    background-size: 100% 100% !important;
+  }
+  .card-background {
+    min-height: 600px;
+  }
+
+  .mat-card-footer .button-wrapper {
+    display:none;
+  }
+  .FF1 {
+    background-image: url(../../../../../../assets/images/kult_ff_1.webp) !important;
+  }
+  .FF2 {
+    background-image: url(../../../../../../assets/images/kult_ff_2.webp) !important;
+  }
+  .FF3 {
+    background-image: url(../../../../../../assets/images/kult_ff_3.webp) !important;
+  }
+
+  .T1 {
+    background-image: url(../../../../../../assets/images/kult_t_1.webp) !important;
+  }
+  .T2 {
+    background-image: url(../../../../../../assets/images/kult_t_2.webp) !important;
+  }
+  .T3 {
+    background-image: url(../../../../../../assets/images/kult_t_3.webp) !important;
+  }
+
+  .M1 {
+    background-image: url(../../../../../../assets/images/kult_m_1.webp) !important;
+  }
+  .M2 {
+    background-image: url(../../../../../../assets/images/kult_m_2.webp) !important;
+  }
+  .M3 {
+    background-image: url(../../../../../../assets/images/kult_m_3.webp) !important;
+  }
+
+  .FG1 {
+    background-image: url(../../../../../../assets/images/kult_fg_1.webp) !important;
+  }
+  .FG2 {
+    background-image: url(../../../../../../assets/images/kult_fg_2.webp) !important;
+  }
+  .FG3 {
+    background-image: url(../../../../../../assets/images/kult_fg_3.webp) !important;
+  }
+
+  .difficultyColorEasy {
+    color: white !important;
+    background-color: mat.get-color-from-palette(mat.$green-palette, 500) !important;
+  }
+
+  .difficultyColorMedium {
+    color: white !important;
+    background-color: mat.get-color-from-palette(mat.$amber-palette, 400) !important;
+  }
+
+  .difficultyColorHard {
+    color: white !important;
+    background-color: mat.get-color-from-palette(mat.$red-palette, 500) !important;
+  }
+}
+
 .grayscale {
   filter: grayscale(90%);
   -webkit-filter: grayscale(90%);

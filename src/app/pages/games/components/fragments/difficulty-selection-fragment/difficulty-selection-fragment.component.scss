@@ -79,3 +79,20 @@
     background-color: mat.get-color-from-palette($future-accent, 500) !important;
   }
 }
+
+.kult-theme {
+  .difficulty-easy {
+    color: mat.get-contrast-color-from-palette($kult-primary, 400) !important;
+    background-color: mat.get-color-from-palette($kult-primary, 400) !important;
+  }
+
+  .difficulty-medium {
+    color: mat.get-contrast-color-from-palette($kult-primary, 500) !important;
+    background-color: mat.get-color-from-palette($kult-primary, 500) !important;
+  }
+
+  .difficulty-hard {
+    color: mat.get-contrast-color-from-palette($kult-primary, 600) !important;
+    background-color: mat.get-color-from-palette($kult-primary, 600) !important;
+  }
+}
