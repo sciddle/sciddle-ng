@@ -21,6 +21,7 @@ export class Card extends Entity {
   public alternateWikipediaArticle: string;
   /** Alternate URL */
   public alternateURL: string;
+  category: any;
 
   /**
    * Constructor

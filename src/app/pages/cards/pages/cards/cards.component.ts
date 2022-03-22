@@ -625,6 +625,10 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
         this.themeService.switchTheme(Theme.FUTURE);
         break;
       }
+      case 'kult': {
+        this.themeService.switchTheme(Theme.KULT);
+        break;
+      }
       default: {
         switch (VariantService.getVariant()) {
           case Variant.SCIDDLE: {

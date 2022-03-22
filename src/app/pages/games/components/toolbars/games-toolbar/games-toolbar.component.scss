@@ -105,6 +105,16 @@
   }
 }
 
+.kult-theme {
+  .toolbar-title {
+    color: mat.get-color-from-palette($kult-primary, 500);
+    font-family: 'Black Han Sans', sans-serif;
+    font-size: 1.5em;
+    text-transform: uppercase;
+    vertical-align: text-top;
+  }
+}
+
 .search-form-field {
   width: 100%;
 }

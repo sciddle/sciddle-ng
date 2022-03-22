@@ -83,6 +83,18 @@
   }
 }
 
+.kult-theme {
+  .single-player {
+    color: white !important;
+    background-color: mat.get-color-from-palette($kult-primary, 400) !important;
+  }
+
+  .multi-player {
+    color: white !important;
+    background-color: mat.get-color-from-palette($kult-primary, 600) !important;
+  }
+}
+
 .mode-button {
   font-size: 2em !important;
   padding: 20px !important;

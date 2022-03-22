@@ -179,6 +179,7 @@ export class StacksService {
           existingCard.word = card.word;
           existingCard.taboos = card.taboos;
           existingCard.difficulty = card.difficulty;
+          existingCard.category = card.category;
           existingCard.alternateExplanationText = card.alternateExplanationText;
           existingCard.alternateWikipediaArticle = card.alternateWikipediaArticle;
 

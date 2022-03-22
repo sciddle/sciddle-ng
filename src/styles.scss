@@ -18,6 +18,10 @@
   @include mat.all-component-themes($future-theme);
 }
 
+.kult-theme {
+  @include mat.all-component-themes($kult-theme);
+}
+
 // Rest
 
 html, body {

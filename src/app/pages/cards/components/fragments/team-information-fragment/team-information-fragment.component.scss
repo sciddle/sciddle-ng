@@ -55,3 +55,10 @@
     font-weight: 700;
   }
 }
+
+.kult-theme {
+  .team-name {
+    color: mat.get-color-from-palette($kult-accent, 500) !important;
+    font-weight: 700;
+  }
+}
