@@ -120,6 +120,22 @@
   }
 }
 
+
+.kult-theme {
+  .toolbar-title {
+    color: mat.get-color-from-palette($kult-primary, 500) !important;
+    font-family: 'Black Han Sans', sans-serif;
+    font-size: 1.5em;
+    text-transform: uppercase;
+    vertical-align: text-top;
+  }
+
+  .card-count {
+    color: mat.get-color-from-palette($kult-accent, 500) !important;
+    font-weight: 700;
+  }
+}
+
 //
 // Material
 //

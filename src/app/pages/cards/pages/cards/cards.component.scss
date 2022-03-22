@@ -171,6 +171,14 @@
   }
 }
 
+.kult-theme {
+  .card-background {
+    border-radius: 40px !important;
+    background-image: url(../../../../../assets/images/kult_back.webp) !important;
+    background-size: 100% 100%;
+  }
+}
+
 .card-background-margin {
   margin: -12px 0 !important;
 }

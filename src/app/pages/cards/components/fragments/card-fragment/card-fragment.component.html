@@ -1,8 +1,9 @@
 <div *ngIf="card != null" [className]="cardClassName">
-  <mat-card class="container flexcontainer-vertical">
+  <mat-card class="container flexcontainer-vertical {{ card.category }}{{ card.difficulty }}">
     <div *ngIf="devMode &&  card.id != null" class="debug">id {{ card.id.slice(0, 19)  }}...</div>
     <div *ngIf="devMode" class="debug">index {{ card.index }}</div>
     <div *ngIf="devMode" class="debug">difficulty {{ card.difficulty }}</div>
+    <div *ngIf="devMode" class="debug">category {{ card.category }}</div>
 
     <mat-card-title class="word">
       <span class="cdk-visually-hidden" #translatedTooltipExplainTheTerm
