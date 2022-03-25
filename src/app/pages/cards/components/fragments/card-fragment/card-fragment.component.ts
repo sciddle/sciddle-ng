@@ -1,4 +1,12 @@
-import {ChangeDetectionStrategy, Component, Input, isDevMode, OnChanges, SimpleChanges, ViewEncapsulation} from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  isDevMode,
+  OnChanges,
+  SimpleChanges,
+  ViewEncapsulation
+} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {environment} from '../../../../../../environments/environment';
 import {Card} from '../../../../../core/entity/model/card/card.model';
@@ -49,6 +57,8 @@ export class CardFragmentComponent implements OnChanges {
   public difficultyLongText = '';
   /** Difficulty combined text */
   public difficultyCombinedText = '';
+  /** CSS class applied to card container */
+  public cardContainerClassName;
   /** CSS class applied to card */
   public cardClassName;
 
@@ -150,7 +160,8 @@ export class CardFragmentComponent implements OnChanges {
    * Initialize CSS class
    */
   private initializeCssClass() {
-    this.cardClassName = (this.isTimerOver) ? 'grayscale' : null;
+    this.cardContainerClassName = (this.isTimerOver) ? 'grayscale' : null;
+    this.cardClassName = (this.theme === Theme.KULT) ? `${this.card.category}${this.card.difficulty}` : null;
   }
 
   //
