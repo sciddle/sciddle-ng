@@ -14,6 +14,8 @@ export class Card extends Entity {
   public taboos: string[];
   /** Difficulty of the term to be explained */
   public difficulty: number;
+  /** Category */
+  public category: string;
 
   /** Alternate explanation text */
   public alternateExplanationText: string;
@@ -21,7 +23,6 @@ export class Card extends Entity {
   public alternateWikipediaArticle: string;
   /** Alternate URL */
   public alternateURL: string;
-  category: any;
 
   /**
    * Constructor
