@@ -1,5 +1,5 @@
-<div *ngIf="card != null" [className]="cardClassName">
-  <mat-card class="container flexcontainer-vertical {{ card.category }}{{ card.difficulty }}">
+<div *ngIf="card != null" [className]="cardContainerClassName">
+  <mat-card class="container flexcontainer-vertical" [ngClass]="cardClassName">
     <div *ngIf="devMode &&  card.id != null" class="debug">id {{ card.id.slice(0, 19)  }}...</div>
     <div *ngIf="devMode" class="debug">index {{ card.index }}</div>
     <div *ngIf="devMode" class="debug">difficulty {{ card.difficulty }}</div>
