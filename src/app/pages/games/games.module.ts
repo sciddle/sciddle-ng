@@ -5,16 +5,11 @@ import {GamesImports} from './games.imports';
 import {GamesComponent} from './pages/games/games.component';
 
 @NgModule({
-  imports: [GamesImports],
-  declarations: [GamesDeclarations],
-  entryComponents: [
-    // Pages
-    GamesComponent,
-    // Dialogs
-    MultiplayerGameDialogComponent,
-  ], providers: [], exports: [
-    GamesComponent,
-  ],
+    imports: [GamesImports],
+    declarations: [GamesDeclarations],
+    providers: [], exports: [
+        GamesComponent,
+    ]
 })
 export class GamesModule {
 }

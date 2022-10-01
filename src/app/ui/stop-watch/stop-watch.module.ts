@@ -3,12 +3,11 @@ import {NgModule} from '@angular/core';
 import {StopWatchComponent} from './stop-watch/stop-watch.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-  ],
-  declarations: [StopWatchComponent],
-  entryComponents: [StopWatchComponent],
-  exports: [StopWatchComponent],
+    imports: [
+        CommonModule,
+    ],
+    declarations: [StopWatchComponent],
+    exports: [StopWatchComponent]
 })
 export class StopWatchModule {
 }

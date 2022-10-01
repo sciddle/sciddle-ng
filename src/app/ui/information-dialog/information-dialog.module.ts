@@ -5,16 +5,12 @@ import {InformationDialogImports} from './information-dialog.imports';
 import {InformationDialogComponent} from './information-dialog/information-dialog.component';
 
 @NgModule({
-  imports: [InformationDialogImports],
-  declarations: [InformationDialogDeclarations],
-  entryComponents: [
-    InformationDialogComponent,
-    CheckableInformationDialogComponent,
-  ],
-  exports: [
-    InformationDialogComponent,
-    CheckableInformationDialogComponent,
-  ],
+    imports: [InformationDialogImports],
+    declarations: [InformationDialogDeclarations],
+    exports: [
+        InformationDialogComponent,
+        CheckableInformationDialogComponent,
+    ]
 })
 export class InformationDialogModule {
 }
