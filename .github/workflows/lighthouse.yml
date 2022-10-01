@@ -1,0 +1,23 @@
+name: Lighthouse
+on: [push]
+jobs:
+  lighthouseci:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x]
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v2
+      - name: Set up Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16
+      - name: Build
+        run: |
+          npm ci
+          npm run build:ci
+      - name: Run Lighthouse CI
+        run: |
+          npm install -g @lhci/cli@0.8.x
+          lhci autorun
