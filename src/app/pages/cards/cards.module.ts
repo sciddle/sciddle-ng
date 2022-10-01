@@ -5,16 +5,11 @@ import {WikipediaDialogComponent} from './components/dialogs/wikpedia-dialog/wik
 import {CardsComponent} from './pages/cards/cards.component';
 
 @NgModule({
-  imports: [CardsImports],
-  declarations: [CardsDeclarations],
-  entryComponents: [
-    // Pages
-    CardsComponent,
-    // Dialogs
-    WikipediaDialogComponent,
-  ], providers: [], exports: [
-    CardsComponent,
-  ],
+    imports: [CardsImports],
+    declarations: [CardsDeclarations],
+    providers: [], exports: [
+        CardsComponent,
+    ]
 })
 export class CardsModule {
 }

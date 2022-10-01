@@ -5,16 +5,12 @@ import {MarkdownFragmentImports} from './markdown-fragment.imports';
 import {MarkdownPreviewComponent} from './markdown-preview/markdown-preview.component';
 
 @NgModule({
-  imports: [MarkdownFragmentImports],
-  declarations: [MarkdownFragmentDeclarations],
-  entryComponents: [
-    MarkdownEditorComponent,
-    MarkdownPreviewComponent,
-  ],
-  exports: [
-    MarkdownEditorComponent,
-    MarkdownPreviewComponent,
-  ],
+    imports: [MarkdownFragmentImports],
+    declarations: [MarkdownFragmentDeclarations],
+    exports: [
+        MarkdownEditorComponent,
+        MarkdownPreviewComponent,
+    ]
 })
 export class MarkdownFragmentModule {
 }
