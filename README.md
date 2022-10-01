@@ -7,6 +7,8 @@
 [![Release app for S4F](https://github.com/sciddle/sciddle-ng/actions/workflows/release-app-s4f-workflow.yml/badge.svg)](https://github.com/sciddle/sciddle-ng/actions/workflows/release-app-s4f-workflow.yml)
 [![Release app for https://sciddle.de](https://github.com/sciddle/sciddle-ng/actions/workflows/release-app-regular-workflow.yml/badge.svg)](https://github.com/sciddle/sciddle-ng/actions/workflows/release-app-regular-workflow.yml)
 
+[![Lighthouse](https://github.com/sciddle/sciddle-ng/actions/workflows/Lighthouse.yml/badge.svg)](https://github.com/sciddle/sciddle-ng/actions/workflows/Lighthouse.yml)
+
 [![Issues](https://img.shields.io/github/issues/sciddle/sciddle-ng)](https://github.com/sciddle/sciddle-ng/issues)
 
 <br />
