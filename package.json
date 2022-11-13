@@ -81,7 +81,7 @@
     "karma-junit-reporter": "^1.2.0",
     "mkdirp": "^1.0.4",
     "protractor": "^7.0.0",
-    "replace": "^1.2.1",
+    "replace": "^1.2.2",
     "ts-node": "~7.0.0",
     "tslint": "^5.20.1",
     "typescript": "^4.6.4"
