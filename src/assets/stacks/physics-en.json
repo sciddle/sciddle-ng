@@ -1,5 +1,5 @@
 {
-  "id":"3","entityType": 0, "title": "Physics", "game": null, "theme":"blue", "cards": [
+  "id":"3", "entityType": 0, "title": "Physics", "game": null, "theme":"blue", "cards": [
     { "entityType": 0, "word": "acceleration", "taboos": ["force", "increase", "mass", "speed", "velocity" ], "difficulty": 2 },
     { "entityType": 0, "word": "acoustics", "taboos": ["ear", "hearing", "sound", "noise", "waves" ], "difficulty": 2 },
     { "entityType": 0, "word": "Principle of least action", "taboos": ["Lagrange", "Hamilton", "integral", "equation", "variation" ], "difficulty": 3 },
@@ -14,7 +14,7 @@
     { "entityType": 0, "word": "balance", "taboos": ["equilibrium", "orientation", "center of mass", "force", "ustable" ], "difficulty": 1 },
     { "entityType": 0, "word": "Big Bang", "taboos": ["beginning", "universe", "creation", "start", "singularity" ], "difficulty": 2 },
     { "entityType": 0, "word": "binding energy", "taboos": ["molecule", "mass defect", "attraction", "charge", "force" ], "difficulty": 3 },
-    { "entityType": 0, "word": "black body", "taboos": ["absorption", "idealization", "radiation", "spectrum", "temperature" ], "difficulty": 3 },  
+    { "entityType": 0, "word": "black body", "taboos": ["absorption", "idealization", "radiation", "spectrum", "temperature" ], "difficulty": 3 },
     { "entityType": 0, "word": "black hole", "taboos": ["mass", "attraction", "dark", "gravity", "light" ], "difficulty": 2 },
     { "entityType": 0, "word": "boson", "taboos": ["fermion", "particle", "statistics", "spin", "Higgs" ], "difficulty": 3 },
     { "entityType": 0, "word": "buoyancy", "taboos": ["archimedes", "fluid", "force", "ship", "water" ], "difficulty": 3 },
