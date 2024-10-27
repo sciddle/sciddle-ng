@@ -11,6 +11,7 @@ import {Variant} from './core/util/model/variant.enum';
 import {MaterialIconService} from "./core/ui/services/material-icon.service";
 import {MatIconRegistry} from "@angular/material/icon";
 import {DomSanitizer} from "@angular/platform-browser";
+import {TranslocoService} from "@ngneat/transloco";
 
 /**
  * Displays application
@@ -27,14 +28,15 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   /** Dev mode */
   public devMode = false;
-  /** Language */
-  public language = environment.LANGUAGE;
 
   /**
    * Constructor
+   * @param iconRegistry icon registry
+   * @param materialIconService Material icon service
    * @param overlayContainer overlay container
    * @param pouchDBService pouchDB service
    * @param pouchDBSettingsService pouchDB settings service
+   * @param sanitizer sanitizer
    * @param snackbarService snackbar service
    * @param snackBar snack bar
    * @param themeService theme service

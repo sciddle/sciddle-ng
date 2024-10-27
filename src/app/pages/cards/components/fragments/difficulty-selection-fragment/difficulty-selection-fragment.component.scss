@@ -42,7 +42,7 @@
 // Theme specific
 //
 
-.blue-theme {
+::ng-deep .blue-theme {
   .difficulty-easy {
     color: mat.get-contrast-color-from-palette($blue-primary, 400) !important;
     background-color: mat.get-color-from-palette($blue-primary, 400) !important;
@@ -59,7 +59,7 @@
   }
 }
 
-.green-theme {
+::ng-deep .green-theme {
   .difficulty-easy {
     color: mat.get-contrast-color-from-palette($green-primary, 400) !important;
     background-color: mat.get-color-from-palette($green-primary, 400) !important;
@@ -76,7 +76,7 @@
   }
 }
 
-.future-theme {
+::ng-deep .future-theme {
   .difficulty-easy {
     color: mat.get-contrast-color-from-palette($future-primary, 400) !important;
     background-color: mat.get-color-from-palette($future-primary, 400) !important;
@@ -93,7 +93,7 @@
   }
 }
 
-.kult-theme {
+::ng-deep .kult-theme {
   .difficulty-easy {
     color: mat.get-contrast-color-from-palette($kult-primary, 400) !important;
     background-color: mat.get-color-from-palette($kult-primary, 400) !important;

@@ -1,28 +1,28 @@
 @use '../../../../../node_modules/@angular/material' as mat;
 @import '../../../../theme';
 
-.blue-theme {
+::ng-deep .blue-theme {
   a, a:visited {
     color: mat.get-color-from-palette($blue-primary, 500) !important;
     text-decoration: none !important;
   }
 }
 
-.green-theme {
+::ng-deep .green-theme {
   a, a:visited {
     color: mat.get-color-from-palette($green-primary, 500) !important;
     text-decoration: none !important;
   }
 }
 
-.future-theme {
+::ng-deep .future-theme {
   a, a:visited {
     color: mat.get-color-from-palette($future-primary, 500) !important;
     text-decoration: none !important;
   }
 }
 
-.kult-theme {
+::ng-deep .kult-theme {
   a, a:visited {
     color: mat.get-color-from-palette($kult-primary, 500) !important;
     text-decoration: none !important;

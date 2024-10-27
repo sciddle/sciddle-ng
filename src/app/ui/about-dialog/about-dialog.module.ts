@@ -1,14 +1,18 @@
 import {NgModule} from '@angular/core';
-import {AboutDialogDeclarations} from './about-dialog.declarations';
-import {AboutDialogImports} from './about-dialog.imports';
 import {AboutDialogComponent} from './about-dialog/about-dialog.component';
+import {CommonModule} from "@angular/common";
+import {MaterialModule} from "../material/material.module";
+import {TranslocoModule} from "@ngneat/transloco";
 
 @NgModule({
-    imports: [AboutDialogImports],
-    declarations: [AboutDialogDeclarations],
-    exports: [
-        AboutDialogComponent,
-    ]
+  declarations: [
+    AboutDialogComponent,
+  ],
+  imports: [
+    CommonModule,
+    MaterialModule,
+    TranslocoModule
+  ]
 })
 export class AboutDialogModule {
 }

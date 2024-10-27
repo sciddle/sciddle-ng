@@ -1,47 +1,49 @@
-<div class="horizontal-center">
-  <div class="description-text double-size-text side-margin">
-    <span i18n="promtSelectDifficulty|Prompt to select a difficulty@@promptSelectDifficulty">Select a difficulty</span>
+<ng-container *transloco="let t; read: 'pages.games'">
+  <div class="horizontal-center">
+    <div class="description-text double-size-text side-margin">
+      {{ t("terms.select-a-difficulty") }}
+    </div>
+    <div>
+      <button *ngIf="cardsEasy.length > 0" mat-flat-button class="button difficulty-easy"
+              (click)="onDifficultySelected(1)">
+        <div class="description-text double-size-text">
+          {{ t("terms.easy") | uppercase }} ({{ cardsEasy.length }})
+        </div>
+      </button>
+      <button *ngIf="cardsEasy.length < 1" mat-flat-button class="button difficulty-easy-disabled"
+              disabled=true>
+        <div class="description-text double-size-text">
+          {{ t("terms.easy") | uppercase }} ({{ cardsEasy.length }})
+        </div>
+      </button>
+    </div>
+    <div>
+      <button *ngIf="cardsMedium.length > 0" mat-flat-button class="button difficulty-medium"
+              (click)="onDifficultySelected(2)">
+        <div class="description-text double-size-text">
+          {{ t("terms.medium") | uppercase }} ({{ cardsMedium.length }})
+        </div>
+      </button>
+      <button *ngIf="cardsMedium.length < 1" mat-flat-button class="button difficulty-medium-disabled"
+              disabled="true">
+        <div class="description-text double-size-text">
+          {{ t("terms.medium") | uppercase }} ({{ cardsMedium.length }})
+        </div>
+      </button>
+    </div>
+    <div>
+      <button *ngIf="cardsHard.length > 0" mat-flat-button class="button difficulty-hard"
+              (click)="onDifficultySelected(3)">
+        <div class="description-text double-size-text">
+          {{ t("terms.hard") | uppercase }} ({{ cardsHard.length }})
+        </div>
+      </button>
+      <button *ngIf="cardsHard.length < 1" mat-flat-button class="button difficulty-hard-disabled"
+              disabled=true>
+        <div class="description-text double-size-text">
+          {{ t("terms.hard") | uppercase }} ({{ cardsHard.length }})
+        </div>
+      </button>
+    </div>
   </div>
-  <div>
-    <button *ngIf="cardsEasy.length > 0" mat-flat-button class="button difficulty-easy"
-            (click)="onDifficultySelected(1)">
-      <div class="description-text double-size-text">
-        <span class="uppercase" i18n="labelEasy|Label easy@@labelEasy">easy</span> ({{ cardsEasy.length }})
-      </div>
-    </button>
-    <button *ngIf="cardsEasy.length < 1" mat-flat-button class="button difficulty-easy-disabled"
-            disabled=true>
-      <div class="description-text double-size-text">
-        <span class="uppercase" i18n="labelEasy|Label easy@@labelEasy">easy</span> ({{ cardsEasy.length }})
-      </div>
-    </button>
-  </div>
-  <div>
-    <button *ngIf="cardsMedium.length > 0" mat-flat-button class="button difficulty-medium"
-            (click)="onDifficultySelected(2)">
-      <div class="description-text double-size-text">
-        <span class="uppercase" i18n="labelMedium|Label medium@@labelMedium">medium</span> ({{ cardsMedium.length }})
-      </div>
-    </button>
-    <button *ngIf="cardsMedium.length < 1" mat-flat-button class="button difficulty-medium-disabled"
-            disabled="true">
-      <div class="description-text double-size-text">
-        <span class="uppercase" i18n="labelMedium|Label medium@@labelMedium">medium</span> ({{ cardsMedium.length }})
-      </div>
-    </button>
-  </div>
-  <div>
-    <button *ngIf="cardsHard.length > 0" mat-flat-button class="button difficulty-hard"
-            (click)="onDifficultySelected(3)">
-      <div class="description-text double-size-text">
-        <span class="uppercase" i18n="labelHard|Label hard@@labelHard">hard</span> ({{ cardsHard.length }})
-      </div>
-    </button>
-    <button *ngIf="cardsHard.length < 1" mat-flat-button class="button difficulty-hard-disabled"
-            disabled=true>
-      <div class="description-text double-size-text">
-        <span class="uppercase" i18n="labelHard|Label hard@@labelHard">hard</span> ({{ cardsHard.length }})
-      </div>
-    </button>
-  </div>
-</div>
+</ng-container>

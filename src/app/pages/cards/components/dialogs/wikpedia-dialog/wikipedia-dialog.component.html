@@ -1,15 +1,17 @@
-<h2 mat-dialog-title>{{ dialogTitle }}</h2>
-<mat-dialog-content [class]="themeClass">
-  <div *ngIf="explanationText == null" class="full-width">
-    <mat-progress-spinner class="horizontal-center" color="accent" mode="indeterminate">
-    </mat-progress-spinner>
-  </div>
-  {{ explanationText }}
-  <a *ngIf="more" [attr.href]="moreLink" target="_blank">{{ more }}</a>
-</mat-dialog-content>
-<mat-dialog-actions class="flexcontainer">
-  <div class="flexbox"></div>
-  <button mat-button color="accent" (click)="confirm()">
-    {{ action }}
-  </button>
-</mat-dialog-actions>
+<ng-container *transloco="let t; read: 'dialogs.wikipedia'">
+  <h2 mat-dialog-title>{{ dialogTitle }}</h2>
+  <mat-dialog-content>
+    <div *ngIf="explanationText == null" class="full-width">
+      <mat-progress-spinner class="horizontal-center" color="accent" mode="indeterminate">
+      </mat-progress-spinner>
+    </div>
+    {{ explanationText }}
+    <a *ngIf="more" [attr.href]="moreLink" target="_blank">{{ more }}</a>
+  </mat-dialog-content>
+  <mat-dialog-actions class="flexcontainer">
+    <div class="flexbox"></div>
+    <button mat-flat-button color="accent" [mat-dialog-close]=null>
+      {{ t("actions.close") | uppercase }}
+    </button>
+  </mat-dialog-actions>
+</ng-container>

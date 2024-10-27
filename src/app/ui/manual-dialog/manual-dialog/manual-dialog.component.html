@@ -1,0 +1,39 @@
+<ng-container *transloco="let t; read: 'dialogs.manual'">
+  <h2 mat-dialog-title>{{ t("title") }}</h2>
+  <mat-dialog-content>
+    <h3>{{ t("terms.number-of-players-title") | capitalizeSentences }}</h3>
+    {{ t("terms.number-of-players-text") }}
+
+    <h3>{{ t("terms.aim-of-the-game-title") | capitalizeSentences }}</h3>
+    {{ t("terms.aim-of-the-game-text") }}
+
+    <h3>{{ t("terms.game-preparation-title") | capitalizeSentences }}</h3>
+    {{ t("terms.game-preparation-text") }}
+
+    <h3>{{ t("terms.playing-the-game-title") | capitalizeSentences }}</h3>
+    {{ t("terms.playing-the-game-text") }}
+
+    <h3>{{ t("terms.winning-points-title") | capitalizeSentences }}</h3>
+    {{ t("terms.winning-points-text") }}
+
+    <h3>{{ t("terms.end-of-the-game-title") | capitalizeSentences }}</h3>
+    {{ t("terms.end-of-the-game-text", {appName: appName}) }}
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <div>
+      <mat-checkbox
+        class="checkbox"
+        labelPosition="after"
+        [checked]="checkboxValue"
+        (change)="onCheckboxChanged($event)">
+        <span class="checkbox-label">{{ t("actions.do-not-show-on-start") }}</span>
+      </mat-checkbox>
+    </div>
+    <div class="full-width flexcontainer">
+      <div class="flexbox"></div>
+      <button mat-flat-button color="accent" (click)="confirm()">
+        {{ t("actions.got-it") | uppercase }}
+      </button>
+    </div>
+  </mat-dialog-actions>
+</ng-container>

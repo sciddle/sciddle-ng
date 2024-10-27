@@ -1,41 +1,43 @@
-<div class="horizontal-center">
-  <div class="description-text">
-    <span i18n="labelDifficulty|Label difficulty@@labelDifficulty">difficulty</span>
+<ng-container *transloco="let t; read: 'pages.games'">
+  <div class="horizontal-center">
+    <div class="description-text">
+      {{ t("terms.difficulty") }}
+    </div>
+    <button *ngIf="difficultyEasy" mat-flat-button class="button difficulty-easy"
+            (click)="onDifficultToggled(1)">
+      <div class="description-text">
+        {{ t("terms.easy") | uppercase }}
+      </div>
+    </button>
+    <button *ngIf="!difficultyEasy" mat-button class="button"
+            (click)="onDifficultToggled(1)">
+      <div class="description-text">
+        {{ t("terms.easy") | uppercase }}
+      </div>
+    </button>
+    <button *ngIf="difficultyMedium" mat-flat-button class="button difficulty-medium"
+            (click)="onDifficultToggled(2)">
+      <div class="description-text">
+        {{ t("terms.medium") | uppercase }}
+      </div>
+    </button>
+    <button *ngIf="!difficultyMedium" mat-button class="button"
+            (click)="onDifficultToggled(2)">
+      <div class="description-text">
+        {{ t("terms.medium") | uppercase }}
+      </div>
+    </button>
+    <button *ngIf="difficultyHard" mat-flat-button class="button difficulty-hard"
+            (click)="onDifficultToggled(3)">
+      <div class="description-text">
+        {{ t("terms.hard") | uppercase }}
+      </div>
+    </button>
+    <button *ngIf="!difficultyHard" mat-button class="button"
+            (click)="onDifficultToggled(3)">
+      <div class="description-text">
+        {{ t("terms.hard") | uppercase }}
+      </div>
+    </button>
   </div>
-  <button *ngIf="difficultyEasy" mat-flat-button class="button difficulty-easy"
-          (click)="onDifficultToggled(1)">
-    <div class="description-text">
-      <span class="uppercase" i18n="labelEasy|Label easy@@labelEasy">easy</span>
-    </div>
-  </button>
-  <button *ngIf="!difficultyEasy" mat-button class="button"
-          (click)="onDifficultToggled(1)">
-    <div class="description-text">
-      <span class="uppercase" i18n="labelEasy|Label easy@@labelEasy">easy</span>
-    </div>
-  </button>
-  <button *ngIf="difficultyMedium" mat-flat-button class="button difficulty-medium"
-          (click)="onDifficultToggled(2)">
-    <div class="description-text">
-      <span class="uppercase" i18n="labelMedium|Label medium@@labelMedium">medium</span>
-    </div>
-  </button>
-  <button *ngIf="!difficultyMedium" mat-button class="button"
-          (click)="onDifficultToggled(2)">
-    <div class="description-text">
-      <span class="uppercase" i18n="labelMedium|Label medium@@labelMedium">medium</span>
-    </div>
-  </button>
-  <button *ngIf="difficultyHard" mat-flat-button class="button difficulty-hard"
-          (click)="onDifficultToggled(3)">
-    <div class="description-text">
-      <span class="uppercase" i18n="labelHard|Label hard@@labelHard">hard</span>
-    </div>
-  </button>
-  <button *ngIf="!difficultyHard" mat-button class="button"
-          (click)="onDifficultToggled(3)">
-    <div class="description-text">
-      <span class="uppercase" i18n="labelHard|Label hard@@labelHard">hard</span>
-    </div>
-  </button>
-</div>
+</ng-container>

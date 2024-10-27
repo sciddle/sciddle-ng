@@ -3,10 +3,10 @@
  */
 export const environment = {
   production: true,
-  LANGUAGE: 'DE',
+  baseHref: "/",
   APP_NAME: 'Sciddle',
-  DATABASE_ENTITIES: 'sciddle_de',
-  DATABASE_SETTINGS: 'sciddle_de_settings',
+  DATABASE_ENTITIES: 'sciddle',
+  DATABASE_SETTINGS: 'sciddle_settings',
 
   VARIANT: 'Sciddle',
 

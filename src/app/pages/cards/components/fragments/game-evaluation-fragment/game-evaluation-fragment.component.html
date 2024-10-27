@@ -1,22 +1,23 @@
-<div class="horizontal-center">
-  <div class="main-text">
+<ng-container *transloco="let t; read: 'pages.games'">
+  <div class="horizontal-center">
+    <div class="main-text">
       <span *ngFor="let team of winningTeams" class="team-name">
-        <span i18n="labelTeam|Label team@@labelTeam">team</span>
-        {{ team.index + 1 }}
+        {{ t("terms.team", {team: team.index + 1}) }}
       </span>
-    <span
-      i18n="pluralHasWon|Plural has won@@pluralHasWon">{winningTeams.length, plural, zero {has won} one {has won} few {have won}}</span>
-  </div>
-  <div *ngIf="stack != null">
-    <div *ngFor="let team of stack.game.teams" class="description-text double-size-text">
-      <span class="uppercase" i18n="labelTeam|Label team@@labelTeam"> team</span> {{ team.index + 1}} -
-      <span
-        i18n="pluralScore|Plural score@@pluralScore">{team.score, plural, zero {0 points} one {{{team.score}} point} other {{{team.score}} points}}</span>
+      <span *ngIf="winningTeams.length == 1">{{ t("terms.has-won") }}</span>
+      <span *ngIf="winningTeams.length > 1">{{ t("terms.have-won") }}</span>
     </div>
-  </div>
-  <button mat-flat-button color="primary" class="button" (click)="onMenuItemClicked('back')">
-    <div class="description-text double-size-text">
-      <span class="uppercase" i18n="actionBack|Action back@@actionBack">back</span>
+    <div *ngIf="stack != null">
+      <div *ngFor="let team of stack.game.teams" class="description-text double-size-text">
+        {{ t("terms.team", {team: team.index + 1}) }} -
+        <span *ngIf="team.score == 1">{{ t("terms.score-singular", {team: team.score}) }}</span>
+        <span *ngIf="team.score != 1">{{ t("terms.score-plural", {team: team.score}) }}</span>
+      </div>
     </div>
-  </button>
-</div>
+    <button mat-flat-button color="primary" class="button" (click)="onMenuItemClicked('back')">
+      <div class="description-text double-size-text">
+        {{ t("terms.back") | uppercase }}
+      </div>
+    </button>
+  </div>
+</ng-container>

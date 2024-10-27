@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {environment} from '../../../../../../environments/environment';
-import {Language} from '../../../../../core/language/model/language.enum';
 import {WikipediaService} from '../../../../../core/wikipedia/services/wikipedia.service';
+import {TranslocoService} from "@ngneat/transloco";
 
 /**
  * Displays wikipedia dialog
@@ -14,8 +14,6 @@ import {WikipediaService} from '../../../../../core/wikipedia/services/wikipedia
 })
 export class WikipediaDialogComponent implements OnInit {
 
-  /** Default theme to be used */
-  public themeClass = 'blue-theme';
   /** Dialog title */
   public dialogTitle = '';
 
@@ -31,11 +29,6 @@ export class WikipediaDialogComponent implements OnInit {
   public alternateWikipediaArticle;
   /** Alternate URL */
   public alternateURL;
-  /** Action */
-  public action = '';
-
-  /** App language */
-  public language = environment.LANGUAGE;
 
   //
   // Static methods
@@ -63,10 +56,12 @@ export class WikipediaDialogComponent implements OnInit {
    * Constructor
    * @param data dialog data
    * @param dialogRef dialog reference
+   * @param translocoService transloco service
    * @param wikipediaService wikipedia service
    */
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
               public dialogRef: MatDialogRef<WikipediaDialogComponent>,
+              private translocoService: TranslocoService,
               private wikipediaService: WikipediaService) {
   }
 
@@ -90,13 +85,11 @@ export class WikipediaDialogComponent implements OnInit {
    * Initializes data
    */
   private initializeData() {
-    this.themeClass = this.data.themeClass;
     this.dialogTitle = this.data.term.replace(/_/g, ' ');
     this.term = this.data.term;
     this.explanationText = this.data.explanationText;
     this.alternateWikipediaArticle = this.data.alternateWikipediaArticle;
     this.alternateURL = this.data.alternateURL;
-    this.action = this.data.action;
   }
 
   /**
@@ -104,18 +97,7 @@ export class WikipediaDialogComponent implements OnInit {
    */
   private initializeExtract() {
     if (this.alternateURL != null) {
-
-      switch (this.language) {
-        case Language.GERMAN: {
-          this.more = `Mehr auf ${this.alternateURL}`;
-          break;
-        }
-        case Language.ENGLISH: {
-          this.more = `Find more on ${this.alternateURL}`;
-          break;
-        }
-      }
-
+      this.more = this.translocoService.translate("dialogs.wikipedia.terms.more-on", {ur: this.alternateURL});
       this.moreLink = this.alternateURL;
     } else {
       const article = this.alternateWikipediaArticle == null ? this.term : this.alternateWikipediaArticle;
@@ -126,32 +108,13 @@ export class WikipediaDialogComponent implements OnInit {
             ? WikipediaDialogComponent.getFirstSentences(result.extract, 2, 100)
             : this.explanationText).replace(/\.\./g, '.').replace(/\.\s\./g, '.');
 
-          switch (this.language) {
-            case Language.GERMAN: {
-              this.more = result.pageURL != null ? ` Mehr auf Wikipedia` : ``;
-              break;
-            }
-            case Language.ENGLISH: {
-              this.more = result.pageURL != null ? ` Find more on Wikipedia` : ``;
-              break;
-            }
-          }
-
+          this.more = result.pageURL != null ? this.translocoService.translate("dialogs.wikipedia.terms.more-on-wikipedia") : ``;
           this.moreLink = result.pageURL.replace(' ', '%20');
         } else {
-          switch (this.language) {
-            case Language.GERMAN: {
-              this.explanationText = `Das Extrakt kann nicht abgerufen werden`;
-              break;
-            }
-            case Language.ENGLISH: {
-              this.explanationText = `Cannot get extract`;
-              break;
-            }
-          }
+          this.explanationText = this.translocoService.translate("dialogs.wikipedia.messages.cannot-get-abstract");
         }
       });
-      this.wikipediaService.getExtract(article, this.language, environment.API_TIMEOUT, environment.API_DELAY, extractEmitter);
+      this.wikipediaService.getExtract(article, this.translocoService.getActiveLang(), environment.API_TIMEOUT, environment.API_DELAY, extractEmitter);
     }
   }
 

@@ -1,11 +1,11 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable, isDevMode} from '@angular/core';
 import {environment} from '../../../../../environments/environment';
-import {Language} from '../../../language/model/language.enum';
 import {LogService} from '../../../log/services/log.service';
 import {Card} from '../../model/card/card.model';
 import {Stack} from '../../model/stack/stack.model';
 import {CloneService} from '../clone.service';
+import {TranslocoService} from "@ngneat/transloco";
 
 /**
  * Handles stacks
@@ -15,10 +15,8 @@ import {CloneService} from '../clone.service';
 })
 export class StacksService {
 
-  /** German stacks */
-  public static stacksDe = new Map<string, string>();
-  /** English stacks */
-  public static stacksEn = new Map<string, string>();
+  /** Stacks */
+  public static stacks = new Map<string, string>();
 
   /** Dev mode */
   public devMode = false;
@@ -41,26 +39,11 @@ export class StacksService {
    * @param stacks already existing stacks
    */
   public static getUninitializedStackIDs(stacks: Stack[]): string[] {
-
-    switch (environment.LANGUAGE) {
-      case Language.GERMAN: {
-        return Array.from(this.stacksDe.keys()).filter((id) => {
-          return (!stacks.some((existingStack) => {
-            return existingStack != null && existingStack.id === id;
-          }));
-        });
-      }
-      case Language.ENGLISH: {
-        return Array.from(this.stacksEn.keys()).filter((id) => {
-          return (!stacks.some((existingStack) => {
-            return existingStack != null && existingStack.id === id;
-          }));
-        });
-      }
-      default: {
-        return [];
-      }
-    }
+    return Array.from(this.stacks.keys()).filter((id) => {
+      return (!stacks.some((existingStack) => {
+        return existingStack != null && existingStack.id === id;
+      }));
+    });
   }
 
   /**
@@ -68,7 +51,6 @@ export class StacksService {
    * @param stacks already existing stacks
    */
   public static getUninitializedDefaultStackIDs(stacks: Stack[]): string[] {
-
     return [environment.DEFAULT_STACK.toString()].filter((id) => {
       return (!stacks.some((existingStack) => {
         return existingStack != null && existingStack.id === id;
@@ -79,16 +61,27 @@ export class StacksService {
   /**
    * Constructor
    * @param http http client
+   * @param translocoService transloco service
    */
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private translocoService: TranslocoService
+  ) {
     this.devMode = isDevMode();
-    StacksService.stacksDe.set('0', 'climate-de.json');
-    StacksService.stacksDe.set('2', 'future-de.json');
-    StacksService.stacksDe.set('3', 'physics-de.json');
-    StacksService.stacksDe.set('4', 'physics-de-school.json');
-    StacksService.stacksDe.set('5', 'anthropology-de.json');
-
-    StacksService.stacksEn.set('3', 'physics-en.json');
+    switch (translocoService.getActiveLang()) {
+      case "de": {
+        StacksService.stacks.set('0', 'climate-de.json');
+        StacksService.stacks.set('2', 'future-de.json');
+        StacksService.stacks.set('3', 'physics-de.json');
+        StacksService.stacks.set('4', 'physics-de-school.json');
+        StacksService.stacks.set('5', 'anthropology-de.json');
+        break;
+      }
+      case "en": {
+        StacksService.stacks.set('3', 'physics-en.json');
+        break;
+      }
+    }
   }
 
   /**
@@ -99,17 +92,7 @@ export class StacksService {
     LogService.trace(`StacksService#mergeStackFromAssets`);
 
     return new Promise<Stack>((resolve, reject) => {
-      let fileName;
-      switch (environment.LANGUAGE) {
-        case Language.GERMAN: {
-          fileName = StacksService.stacksDe.get(stack.id);
-          break;
-        }
-        case Language.ENGLISH: {
-          fileName = StacksService.stacksEn.get(stack.id);
-          break;
-        }
-      }
+      const fileName = StacksService.stacks.get(stack.id);
 
       if (fileName != null) {
         this.getStackFromAssets(fileName).then((stackFromAsset) => {
