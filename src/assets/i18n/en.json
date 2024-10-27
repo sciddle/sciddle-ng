@@ -1,0 +1,159 @@
+{
+  "dialogs": {
+    "about": {
+      "title": "About the app",
+      "terms": {
+        "version": "version",
+        "based-on": "based on",
+        "game-original": "Sciddle - The Science Riddle",
+        "by": "by",
+        "graphics-by": "graphics by",
+        "ideas-and-text-by": "ideas and text by",
+        "licensed-under": "licensed under",
+        "implemented-by": "implemented by",
+        "source-code-available-on": "source code available on",
+        "github": "GitHub",
+        "scientific-supervision-by": "scientific supervision by"
+      },
+      "actions": {
+        "close": "close"
+      }
+    },
+    "wikipedia": {
+      "terms": {
+        "more-on":"find more on {{ url }}",
+        "more-on-wikipedia":"find more on Wikipedia"
+      },
+      "actions": {
+        "close": "close"
+      },
+      "messages": {
+        "cannot-get-abstract": "cannot get abstract"
+      }
+    },
+    "manual":{
+      "title": "Manual",
+      "terms": {
+        "number-of-players-title": "number of players",
+        "number-of-players-text": "3+",
+        "aim-of-the-game-title": "aim of the game",
+        "aim-of-the-game-text": "The team that scores the most points by guessing and explaining the terms printed on the cards wins the game.",
+        "game-preparation-title": "game preparation",
+        "game-preparation-text": "The participants are divided into at least 3 teams, with the same number of participants per team (or as close as possible to the same number). On the cards, the difficulty of the term is given as a number between 1 (easy), 2 (medium) and 3 (difficult). The cards are sorted by this number into three stacks. The stacks are mixed and put face down in front of the players. Paper and pencil are required to record points.",
+        "playing-the-game-title": "playing the game",
+        "playing-the-game-text": "Taking turns, each player of each team decides a level of difficulty, gets a card and has 30 seconds to explain the word on top of the card to the players of the other teams. Only one person is allowed to explain each term. The order does not matter as long as every team has had the chance to explain the same number of cards at the end. No technical terms should be used. All words appearing on the card are initially forbidden, as are words deriving from them in the form of other nouns, verbs or adjectives. If, for example, water appears on the card, water, watery and watering would be forbidden. As soon as the words or derivatives are said by any player on the guessing teams, they can also be used by the explaining player. Using any words on the card or their derivatives before they are mentioned by the guessing players is considered an error, the card must be set aside and will not be counted. This is also the case if rhymes or word similarities ( „sounds like“) and imitating noises are used. The use of formulas, equations or symbols is also not allowed. Players may use their hands (and bodies) when explaining terms, except to form letters and symbols.",
+        "winning-points-title": "winning points",
+        "winning-points-text": "For each term correctly guessed the team that explained the term and the team that guessed correctly get the difﬁ culty level of the card as points. For example, if a player explains a term which is difficulty level 3, their team and the team that correctly guessed the term is awarded 3 points. The points are written down at the end of each players go.",
+        "end-of-the-game-title": "the end of the game",
+        "end-of-the-game-text": "After each player has had at least one go and all teams had the same number of chances to explain a term, the team with the most points wins. (Note that this is only one possible way to play _{{appTitle}}_. You can experiment with the game and ﬁ nd your own versions.)"
+      },
+      "actions": {
+        "do-not-show-on-start": "do not show on start",
+        "got-it": "got it"
+      }
+    },
+    "open-source": {
+      "title": "Open Source components",
+      "actions": {
+        "got-it": "got it"
+      }
+    },
+    "end-game": {
+      "title": "Terminate game",
+      "messages": {
+        "end-game": "Do you want to terminate the game?"
+      },
+      "actions": {
+        "confirm": "Yes, terminate",
+        "abort": "No, continue playing"
+      }
+    }
+  },
+  "pages": {
+    "stacks": {
+      "terms": {
+        "ongoing-game": "ongoing game",
+        "cards-singular": "{{cards}} card",
+        "cards-plural": "{{cards}} cards"
+      },
+      "actions": {
+        "open-menu": "open menu",
+        "manual": "manual",
+        "open-source": "open source",
+        "about": "about the app"
+      }
+    },
+    "games": {
+      "terms": {
+        "training-mode": "training mode",
+        "without-time-limit": "without time limit",
+        "with-time-limit": "with time limit",
+        "number-of-teams": "number of teams",
+        "number-of-cards": "number of cards",
+        "select-a-difficulty": "select a difficulty",
+        "easy": "easy",
+        "medium": "medium",
+        "hard": "hard",
+        "difficulty": "difficulty",
+        "team": "team {{team}}",
+        "score-singular": "{{ score }} point",
+        "score-plural": "{{ score }} points",
+        "has-won": "has won",
+        "have-won": "have won"
+      },
+      "actions": {
+        "start": "start",
+        "start-game": "start game",
+        "back": "back",
+        "leave-game": "leave-game",
+        "open-menu": "open menu",
+        "manual": "manual",
+        "open-source": "open source",
+        "about": "about the app"
+      }
+    },
+    "cards": {
+      "terms": {
+        "easy": "easy",
+        "medium": "medium",
+        "hard": "hard",
+        "score": "points",
+        "explain-the-term": "explain the term",
+        "show-hint": "show hint",
+        "dont-use-these-words": "don't use the words",
+        "which-team-answered-correctly": "which team guessed correctly?",
+        "team": "team {{team}}",
+        "no-one": "no one",
+        "score-singular": "{{ score }} point",
+        "score-plural": "{{ score }} points",
+        "pass-the-device-and-tap-on-the-screen-to-proceed": "pass the device and tap on the screen to proceed",
+        "tap-on-the-screen-to-proceed": "tap on the screen to proceed",
+        "next-card": "next card",
+        "term-has-been-guessed": "term has been guessed",
+        "teams-turn": "it's team {{team}}'s turn"
+      },
+      "actions": {
+        "got-it": "got it",
+        "proceed": "proceed",
+        "swipe-card-aside-when-someone-has-guessed-the-term": "swipe card aside when someone has guessed the term",
+        "time-is-over-swipe-card-aside-to-proceed": "time is over. swipe card aside to proceed",
+        "terminate-game": "terminate game",
+        "sort-cards": "sort cards",
+        "shuffle-cards": "shuffle cards",
+        "open-menu": "open menu",
+        "manual": "manual",
+        "open-source": "open source",
+        "about": "about the app"
+      },
+      "messages": {
+        "warning-game-will-not-be-saved": "warning: game will not be saved",
+        "started-game": "started game",
+        "round-started": "round-started",
+        "time-is-up": "time is up",
+        "put-card-to-end": "put card to end",
+        "sorted-cards": "sorted cards",
+        "shuffled-cards": "shuffled cards"
+      }
+    }
+  }
+}

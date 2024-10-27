@@ -1,50 +1,50 @@
-<mat-toolbar class="toolbar flexcontainer">
-  <div *ngIf="variant === variantType.SCIDDLE" class="toolbar-block start">
-    <span class="cdk-visually-hidden" #translatedTooltipLeaveGame
-          i18n="tooltipLeaveGame|Tooltip leave game@@tooltipLeaveGame">Leave game</span>
-    <button mat-button [matTooltip]="translatedTooltipLeaveGame.innerHTML" class="toolbar-menu-item" aria-label="Back"
-            (click)="onMenuItemClicked('back')">
-      <mat-icon class="icon" svgIcon="arrow_back"></mat-icon>
-    </button>
-    <span *ngIf="media != mediaType.SMALL" class="toolbar-title">
+<ng-container *transloco="let t; read: 'pages.games'">
+  <mat-toolbar class="toolbar flexcontainer">
+    <div *ngIf="variant === variantType.SCIDDLE" class="toolbar-block start">
+    <span class="cdk-visually-hidden" #translatedTooltipLeaveGame>{{ t("actions.leave-game") }}</span>
+      <button mat-button [matTooltip]="translatedTooltipLeaveGame.innerHTML" class="toolbar-menu-item" aria-label="Back"
+              (click)="onMenuItemClicked('back')">
+        <mat-icon class="icon" svgIcon="arrow_back"></mat-icon>
+      </button>
+      <span *ngIf="media != mediaType.SMALL" class="toolbar-title">
       <span>{{ title }}</span>
     </span>
-  </div>
-  <div *ngIf="variant === variantType.S4F" class="toolbar-block start">
-    <button mat-button class="toolbar-menu-item" aria-label="Blank">
-      <mat-icon class="icon" svgIcon="blank"></mat-icon>
-    </button>
-    <img *ngIf="media != mediaType.SMALL" class="toolbar-logo" style="height: 35px"
-         src="assets/logos-s4f/logo-144x144.webp" alt="logo"/>
-    <span *ngIf="media != mediaType.SMALL" class="toolbar-title">
+    </div>
+    <div *ngIf="variant === variantType.S4F" class="toolbar-block start">
+      <button mat-button class="toolbar-menu-item" aria-label="Blank">
+        <mat-icon class="icon" svgIcon="blank"></mat-icon>
+      </button>
+      <img *ngIf="media != mediaType.SMALL" class="toolbar-logo" style="height: 35px"
+           src="assets/logos-s4f/logo-144x144.webp" alt="logo"/>
+      <span *ngIf="media != mediaType.SMALL" class="toolbar-title">
        Cards<span class="secondary"> for </span> Future
     </span>
-  </div>
-  <div class="flexbox"></div>
-  <div class="toolbar-block end">
-    <span class="cdk-visually-hidden" #translatedTooltipOpenMenu
-          i18n="tooltipOpenMenu|Tooltip on menu open@@tooltipOpenMenu">Open menu</span>
-    <button mat-button
-            class="toolbar-menu-item right"
-            aria-label="Menu"
-            [matTooltip]="translatedTooltipOpenMenu.innerHTML"
-            [matMenuTriggerFor]="menu">
-      <mat-icon class="icon" svgIcon="more_vert"></mat-icon>
-    </button>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item (click)="onMenuItemClicked('manual')">
-        <mat-icon class="icon" svgIcon="format_align_left"></mat-icon>
-        <span i18n="menuItemManual|Menu item label for manual@@menuItemManual">Manual</span>
+    </div>
+    <div class="flexbox"></div>
+    <div class="toolbar-block end">
+    <span class="cdk-visually-hidden" #translatedTooltipOpenMenu>{{ t("actions.open-menu") }}</span>
+      <button mat-button
+              class="toolbar-menu-item right"
+              aria-label="Menu"
+              [matTooltip]="translatedTooltipOpenMenu.innerHTML"
+              [matMenuTriggerFor]="menu">
+        <mat-icon class="icon" svgIcon="more_vert"></mat-icon>
       </button>
-      <mat-divider></mat-divider>
-      <button mat-menu-item (click)="onMenuItemClicked('open-source')">
-        <mat-icon class="icon" svgIcon="open_source_initiative"></mat-icon>
-        <span i18n="menuItemOpenSource|Menu item label for open source@@menuItemOpenSource">Open source</span>
-      </button>
-      <button mat-menu-item (click)="onMenuItemClicked('about')">
-        <mat-icon class="icon" svgIcon="blank"></mat-icon>
-        <span i18n="menuItemAboutApp|Menu item label for about app@@menuItemAboutApp">About the app</span>
-      </button>
-    </mat-menu>
-  </div>
-</mat-toolbar>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="onMenuItemClicked('manual')">
+          <mat-icon class="icon" svgIcon="format_align_left"></mat-icon>
+          {{ t("actions.manual") }}
+        </button>
+        <mat-divider></mat-divider>
+        <button mat-menu-item (click)="onMenuItemClicked('open-source')">
+          <mat-icon class="icon" svgIcon="open_source_initiative"></mat-icon>
+          {{ t("actions.open-source") }}
+        </button>
+        <button mat-menu-item (click)="onMenuItemClicked('about')">
+          <mat-icon class="icon" svgIcon="blank"></mat-icon>
+          {{ t("actions.about") }}
+        </button>
+      </mat-menu>
+    </div>
+  </mat-toolbar>
+</ng-container>

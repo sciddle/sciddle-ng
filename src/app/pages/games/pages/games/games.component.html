@@ -1,26 +1,28 @@
-<app-games-toolbar
-  class="fixed"
-  [title]="title"
-  [media]="media"
-  (menuItemEventEmitter)="onMenuItemClicked($event)"></app-games-toolbar>
+<ng-container *transloco="let t; read: 'pages.games'">
+  <app-games-toolbar
+    class="fixed"
+    [title]="title"
+    [media]="media"
+    (menuItemEventEmitter)="onMenuItemClicked($event)"></app-games-toolbar>
 
-<div class="main-content">
-  <div class="horizontal-center vertical-center">
-    <div class="margin">
-      <div>
+  <div class="main-content">
+    <div class="horizontal-center vertical-center">
+      <div class="margin">
         <div>
-          <button mat-flat-button class="mode-button single-player"
+          <div>
+            <button mat-flat-button class="mode-button single-player"
+                    [disabled]="stack == null"
+                    (click)="onSinglePlayerClicked()">
+              <span class="button-text">{{ t("terms.training-mode") | uppercase }}</span>
+            </button>
+          </div>
+          <button mat-flat-button class="mode-button multi-player"
                   [disabled]="stack == null"
-                  (click)="onSinglePlayerClicked()">
-            <span class="button-text uppercase" i18n="labelSinglePlayerGame|Single player mode@@labelSinglePlayerGame">Training mode</span>
+                  (click)="onMultiPlayerClicked()">
+            <span class="button-text">{{ t("actions.start-game") | uppercase }}</span>
           </button>
         </div>
-        <button mat-flat-button class="mode-button multi-player"
-                [disabled]="stack == null"
-                (click)="onMultiPlayerClicked()">
-          <span class="button-text uppercase" i18n="labelMultiPlayerGame|Multiple player mode@@labelMultiplePlayerGame">Start game</span>
-        </button>
       </div>
     </div>
   </div>
-</div>
+</ng-container>

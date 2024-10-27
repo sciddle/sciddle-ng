@@ -1,34 +1,36 @@
-<mat-toolbar class="toolbar flexcontainer">
-  <div class="toolbar-block start">
-    <button mat-button class="toolbar-menu-item" aria-label="Menu" (click)="onMenuItemClicked('menu')">
-      <mat-icon svgIcon="menu"></mat-icon>
-    </button>
-    <span *ngIf="media != mediaType.SMALL" class="toolbar-title">{{ title }}</span>
-  </div>
-  <div class="flexbox"></div>
-  <div class="toolbar-block end">
-    <span class="cdk-visually-hidden" #translatedTooltipOpenMenu i18n="tooltipOpenMenu|Tooltip on menu open@@tooltipOpenMenu">Open menu</span>
-    <button mat-button
-            class="toolbar-menu-item right"
-            aria-label="Menu"
-            [matTooltip]="translatedTooltipOpenMenu.innerHTML"
-            [matMenuTriggerFor]="menu">
-      <mat-icon svgIcon="more_vert"></mat-icon>
-    </button>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item (click)="onMenuItemClicked('manual')">
-        <mat-icon svgIcon="format_align_left"></mat-icon>
-        <span i18n="menuItemManual|Menu item label for manual@@menuItemManual">Anleitung</span>
+<ng-container *transloco="let t; read: 'pages.stacks'">
+  <mat-toolbar class="toolbar flexcontainer">
+    <div class="toolbar-block start">
+      <button mat-button class="toolbar-menu-item" aria-label="Menu" (click)="onMenuItemClicked('menu')">
+        <mat-icon svgIcon="menu"></mat-icon>
       </button>
-      <mat-divider></mat-divider>
-      <button mat-menu-item (click)="onMenuItemClicked('open-source')">
-        <mat-icon svgIcon="open_source_initiative"></mat-icon>
-        <span i18n="menuItemOpenSource|Menu item label for open source@@menuItemOpenSource">Open Source</span>
+      <span *ngIf="media != mediaType.SMALL" class="toolbar-title">{{ title }}</span>
+    </div>
+    <div class="flexbox"></div>
+    <div class="toolbar-block end">
+      <span class="cdk-visually-hidden" #translatedTooltipOpenMenu>{{  t("actions.open-menu") }}</span>
+      <button mat-button
+              class="toolbar-menu-item right"
+              aria-label="Menu"
+              [matTooltip]="translatedTooltipOpenMenu.innerHTML"
+              [matMenuTriggerFor]="menu">
+        <mat-icon svgIcon="more_vert"></mat-icon>
       </button>
-      <button mat-menu-item (click)="onMenuItemClicked('about')">
-        <mat-icon svgIcon="blank"></mat-icon>
-        <span i18n="menuItemAboutApp|Menu item label for about app@@menuItemAboutApp">Über die App</span>
-      </button>
-    </mat-menu>
-  </div>
-</mat-toolbar>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="onMenuItemClicked('manual')">
+          <mat-icon svgIcon="format_align_left"></mat-icon>
+          {{ t("actions.manual") }}
+        </button>
+        <mat-divider></mat-divider>
+        <button mat-menu-item (click)="onMenuItemClicked('open-source')">
+          <mat-icon svgIcon="open_source_initiative"></mat-icon>
+          {{ t("actions.open-source") }}
+        </button>
+        <button mat-menu-item (click)="onMenuItemClicked('about')">
+          <mat-icon svgIcon="blank"></mat-icon>
+          {{ t("actions.about") }}
+        </button>
+      </mat-menu>
+    </div>
+  </mat-toolbar>
+</ng-container>

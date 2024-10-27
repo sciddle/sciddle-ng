@@ -7,6 +7,7 @@ import {environment} from '../environments/environment';
 import {AppRoutingModule} from './app-routing.module';
 import {CoreModule} from './core/core.module';
 import {MaterialModule} from './ui/material/material.module';
+import {TranslocoModule} from "@ngneat/transloco";
 
 /** Imports for app module */
 export const AppImports  = [
@@ -20,6 +21,9 @@ export const AppImports  = [
 
   // Core service
   CoreModule,
+
+  // Translation
+  TranslocoModule,
 
   // Progressive Web App
   ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),

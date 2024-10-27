@@ -1,49 +1,55 @@
-<div *ngIf="card != null" [className]="cardContainerClassName">
-  <mat-card class="container flexcontainer-vertical" [ngClass]="cardClassName">
-    <div *ngIf="devMode &&  card.id != null" class="debug">id {{ card.id.slice(0, 19)  }}...</div>
-    <div *ngIf="devMode" class="debug">index {{ card.index }}</div>
-    <div *ngIf="devMode" class="debug">difficulty {{ card.difficulty }}</div>
-    <div *ngIf="devMode" class="debug">category {{ card.category }}</div>
+<ng-container *transloco="let t; read: 'pages.cards'">
+  <div *ngIf="card != null" [className]="cardContainerClassName">
+    <mat-card class="container flexcontainer-vertical" [ngClass]="cardClassName">
+      <div *ngIf="devMode &&  card.id != null" class="debug">id {{ card.id.slice(0, 19) }}...</div>
+      <div *ngIf="devMode" class="debug">index {{ card.index }}</div>
+      <div *ngIf="devMode" class="debug">difficulty {{ card.difficulty }}</div>
+      <div *ngIf="devMode" class="debug">category {{ card.category }}</div>
 
-    <mat-card-title class="word">
-      <span class="cdk-visually-hidden" #translatedTooltipExplainTheTerm
-            i18n="tooltipExplainTheTerm|Tooltip explain the term@@tooltipExplainTheTerm">Explain the term</span>
-      <span [matTooltip]="translatedTooltipExplainTheTerm.innerHTML"
-            matTooltipPosition="above"
-            matTooltipShowDelay="250">{{ card.word }}</span>
-      <span class="cdk-visually-hidden" #translatedTooltipShowHint
-            i18n="tooltipShowHint|Tooltip show hint@@tooltipShowHint">Show hint</span>
-      <mat-icon *ngIf="card.alternateExplanationText != ''"
-                svgIcon="help_outline"
-                [matTooltip]="translatedTooltipShowHint.innerHTML"
-                matTooltipPosition="above"
-                matTooltipShowDelay="250" class="help-icon" (click)="onHelpClicked()"></mat-icon>
-    </mat-card-title>
-    <span class="cdk-visually-hidden" #translatedTooltipDontUseTheseWords
-          i18n="tooltipDontUseTheseWords|Tooltip don't use these words@@tooltipDontUseTheseWords">Don't use these words</span>
-    <div [matTooltip]="translatedTooltipDontUseTheseWords.innerHTML"
-         matTooltipPosition="above"
-         matTooltipShowDelay="250">
-      <div *ngFor="let taboo of card.taboos" class="taboo">
-        {{ taboo }}
+      <mat-card-title class="word">
+      <span class="cdk-visually-hidden" #translatedTooltipExplainTheTerm>
+        {{ t("terms.explain-the-term") | capitalizeSentences }}
+      </span>
+        <span [matTooltip]="translatedTooltipExplainTheTerm.innerHTML"
+              matTooltipPosition="above"
+              matTooltipShowDelay="250">{{ card.word }}</span>
+        <span class="cdk-visually-hidden" #translatedTooltipShowHint>
+          {{ t("terms.show-hint") | capitalizeSentences }}
+        </span>
+        <mat-icon *ngIf="card.alternateExplanationText != ''"
+                  svgIcon="help_outline"
+                  [matTooltip]="translatedTooltipShowHint.innerHTML"
+                  matTooltipPosition="above"
+                  matTooltipShowDelay="250" class="help-icon" (click)="onHelpClicked()"></mat-icon>
+      </mat-card-title>
+      <span class="cdk-visually-hidden" #translatedTooltipDontUseTheseWords>
+        {{ t("terms.dont-use-these-words") }}
+      </span>
+      <div [matTooltip]="translatedTooltipDontUseTheseWords.innerHTML"
+           matTooltipPosition="above"
+           matTooltipShowDelay="250">
+        <div *ngFor="let taboo of card.taboos" class="taboo">
+          {{ taboo }}
+        </div>
       </div>
-    </div>
-    <div class="flexbox"></div>
-    <mat-card-footer class="flexcontainer">
       <div class="flexbox"></div>
-      <div class="button-wrapper">
-        <button *ngIf="!difficultyDisplayLongText" mat-mini-fab [matTooltip]="difficultyCombinedText" class="difficulty"
-                [ngClass]="difficultyClass"
-                (click)="onDifficultyClicked()">
-          {{ difficultyText }}
-        </button>
-        <button *ngIf="difficultyDisplayLongText" mat-raised-button [matTooltip]="difficultyCombinedText"
-                class="difficulty"
-                [ngClass]="difficultyClass"
-                (click)="onDifficultyClicked()">
-          {{ difficultyLongText }}
-        </button>
-      </div>
-    </mat-card-footer>
-  </mat-card>
-</div>
+      <mat-card-footer class="flexcontainer">
+        <div class="flexbox"></div>
+        <div class="button-wrapper">
+          <button *ngIf="!difficultyDisplayLongText" mat-mini-fab [matTooltip]="difficultyCombinedText"
+                  class="difficulty"
+                  [ngClass]="difficultyClass"
+                  (click)="onDifficultyClicked()">
+            {{ difficultyText }}
+          </button>
+          <button *ngIf="difficultyDisplayLongText" mat-raised-button [matTooltip]="difficultyCombinedText"
+                  class="difficulty"
+                  [ngClass]="difficultyClass"
+                  (click)="onDifficultyClicked()">
+            {{ difficultyLongText }}
+          </button>
+        </div>
+      </mat-card-footer>
+    </mat-card>
+  </div>
+</ng-container>

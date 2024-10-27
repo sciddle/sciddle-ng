@@ -19,7 +19,7 @@
   text-align: center;
 }
 
-.kult-theme {
+::ng-deep .kult-theme {
   .word {
     font-family: 'Roboto Slab', serif;
     font-size: 2.0em !important;
@@ -140,7 +140,6 @@
     background-color: mat.get-color-from-palette($future-accent, 700) !important;
   }
 }
-
 
 .kult-theme {
   .container {

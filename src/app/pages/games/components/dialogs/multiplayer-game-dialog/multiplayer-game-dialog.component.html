@@ -1,36 +1,37 @@
-<h2 mat-dialog-title>{{ dialogTitle }}</h2>
-<mat-dialog-content>
-  <div class="horizontal-center">
-    <div class="flexcontainer">
-      <div class="flexbox"></div>
-      <div class="time-limit-button">
-        <button *ngIf="!useTimeLimit" mat-button color="primary" (click)="onTimeLimitToggled()">
-          <mat-icon svgIcon="alarm_off" class="button-icon"></mat-icon>
-          <span i18n="labelWithoutTimeLimit|Label without time limit@@labelWithoutTimeLimit">without time limit</span>
-        </button>
-        <button *ngIf="useTimeLimit" mat-flat-button color="primary" (click)="onTimeLimitToggled()">
-          <mat-icon svgIcon="alarm_on" class="button-icon"></mat-icon>
-          <span i18n="labelWithTimeLimit|Label with time limit@@labelWithTimeLimit">with time limit</span>
-        </button>
+<ng-container *transloco="let t; read: 'pages.games'">
+  <h2 mat-dialog-title>{{ dialogTitle }}</h2>
+  <mat-dialog-content>
+    <div class="horizontal-center">
+      <div class="flexcontainer">
+        <div class="flexbox"></div>
+        <div class="time-limit-button">
+          <button *ngIf="!useTimeLimit" mat-button color="primary" (click)="onTimeLimitToggled()">
+            <mat-icon svgIcon="alarm_off" class="button-icon"></mat-icon>
+            {{ t("terms.without-time-limit")}}
+          </button>
+          <button *ngIf="useTimeLimit" mat-flat-button color="primary" (click)="onTimeLimitToggled()">
+            <mat-icon svgIcon="alarm_on" class="button-icon"></mat-icon>
+            {{ t("terms.with-time-limit")}}
+          </button>
+        </div>
+        <!--
+        <div class="alarm-button">
+          <button *ngIf="!useAlarm" mat-button color="accent" [disabled]="!useTimeLimit" (click)="onAlarmToggled()">
+            <mat-icon svgIcon="bell_outline_off" class="button-icon"></mat-icon>
+            without sound
+          </button>
+          <button *ngIf="useAlarm" mat-flat-button color="accent" [disabled]="!useTimeLimit" (click)="onAlarmToggled()">
+            <mat-icon svgIcon="bell_outline" class="button-icon"></mat-icon>
+            with sound
+          </button>
+        </div>
+        -->
+        <div class="flexbox"></div>
       </div>
-      <!--
-      <div class="alarm-button">
-        <button *ngIf="!useAlarm" mat-button color="accent" [disabled]="!useTimeLimit" (click)="onAlarmToggled()">
-          <mat-icon svgIcon="bell_outline_off" class="button-icon"></mat-icon>
-          without sound
-        </button>
-        <button *ngIf="useAlarm" mat-flat-button color="accent" [disabled]="!useTimeLimit" (click)="onAlarmToggled()">
-          <mat-icon svgIcon="bell_outline" class="button-icon"></mat-icon>
-          with sound
-        </button>
+      <div class="description-text">
+        {{ t("terms.number-of-teams")}}
       </div>
-      -->
-      <div class="flexbox"></div>
-    </div>
-    <div class="description-text">
-      <span i18n="labelNumberOfTeams|Label number of teams@@labelNumberOfTeams">number of teams</span>
-    </div>
-    <span *ngFor="let item of arrayOne(3); let i = index;">
+      <span *ngFor="let item of arrayOne(3); let i = index;">
         <button *ngIf="teamCount !== i + 3" mat-button color="primary" class="team-button"
                 (click)="onTeamCountSelected(i+3)">
           {{ i + 3 }}
@@ -41,33 +42,34 @@
         </button>
       </span>
 
-    <app-difficulty-selection-fragment
-      [difficultyEasy]="difficultyEasy"
-      [difficultyMedium]="difficultyMedium"
-      [difficultyHard]="difficultyHard"
-      (difficultySelectionChangedEmitter)="onDifficultySelected($event)">
-    </app-difficulty-selection-fragment>
+      <app-difficulty-selection-fragment
+        [difficultyEasy]="difficultyEasy"
+        [difficultyMedium]="difficultyMedium"
+        [difficultyHard]="difficultyHard"
+        (difficultySelectionChangedEmitter)="onDifficultySelected($event)">
+      </app-difficulty-selection-fragment>
 
-    <div class="description-text">
-      <span i18n="labelNumberOfCards|Label number of cards@@labelNumberOfCards">number of cards</span>
-    </div>
-    <div class="flexcontainer">
-      <div class="flexcontainer" style="margin: 0 auto">
-        <div class="full-width">
-          <mat-slider class="slider" [min]="minCardCount" [max]="maxCardCount"
-                      step="1" [value]="cardCount" thumbLabel="true"
-                      (input)="onCardCountChanged($event)"></mat-slider>
+      <div class="description-text">
+        {{ t("terms.number-of-cards") }}
+      </div>
+      <div class="flexcontainer">
+        <div class="flexcontainer" style="margin: 0 auto">
+          <div class="full-width">
+            <mat-slider class="slider" [min]="minCardCount" [max]="maxCardCount"
+                        step="1" [value]="cardCount" thumbLabel="true"
+                        (input)="onCardCountChanged($event)"></mat-slider>
+          </div>
+          <span class="cardCountValue">{{ cardCount }}</span>
         </div>
-        <span class="cardCountValue">{{ cardCount }}</span>
       </div>
     </div>
-  </div>
-</mat-dialog-content>
-<mat-dialog-actions class="flexcontainer">
-  <div class="flexbox"></div>
-  <button mat-button color="primary"
-          [disabled]="teamCount === -1 || (!difficultyEasy && !difficultyMedium && !difficultyHard)"
-          (click)="startGame()">
-    <span class="uppercase" i18n="actionStartGame|Action start game@@actionStartGame">start</span>
-  </button>
-</mat-dialog-actions>
+  </mat-dialog-content>
+  <mat-dialog-actions class="flexcontainer">
+    <div class="flexbox"></div>
+    <button mat-button color="primary"
+            [disabled]="teamCount === -1 || (!difficultyEasy && !difficultyMedium && !difficultyHard)"
+            (click)="startGame()">
+      {{ t("actions.start") | uppercase }}
+    </button>
+  </mat-dialog-actions>
+</ng-container>

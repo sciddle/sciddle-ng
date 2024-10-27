@@ -1,7 +1,6 @@
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {EntityModule} from './entity/entity.module';
-import {LanguageModule} from './language/language.module';
 import {LogModule} from './log/log.module';
 import {NotificationModule} from './notification/notification.module';
 import {PersistenceModule} from './persistence/persistence.module';
@@ -14,7 +13,6 @@ import {WikipediaModule} from './wikipedia/wikipedia.module';
     CommonModule,
 
     EntityModule,
-    LanguageModule,
     LogModule,
     NotificationModule,
     PersistenceModule,

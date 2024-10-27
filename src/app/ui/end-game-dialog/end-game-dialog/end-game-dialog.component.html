@@ -1,0 +1,15 @@
+<ng-container *transloco="let t; read: 'dialogs.end-game'">
+  <h2 mat-dialog-title>{{ t("title") }}</h2>
+  <mat-dialog-content>
+    {{ t("messages.end-game") }}
+  </mat-dialog-content>
+  <mat-dialog-actions class="flexcontainer">
+    <button mat-flat-button color="accent" [mat-dialog-close]=null>
+      {{ t("actions.abort") | uppercase }}
+    </button>
+    <div class="flexbox"></div>
+    <button mat-button [mat-dialog-close]=true>
+      {{ t("actions.confirm") | uppercase }}
+    </button>
+  </mat-dialog-actions>
+</ng-container>

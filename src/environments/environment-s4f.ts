@@ -8,7 +8,7 @@
  */
 export const environment = {
   production: false,
-  LANGUAGE: 'DE',
+  baseHref: "/",
   APP_NAME: 'Cards for Future Dev',
   DATABASE_ENTITIES: 's4f-dev',
   DATABASE_SETTINGS: 's4f_settings-dev',

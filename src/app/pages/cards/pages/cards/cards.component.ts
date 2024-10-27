@@ -30,9 +30,10 @@ import {Stack} from '../../../../core/entity/model/stack/stack.model';
 import {TurnState} from '../../../../core/entity/model/turn-state.enum';
 import {CardsService} from '../../../../core/entity/services/card/cards.service';
 import {GamesService} from '../../../../core/entity/services/game/games.service';
-import {StacksPersistenceService} from '../../../../core/entity/services/stack/persistence/stacks-persistence.interface';
+import {
+  StacksPersistenceService
+} from '../../../../core/entity/services/stack/persistence/stacks-persistence.interface';
 import {StacksService} from '../../../../core/entity/services/stack/stacks.service';
-import {Language} from '../../../../core/language/model/language.enum';
 import {LogService} from '../../../../core/log/services/log.service';
 import {SettingType} from '../../../../core/settings/model/setting-type.enum';
 import {Setting} from '../../../../core/settings/model/setting.model';
@@ -47,10 +48,12 @@ import {ThemeService} from '../../../../core/ui/services/theme.service';
 import {Variant} from '../../../../core/util/model/variant.enum';
 import {VariantService} from '../../../../core/util/services/variant.service';
 import {AboutDialogComponent} from '../../../../ui/about-dialog/about-dialog/about-dialog.component';
-import {ConfirmationDialogComponent} from '../../../../ui/confirmation-dialog/confirmation-dialog/confirmation-dialog.component';
-// tslint:disable-next-line:max-line-length
-import {CheckableInformationDialogComponent} from '../../../../ui/information-dialog/checkable-information-dialog/checkable-information-dialog.component';
-import {InformationDialogComponent} from '../../../../ui/information-dialog/information-dialog/information-dialog.component';
+import {TranslocoService} from "@ngneat/transloco";
+import {ManualDialogComponent} from "../../../../ui/manual-dialog/manual-dialog/manual-dialog.component";
+import {
+  OpenSourceDialogComponent
+} from "../../../../ui/open-source-dialog/open-source-dialog/open-source-dialog.component";
+import {EndGameDialogComponent} from "../../../../ui/end-game-dialog/end-game-dialog/end-game-dialog.component";
 
 export enum DisplayAspect {
   DISPLAY_CARDS,
@@ -146,8 +149,6 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   /** App variant */
   public variant = environment.VARIANT;
-  /** App language */
-  public language = environment.LANGUAGE;
 
   /**
    * Constructor
@@ -168,6 +169,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    * @param stacksPersistenceService stacks persistence service
    * @param stacksService stacks service
    * @param themeService theme service
+   * @param translocoService transloco service
    */
   constructor(private cardsService: CardsService,
               public dialog: MatDialog,
@@ -185,7 +187,8 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
               private snackbarService: SnackbarService,
               @Inject(STACK_PERSISTENCE_POUCHDB) private stacksPersistenceService: StacksPersistenceService,
               private stacksService: StacksService,
-              private themeService: ThemeService) {
+              private themeService: ThemeService,
+              private translocoService: TranslocoService) {
     this.devMode = isDevMode();
   }
 
@@ -333,16 +336,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.stacksPersistenceService.databaseErrorSubject.pipe(
       takeUntil(this.unsubscribeSubject),
     ).subscribe((value) => {
-      switch (this.language) {
-        case Language.GERMAN: {
-          this.snackbarService.showSnackbar('Achtung: Spiel wird nicht gespeichert.');
-          break;
-        }
-        case Language.ENGLISH: {
-          this.snackbarService.showSnackbar('Warning: Game will not be saved.');
-          break;
-        }
-      }
+      this.snackbarService.showSnackbar(this.translocoService.translate("pages.cards.messages.warning-game-will-not-be-saved"));
 
       if (value != null) {
         // Build stack template
@@ -376,17 +370,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
             this.navigateToGamesPage();
           }
 
-          let fileName;
-          switch (this.language) {
-            case Language.GERMAN: {
-              fileName = StacksService.stacksDe.get(stack.id);
-              break;
-            }
-            case Language.ENGLISH: {
-              fileName = StacksService.stacksEn.get(stack.id);
-              break;
-            }
-          }
+          const fileName = StacksService.stacks.get(stack.id);
 
           this.stacksService.getStackFromAssets(fileName).then((stackFromAssets) => {
             if (stackFromAssets != null) {
@@ -464,16 +448,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
           case GameState.UNINIZIALIZED:
             // Start game
             this.gamesService.startGame(this.game).then(() => {
-              switch (this.language) {
-                case Language.GERMAN: {
-                  this.snackbarService.showSnackbar('Spiel gestarted');
-                  break;
-                }
-                case Language.ENGLISH: {
-                  this.snackbarService.showSnackbar('Started game');
-                  break;
-                }
-              }
+              this.snackbarService.showSnackbar(this.translocoService.translate("pages.cards.messages.started-game"));
             });
             break;
           case GameState.ONGOING: {
@@ -486,27 +461,9 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
                     this.game = resolve as Game;
                     this.stack.game = resolve as Game;
                     this.stacksPersistenceService.updateStack(this.stack).then(() => {
-                      switch (this.language) {
-                        case Language.GERMAN: {
-                          this.snackbarService.showSnackbar('Runde gestarted');
-                          break;
-                        }
-                        case Language.ENGLISH: {
-                          this.snackbarService.showSnackbar('Started round');
-                          break;
-                        }
-                      }
+                      this.snackbarService.showSnackbar(this.translocoService.translate("pages.cards.messages.round-started"));
                     }, (stack) => {
-                      switch (this.language) {
-                        case Language.GERMAN: {
-                          this.snackbarService.showSnackbar('Runde gestarted');
-                          break;
-                        }
-                        case Language.ENGLISH: {
-                          this.snackbarService.showSnackbar('Started round');
-                          break;
-                        }
-                      }
+                      this.snackbarService.showSnackbar(this.translocoService.translate("pages.cards.messages.round-started"));
                       this.initializeCards(stack.cards);
                     });
                   }
@@ -598,7 +555,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
         break;
       }
       case Variant.S4F: {
-        this.title = 'Sciddle';
+        this.title = environment.APP_NAME;
         break;
       }
     }
@@ -774,136 +731,22 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
         break;
       }
       case 'manual': {
-        let file;
-        switch (environment.LANGUAGE) {
-          case Language.GERMAN: {
-            file = 'assets/manual/manual-de.md';
-            break;
+        this.dialog.open(ManualDialogComponent).afterClosed().subscribe((result) => {
+          if (result != null) {
+            this.dontShowManualOnStartup = result.checkboxValue as boolean;
+            this.settingsService.updateSetting(
+              new Setting(SettingType.DONT_SHOW_MANUAL_ON_STARTUP, this.dontShowManualOnStartup),
+              false);
           }
-          case Language.ENGLISH: {
-            file = 'assets/manual/manual-en.md';
-            break;
-          }
-        }
-
-        if (file != null) {
-          this.http.get(file).subscribe(
-            () => {
-            }, (err) => {
-              let title = '';
-              let checkboxText = '';
-              let action = '';
-              switch (this.language) {
-                case Language.GERMAN: {
-                  title = 'Anleitung';
-                  checkboxText = 'Anleitung beim Starten nicht mehr anzeigen';
-                  action = 'Alles klar';
-                  break;
-                }
-                case Language.ENGLISH: {
-                  title = 'Manual';
-                  checkboxText = 'Do not show on start';
-                  action = 'Got it';
-                  break;
-                }
-              }
-
-              const dialogRef = this.dialog.open(CheckableInformationDialogComponent, {
-                disableClose: false,
-                data: {
-                  title,
-                  text: JSON.stringify(err.error.text)
-                    .replace(/"/g, '')
-                    .replace(/\\n/g, '\n')
-                    .replace(/\\r/g, '\r'),
-                  checkboxValue: this.dontShowManualOnStartup,
-                  checkboxText,
-                  action,
-                },
-              });
-
-              dialogRef.afterClosed().subscribe((result) => {
-                if (result != null) {
-                  this.dontShowManualOnStartup = result.checkboxValue as boolean;
-                  this.settingsService.updateSetting(
-                    new Setting(SettingType.DONT_SHOW_MANUAL_ON_STARTUP, this.dontShowManualOnStartup),
-                    false);
-                }
-              });
-            });
-        }
+        });
         break;
       }
       case 'open-source': {
-        this.http.get('assets/open-source/open-source.md').subscribe(
-          () => {
-          }, (_) => {
-            let title = '';
-            let action = '';
-            switch (this.language) {
-              case Language.GERMAN: {
-                title = 'Open Source Komponenten';
-                action = 'Alles klar';
-                break;
-              }
-              case Language.ENGLISH: {
-                title = 'Open source components';
-                action = 'Got it';
-                break;
-              }
-            }
-
-            this.dialog.open(InformationDialogComponent, {
-              disableClose: false,
-              data: {
-                title,
-                text: Object.keys(environment.DEPENDENCIES).map((key) => {
-                  return `${key} ${environment.DEPENDENCIES[key]}`;
-                }).concat('---').concat(Object.keys(environment.DEV_DEPENDENCIES).map((key) => {
-                  return `${key} ${environment.DEV_DEPENDENCIES[key]}`;
-                })).join('<br/>'),
-                action,
-                value: null,
-              },
-            });
-          });
+        this.dialog.open(OpenSourceDialogComponent);
         break;
       }
-
       case 'about': {
-        let title = '';
-        switch (this.language) {
-          case Language.GERMAN: {
-            title = 'Über die App';
-            break;
-          }
-          case Language.ENGLISH: {
-            title = 'About the app';
-            break;
-          }
-        }
-
-        this.dialog.open(AboutDialogComponent, {
-          disableClose: false,
-          data: {
-            themeClass: this.theme,
-            title,
-            name: environment.APP_NAME,
-            version: environment.VERSION,
-            authorOriginal: environment.AUTHOR_ORIGINAL,
-            authorCode: environment.AUTHOR_CODE,
-            authorCodeUrl: environment.AUTHOR_CODE_URL,
-            authorContent: environment.AUTHOR_CONTENT,
-            authorGraphics: environment.AUTHOR_GRAPHICS,
-            authorGraphicsUrl: environment.AUTHOR_GRAPHICS_URL,
-            authorScientificSupervision: environment.AUTHOR_SCIENTIFIC_SUPERVISION,
-            githubUrl: environment.GITHUB_URL,
-            licenseCode: environment.LICENSE_CODE,
-            licenseContent: environment.LICENSE_CONTENT,
-            homepage: environment.HOMEPAGE,
-            variant: this.variant,
-          },
-        });
+        this.dialog.open(AboutDialogComponent);
         break;
       }
     }
@@ -916,16 +759,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
     LogService.trace(`CardsComponent#onTimerOver`);
     // Check if timer is over during cards state
     if (this.game.turn.state === TurnState.DISPLAY_CARDS) {
-      switch (this.language) {
-        case Language.GERMAN: {
-          this.snackbarService.showSnackbar('Zeit ist abgelaufen');
-          break;
-        }
-        case Language.ENGLISH: {
-          this.snackbarService.showSnackbar('Timer has run out');
-          break;
-        }
-      }
+      this.snackbarService.showSnackbar(this.translocoService.translate("pages.cards.messages.time-is-up"));
 
       this.timerOver = true;
 
@@ -1036,27 +870,9 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
       case GameMode.SINGLE_PLAYER: {
         this.cardsService.putCardToEnd(this.stack, this.cards[0]).then((stack) => {
           this.updateCard(this.stack, this.cards[0]).then(() => {
-            switch (this.language) {
-              case Language.GERMAN: {
-                this.snackbarService.showSnackbar('Karte ans Ende gelegt');
-                break;
-              }
-              case Language.ENGLISH: {
-                this.snackbarService.showSnackbar('Put card to end');
-                break;
-              }
-            }
+            this.snackbarService.showSnackbar(this.translocoService.translate("pages.cards.messages.put-card-to-end"));
           }, () => {
-            switch (this.language) {
-              case Language.GERMAN: {
-                this.snackbarService.showSnackbar('Karte ans Ende gelegt');
-                break;
-              }
-              case Language.ENGLISH: {
-                this.snackbarService.showSnackbar('Put card to end');
-                break;
-              }
-            }
+            this.snackbarService.showSnackbar(this.translocoService.translate("pages.cards.messages.put-card-to-end"));
             this.initializeStack(stack);
           });
         });
@@ -1118,39 +934,7 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
    * Handles back action
    */
   private handleBackActionWithConfirmation() {
-    let title = '';
-    let text = '';
-    let action = '';
-    let negativeAction = '';
-    switch (this.language) {
-      case Language.GERMAN: {
-        title = 'Spiel beenden';
-        text = 'Willst du das Spiel beenden?';
-        action = 'Ja, beenden';
-        negativeAction = 'Nein, weiterspielen';
-        break;
-      }
-      case Language.ENGLISH: {
-        title = 'Terminate game';
-        text = 'Do you want to terminate the game?';
-        action = 'Yes, terminate';
-        negativeAction = 'No, continue playing';
-        break;
-      }
-    }
-
-    LogService.trace(`CardsComponent#handleBackActionWithConfirmation`);
-    const confirmationDialogRef = this.dialog.open(ConfirmationDialogComponent, {
-      disableClose: false,
-      data: {
-        title,
-        text,
-        action,
-        negativeAction,
-        value: {},
-      },
-    });
-    confirmationDialogRef.afterClosed().subscribe((confirmationResult) => {
+    this.dialog.open(EndGameDialogComponent).afterClosed().subscribe((confirmationResult) => {
       if (confirmationResult != null) {
         this.handleBackAction();
       }
@@ -1205,27 +989,9 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
       if (stack != null) {
         this.cardsService.sortStack(stack).then(((sortedStack) => {
           this.stacksPersistenceService.updateStack(sortedStack).then(() => {
-            switch (this.language) {
-              case Language.GERMAN: {
-                this.snackbarService.showSnackbar('Karten sortiert');
-                break;
-              }
-              case Language.ENGLISH: {
-                this.snackbarService.showSnackbar('Sorted cards');
-                break;
-              }
-            }
+            this.snackbarService.showSnackbar(this.translocoService.translate("pages.cards.messages.sorted-cards"));
           }, (updatedStack) => {
-            switch (this.language) {
-              case Language.GERMAN: {
-                this.snackbarService.showSnackbar('Karten sortiert');
-                break;
-              }
-              case Language.ENGLISH: {
-                this.snackbarService.showSnackbar('Sorted cards');
-                break;
-              }
-            }
+            this.snackbarService.showSnackbar(this.translocoService.translate("pages.cards.messages.sorted-cards"));
             this.initializeStack(updatedStack);
             this.initializeGameMode(updatedStack);
           });
@@ -1244,27 +1010,9 @@ export class CardsComponent implements OnInit, AfterViewInit, OnDestroy {
       if (stack != null) {
         this.cardsService.shuffleStack(stack).then(((shuffledStack) => {
           this.stacksPersistenceService.updateStack(shuffledStack).then(() => {
-            switch (this.language) {
-              case Language.GERMAN: {
-                this.snackbarService.showSnackbar('Karten gemischt');
-                break;
-              }
-              case Language.ENGLISH: {
-                this.snackbarService.showSnackbar('Shuffled cards');
-                break;
-              }
-            }
+            this.snackbarService.showSnackbar(this.translocoService.translate("pages.cards.messages.shuffled-cards"));
           }, (updatedStack) => {
-            switch (this.language) {
-              case Language.GERMAN: {
-                this.snackbarService.showSnackbar('Karten gemischt');
-                break;
-              }
-              case Language.ENGLISH: {
-                this.snackbarService.showSnackbar('Shuffled cards');
-                break;
-              }
-            }
+            this.snackbarService.showSnackbar(this.translocoService.translate("pages.cards.messages.shuffled-cards"));
             this.initializeStack(updatedStack);
             this.initializeGameMode(updatedStack);
           });

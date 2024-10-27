@@ -1,11 +1,14 @@
-<div class="horizontal-center">
-  <button *ngIf="stack != null" mat-button class="full-width" (click)="onDisplayScoreOverviewClicked()">
-    <div *ngFor="let team of stack.game.teams" class="description-text double-size-text">
-      <span><span class="uppercase" i18n="labelTeam|Label team@@labelTeam"> team</span> {{ team.index + 1}} - </span>
-      <span i18n="pluralScore|Plural score@@pluralScore">{team.score, plural, zero {0 points} one {{{team.score}} point} other {{{team.score}} points}}</span>
-    </div>
-    <div class="description-text double-size-text top-margin">
-      <span i18n="promptTapOnScreen|Prompt to tap on screen to continue@@promptTapOnScreen">Tap on screen to proceed</span>
-    </div>
-  </button>
-</div>
+<ng-container *transloco="let t; read: 'pages.cards'">
+  <div class="horizontal-center">
+    <button *ngIf="stack != null" mat-button class="full-width" (click)="onDisplayScoreOverviewClicked()">
+      <div *ngFor="let team of stack.game.teams" class="description-text double-size-text">
+        {{ t("terms.team", {team: team.index + 1}) | uppercase }}
+        <span *ngIf="team.score != 1">{{ t("terms.score-plural", {score: team.score}) }}</span>
+        <span *ngIf="team.score == 1">{{ t("terms.score-singular", {score: team.score}) }}</span>
+      </div>
+      <div class="description-text double-size-text top-margin">
+       {{ t("terms.tap-on-the-screen-to-proceed") | capitalizeSentences }}
+      </div>
+    </button>
+  </div>
+</ng-container>

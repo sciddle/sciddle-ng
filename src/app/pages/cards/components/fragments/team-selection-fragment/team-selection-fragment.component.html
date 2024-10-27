@@ -1,28 +1,27 @@
-<div class="horizontal-center">
-  <div class="description-text double-size-text">
-       <span i18n="questionWhichTeamAnsweredCorrectly|Question which team has answered correctly@@questionWhichTeamAnsweredCorrectly">
-         Which team guessed correctly?
-       </span>
-  </div>
-  <div *ngIf="stack != null">
-    <div *ngFor="let team of stack.game.teams" class="team-button-wrapper">
-      <button mat-flat-button color="primary" class="button"
-              (click)="onSuccessfulTeamSelected(team.index)">
-        <div class="description-text double-size-text">
-          <span class="uppercase" i18n="answerTeam|Answer to question which team has answered correctly: team@@whichTeamAnsweredCorrectlyTeam">
-            team</span> {{ team.index + 1}}
-        </div>
-      </button>
+<ng-container *transloco="let t; read: 'pages.cards'">
+  <div class="horizontal-center">
+    <div class="description-text double-size-text">
+      {{ t("terms.which-team-answered-correctly") | capitalizeSentences }}
     </div>
-    <div>
-      <button mat-button color="primary" class="button"
-              (click)="onSuccessfulTeamSelected(null)">
-        <div class="description-text double-size-text">
-          <span class="uppercase" i18n="answerNoOne|Answer to question which team has answered correctly: no one@@whichTeamAnsweredCorrectlyNoOne">
-            no one
+    <div *ngIf="stack != null">
+      <div *ngFor="let team of stack.game.teams" class="team-button-wrapper">
+        <button mat-flat-button color="primary" class="button"
+                (click)="onSuccessfulTeamSelected(team.index)">
+          <div class="description-text double-size-text">
+          <span class="uppercase">{{ t("terms.team", {team: team.index + 1}) }}</span>
+          </div>
+        </button>
+      </div>
+      <div>
+        <button mat-button color="primary" class="button"
+                (click)="onSuccessfulTeamSelected(null)">
+          <div class="description-text double-size-text">
+          <span class="uppercase">
+            {{ t("terms.no-one") }}
           </span>
-        </div>
-      </button>
+          </div>
+        </button>
+      </div>
     </div>
   </div>
-</div>
+</ng-container>

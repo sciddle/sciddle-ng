@@ -8,15 +8,14 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
-import {environment} from '../../../../../../environments/environment';
 import {Card} from '../../../../../core/entity/model/card/card.model';
 import {Stack} from '../../../../../core/entity/model/stack/stack.model';
-import {Language} from '../../../../../core/language/model/language.enum';
 import {Media} from '../../../../../core/ui/model/media.enum';
 import {Theme} from '../../../../../core/ui/model/theme.enum';
 import {MaterialColorService} from '../../../../../core/ui/services/material-color.service';
 import {WikipediaService} from '../../../../../core/wikipedia/services/wikipedia.service';
 import {WikipediaDialogComponent} from '../../dialogs/wikpedia-dialog/wikipedia-dialog.component';
+import {TranslocoService} from "@ngneat/transloco";
 
 /**
  * Displays a card
@@ -62,18 +61,17 @@ export class CardFragmentComponent implements OnChanges {
   /** CSS class applied to card */
   public cardClassName;
 
-  /** App language */
-  public language = environment.LANGUAGE;
-
   /**
    * Constructor
    * @param dialog dialog
    * @param materialColorService material color service
    * @param wikipediaService wikipedia service
+   * @param translocoService transloco service
    */
   constructor(public dialog: MatDialog,
               private materialColorService: MaterialColorService,
-              private wikipediaService: WikipediaService) {
+              private wikipediaService: WikipediaService,
+              private translocoService: TranslocoService) {
     this.devMode = isDevMode();
   }
 
@@ -103,55 +101,26 @@ export class CardFragmentComponent implements OnChanges {
       case 1: {
         this.difficultyClass = 'difficultyColorEasy';
         this.difficultyText = '1';
-        switch (this.language) {
-          case Language.GERMAN: {
-            this.difficultyLongText = 'EINFACH';
-            this.difficultyCombinedText = `${this.difficultyLongText} / ${this.difficultyText} Punkt`;
-            break;
-          }
-          case Language.ENGLISH: {
-            this.difficultyLongText = 'EASY';
-            this.difficultyCombinedText = `${this.difficultyLongText} / ${this.difficultyText} point`;
-            break;
-          }
-        }
+
+        this.difficultyLongText = this.translocoService.translate("pages.cards.terms.easy").toUpperCase();
+        this.difficultyCombinedText = `${this.difficultyLongText} / ${this.difficultyText} ${this.translocoService.translate("pages.cards.terms.score")}`;
         break;
       }
       case 2: {
         this.difficultyClass = 'difficultyColorMedium';
         this.difficultyText = '2';
-        switch (this.language) {
-          case Language.GERMAN: {
-            this.difficultyLongText = 'MITTEL';
-            this.difficultyCombinedText = `${this.difficultyLongText} / ${this.difficultyText} Punkte`;
-            break;
-          }
-          case Language.ENGLISH: {
-            this.difficultyLongText = 'MEDIUM';
-            this.difficultyCombinedText = `${this.difficultyLongText} / ${this.difficultyText} points`;
-            break;
-          }
-        }
+
+        this.difficultyLongText = this.translocoService.translate("pages.cards.terms.medium").toUpperCase();
+        this.difficultyCombinedText = `${this.difficultyLongText} / ${this.difficultyText} ${this.translocoService.translate("pages.cards.terms.score")}`;
 
         break;
       }
       case 3: {
         this.difficultyClass = 'difficultyColorHard';
         this.difficultyText = '3';
-        switch (this.language) {
-          case Language.GERMAN: {
-            this.difficultyLongText = 'SCHWER';
-            this.difficultyCombinedText = `${this.difficultyLongText} / ${this.difficultyText} Punkte`;
-            break;
-          }
-          case Language.ENGLISH: {
-            this.difficultyLongText = 'HARD';
-            this.difficultyCombinedText = `${this.difficultyLongText} / ${this.difficultyText} points`;
-            break;
-          }
-        }
 
-        break;
+        this.difficultyLongText = this.translocoService.translate("pages.cards.terms.hard").toUpperCase();
+        this.difficultyCombinedText = `${this.difficultyLongText} / ${this.difficultyText} ${this.translocoService.translate("pages.cards.terms.score")}`;
       }
     }
   }
@@ -172,27 +141,12 @@ export class CardFragmentComponent implements OnChanges {
    * Handles click on help button
    */
   public onHelpClicked() {
-    let action = '';
-    switch (this.language) {
-      case Language.GERMAN: {
-        action = 'Verstanden';
-        break;
-      }
-      case Language.ENGLISH: {
-        action = 'Got it';
-        break;
-      }
-    }
-
     this.dialog.open(WikipediaDialogComponent, {
-      disableClose: false,
       data: {
-        themeClass: this.theme,
         term: this.getTerm(this.card),
         explanationText: this.card.alternateExplanationText,
         alternateWikipediaArticle: this.card.alternateWikipediaArticle,
-        alternateURL: this.card.alternateURL,
-        action,
+        alternateURL: this.card.alternateURL
       },
       autoFocus: false,
     });

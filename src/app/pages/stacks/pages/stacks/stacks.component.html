@@ -1,15 +1,17 @@
-<app-stacks-toolbar
-  class="fixed"
-  [title]="title"
-  [media]="media"
-  (menuItemEventEmitter)="onMenuItemClicked($event)"></app-stacks-toolbar>
+<ng-container *transloco="let t; read: 'pages.stacks'">
+  <app-stacks-toolbar
+    class="fixed"
+    [title]="title"
+    [media]="media"
+    (menuItemEventEmitter)="onMenuItemClicked($event)"></app-stacks-toolbar>
 
-<div class="main-content horizontal-center">
-  <cdk-virtual-scroll-viewport itemSize="50" class="scroll-viewport">
-    <div *cdkVirtualFor="let s of stacks" class="scroll-item">
-      <app-stack-fragment [stack]="s"
-                          (stackEventEmitter)="onStackEvent($event)">
-      </app-stack-fragment>
-    </div>
-  </cdk-virtual-scroll-viewport>
-</div>
+  <div class="main-content horizontal-center">
+    <cdk-virtual-scroll-viewport itemSize="50" class="scroll-viewport">
+      <div *cdkVirtualFor="let s of stacks" class="scroll-item">
+        <app-stack-fragment [stack]="s"
+                            (stackEventEmitter)="onStackEvent($event)">
+        </app-stack-fragment>
+      </div>
+    </cdk-virtual-scroll-viewport>
+  </div>
+</ng-container>

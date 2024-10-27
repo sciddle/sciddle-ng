@@ -1,0 +1,14 @@
+<ng-container *transloco="let t; read: 'dialogs.open-source'">
+  <h2 mat-dialog-title>{{ t("title") }}</h2>
+  <mat-dialog-content>
+    <div *ngFor="let dependency of dependencies">
+      {{ dependency }}
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions class="flexcontainer">
+    <div class="flexbox"></div>
+    <button mat-flat-button color="accent" [mat-dialog-close]=null>
+      {{ t("actions.got-it") | uppercase }}
+    </button>
+  </mat-dialog-actions>
+</ng-container>

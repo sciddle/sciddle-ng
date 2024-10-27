@@ -13,9 +13,10 @@ import {Action} from '../../../../core/entity/model/action.enum';
 import {Stack} from '../../../../core/entity/model/stack/stack.model';
 import {CloneService} from '../../../../core/entity/services/clone.service';
 import {GamesService} from '../../../../core/entity/services/game/games.service';
-import {StacksPersistenceService} from '../../../../core/entity/services/stack/persistence/stacks-persistence.interface';
+import {
+  StacksPersistenceService
+} from '../../../../core/entity/services/stack/persistence/stacks-persistence.interface';
 import {StacksService} from '../../../../core/entity/services/stack/stacks.service';
-import {Language} from '../../../../core/language/model/language.enum';
 import {LogService} from '../../../../core/log/services/log.service';
 import {SettingType} from '../../../../core/settings/model/setting-type.enum';
 import {Setting} from '../../../../core/settings/model/setting.model';
@@ -29,8 +30,10 @@ import {SnackbarService} from '../../../../core/ui/services/snackbar.service';
 import {ThemeService} from '../../../../core/ui/services/theme.service';
 import {AboutDialogComponent} from '../../../../ui/about-dialog/about-dialog/about-dialog.component';
 // tslint:disable-next-line:max-line-length
-import {CheckableInformationDialogComponent} from '../../../../ui/information-dialog/checkable-information-dialog/checkable-information-dialog.component';
-import {InformationDialogComponent} from '../../../../ui/information-dialog/information-dialog/information-dialog.component';
+import {ManualDialogComponent} from "../../../../ui/manual-dialog/manual-dialog/manual-dialog.component";
+import {
+  OpenSourceDialogComponent
+} from "../../../../ui/open-source-dialog/open-source-dialog/open-source-dialog.component";
 
 /**
  * Displays stacks
@@ -70,8 +73,6 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
 
   /** App variant */
   public variant = environment.VARIANT;
-  /** App language */
-  public language = environment.LANGUAGE;
 
   /**
    * Constructor
@@ -186,34 +187,15 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
       if (value != null) {
         this.stacks = [];
 
-        switch (this.language) {
-          case Language.GERMAN: {
-            Array.from(StacksService.stacksDe.values()).forEach((fileName) =>
-              this.stacksService.getStackFromAssets(fileName).then((stackFromAssets) => {
-                LogService.trace(`StacksComponent > STACK FROM ASSETS`);
-                if (stackFromAssets != null) {
-                  this.initializeStacks(this.stacks.concat([stackFromAssets]));
-                  this.snackbarService.showSnackbar('Achtung: Spiel wird nicht gespeichert.');
-
-                }
-              }),
-            );
-            break;
-          }
-          case Language.ENGLISH: {
-            console.log(`++ FOO B`);
-            Array.from(StacksService.stacksEn.values()).forEach((fileName) =>
-              this.stacksService.getStackFromAssets(fileName).then((stackFromAssets) => {
-                LogService.trace(`StacksComponent > STACK FROM ASSETS`);
-                if (stackFromAssets != null) {
-                  this.initializeStacks(this.stacks.concat([stackFromAssets]));
-                  this.snackbarService.showSnackbar('Warning: Game will not be saved.');
-                }
-              }),
-            );
-            break;
-          }
-        }
+        Array.from(StacksService.stacks.values()).forEach((fileName) =>
+          this.stacksService.getStackFromAssets(fileName).then((stackFromAssets) => {
+            LogService.trace(`StacksComponent > STACK FROM ASSETS`);
+            if (stackFromAssets != null) {
+              this.initializeStacks(this.stacks.concat([stackFromAssets]));
+              this.snackbarService.showSnackbar('Achtung: Spiel wird nicht gespeichert.');
+            }
+          }),
+        );
       }
     });
   }
@@ -239,16 +221,7 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
           const mergedStack = resolve as Stack;
           this.stacksPersistenceService.updateStack(mergedStack).then(() => {
           });
-          switch (this.language) {
-            case Language.GERMAN: {
-              this.snackbarService.showSnackbar('Neue Karten geladen');
-              break;
-            }
-            case Language.ENGLISH: {
-              this.snackbarService.showSnackbar('Loaded new cards');
-              break;
-            }
-          }
+          this.snackbarService.showSnackbar('Neue Karten geladen');
         }, () => {
         });
       }
@@ -369,136 +342,22 @@ export class StacksComponent implements OnInit, AfterViewInit, OnDestroy {
   public onMenuItemClicked(menuItem: string) {
     switch (menuItem) {
       case 'manual': {
-        let file;
-        switch (environment.LANGUAGE) {
-          case Language.GERMAN: {
-            file = 'assets/manual/manual-de.md';
-            break;
+        this.dialog.open(ManualDialogComponent).afterClosed().subscribe((result) => {
+          if (result != null) {
+            this.dontShowManualOnStartup = result.checkboxValue as boolean;
+            this.settingsService.updateSetting(
+              new Setting(SettingType.DONT_SHOW_MANUAL_ON_STARTUP, this.dontShowManualOnStartup),
+              false);
           }
-          case Language.ENGLISH: {
-            file = 'assets/manual/manual-en.md';
-            break;
-          }
-        }
-
-        if (file != null) {
-          this.http.get(file).subscribe(
-            () => {
-            }, (err) => {
-              let title = '';
-              let checkboxText = '';
-              let action = '';
-              switch (this.language) {
-                case Language.GERMAN: {
-                  title = 'Anleitung';
-                  checkboxText = 'Anleitung beim Starten nicht mehr anzeigen';
-                  action = 'Alles klar';
-                  break;
-                }
-                case Language.ENGLISH: {
-                  title = 'Manual';
-                  checkboxText = 'Do not show on start';
-                  action = 'Got it';
-                  break;
-                }
-              }
-
-              const dialogRef = this.dialog.open(CheckableInformationDialogComponent, {
-                disableClose: false,
-                data: {
-                  title,
-                  text: JSON.stringify(err.error.text)
-                    .replace(/"/g, '')
-                    .replace(/\\n/g, '\n')
-                    .replace(/\\r/g, '\r'),
-                  checkboxValue: this.dontShowManualOnStartup,
-                  checkboxText,
-                  action,
-                },
-              });
-
-              dialogRef.afterClosed().subscribe((result) => {
-                if (result != null) {
-                  this.dontShowManualOnStartup = result.checkboxValue as boolean;
-                  this.settingsService.updateSetting(
-                    new Setting(SettingType.DONT_SHOW_MANUAL_ON_STARTUP, this.dontShowManualOnStartup),
-                    false);
-                }
-              });
-            });
-        }
+        });
         break;
       }
       case 'open-source': {
-        this.http.get('assets/open-source/open-source.md').subscribe(
-          () => {
-          }, (_) => {
-            let title = '';
-            let action = '';
-            switch (this.language) {
-              case Language.GERMAN: {
-                title = 'Open Source Komponenten';
-                action = 'Alles klar';
-                break;
-              }
-              case Language.ENGLISH: {
-                title = 'Open source components';
-                action = 'Got it';
-                break;
-              }
-            }
-
-            this.dialog.open(InformationDialogComponent, {
-              disableClose: false,
-              data: {
-                title,
-                text: Object.keys(environment.DEPENDENCIES).map((key) => {
-                  return `${key} ${environment.DEPENDENCIES[key]}`;
-                }).concat('---').concat(Object.keys(environment.DEV_DEPENDENCIES).map((key) => {
-                  return `${key} ${environment.DEV_DEPENDENCIES[key]}`;
-                })).join('<br/>'),
-                action,
-                value: null,
-              },
-            });
-          });
+        this.dialog.open(OpenSourceDialogComponent);
         break;
       }
-
       case 'about': {
-        let title = '';
-        switch (this.language) {
-          case Language.GERMAN: {
-            title = 'Über die App';
-            break;
-          }
-          case Language.ENGLISH: {
-            title = 'About the app';
-            break;
-          }
-        }
-
-        this.dialog.open(AboutDialogComponent, {
-          disableClose: false,
-          data: {
-            themeClass: this.theme,
-            title,
-            name: environment.APP_NAME,
-            version: environment.VERSION,
-            authorOriginal: environment.AUTHOR_ORIGINAL,
-            authorCode: environment.AUTHOR_CODE,
-            authorCodeUrl: environment.AUTHOR_CODE_URL,
-            authorContent: environment.AUTHOR_CONTENT,
-            authorGraphics: environment.AUTHOR_GRAPHICS,
-            authorGraphicsUrl: environment.AUTHOR_GRAPHICS_URL,
-            authorScientificSupervision: environment.AUTHOR_SCIENTIFIC_SUPERVISION,
-            githubUrl: environment.GITHUB_URL,
-            licenseCode: environment.LICENSE_CODE,
-            licenseContent: environment.LICENSE_CONTENT,
-            homepage: environment.HOMEPAGE,
-            variant: this.variant,
-          },
-        });
+        this.dialog.open(AboutDialogComponent);
         break;
       }
     }

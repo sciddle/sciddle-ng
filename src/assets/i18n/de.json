@@ -1,0 +1,159 @@
+{
+  "dialogs": {
+    "about": {
+      "title": "Über die App",
+      "terms": {
+        "version": "Version",
+        "based-on": "basierend auf",
+        "game-original": "Sciddle - The Science Riddle",
+        "by": "von",
+        "graphics-by": "Grafiken von",
+        "ideas-and-text-by": "Idee und Text von",
+        "licensed-under": "lizensiert unter",
+        "implemented-by": "implementiert durch",
+        "source-code-available-on": "Sourcecode verfügbar auf",
+        "github": "GitHub",
+        "scientific-supervision-by": "wissenschaftliche Betreuung durch"
+      },
+      "actions": {
+        "close": "schließen"
+      }
+    },
+    "wikipedia": {
+      "terms": {
+        "more-on": "mehr auf {{ url }}",
+        "more-on-wikipedia": "mehr auf Wikipedia"
+      },
+      "actions": {
+        "close": "schließen"
+      },
+      "messages": {
+        "cannot-get-abstract": "das Extrakt kann nicht abgerufen werden"
+      }
+    },
+    "manual":{
+      "title": "Anleitung",
+      "terms": {
+        "number-of-players-title": "Anzahl der Spieler",
+        "number-of-players-text": "3+",
+        "aim-of-the-game-title": "Ziel des Spiels",
+        "aim-of-the-game-text": "Das Team, das die meisten Punkte erzielt, indem es die auf den Karten aufgedruckten Begriffe errät und erklärt, gewinnt das Spiel.",
+        "game-preparation-title": "Spielvorbereitung",
+        "game-preparation-text": "Die Spieler sind in mindestens 3 Teams aufgeteilt, mit der gleichen Anzahl von Teilnehmern pro Team (oder so nah wie möglich an der gleichen Zahl).",
+        "playing-the-game-title": "Das Spiel spielen",
+        "playing-the-game-text": "Reihum entscheidet jeder Spieler jeder Mannschaft über einen Schwierigkeitsgrad, bekommt eine Karte und hat 30 Sekunden Zeit, den Spielern aller Teams das Wort oben auf der Karte zu erklären. Jeder Begriff darf nur von einer Person erklärt werden. Die Reihenfolge spielt keine Rolle, solange jedes Team am Ende die Chance hatte, die gleiche Anzahl von Karten zu erklären. Es sollten keine Fachbegriffe verwendet werden. Alle Wörter auf der Karte, sind anfangs verboten, ebenso Ableitungen der Wörter auf der Karte zum Beispiel sich daraus ableitende Verben oder Adjektive. Wenn zum Beispiel Wasser auf der Karte steht, sind wässern und wässerig verboten. Sobald die Wörter oder Ableitungen von einem der ratenden Spieler gesagt worden sind, können diese auch vom erklärenden Spieler verwendet werden. Die Verwendung von Wörtern auf der Karte oder deren Ableitungen wird als Fehler gewertet. Die Karte muss beiseite gelegt werden und wird nicht gezählt. Dies gilt auch für die Verwendung von Reimen oder die Erwähnung von Wortähnlichkeiten („sounds like“) und Geräuschen. Die Verwendung von Formeln, Gleichungen oder Symbolen ist ebenfalls nicht erlaubt. Die Spieler dürfen ihre Hände (und Körper) bei der Erklärung von Begriffen verwenden, außer sie formen damit Buchstaben und Symbole.",
+        "winning-points-title": "Gewinnpunkte",
+        "winning-points-text": "Für jeden richtig geratenen Begriff erhalten das Team dessen Spieler den Begriff erklärt hat und das Team dessen Spieler den Begriff erraten hat jeweils einen Punkte. Sollte es sich um das gleiche Team handeln, erhält dieses Team zwei Punkte. Auf den Karten ist die Schwierigkeit des Begriffs als Zahl angegeben zwischen 1 (leicht), 2 (mittel) und 3 (schwer). Diese dienen nur zur Orientierung der Spieler.",
+        "end-of-the-game-title": "Ende des Spiels",
+        "end-of-the-game-text": "Nachdem jeder Spieler mindestens einen Versuch unternommen hat und alle Teams die gleiche Anzahl von Chancen hatten, Begriffe zu erklären, endet das Spiel. Die Mannschaft mit den meisten Punkten gewinnt. (Beachte, dass dies nur eine Möglichkeit ist, {{appName}} zu spielen. Du kannst mit dem Spiel experimentieren und deine eigenen Varianten erfinden.)\n"
+      },
+      "actions": {
+        "do-not-show-on-start": "Anleitung beim Starten nicht mehr anzeigen",
+        "got-it": "verstanden"
+      }
+    },
+    "open-source": {
+      "title": "Open Source Komponenten",
+      "actions": {
+        "got-it": "alles klar"
+      }
+    },
+    "end-game": {
+      "title": "Spiel beenden",
+      "messages": {
+        "end-game": "Willst du das Spiel beenden?"
+      },
+      "actions": {
+        "confirm": "Ja, beenden",
+        "abort": "Nein, weiterspielen"
+      }
+    }
+  },
+  "pages": {
+    "stacks": {
+      "terms": {
+        "ongoing-game": "laufende Spielrunde",
+        "cards-singular": "{{cards}} Karte",
+        "cards-plural": "{{cards}} Karten"
+      },
+      "actions": {
+        "open-menu": "Menü öffnen",
+        "manual": "Anleitung",
+        "open-source": "Open Source",
+        "about": "über die App"
+      }
+    },
+    "games": {
+      "terms": {
+        "training-mode": "freies Spiel",
+        "without-time-limit": "ohne Zeitlimit",
+        "with-time-limit": "mit Zeitlimit",
+        "number-of-teams": "Anzahl der Teams",
+        "number-of-cards": "Anzahl der Karten",
+        "select-a-difficulty": "wähle einen Schwierigkeitsgrad",
+        "easy": "einfach",
+        "medium": "mittel",
+        "hard": "schwer",
+        "difficulty": "Schwierigkeitsgrad",
+        "team": "Team {{team}}",
+        "score-singular": "{{ score }} Punkt",
+        "score-plural": "{{ score }} Punkte",
+        "has-won": "hat gewonnen",
+        "have-won": "haben gewonnen"
+      },
+      "actions": {
+        "start": "starten",
+        "start-game": "Spiel starten",
+        "back": "zurück",
+        "leave-game": "Spiel verlassen",
+        "open-menu": "Menü öffnen",
+        "manual": "Anleitung",
+        "open-source": "Open Source",
+        "about": "über die App"
+      }
+    },
+    "cards": {
+      "terms": {
+        "easy": "einfach",
+        "medium": "mittel",
+        "hard": "schwer",
+        "score": "Punkte",
+        "explain-the-term": "erkläre den Begriff",
+        "show-hint": "zeige Hinweis an",
+        "dont-use-these-words": "benutze diese Wörter nicht",
+        "which-team-answered-correctly": "welches Team hat richtig geantwortet?",
+        "team": "Team {{team}}",
+        "no-one": "niemand",
+        "score-singular": "{{ score }} Punkt",
+        "score-plural": "{{ score }} Punkte",
+        "pass-the-device-and-tap-on-the-screen-to-proceed": "gib das Gerät weiter und tippe auf den Bildschirm um weiterzumachen",
+        "tap-on-the-screen-to-proceed": "tipp auf den Bildschirm um fortzufahren",
+        "next-card": "nächste Karte",
+        "term-has-been-guessed": "Begriff wurde erraten",
+        "teams-turn": "Team {{team}} ist am Zug"
+      },
+      "actions": {
+        "got-it": "verstanden",
+        "proceed": "weiter",
+        "swipe-card-aside-when-someone-has-guessed-the-term": "wische die Karte zur Seite wenn jemand den Begriff erraten hat",
+        "time-is-over-swipe-card-aside-to-proceed": "Zeit ist abgelaufen. wisch die Karte zur Seite um fortzufahren",
+        "terminate-game": "Spiel beenden",
+        "sort-cards": "Karten sortieren",
+        "shuffle-cards": "Karten mischen",
+        "open-menu": "Menü öffnen",
+        "manual": "Anleitung",
+        "open-source": "Open Source",
+        "about": "über die App"
+      },
+      "messages": {
+        "warning-game-will-not-be-saved": "Achtung: Spiel wird nicht gespeichert.",
+        "started-game": "Spiel gestartet",
+        "round-started": "Runde gestartet",
+        "time-is-up": "Zeit ist abgelaufen",
+        "put-card-to-end": "Karte ans Ende gelegt",
+        "sorted-cards": "Karten sortiert",
+        "shuffled-cards": "Karten gemischt"
+      }
+    }
+  }
+}

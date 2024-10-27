@@ -26,28 +26,28 @@
 // Theme specific
 //
 
-.blue-theme {
+::ng-deep .blue-theme {
   .team-name {
     color: mat.get-color-from-palette($blue-accent, 500) !important;
     font-weight: 700;
   }
 }
 
-.green-theme {
+::ng-deep .green-theme {
   .team-name {
     color: mat.get-color-from-palette($green-accent, 500) !important;
     font-weight: 700;
   }
 }
 
-.future-theme {
+::ng-deep .future-theme {
   .team-name {
     color: mat.get-color-from-palette($future-accent, 500) !important;
     font-weight: 700;
   }
 }
 
-.kult-theme {
+::ng-deep .kult-theme {
   .team-name {
     color: mat.get-color-from-palette($kult-accent, 500) !important;
     font-weight: 700;
