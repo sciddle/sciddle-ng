@@ -17,7 +17,7 @@
           {{ t("terms.show-hint") | capitalizeSentences }}
         </span>
         <mat-icon *ngIf="card.alternateExplanationText != ''"
-                  svgIcon="help_outline"
+                  fontIcon="help_outline"
                   [matTooltip]="translatedTooltipShowHint.innerHTML"
                   matTooltipPosition="above"
                   matTooltipShowDelay="250" class="help-icon" (click)="onHelpClicked()"></mat-icon>

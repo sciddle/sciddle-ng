@@ -2,7 +2,7 @@
   <mat-toolbar class="toolbar flexcontainer">
     <div class="toolbar-block start">
       <button mat-button class="toolbar-menu-item" aria-label="Menu" (click)="onMenuItemClicked('menu')">
-        <mat-icon svgIcon="menu"></mat-icon>
+        <mat-icon fontIcon="menu"></mat-icon>
       </button>
       <span *ngIf="media != mediaType.SMALL" class="toolbar-title">{{ title }}</span>
     </div>
@@ -14,20 +14,20 @@
               aria-label="Menu"
               [matTooltip]="translatedTooltipOpenMenu.innerHTML"
               [matMenuTriggerFor]="menu">
-        <mat-icon svgIcon="more_vert"></mat-icon>
+        <mat-icon fontIcon="more_vert"></mat-icon>
       </button>
       <mat-menu #menu="matMenu">
         <button mat-menu-item (click)="onMenuItemClicked('manual')">
-          <mat-icon svgIcon="format_align_left"></mat-icon>
+          <mat-icon fontIcon="format_align_left"></mat-icon>
           {{ t("actions.manual") }}
         </button>
         <mat-divider></mat-divider>
         <button mat-menu-item (click)="onMenuItemClicked('open-source')">
-          <mat-icon svgIcon="open_source_initiative"></mat-icon>
+          <mat-icon fontIcon="open_source_initiative"></mat-icon>
           {{ t("actions.open-source") }}
         </button>
         <button mat-menu-item (click)="onMenuItemClicked('about')">
-          <mat-icon svgIcon="blank"></mat-icon>
+          <mat-icon fontIcon="blank"></mat-icon>
           {{ t("actions.about") }}
         </button>
       </mat-menu>

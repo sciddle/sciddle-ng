@@ -4,7 +4,7 @@
     <span class="cdk-visually-hidden" #translatedTooltipLeaveGame>{{ t("actions.leave-game") }}</span>
       <button mat-button [matTooltip]="translatedTooltipLeaveGame.innerHTML" class="toolbar-menu-item" aria-label="Back"
               (click)="onMenuItemClicked('back')">
-        <mat-icon class="icon" svgIcon="arrow_back"></mat-icon>
+        <mat-icon class="icon" fontIcon="arrow_back"></mat-icon>
       </button>
       <span *ngIf="media != mediaType.SMALL" class="toolbar-title">
       <span>{{ title }}</span>
@@ -12,7 +12,7 @@
     </div>
     <div *ngIf="variant === variantType.S4F" class="toolbar-block start">
       <button mat-button class="toolbar-menu-item" aria-label="Blank">
-        <mat-icon class="icon" svgIcon="blank"></mat-icon>
+        <mat-icon class="icon" fontIcon="blank"></mat-icon>
       </button>
       <img *ngIf="media != mediaType.SMALL" class="toolbar-logo" style="height: 35px"
            src="assets/logos-s4f/logo-144x144.webp" alt="logo"/>
@@ -28,20 +28,20 @@
               aria-label="Menu"
               [matTooltip]="translatedTooltipOpenMenu.innerHTML"
               [matMenuTriggerFor]="menu">
-        <mat-icon class="icon" svgIcon="more_vert"></mat-icon>
+        <mat-icon class="icon" fontIcon="more_vert"></mat-icon>
       </button>
       <mat-menu #menu="matMenu">
         <button mat-menu-item (click)="onMenuItemClicked('manual')">
-          <mat-icon class="icon" svgIcon="format_align_left"></mat-icon>
+          <mat-icon class="icon" fontIcon="format_align_left"></mat-icon>
           {{ t("actions.manual") }}
         </button>
         <mat-divider></mat-divider>
         <button mat-menu-item (click)="onMenuItemClicked('open-source')">
-          <mat-icon class="icon" svgIcon="open_source_initiative"></mat-icon>
+          <mat-icon class="icon" fontIcon="open_source_initiative"></mat-icon>
           {{ t("actions.open-source") }}
         </button>
         <button mat-menu-item (click)="onMenuItemClicked('about')">
-          <mat-icon class="icon" svgIcon="blank"></mat-icon>
+          <mat-icon class="icon" fontIcon="blank"></mat-icon>
           {{ t("actions.about") }}
         </button>
       </mat-menu>
