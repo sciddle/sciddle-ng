@@ -1,7 +1,7 @@
 module.exports = {
   ci: {
     collect: {
-      staticDistDir: './dist/fem-readup-search-engine-ng',
+      staticDistDir: './dist',
     },
     assert: {
       preset: 'lighthouse:recommended',

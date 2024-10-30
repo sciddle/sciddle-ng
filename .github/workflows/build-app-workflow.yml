@@ -1,20 +1,21 @@
 name: Build
-on: [pull_request, push]
+on:
+  push:
+    branches:
+      - main
 jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [12.x]
+        node-version: [16.x]
     steps:
       - name: Checkout the code
         uses: actions/checkout@v2
-        with:
-          submodules: recursive
       - name: Set up Node
         uses: actions/setup-node@v1
         with:
-          node-version: 12
+          node-version: 16
       - name: Build
         run: |
           npm ci
