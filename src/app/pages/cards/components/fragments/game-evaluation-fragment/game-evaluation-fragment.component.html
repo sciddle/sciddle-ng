@@ -9,14 +9,14 @@
     </div>
     <div *ngIf="stack != null">
       <div *ngFor="let team of stack.game.teams" class="description-text double-size-text">
-        {{ t("terms.team", {team: team.index + 1}) }} -
-        <span *ngIf="team.score == 1">{{ t("terms.score-singular", {team: team.score}) }}</span>
-        <span *ngIf="team.score != 1">{{ t("terms.score-plural", {team: team.score}) }}</span>
+        {{ t("terms.team", {team: team.index + 1}) }} :
+        <span *ngIf="team.score == 1">{{ t("terms.score-singular", {score: team.score}) }}</span>
+        <span *ngIf="team.score != 1">{{ t("terms.score-plural", {score: team.score}) }}</span>
       </div>
     </div>
     <button mat-flat-button color="primary" class="button" (click)="onMenuItemClicked('back')">
       <div class="description-text double-size-text">
-        {{ t("terms.back") | uppercase }}
+        {{ t("actions.back") | uppercase }}
       </div>
     </button>
   </div>

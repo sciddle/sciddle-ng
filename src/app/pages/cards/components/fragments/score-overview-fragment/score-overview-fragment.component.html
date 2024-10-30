@@ -2,7 +2,7 @@
   <div class="horizontal-center">
     <button *ngIf="stack != null" mat-button class="full-width" (click)="onDisplayScoreOverviewClicked()">
       <div *ngFor="let team of stack.game.teams" class="description-text double-size-text">
-        {{ t("terms.team", {team: team.index + 1}) | uppercase }}
+        {{ t("terms.team", {team: team.index + 1}) | uppercase }} :
         <span *ngIf="team.score != 1">{{ t("terms.score-plural", {score: team.score}) }}</span>
         <span *ngIf="team.score == 1">{{ t("terms.score-singular", {score: team.score}) }}</span>
       </div>

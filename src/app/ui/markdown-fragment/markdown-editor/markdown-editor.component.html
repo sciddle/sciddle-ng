@@ -1,7 +1,7 @@
 <mat-tab-group mat-align-tabs="center">
   <mat-tab>
     <ng-template mat-tab-label>
-      <mat-icon svgIcon="text"></mat-icon>
+      <mat-icon fontIcon="text"></mat-icon>
       Text
     </ng-template>
     <mat-form-field color="primary" class="wide-box">
@@ -24,13 +24,13 @@
         type="button"
         title=''
         (click)="onClearButtonClicked()">
-        <mat-icon svgIcon="close_18"></mat-icon>
+        <mat-icon fontIcon="close_18"></mat-icon>
       </button>
     </mat-form-field>
   </mat-tab>
   <mat-tab>
     <ng-template mat-tab-label>
-      <mat-icon svgIcon="markdown"></mat-icon>
+      <mat-icon fontIcon="markdown"></mat-icon>
       Preview
     </ng-template>
     <app-markdown-preview [markdownText]="text"></app-markdown-preview>

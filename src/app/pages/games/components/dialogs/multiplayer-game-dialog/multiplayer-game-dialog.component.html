@@ -6,22 +6,22 @@
         <div class="flexbox"></div>
         <div class="time-limit-button">
           <button *ngIf="!useTimeLimit" mat-button color="primary" (click)="onTimeLimitToggled()">
-            <mat-icon svgIcon="alarm_off" class="button-icon"></mat-icon>
+            <mat-icon fontIcon="alarm_off" class="button-icon"></mat-icon>
             {{ t("terms.without-time-limit")}}
           </button>
           <button *ngIf="useTimeLimit" mat-flat-button color="primary" (click)="onTimeLimitToggled()">
-            <mat-icon svgIcon="alarm_on" class="button-icon"></mat-icon>
+            <mat-icon fontIcon="alarm_on" class="button-icon"></mat-icon>
             {{ t("terms.with-time-limit")}}
           </button>
         </div>
         <!--
         <div class="alarm-button">
           <button *ngIf="!useAlarm" mat-button color="accent" [disabled]="!useTimeLimit" (click)="onAlarmToggled()">
-            <mat-icon svgIcon="bell_outline_off" class="button-icon"></mat-icon>
+            <mat-icon fontIcon="bell_outline_off" class="button-icon"></mat-icon>
             without sound
           </button>
           <button *ngIf="useAlarm" mat-flat-button color="accent" [disabled]="!useTimeLimit" (click)="onAlarmToggled()">
-            <mat-icon svgIcon="bell_outline" class="button-icon"></mat-icon>
+            <mat-icon fontIcon="bell_outline" class="button-icon"></mat-icon>
             with sound
           </button>
         </div>
