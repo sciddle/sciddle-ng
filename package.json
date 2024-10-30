@@ -21,14 +21,14 @@
     "start-s4f-production": "ng serve --configuration=s4f-production",
     "build": "ng build",
     "build:ci": "npm run clean && npm run build",
-    "build-regular-prod": "ng build --deleteOutputPath=true --configuration=regular-production --outputPath=dist/sciddle-riddle",
-    "build-s4f-prod": "ng build --deleteOutputPath=true --configuration=s4f-production --outputPath=dist/sciddle-s4f",
+    "build-regular-prod": "ng build --configuration=regular-production",
+    "build-s4f-prod": "ng build --configuration=s4f-production",
     "test": "ng test --reporters junit --code-coverage",
     "lint": "ng lint",
     "lint-junit": "./node_modules/.bin/tslint -c ./tslint.json \"src/**/*.ts\" --format junit --out reports/lint-results.xml",
     "compodoc": "compodoc src/app -p tsconfig.json --output reports/documentation/",
     "e2e": "ng e2e",
-    "release-only-web-s4f": "mkdirp ./release && cd dist/sciddle-s4f && bestzip ./../../release/${npm_package_name}-s4f-web-${npm_package_version}.zip  ./*"
+    "release-only-web-s4f": "mkdirp ./release && cd dist && bestzip ./../../release/${npm_package_name}-s4f-web-${npm_package_version}.zip  ./*"
   },
   "private": true,
   "dependencies": {
