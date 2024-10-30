@@ -9,8 +9,6 @@ jobs:
     steps:
       - name: Checkout the code
         uses: actions/checkout@v2
-        with:
-          submodules: recursive
       - name: Set up Node
         uses: actions/setup-node@v1
         with:
@@ -24,7 +22,7 @@ jobs:
       - name: Build Angular
         run: |
           npm install
-          npm run build-en-regular-prod -- --base-href 'https://sciddle-riddle-eng.web.app/'
+          npm run build-regular-prod -- --base-href 'https://sciddle-riddle-eng.web.app/'
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:

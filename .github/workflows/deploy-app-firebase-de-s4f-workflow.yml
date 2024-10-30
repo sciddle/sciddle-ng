@@ -9,8 +9,6 @@ jobs:
     steps:
       - name: Checkout the code
         uses: actions/checkout@v2
-        with:
-          submodules: recursive
       - name: Set up Node
         uses: actions/setup-node@v1
         with:
@@ -28,7 +26,7 @@ jobs:
           cp ./src/assets/manual/manual-de-s4f.md ./src/assets/manual/manual-de.md
           cp ./src/manifest-s4f.webmanifest ./src/manifest.webmanifest
           npm install
-          npm run build-de-s4f-prod
+          npm run build-s4f-prod
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:

@@ -12,8 +12,6 @@ jobs:
     steps:
       - name: Checkout the code
         uses: actions/checkout@v2
-        with:
-          submodules: recursive
       - name: Set up Node
         uses: actions/setup-node@v1
         with:
@@ -29,7 +27,7 @@ jobs:
           cp ./src/index-s4f-matomo.html ./src/index.html
           cp ./src/favicon-s4f.ico ./src/favicon.ico
           npm install
-          npm run build-de-s4f-prod -- --base-href 'https://apps.scientists4future.org/cards-for-future/'
+          npm run build-s4f-prod -- --base-href 'https://apps.scientists4future.org/cards-for-future/'
       - name: Build Release
         run: |
           npm run release-only-web-s4f
