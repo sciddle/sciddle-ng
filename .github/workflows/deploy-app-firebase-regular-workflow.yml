@@ -24,10 +24,10 @@ jobs:
       - name: Build Angular
         run: |
           npm install
-          npm run build-regular-prod -- --base-href 'https://sciddle-riddle-deu.web.app/'
+          npm run build-regular-prod -- --base-href 'https://c/'
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
-          args: deploy --project sciddle-riddle --only hosting:sciddle-riddle-deu
+          args: deploy --project sciddle-riddle --only hosting:sciddle-riddle
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
