@@ -1,5 +1,7 @@
-name: Deploy German version to Firebase
-on: [pull_request, push]
+name: Build and Deploy to Firebase
+on:
+  push:
+  workflow_dispatch:
 jobs:
   build:
     runs-on: ubuntu-latest

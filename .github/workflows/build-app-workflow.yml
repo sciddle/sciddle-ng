@@ -1,11 +1,14 @@
 name: Build
-on: [pull_request, push]
+on:
+  push:
+    branches:
+      - main
 jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [12.x]
+        node-version: [16.x]
     steps:
       - name: Checkout the code
         uses: actions/checkout@v2
