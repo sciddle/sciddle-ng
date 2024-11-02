@@ -75,6 +75,7 @@ export class StacksService {
         StacksService.stacks.set('3', 'physics-de.json');
         StacksService.stacks.set('4', 'physics-de-school.json');
         StacksService.stacks.set('5', 'anthropology-de.json');
+        StacksService.stacks.set('6', 'quantum-de.json');
         break;
       }
       case "en": {
