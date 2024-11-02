@@ -5,14 +5,8 @@
         "sciddle-riddle": [
           "sciddle-riddle"
         ],
-        "sciddle-s4f-deu": [
-          "sciddle-s4f-deu"
-        ],
-        "sciddle-riddle-deu": [
-          "sciddle-riddle-deu"
-        ],
-        "sciddle-riddle-eng": [
-          "sciddle-riddle-eng"
+        "sciddle-s4f": [
+          "sciddle-s4f"
         ]
       }
     }

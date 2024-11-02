@@ -1,4 +1,4 @@
-name: Release app for https://sciddle.de
+name: Build and Deploy to Firebase
 on:
   workflow_dispatch:
 jobs:

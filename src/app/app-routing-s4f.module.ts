@@ -8,6 +8,11 @@ const routes: Routes = [
   {
     canActivate: [GameGuard],
     loadChildren: () => import('./pages/games/games.module').then((m) => m.GamesModule),
+    path: `${ROUTE_GAMES}`,
+  },
+  {
+    canActivate: [GameGuard],
+    loadChildren: () => import('./pages/games/games.module').then((m) => m.GamesModule),
     path: `${ROUTE_GAMES}/:id`,
   },
   {path: `${ROUTE_CARDS}`, loadChildren: () => import('./pages/cards/cards.module').then((m) => m.CardsModule)},
