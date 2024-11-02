@@ -54,3 +54,11 @@ Thumbs.db
 firebase-debug.log
 .firebase
 /.angular/
+
+_replicator
+_users
+pouch__all_dbs__
+s4f-dev
+s4f_settings-dev
+config.json
+log.txt

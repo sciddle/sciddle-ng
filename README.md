@@ -24,11 +24,9 @@ Sciddle is a **sci**ence ri**ddle** game that lets you learn science terms in a 
 The rules are simple: Try to explain the term written on top of each card to others __without__ using the five words printed below. Swipe the card to the left or to the right to show the next one.
 
 The latest version of this web app is available on
-* https://sciddle.de (German version that is mentioned on physical game boxes)
-* https://apps.scientists4future.org/cards-for-future (German version re-branded for [Scientists 4 Future](https://www.scientists4future.org/))
-
-Intermediate states of the app can be seen on
-* https://sciddle-s4f.web.app/ (German version, re-branded for Scientists 4 Future)
+* https://sciddle.de (version that is mentioned on physical game boxes)
+* https://sciddle-s4f.web.app/ (version re-branded for Scientists 4 Future)
+* https://apps.scientists4future.org/cards-for-future (version re-branded for Scientists 4 Future on https://www.scientists4future.org/)
 
 ### Built With
 
@@ -42,8 +40,14 @@ Install all packages by running
 npm install
 ```
 
-You can start the app locally by running
+Start a [PouchDB server](https://pouchdb.com/guides/setup-couchdb.html)
 
+```
+npm install -g pouchdb-server
+pouchdb-server --port 5984
+```
+
+Start the app locally by running
 ```
 npm run start
 ```
