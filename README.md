@@ -1,9 +1,5 @@
 [![Build](https://github.com/sciddle/sciddle-ng/actions/workflows/build-app-workflow.yml/badge.svg?branch=main)](https://github.com/sciddle/sciddle-ng/actions/workflows/build-app-workflow.yml)
 
-[![Deploy German version to Firebase](https://github.com/sciddle/sciddle-ng/actions/workflows/deploy-app-firebase-de-regular-workflow.yml/badge.svg)](https://github.com/sciddle/sciddle-ng/actions/workflows/deploy-app-firebase-de-regular-workflow.yml)
-[![Deploy English version to Firebase](https://github.com/sciddle/sciddle-ng/actions/workflows/deploy-app-firebase-en-regular-workflow.yml/badge.svg)](https://github.com/sciddle/sciddle-ng/actions/workflows/deploy-app-firebase-en-regular-workflow.yml)
-[![Deploy German S4F version to Firebase](https://github.com/sciddle/sciddle-ng/actions/workflows/deploy-app-firebase-de-s4f-workflow.yml/badge.svg)](https://github.com/sciddle/sciddle-ng/actions/workflows/deploy-app-firebase-de-s4f-workflow.yml)
-
 [![Release app for S4F](https://github.com/sciddle/sciddle-ng/actions/workflows/release-app-s4f-workflow.yml/badge.svg)](https://github.com/sciddle/sciddle-ng/actions/workflows/release-app-s4f-workflow.yml)
 [![Release app for https://sciddle.de](https://github.com/sciddle/sciddle-ng/actions/workflows/release-app-regular-workflow.yml/badge.svg)](https://github.com/sciddle/sciddle-ng/actions/workflows/release-app-regular-workflow.yml)
 
@@ -13,7 +9,7 @@
 
 <br />
 <p align="center">
-  <a href="https://github.com/florianschwanz/fom-big-data-bike-path-quality-frontend">
+  <a href="https://github.com/sciddle/sciddle-ng">
     <img src="./src/assets/logos/logo-144x144.png" alt="Logo" width="80" height="80">
   </a>
 
@@ -34,9 +30,7 @@ The latest version of this web app is available on
 * https://apps.scientists4future.org/cards-for-future (German version re-branded for [Scientists 4 Future](https://www.scientists4future.org/))
 
 Intermediate states of the app can be seen on
-* https://sciddle-riddle-deu.web.app (German version)
-* https://sciddle-riddle-eng.web.app (English version)
-* https://sciddle-s4f-deu.web.app (German version, re-branded for Scientists 4 Future)
+* https://sciddle-s4f.web.app/ (German version, re-branded for Scientists 4 Future)
 
 ### Built With
 
@@ -80,7 +74,7 @@ Florian Schwanz - florian.schwanz@gmail.com
 
 ## Acknowledgements
 
-Concept and idea maded by Anne Braun, Anne Dippel, Thomas Klose, Britta Kussin and Dennis Rätzel.
+Concept and idea made by Anne Braun, Anne Dippel, Thomas Klose, Britta Kussin and Dennis Rätzel.
 
 Content created by Dennis Rätzel, Kiri Mochrie, Jana Mochrie and Julia Mochrie.
 
