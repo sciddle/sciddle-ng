@@ -7,7 +7,7 @@ import {
   SimpleChanges,
   ViewEncapsulation
 } from '@angular/core';
-import {MatDialog} from '@angular/material/dialog';
+import {MatLegacyDialog as MatDialog} from '@angular/material/legacy-dialog';
 import {Card} from '../../../../../core/entity/model/card/card.model';
 import {Stack} from '../../../../../core/entity/model/stack/stack.model';
 import {Media} from '../../../../../core/ui/model/media.enum';

@@ -1,6 +1,6 @@
 import {OverlayContainer} from '@angular/cdk/overlay';
 import {AfterViewInit, Component, isDevMode, OnInit} from '@angular/core';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import {MatLegacySnackBar as MatSnackBar} from '@angular/material/legacy-snack-bar';
 import {environment} from '../environments/environment';
 import {LogService} from './core/log/services/log.service';
 import {PouchDBSettingsService} from './core/persistence/services/pouchdb-settings.service';

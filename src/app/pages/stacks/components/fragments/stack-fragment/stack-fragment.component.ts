@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, isDevMode, OnInit, Output} from '@angular/core';
-import {MatDialog} from '@angular/material/dialog';
+import {MatLegacyDialog as MatDialog} from '@angular/material/legacy-dialog';
 import {Action} from '../../../../../core/entity/model/action.enum';
 import {Stack} from '../../../../../core/entity/model/stack/stack.model';
 import {CardsService} from '../../../../../core/entity/services/card/cards.service';

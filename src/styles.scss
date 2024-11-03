@@ -1,25 +1,34 @@
 @use '@angular/material' as mat;
 // Theme
 
-@include mat.core();
+// TODO(v15): As of v15 mat.legacy-core no longer includes default typography styles.
+//  The following line adds:
+//    1. Default typography styles for all components
+//    2. Styles for typography hierarchy classes (e.g. .mat-headline-1)
+//  If you specify typography styles for the components you use elsewhere, you should delete this line.
+//  If you don't need the default component typographies but still want the hierarchy styles,
+//  you can delete this line and instead use:
+//    `@include mat.legacy-typography-hierarchy(mat.define-legacy-typography-config());`
+@include mat.all-legacy-component-typographies();
+@include mat.legacy-core();
 @import 'theme.scss';
 @import 'sizes.scss';
 @import 'flex.scss';
 
 .blue-theme {
-  @include mat.all-component-themes($blue-theme);
+  @include mat.all-legacy-component-themes($blue-theme);
 }
 
 .green-theme {
-  @include mat.all-component-themes($green-theme);
+  @include mat.all-legacy-component-themes($green-theme);
 }
 
 .future-theme {
-  @include mat.all-component-themes($future-theme);
+  @include mat.all-legacy-component-themes($future-theme);
 }
 
 .kult-theme {
-  @include mat.all-component-themes($kult-theme);
+  @include mat.all-legacy-component-themes($kult-theme);
 }
 
 // Rest
