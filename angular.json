@@ -37,9 +37,6 @@
           "configurations": {
             "regular": {
               "outputPath": "dist",
-              "aot": true,
-              "serviceWorker": false,
-              "ngswConfigPath": "src/ngsw-config.json",
               "optimization": {
                 "scripts": true,
                 "styles": {
@@ -47,7 +44,23 @@
                   "inlineCritical": false
                 },
                 "fonts": true
-              }
+              },
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "aot": false,
+              "extractLicenses": false,
+              "vendorChunk": false,
+              "buildOptimizer": false,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ],
+              "serviceWorker": false,
+              "ngswConfigPath": "src/ngsw-config.json"
             },
             "regular-production": {
               "outputPath": "dist",
@@ -228,5 +241,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }
