@@ -35,7 +35,7 @@
     { "entityType": 0, "word": "Faktor", "taboos": ["Koeffizient", "Term", "Zahl", "Funktion", "Variable" ], "difficulty": 1, "alternateWikipediaArticle": "Umweltfaktor" },
     { "entityType": 0, "word": "Feldlinien", "taboos": ["Kraft", "Richtung", "Dichte", "radial", "homogen" ], "difficulty": 2 },
     { "entityType": 0, "word": "Festkörper", "taboos": ["Materie", "Zustand", "Flüssigkeit", "Gas", "Bindung" ], "difficulty": 2 },
-    { "entityType": 0, "word": "Fluchtgeschwindigkeit", "taboos": ["Tempo", "Gravitation", "Anziehung", "unendlich", "Energie" ], "difficulty": 3 },
+    { "entityType": 0, "word": "Flucht-geschwindigkeit", "taboos": ["Tempo", "Gravitation", "Anziehung", "unendlich", "Energie" ], "difficulty": 3 },
     { "entityType": 0, "word": "Flüssigkeit", "taboos": ["Gas", "Zustand", "Verformung", "Fließen", "Festkörper" ], "difficulty": 1 },
     { "entityType": 0, "word": "Formel", "taboos": ["Gleichung", "Berechnung", "Gesetz", "Umstellen", "Symbole" ], "difficulty": 1 },
     { "entityType": 0, "word": "Freier Fall", "taboos": ["Gravitation", "Körper", "Schwerelosigkeit", "Kraft", "Newton" ], "difficulty": 2 },
