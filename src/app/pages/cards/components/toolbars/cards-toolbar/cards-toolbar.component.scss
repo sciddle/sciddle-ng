@@ -41,7 +41,7 @@
 // Theme specific
 //
 
-::ng-deep .blue-theme {
+.blue-theme {
   .toolbar-title {
     color: mat.get-color-from-palette($blue-primary, 500) !important;
     font-family: 'Black Han Sans', sans-serif;
@@ -56,7 +56,7 @@
   }
 }
 
-::ng-deep .green-theme {
+.green-theme {
   .toolbar-title {
     color: mat.get-color-from-palette($green-primary, 500) !important;
     font-family: 'Black Han Sans', sans-serif;
@@ -71,7 +71,7 @@
   }
 }
 
-::ng-deep .future-theme {
+.future-theme {
   .toolbar {
     border-top: 5px solid #006eb3;
 
@@ -121,7 +121,7 @@
 }
 
 
-::ng-deep .kult-theme {
+.kult-theme {
   .toolbar-title {
     color: mat.get-color-from-palette($kult-primary, 500) !important;
     font-family: 'Black Han Sans', sans-serif;
